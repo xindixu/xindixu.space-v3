@@ -38,7 +38,7 @@
     "import/resolver": {
       "node": {
         "extensions": [".js", ".jsx"],
-        "moduleDirectory": ["src", "node_modules"]
+        "moduleDirectory": [".", "node_modules"]
       }
     }
   }
