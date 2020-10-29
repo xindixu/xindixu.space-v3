@@ -1,5 +1,5 @@
 import React from "react";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 import { Grommet } from "grommet";
 import CommonLayout from "layout/common";
 

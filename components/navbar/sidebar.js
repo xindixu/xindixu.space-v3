@@ -1,22 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-import {
-  Avatar,
-  Box,
-  Button,
-  Layer,
-  Nav,
-  Sidebar as GSidebar,
-  Stack,
-  Text,
-} from "grommet";
+import { Avatar, Box, Button, Layer, Nav, Sidebar as GSidebar } from "grommet";
 import {
   Home,
   Chat,
   UserFemale,
   Help,
   Briefcase,
-  Split,
   Diamond,
 } from "grommet-icons";
 
@@ -43,7 +33,7 @@ const MainNavigation = () => (
 );
 
 const Sidebar = ({ onClose, show }) =>
-  show ? (
+  show && (
     <Layer
       onEsc={onClose}
       onClickOutside={onClose}
@@ -60,8 +50,11 @@ const Sidebar = ({ onClose, show }) =>
         <MainNavigation />
       </GSidebar>
     </Layer>
-  ) : null;
+  );
 
-Sidebar.propTypes = {};
+Sidebar.propTypes = {
+  onClose: PropTypes.func.isRequired,
+  show: PropTypes.bool.isRequired,
+};
 
 export default Sidebar;
