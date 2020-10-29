@@ -1,34 +1,26 @@
 import React from "react";
+import Link from "next/link";
 import PropTypes from "prop-types";
-import { Avatar, Box, Button, Layer, Nav, Sidebar as GSidebar } from "grommet";
-import {
-  Home,
-  Chat,
-  UserFemale,
-  Help,
-  Briefcase,
-  Diamond,
-} from "grommet-icons";
+import { Box, Button, Layer, Nav, Sidebar as GSidebar } from "grommet";
+import { Article, Briefcase, Diamond, Home, UserFemale } from "grommet-icons";
 
-const SidebarFooter = () => (
-  <Nav>
-    <SidebarButton icon={<Chat />} label="Chat" />
-    <SidebarButton icon={<Help />} label="Support" />
-  </Nav>
-);
+const SidebarFooter = () => "Built with Next.js";
 
-const SidebarButton = ({ icon, label, ...rest }) => (
+const SidebarButton = ({ icon, label, link }) => (
   <Box fill>
-    <Button hoverIndicator size="large" icon={icon} label={label} {...rest} />
+    <Link href={link}>
+      <Button hoverIndicator size="large" icon={icon} label={label} />
+    </Link>
   </Box>
 );
 
 const MainNavigation = () => (
   <Nav gap="medium" responsive={false}>
-    <SidebarButton icon={<Home />} label="Home" />
-    <SidebarButton icon={<UserFemale />} label="About" />
-    <SidebarButton icon={<Briefcase />} label="Projects" />
-    <SidebarButton icon={<Diamond />} label="Life" />
+    <SidebarButton icon={<Home />} label="Home" link="/" />
+    <SidebarButton icon={<UserFemale />} label="About" link="/about" />
+    <SidebarButton icon={<Briefcase />} label="Projects" link="/project" />
+    <SidebarButton icon={<Diamond />} label="Life" link="/life" />
+    <SidebarButton icon={<Article />} label="Blog" link="/blog" />
   </Nav>
 );
 

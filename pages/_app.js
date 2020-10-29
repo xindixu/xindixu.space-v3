@@ -27,6 +27,7 @@ const theme = {
 };
 
 export default function App({ Component, pageProps }) {
+  console.log(pageProps);
   return (
     <>
       <Grommet full theme={theme}>

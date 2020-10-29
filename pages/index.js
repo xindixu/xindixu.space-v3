@@ -10,7 +10,7 @@ const Title = styled.h1`
 export default function Home() {
   return (
     <>
-      <Title>My page</Title>
+      <Title>Home page</Title>
       <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
         <Box flex align="center" justify="center">
           app body
