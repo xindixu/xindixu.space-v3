@@ -26,10 +26,10 @@ const SidebarButton = ({ icon, label, link, onClick, active }) => (
 
 const MainNavigation = ({ onClose, pathname }) => (
   <Nav gap="medium" full="horizontal" alignSelf="stretch">
-    {links.map(({ icon, label, link }) => (
+    {links.map(({ icon, name, link }) => (
       <SidebarButton
         icon={icon}
-        label={label}
+        label={name}
         link={link}
         onClick={onClose}
         active={link === pathname}

@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { Header, Button, Text } from "grommet";
 import { Menu } from "grommet-icons";
 import Sidebar from "./sidebar";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const [showSideBar, setShowSideBar] = useState(false);
   return (
     <>
@@ -20,7 +19,5 @@ const Navbar = (props) => {
     </>
   );
 };
-
-Navbar.propTypes = {};
 
 export default Navbar;

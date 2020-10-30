@@ -13,11 +13,11 @@ const GlobalStyle = createGlobalStyle`
 
 const theme = {
   colors: {
-    primary: "#ADC178",
+    primary: "#e2b4bd",
   },
   global: {
     colors: {
-      brand: "#ADC178",
+      brand: "#e2b4bd",
     },
     font: {
       size: "16px",

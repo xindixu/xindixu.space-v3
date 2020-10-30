@@ -1,10 +1,9 @@
 import React, { useState } from "react";
-import PropTypes from "prop-types";
 import { Footer, Layer } from "grommet";
 import { links } from "contents/social-media";
 import QuickMenu from "components/quick-menu";
 
-const Index = (props) => {
+const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <Layer
@@ -12,7 +11,7 @@ const Index = (props) => {
       modal={false}
       animate={false}
       responsive={false}
-      style={{ zIndex: 10 }}
+      style={{ zIndex: 10, background: "none" }}
     >
       <Footer pad="small">
         <QuickMenu subMenu={links} isOpen={isOpen} setIsOpen={setIsOpen} />
@@ -20,7 +19,5 @@ const Index = (props) => {
     </Layer>
   );
 };
-
-Index.propTypes = {};
 
 export default Index;
