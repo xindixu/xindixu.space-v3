@@ -3,10 +3,13 @@ import PropTypes from "prop-types";
 import { Button } from "grommet";
 import { Close, AppsRounded } from "grommet-icons";
 import styled from "styled-components";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import styleSettings from "lib/style-settings/index";
 
-const { spacerBase } = styleSettings;
+const {
+  spacerBase,
+  elevation: { light },
+} = styleSettings;
 
 const diameter = "288px";
 const radius = "144px";
@@ -27,6 +30,7 @@ const MainButton = styled(Button)`
   left: 60%;
   margin: -${spacerBase};
   border-radius: 50%;
+  box-shadow: ${light.medium};
 `;
 
 const SubButton = styled(Button)`
@@ -35,6 +39,7 @@ const SubButton = styled(Button)`
   left: 50%;
   margin: -${spacerBase};
   border-radius: 50%;
+  box-shadow: ${light.medium};
   ${({ count, index, cycle }) => {
     const angle = 90 / count;
     const rotation = angle * (index + count * (cycle - 1) + 0.5);
@@ -76,45 +81,44 @@ const subIconAnimation = {
 const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
   const { length: count } = subMenu;
   return (
-    <div>
-      <Circle>
-        <MainButton
-          icon={
-            <motion.div
-              initial={isOpen ? "hidden" : false}
-              animate={isOpen ? "visible" : "hidden"}
-              variants={mainIconAnimation}
-            >
-              {isOpen ? <Close /> : <AppsRounded />}
-            </motion.div>
-          }
-          primary
-          hoverIndicator
-          onClick={() => {
-            setIsOpen((prevIsOpen) => !prevIsOpen);
-          }}
-        />
-        {subMenu.map(({ name, link, icon }, index) => (
+    <Circle>
+      <MainButton
+        elevation="medium"
+        icon={
           <motion.div
-            key={name}
             initial={isOpen ? "hidden" : false}
             animate={isOpen ? "visible" : "hidden"}
-            variants={circleAnimation}
-            custom={{ index, count }}
+            variants={mainIconAnimation}
           >
-            <SubButton
-              hoverIndicator
-              cycle={count}
-              count={count}
-              index={index}
-              icon={<motion.div variants={subIconAnimation}>{icon}</motion.div>}
-              href={link}
-              primary
-            />
+            {isOpen ? <Close /> : <AppsRounded />}
           </motion.div>
-        ))}
-      </Circle>
-    </div>
+        }
+        primary
+        hoverIndicator
+        onClick={() => {
+          setIsOpen((prevIsOpen) => !prevIsOpen);
+        }}
+      />
+      {subMenu.map(({ name, link, icon }, index) => (
+        <motion.div
+          key={name}
+          initial={isOpen ? "hidden" : false}
+          animate={isOpen ? "visible" : "hidden"}
+          variants={circleAnimation}
+          custom={{ index, count }}
+        >
+          <SubButton
+            hoverIndicator
+            cycle={count}
+            count={count}
+            index={index}
+            icon={<motion.div variants={subIconAnimation}>{icon}</motion.div>}
+            href={link}
+            primary
+          />
+        </motion.div>
+      ))}
+    </Circle>
   );
 };
 

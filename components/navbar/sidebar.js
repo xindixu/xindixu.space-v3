@@ -1,46 +1,46 @@
 import React from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 import { useMedia } from "react-use";
-import { Box, Button, Layer, Nav, Sidebar as GSidebar } from "grommet";
-import {
-  Article,
-  Briefcase,
-  Diamond,
-  Home,
-  UserFemale,
-  Close,
-} from "grommet-icons";
+import { Button, Layer, Nav, Sidebar as GSidebar } from "grommet";
+import { Close } from "grommet-icons";
 import { mediaQuery } from "lib/style-settings/media-query";
 import { links } from "contents/routes";
 
 const SidebarFooter = () => "Built with Next.js";
 
-const SidebarButton = ({ icon, label, link, onClick }) => (
-  <Box fill>
-    <Link href={link}>
-      <Button
-        hoverIndicator
-        size="large"
-        icon={icon}
-        label={label}
-        onClick={onClick}
-      />
-    </Link>
-  </Box>
+const SidebarButton = ({ icon, label, link, onClick, active }) => (
+  <Link href={link}>
+    <Button
+      hoverIndicator
+      full="horizontal"
+      size="large"
+      icon={icon}
+      label={label}
+      onClick={onClick}
+      active={active}
+    />
+  </Link>
 );
 
-const MainNavigation = ({ onClose }) => (
-  <Nav gap="medium">
+const MainNavigation = ({ onClose, pathname }) => (
+  <Nav gap="medium" full="horizontal" alignSelf="stretch">
     {links.map(({ icon, label, link }) => (
-      <SidebarButton icon={icon} label={label} link={link} onClick={onClose} />
+      <SidebarButton
+        icon={icon}
+        label={label}
+        link={link}
+        onClick={onClose}
+        active={link === pathname}
+      />
     ))}
   </Nav>
 );
 
 const Sidebar = ({ onClose, show }) => {
   const isBigScreen = useMedia(mediaQuery.screenBaseAndUp);
-
+  const { pathname } = useRouter();
   return (
     show && (
       <Layer
@@ -49,6 +49,7 @@ const Sidebar = ({ onClose, show }) => {
         modal
         onClickOutside={onClose}
         onEsc={onClose}
+        elevation="medium"
       >
         <GSidebar
           header={
@@ -66,8 +67,9 @@ const Sidebar = ({ onClose, show }) => {
           footer={<SidebarFooter />}
           background="brand"
           align="center"
+          full="vertical"
         >
-          <MainNavigation onClose={onClose} />
+          <MainNavigation onClose={onClose} pathname={pathname} />
         </GSidebar>
       </Layer>
     )
