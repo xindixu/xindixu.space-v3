@@ -37,7 +37,8 @@ const Sidebar = ({ onClose, show }) =>
         header={<div />}
         footer={<SidebarFooter />}
         background="brand"
-        pad="medium"
+        // pad="medium"
+        align="center"
       >
         <MainNavigation />
       </GSidebar>

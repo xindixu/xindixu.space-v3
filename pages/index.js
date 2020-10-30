@@ -7,24 +7,15 @@ const Title = styled.h1`
   color: ${({ theme }) => theme.colors.primary};
 `;
 
-export default function Home() {
+const Home = () => {
   return (
     <>
       <Title>Home page</Title>
-      <Box direction="row" flex overflow={{ horizontal: "hidden" }}>
-        <Box flex align="center" justify="center">
-          app body
-        </Box>
-        <Box
-          width="medium"
-          background="light-2"
-          elevation="small"
-          align="center"
-          justify="center"
-        >
-          sidebar
-        </Box>
+      <Box>
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. In facilisis a
       </Box>
     </>
   );
-}
+};
+
+export default Home;

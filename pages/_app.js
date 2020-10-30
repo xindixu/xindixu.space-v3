@@ -1,5 +1,6 @@
 import React from "react";
 import { createGlobalStyle } from "styled-components";
+import { useRouter } from "next/router";
 import { Grommet } from "grommet";
 import CommonLayout from "layout/common";
 
@@ -27,7 +28,8 @@ const theme = {
 };
 
 export default function App({ Component, pageProps }) {
-  console.log(pageProps);
+  const route = useRouter();
+
   return (
     <>
       <Grommet full theme={theme}>

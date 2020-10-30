@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
-import { Box, Button, Text } from "grommet";
+import { Header, Button, Text } from "grommet";
 import { Menu } from "grommet-icons";
 import Sidebar from "./sidebar";
 
@@ -8,20 +8,14 @@ const Navbar = (props) => {
   const [showSideBar, setShowSideBar] = useState(false);
   return (
     <>
-      <Box
-        tag="header"
-        direction="row"
-        align="center"
-        justify="between"
+      <Header
         background="brand"
-        pad={{ left: "medium", right: "small", vertical: "small" }}
         elevation="medium"
-        style={{ zIndex: "1" }}
-        {...props}
+        pad={{ horizontal: "small", vertical: "xsmall" }}
       >
         <Text margin="none">XindiXu.Space</Text>
         <Button icon={<Menu />} onClick={() => setShowSideBar(true)} />
-      </Box>
+      </Header>
       <Sidebar show={showSideBar} onClose={() => setShowSideBar(false)} />
     </>
   );

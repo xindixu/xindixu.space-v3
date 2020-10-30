@@ -32,6 +32,7 @@
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
     "react/no-multi-comp": [1, { "ignoreStateless": true }],
+    "react/react-in-jsx-scope": 0,
     "react/sort-comp": 0
   },
   "settings": {
