@@ -21,8 +21,8 @@ const theme = {
       brand: "#ADC178",
     },
     font: {
-      size: "18px",
-      height: "20px",
+      size: "16px",
+      height: "18px",
     },
   },
 };
