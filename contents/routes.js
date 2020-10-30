@@ -25,18 +25,23 @@ export const links = [
 ];
 
 export const linksByPathname = {
-  "/": { icon: <Home />, name: "Home", link: "/", background: "/bg/bg1.jpg" },
+  "/": {
+    icon: <Home />,
+    name: "Home",
+    link: "/",
+    background: { url: "/bg/bg1.jpg", position: "75% 10%" },
+  },
   "/about": {
     icon: <UserFemale />,
     name: "About",
     link: "/about",
-    background: "/bg/bg2.jpg",
+    background: { url: "/bg/bg2.jpg" },
   },
   "/project": {
     icon: <Briefcase />,
     name: "Projects",
     link: "/project",
-    background: "/bg/bg3.jpg",
+    background: { url: "/bg/bg3.jpg" },
   },
   "/life": {
     icon: <Diamond />,

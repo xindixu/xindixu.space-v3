@@ -1,22 +1,23 @@
 import React, { useState } from "react";
-import { Footer, Layer } from "grommet";
+import { Footer, Box } from "grommet";
+import styled from "styled-components";
 import { links } from "contents/social-media";
 import QuickMenu from "components/quick-menu";
+
+const FixBottom = styled(Box)`
+  position: fixed;
+  bottom: 0;
+  left: 0;
+`;
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <Layer
-      position="bottom-left"
-      modal={false}
-      animate={false}
-      responsive={false}
-      style={{ zIndex: 10, background: "none" }}
-    >
+    <FixBottom>
       <Footer pad="small">
         <QuickMenu subMenu={links} isOpen={isOpen} setIsOpen={setIsOpen} />
       </Footer>
-    </Layer>
+    </FixBottom>
   );
 };
 

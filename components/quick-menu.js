@@ -108,6 +108,7 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
           custom={{ index, count }}
         >
           <SubButton
+            tabIndex={isOpen || -1}
             hoverIndicator
             cycle={count}
             count={count}
