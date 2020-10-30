@@ -22,7 +22,6 @@ const theme = {
     },
     font: {
       size: "16px",
-      height: "18px",
     },
   },
 };

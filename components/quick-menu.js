@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { Button } from "grommet";
-import { Close } from "grommet-icons";
+import { Close, AppsRounded } from "grommet-icons";
 import styled from "styled-components";
-import { motion, useAnimation, useTransform } from "framer-motion";
+import { motion, useAnimation } from "framer-motion";
 import styleSettings from "lib/style-settings/index";
 
 const { spacerBase } = styleSettings;
@@ -45,50 +45,61 @@ const SubButton = styled(Button)`
 `;
 
 const circleAnimation = {
-  hidden: { translateY: radius, rotate: -100 },
-  visible: { translateY: radius, rotate: 0 },
+  hidden: ({ index, count }) => ({
+    translateY: radius,
+    rotate: -100,
+    transition: {
+      delay: 0.1 * (count - index),
+    },
+  }),
+  visible: ({ index }) => ({
+    translateY: radius,
+    rotate: 0,
+    transition: {
+      when: "beforeChildren",
+      staggerChildren: 0.1 * index,
+      delay: 0.1 * index,
+    },
+  }),
 };
 
-const iconAnimation = {
+const mainIconAnimation = {
+  hidden: { rotate: 0 },
+  visible: { rotate: 180 },
+};
+
+const subIconAnimation = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
 };
 
-const QuickMenu = ({ subMenu }) => {
-  const [open, setOpen] = useState(false);
-  const controls = useAnimation();
+const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
   const { length: count } = subMenu;
   return (
     <div>
       <Circle>
         <MainButton
-          icon={<Close />}
+          icon={
+            <motion.div
+              initial={isOpen ? "hidden" : false}
+              animate={isOpen ? "visible" : "hidden"}
+              variants={mainIconAnimation}
+            >
+              {isOpen ? <Close /> : <AppsRounded />}
+            </motion.div>
+          }
           primary
           hoverIndicator
           onClick={() => {
-            setOpen((prevOpen) => {
-              controls.start((i) => {
-                const { hidden, visible } = circleAnimation;
-                const animation = prevOpen ? hidden : visible;
-                const delay = 0.1 * (prevOpen ? i : count - i);
-                return {
-                  ...animation,
-                  transition: {
-                    delay,
-                  },
-                };
-              });
-              return !prevOpen;
-            });
+            setIsOpen((prevIsOpen) => !prevIsOpen);
           }}
         />
-
         {subMenu.map(({ name, link, icon }, index) => (
           <motion.div
-            initial={open ? "visible" : "hidden"}
+            initial={isOpen ? "hidden" : false}
+            animate={isOpen ? "visible" : "hidden"}
             variants={circleAnimation}
-            animate={controls}
-            custom={index}
+            custom={{ index, count }}
           >
             <SubButton
               key={name}
@@ -96,15 +107,7 @@ const QuickMenu = ({ subMenu }) => {
               cycle={count}
               count={count}
               index={index}
-              icon={
-                <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  variants={iconAnimation}
-                >
-                  {icon}
-                </motion.div>
-              }
+              icon={<motion.div variants={subIconAnimation}>{icon}</motion.div>}
               href={link}
               primary
             />
@@ -123,6 +126,8 @@ QuickMenu.propTypes = {
       icon: PropTypes.element.isRequired,
     }).isRequired
   ).isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  setIsOpen: PropTypes.func.isRequired,
 };
 
 export default QuickMenu;
