@@ -57,7 +57,7 @@ const circleAnimation = {
     rotate: 0,
     transition: {
       when: "beforeChildren",
-      staggerChildren: 0.1 * index,
+      staggerChildren: 0.01 * index,
       delay: 0.1 * index,
     },
   }),
@@ -96,13 +96,13 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
         />
         {subMenu.map(({ name, link, icon }, index) => (
           <motion.div
+            key={name}
             initial={isOpen ? "hidden" : false}
             animate={isOpen ? "visible" : "hidden"}
             variants={circleAnimation}
             custom={{ index, count }}
           >
             <SubButton
-              key={name}
               hoverIndicator
               cycle={count}
               count={count}

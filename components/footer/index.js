@@ -11,6 +11,7 @@ const Index = (props) => {
       position="bottom-left"
       modal={false}
       animate={false}
+      responsive={false}
       style={{ zIndex: 10 }}
     >
       <Footer pad="small">
