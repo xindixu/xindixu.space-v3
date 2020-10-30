@@ -1,10 +1,4 @@
-import {
-  Close,
-  Github,
-  LinkedinOption,
-  Youtube,
-  MailOption,
-} from "grommet-icons";
+import { Github, LinkedinOption, Youtube, MailOption } from "grommet-icons";
 
 export const links = [
   { name: "GitHub", link: "https://github.com/xindixu", icon: <Github /> },

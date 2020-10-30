@@ -31,7 +31,7 @@ export default function App({ Component, pageProps }) {
 
   return (
     <>
-      <Grommet full theme={theme}>
+      <Grommet theme={theme} full>
         <GlobalStyle />
         <CommonLayout>
           <Component {...pageProps} />

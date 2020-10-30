@@ -12,24 +12,29 @@ import {
   Close,
 } from "grommet-icons";
 import { mediaQuery } from "lib/style-settings/media-query";
+import { links } from "contents/routes";
 
 const SidebarFooter = () => "Built with Next.js";
 
-const SidebarButton = ({ icon, label, link }) => (
+const SidebarButton = ({ icon, label, link, onClick }) => (
   <Box fill>
     <Link href={link}>
-      <Button hoverIndicator size="large" icon={icon} label={label} />
+      <Button
+        hoverIndicator
+        size="large"
+        icon={icon}
+        label={label}
+        onClick={onClick}
+      />
     </Link>
   </Box>
 );
 
-const MainNavigation = () => (
-  <Nav gap="medium" responsive={false}>
-    <SidebarButton icon={<Home />} label="Home" link="/" />
-    <SidebarButton icon={<UserFemale />} label="About" link="/about" />
-    <SidebarButton icon={<Briefcase />} label="Projects" link="/project" />
-    <SidebarButton icon={<Diamond />} label="Life" link="/life" />
-    <SidebarButton icon={<Article />} label="Blog" link="/blog" />
+const MainNavigation = ({ onClose }) => (
+  <Nav gap="medium">
+    {links.map(({ icon, label, link }) => (
+      <SidebarButton icon={icon} label={label} link={link} onClick={onClose} />
+    ))}
   </Nav>
 );
 
@@ -39,13 +44,13 @@ const Sidebar = ({ onClose, show }) => {
   return (
     show && (
       <Layer
-        onEsc={onClose}
-        onClickOutside={onClose}
         position="right"
         full="vertical"
+        modal
+        onClickOutside={onClose}
+        onEsc={onClose}
       >
         <GSidebar
-          responsive={false}
           header={
             isBigScreen ? (
               <div />
@@ -60,10 +65,9 @@ const Sidebar = ({ onClose, show }) => {
           }
           footer={<SidebarFooter />}
           background="brand"
-          // pad="medium"
           align="center"
         >
-          <MainNavigation />
+          <MainNavigation onClose={onClose} />
         </GSidebar>
       </Layer>
     )
