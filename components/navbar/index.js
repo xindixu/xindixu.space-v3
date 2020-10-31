@@ -10,14 +10,22 @@ const FixTop = styled(Box)`
   left: 0;
 `;
 
-const Navbar = () => {
+const solidStyleProps = {
+  background: "brand",
+  elevation: "medium",
+  animation: {
+    type: "fadeIn",
+    duration: 500,
+  },
+};
+
+const Navbar = ({ isHeaderInView }) => {
   const [showSideBar, setShowSideBar] = useState(false);
   return (
     <>
       <FixTop fill="horizontal">
         <Header
-          background="brand"
-          elevation="medium"
+          {...(isHeaderInView ? {} : solidStyleProps)}
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
           <Text margin="none">XindiXu.Space</Text>

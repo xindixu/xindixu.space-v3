@@ -17,15 +17,15 @@ const Image = styled(Box)`
   `}
 `;
 
-const Header = () => {
+const Header = React.forwardRef((props, ref) => {
   const { pathname } = useRouter();
 
   const { name, background } = linksByPathname[pathname];
   return (
-    <Image {...background} fill align="center" justify="center">
+    <Image {...background} fill align="center" justify="center" ref={ref}>
       <Heading>{name}</Heading>
     </Image>
   );
-};
+});
 
 export default Header;

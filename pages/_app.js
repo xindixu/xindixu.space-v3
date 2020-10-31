@@ -1,7 +1,11 @@
 import React from "react";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { createGlobalStyle } from "styled-components";
 import { Grommet } from "grommet";
 import CommonLayout from "layout/common";
+import customTheme from "lib/style-settings/theme";
+import { linksByPathname } from "contents/routes";
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -11,30 +15,16 @@ const GlobalStyle = createGlobalStyle`
   }
 `;
 
-const theme = {
-  colors: {
-    primary: "#e2b4bd",
-  },
-  heading: {
-    font: {
-      family: "'Dancing Script', cursive",
-    },
-  },
-  global: {
-    colors: {
-      brand: "#e2b4bd",
-    },
-    font: {
-      size: "16px",
-      family: "'Lato', sans-serif",
-    },
-  },
-};
-
 export default function App({ Component, pageProps }) {
+  const { pathname } = useRouter();
+
+  const { name } = linksByPathname[pathname];
   return (
     <>
-      <Grommet theme={theme} full>
+      <Head>
+        <title>{name} | XindiXu.space</title>
+      </Head>
+      <Grommet theme={customTheme} full>
         <GlobalStyle />
         <CommonLayout>
           <Component {...pageProps} />

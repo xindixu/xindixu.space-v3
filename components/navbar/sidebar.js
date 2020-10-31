@@ -2,6 +2,7 @@ import React from "react";
 import Link from "next/link";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
+import styled from "styled-components";
 import { useMedia } from "react-use";
 import { Button, Layer, Nav, Sidebar as GSidebar } from "grommet";
 import { Close } from "grommet-icons";
@@ -37,6 +38,8 @@ const MainNavigation = ({ onClose, pathname }) => (
     ))}
   </Nav>
 );
+
+const GradientBackground = styled(GSidebar)``;
 
 const Sidebar = ({ onClose, show }) => {
   const isBigScreen = useMedia(mediaQuery.screenBaseAndUp);
@@ -75,6 +78,7 @@ const Sidebar = ({ onClose, show }) => {
     )
   );
 };
+
 Sidebar.propTypes = {
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
