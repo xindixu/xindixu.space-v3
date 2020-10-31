@@ -29,28 +29,30 @@ export const linksByPathname = {
     icon: <Home />,
     name: "Home",
     link: "/",
-    background: { url: "/bg/bg1.jpg", position: "75% 10%" },
+    background: { url: "/bg/bg-light-1.jpg" },
   },
   "/about": {
     icon: <UserFemale />,
     name: "About",
     link: "/about",
-    background: { url: "/bg/bg2.jpg" },
+    background: { url: "/bg/bg-light-2.jpg" },
   },
   "/project": {
     icon: <Briefcase />,
     name: "Projects",
     link: "/project",
-    background: { url: "/bg/bg3.jpg" },
+    background: { url: "/bg/bg-light-3.jpg" },
   },
   "/life": {
     icon: <Diamond />,
     name: "Life",
     link: "/life",
+    background: { url: "/bg/bg-light-6.jpg" },
   },
   "/blog": {
     icon: <Article />,
     name: "Blog",
     link: "/blog",
+    background: { url: "/bg/bg-light-5.jpg" },
   },
 };

@@ -7,13 +7,19 @@ import { useMedia } from "react-use";
 import { Button, Layer, Nav, Sidebar as GSidebar } from "grommet";
 import { Close } from "grommet-icons";
 import { mediaQuery } from "lib/style-settings/media-query";
+import styleSettings from "lib/style-settings";
 import { links } from "contents/routes";
 
+const { pink, black } = styleSettings;
 const SidebarFooter = () => "Built with Next.js";
+
+const NoBorderButton = styled(Button)`
+  border: none;
+`;
 
 const SidebarButton = ({ icon, label, link, onClick, active }) => (
   <Link href={link}>
-    <Button
+    <NoBorderButton
       hoverIndicator
       full="horizontal"
       size="large"
@@ -29,6 +35,7 @@ const MainNavigation = ({ onClose, pathname }) => (
   <Nav gap="medium" full="horizontal" alignSelf="stretch">
     {links.map(({ icon, name, link }) => (
       <SidebarButton
+        key={name}
         icon={icon}
         label={name}
         link={link}
@@ -39,7 +46,9 @@ const MainNavigation = ({ onClose, pathname }) => (
   </Nav>
 );
 
-const GradientBackground = styled(GSidebar)``;
+const GradientBackground = styled(GSidebar)`
+  background: linear-gradient(0deg, ${black}FF -10%, ${pink}80 100%);
+`;
 
 const Sidebar = ({ onClose, show }) => {
   const isBigScreen = useMedia(mediaQuery.screenBaseAndUp);
@@ -54,7 +63,7 @@ const Sidebar = ({ onClose, show }) => {
         onEsc={onClose}
         elevation="medium"
       >
-        <GSidebar
+        <GradientBackground
           header={
             isBigScreen ? (
               <div />
@@ -68,12 +77,12 @@ const Sidebar = ({ onClose, show }) => {
             )
           }
           footer={<SidebarFooter />}
-          background="brand"
           align="center"
           full="vertical"
+          background="brand"
         >
           <MainNavigation onClose={onClose} pathname={pathname} />
-        </GSidebar>
+        </GradientBackground>
       </Layer>
     )
   );
