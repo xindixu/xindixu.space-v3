@@ -9,18 +9,13 @@ export const links = [
   },
   {
     icon: <Briefcase />,
-    name: "Projects",
-    link: "/project",
-  },
-  {
-    icon: <Diamond />,
-    name: "Life",
-    link: "/life",
+    name: "Work",
+    link: "/work",
   },
   {
     icon: <Article />,
-    name: "Blog",
-    link: "/blog",
+    name: "Ideas",
+    link: "/ideas",
   },
 ];
 
@@ -29,7 +24,7 @@ export const linksByPathname = {
     icon: <Home />,
     name: "Home",
     link: "/",
-    background: { url: "/bg/bg-light-1.jpg" },
+    background: { url: "/bg/bg-light-6.jpg" },
   },
   "/about": {
     icon: <UserFemale />,
@@ -37,22 +32,16 @@ export const linksByPathname = {
     link: "/about",
     background: { url: "/bg/bg-light-2.jpg" },
   },
-  "/project": {
+  "/work": {
     icon: <Briefcase />,
-    name: "Projects",
-    link: "/project",
+    name: "Work",
+    link: "/work",
     background: { url: "/bg/bg-light-3.jpg" },
   },
-  "/life": {
-    icon: <Diamond />,
-    name: "Life",
-    link: "/life",
-    background: { url: "/bg/bg-light-6.jpg" },
-  },
-  "/blog": {
+  "/ideas": {
     icon: <Article />,
-    name: "Blog",
-    link: "/blog",
-    background: { url: "/bg/bg-light-5.jpg" },
+    name: "Ideas",
+    link: "/ideas",
+    background: { url: "/bg/bg-light-7.jpg" },
   },
 };
