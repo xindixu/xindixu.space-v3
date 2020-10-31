@@ -1,18 +1,9 @@
-import React, { useContext, useState } from "react";
-import PropTypes from "prop-types";
-import { get } from "lodash";
-import Link from "next/link";
-import {
-  Box,
-  Card,
-  CardBody,
-  CardFooter,
-  Grid,
-  ResponsiveContext,
-  Text,
-  Image,
-} from "grommet";
-import { getAllWorks } from "lib/contentful/work";
+import React, { useContext } from "react"
+import PropTypes from "prop-types"
+import { get } from "lodash"
+import Link from "next/link"
+import { Card, CardBody, CardFooter, Grid, ResponsiveContext, Text, Image } from "grommet"
+import { getAllWorks } from "lib/contentful/work"
 
 const Work = ({ name, slug, thumbnail }) => (
   <Link href={`/work/${slug}`}>
@@ -29,10 +20,10 @@ const Work = ({ name, slug, thumbnail }) => (
       </CardFooter>
     </Card>
   </Link>
-);
+)
 
 const Works = ({ works = [] }) => {
-  const size = useContext(ResponsiveContext);
+  const size = useContext(ResponsiveContext)
 
   return (
     <Grid
@@ -47,8 +38,8 @@ const Works = ({ works = [] }) => {
         <Work key={slug} name={name} slug={slug} thumbnail={thumbnail} />
       ))}
     </Grid>
-  );
-};
+  )
+}
 
 const FAKE = () => ({
   name: "fake",
@@ -61,9 +52,10 @@ const FAKE = () => ({
       },
     },
   },
-});
+})
+
 export async function getStaticProps() {
-  const { entries } = await getAllWorks();
+  const { entries } = await getAllWorks()
 
   // Next.js expects the props to be json stringify-able
   // https://dev.to/ryyppy/reason-records-nextjs-undefined-and-getstaticprops-5d46
@@ -73,9 +65,9 @@ export async function getStaticProps() {
         works: [...entries, FAKE(), FAKE()],
       })
     ),
-  };
+  }
 }
 
-Works.propTypes = {};
+Works.propTypes = {}
 
-export default Works;
+export default Works

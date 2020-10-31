@@ -23,9 +23,9 @@ const Text = styled(Box)`
   background: radial-gradient(circle, ${white}55 60%, ${white} 100%);
 `
 
-const Header = React.forwardRef(({ name, background }, ref) => {
+const Header = React.forwardRef(({ name, background, full }, ref) => {
   return (
-    <Image {...background} fill ref={ref}>
+    <Image {...background} fill={full ? true : "horizontal"} ref={ref}>
       <Gradient fill align="center" justify="center">
         <Text>
           <Heading color="black" size="xlarge">
