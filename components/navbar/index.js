@@ -32,6 +32,7 @@ const Navbar = ({ isHeaderInView }) => {
           <Button icon={<Menu />} onClick={() => setShowSideBar(true)} />
         </Header>
       </FixTop>
+
       <Sidebar show={showSideBar} onClose={() => setShowSideBar(false)} />
     </>
   );

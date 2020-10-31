@@ -49,7 +49,12 @@ const SubButton = styled(Button)`
   }}
 `;
 
-const circleAnimation = {
+const mainIconAnimation = {
+  hidden: { rotate: 0 },
+  visible: { rotate: 180 },
+};
+
+const subMenuCircleAnimation = {
   hidden: ({ index, count }) => ({
     translateY: radius,
     rotate: -100,
@@ -62,15 +67,10 @@ const circleAnimation = {
     rotate: 0,
     transition: {
       when: "beforeChildren",
-      staggerChildren: 0.01 * index,
       delay: 0.1 * index,
+      staggerChildren: 0.01 * index,
     },
   }),
-};
-
-const mainIconAnimation = {
-  hidden: { rotate: 0 },
-  visible: { rotate: 180 },
 };
 
 const subIconAnimation = {
@@ -104,11 +104,11 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
           key={name}
           initial={isOpen ? "hidden" : false}
           animate={isOpen ? "visible" : "hidden"}
-          variants={circleAnimation}
+          variants={subMenuCircleAnimation}
           custom={{ index, count }}
         >
           <SubButton
-            tabIndex={isOpen || -1}
+            tabIndex={isOpen - 1}
             hoverIndicator
             cycle={count}
             count={count}
