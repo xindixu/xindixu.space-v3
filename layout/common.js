@@ -7,14 +7,13 @@ import Header from "components/header";
 import Footer from "components/footer";
 
 const Common = ({ children }) => {
-  const [ref, isHeaderInView] = useInView();
+  const [ref, isHeaderInView] = useInView({ threshold: 0.05 });
 
   return (
     <>
       <Navbar isHeaderInView={isHeaderInView} />
       <Header ref={ref} />
       <Main pad="large">{children}</Main>
-
       <Footer />
     </>
   );

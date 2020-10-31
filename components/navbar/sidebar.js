@@ -14,12 +14,14 @@ import { links } from "contents/routes";
 const { pink, black } = styleSettings;
 
 const GradientBackground = styled(GSidebar)`
-  background: linear-gradient(
-    0deg,
-    ${black}BB -10%,
-    ${pink}BB 90%,
-    ${pink} 100%
-  );
+  ${({ isBigScreen }) => `
+    background: linear-gradient(
+      0deg,
+      ${black}BB -10%,
+      ${pink}${isBigScreen ? "88" : "BB"} 90%,
+      ${pink} 100%
+    );
+`}
 `;
 
 const circleMenuAnimation = {
