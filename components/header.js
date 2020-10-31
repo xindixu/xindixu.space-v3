@@ -6,11 +6,11 @@ import styleSettings from "lib/style-settings"
 const { pink, white, spacerXxl } = styleSettings
 
 const Image = styled(Box)`
-  ${({ url, position }) => `
-    background: url(/img${url});
+  ${({ url, position = "center" }) => `
+    background: url(${url});
     background-repeat: no-repeat;
     background-size: cover;
-    background-position: ${position || "center"};
+    background-position: ${position};
   `}
 `
 
@@ -28,7 +28,7 @@ const Header = React.forwardRef(({ name, background, full }, ref) => {
     <Image {...background} fill={full ? true : "horizontal"} ref={ref}>
       <Gradient fill align="center" justify="center">
         <Text>
-          <Heading color="black" size="xlarge">
+          <Heading color="black" size={full ? "xlarge" : "medium"}>
             {name}
           </Heading>
         </Text>

@@ -17,7 +17,7 @@ const App = ({ Component, pageProps }) => (
     <Grommet theme={customTheme} full>
       <GlobalStyle />
       <CommonLayout>
-        <Component {...pageProps} />
+        {({ setHeaderRef }) => <Component {...pageProps} setHeaderRef={setHeaderRef} />}
       </CommonLayout>
     </Grommet>
   </>

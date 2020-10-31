@@ -1,7 +1,6 @@
 import React from "react"
 import { useInView } from "react-intersection-observer"
 import PropTypes from "prop-types"
-import { Main } from "grommet"
 import usePageConfig from "hooks/usePageConfig"
 
 import Title from "components/title"
@@ -20,8 +19,8 @@ const Common = ({ children }) => {
     <>
       <Title name={name} />
       <Navbar isHeaderInView={isHeaderInView} />
-      <Header ref={ref} name={name} background={background} full={isTopLevel} />
-      <Main pad="xlarge">{children}</Main>
+      {isTopLevel && <Header ref={ref} name={name} background={background} full={isTopLevel} />}
+      {children({ setHeaderRef: ref })}
       <Footer />
     </>
   )

@@ -2,7 +2,7 @@ import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import { get } from "lodash"
 import Link from "next/link"
-import { Card, CardBody, CardFooter, Grid, ResponsiveContext, Text, Image } from "grommet"
+import { Main, Card, CardBody, CardFooter, Grid, ResponsiveContext, Text, Image } from "grommet"
 import { getAllWorks } from "lib/contentful/work"
 
 const Work = ({ name, slug, thumbnail }) => (
@@ -12,7 +12,7 @@ const Work = ({ name, slug, thumbnail }) => (
         <Image
           fit="cover"
           // TODO: fallback url
-          src={get(thumbnail, "fields.file.url") || ""}
+          src={thumbnail}
         />
       </CardBody>
       <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
@@ -26,32 +26,28 @@ const Works = ({ works = [] }) => {
   const size = useContext(ResponsiveContext)
 
   return (
-    <Grid
-      gap="medium"
-      rows="small"
-      columns={{
-        count: "fit",
-        size: size === "small" ? "100%" : "medium",
-      }}
-    >
-      {works.map(({ name, slug, thumbnail }) => (
-        <Work key={slug} name={name} slug={slug} thumbnail={thumbnail} />
-      ))}
-    </Grid>
+    <Main pad="xlarge">
+      <Grid
+        gap="medium"
+        rows="small"
+        columns={{
+          count: "fit",
+          size: size === "small" ? "100%" : "medium",
+        }}
+      >
+        {works.map(({ name, slug, thumbnail }) => (
+          <Work key={slug} name={name} slug={slug} thumbnail={thumbnail} />
+        ))}
+      </Grid>
+    </Main>
   )
 }
 
 const FAKE = () => ({
   name: "fake",
   slug: `fake-${Math.random()}`,
-  thumbnail: {
-    fields: {
-      file: {
-        url:
-          "//images.ctfassets.net/erckh4cqp51i/3M2MNu9R6E5lmp3kTJUhLG/a43833c68f570e4a13dec1603c0d25b1/bg-dark-2.jpg",
-      },
-    },
-  },
+  thumbnail:
+    "//images.ctfassets.net/erckh4cqp51i/3M2MNu9R6E5lmp3kTJUhLG/a43833c68f570e4a13dec1603c0d25b1/bg-dark-2.jpg",
 })
 
 export async function getStaticProps() {
@@ -62,12 +58,20 @@ export async function getStaticProps() {
   return {
     props: JSON.parse(
       JSON.stringify({
-        works: [...entries, FAKE(), FAKE()],
+        works: [...entries],
       })
     ),
   }
 }
 
-Works.propTypes = {}
+Works.propTypes = {
+  works: PropTypes.arrayOf(
+    PropTypes.shape({
+      name: PropTypes.string.isRequired,
+      slug: PropTypes.string.isRequired,
+      thumbnail: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+}
 
 export default Works
