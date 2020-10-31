@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import { Box, Header, Button, Text } from "grommet";
-import { Menu } from "grommet-icons";
-import styled from "styled-components";
-import Sidebar from "./sidebar";
+import React, { useState } from "react"
+import { Box, Header, Button, Text } from "grommet"
+import { Menu } from "grommet-icons"
+import styled from "styled-components"
+import Sidebar from "./sidebar"
 
 const FixTop = styled(Box)`
   position: fixed;
   top: 0;
   left: 0;
-`;
+`
 
 const solidStyleProps = {
   background: "brand",
@@ -17,10 +17,10 @@ const solidStyleProps = {
     type: "fadeIn",
     duration: 500,
   },
-};
+}
 
 const Navbar = ({ isHeaderInView }) => {
-  const [showSideBar, setShowSideBar] = useState(false);
+  const [showSideBar, setShowSideBar] = useState(false)
   return (
     <>
       <FixTop fill="horizontal">
@@ -35,7 +35,7 @@ const Navbar = ({ isHeaderInView }) => {
 
       <Sidebar show={showSideBar} onClose={() => setShowSideBar(false)} />
     </>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

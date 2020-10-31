@@ -1,4 +1,4 @@
-import { Article, Briefcase, Diamond, Home, UserFemale } from "grommet-icons";
+import { Article, Briefcase, Home, UserFemale } from "grommet-icons"
 
 export const links = [
   { icon: <Home />, name: "Home", link: "/" },
@@ -17,7 +17,7 @@ export const links = [
     name: "Ideas",
     link: "/ideas",
   },
-];
+]
 
 export const linksByPathname = {
   "/": {
@@ -44,4 +44,4 @@ export const linksByPathname = {
     link: "/ideas",
     background: { url: "/bg/bg-light-7.jpg" },
   },
-};
+}

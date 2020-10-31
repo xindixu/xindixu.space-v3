@@ -1,17 +1,17 @@
-import React from "react";
-import Link from "next/link";
-import PropTypes from "prop-types";
-import { useRouter } from "next/router";
-import styled from "styled-components";
-import { useMedia } from "react-use";
-import { Box, Button, Layer, Nav, Sidebar as GSidebar } from "grommet";
-import { Close } from "grommet-icons";
-import { motion, AnimatePresence } from "framer-motion";
-import { mediaQuery } from "lib/style-settings/media-query";
-import styleSettings from "lib/style-settings";
-import { links } from "contents/routes";
+import React from "react"
+import Link from "next/link"
+import PropTypes from "prop-types"
+import { useRouter } from "next/router"
+import styled from "styled-components"
+import { useMedia } from "react-use"
+import { Box, Button, Layer, Nav, Sidebar as GSidebar } from "grommet"
+import { Close } from "grommet-icons"
+import { motion, AnimatePresence } from "framer-motion"
+import { mediaQuery } from "lib/style-settings/media-query"
+import styleSettings from "lib/style-settings"
+import { links } from "contents/routes"
 
-const { pink, black } = styleSettings;
+const { pink, black } = styleSettings
 
 const GradientBackground = styled(GSidebar)`
   ${({ isBigScreen }) => `
@@ -22,7 +22,7 @@ const GradientBackground = styled(GSidebar)`
       ${pink} 100%
     );
 `}
-`;
+`
 
 const circleMenuAnimation = {
   visible: {
@@ -44,7 +44,7 @@ const circleMenuAnimation = {
       damping: 40,
     },
   },
-};
+}
 
 const slideMenuAnimation = {
   visible: {
@@ -60,7 +60,7 @@ const slideMenuAnimation = {
       delay: 0.5,
     },
   },
-};
+}
 
 const linkAnimation = {
   visible: ({ index }) => ({
@@ -78,9 +78,9 @@ const linkAnimation = {
       delay: 0.1 * (count - index),
     },
   }),
-};
+}
 
-const SidebarFooter = () => "Built with Next.js";
+const SidebarFooter = () => "Built with Next.js"
 
 const SidebarButton = ({ icon, label, link, onClick, active, show }) => (
   <Link href={link}>
@@ -97,7 +97,7 @@ const SidebarButton = ({ icon, label, link, onClick, active, show }) => (
       style={{ background: "white" }}
     />
   </Link>
-);
+)
 
 const MainNavigation = ({ onClose, pathname, show }) => (
   <Nav gap="medium" full="horizontal" alignSelf="stretch">
@@ -121,11 +121,11 @@ const MainNavigation = ({ onClose, pathname, show }) => (
       </motion.div>
     ))}
   </Nav>
-);
+)
 
 const Sidebar = ({ onClose, show }) => {
-  const isBigScreen = useMedia(mediaQuery.screenBaseAndUp);
-  const { pathname } = useRouter();
+  const isBigScreen = useMedia(mediaQuery.screenBaseAndUp)
+  const { pathname } = useRouter()
   return (
     <Box>
       <AnimatePresence>
@@ -150,34 +150,25 @@ const Sidebar = ({ onClose, show }) => {
             >
               <GradientBackground
                 header={
-                  <Button
-                    icon={<Close />}
-                    hoverIndicator
-                    alignSelf="end"
-                    onClick={onClose}
-                  />
+                  <Button icon={<Close />} hoverIndicator alignSelf="end" onClick={onClose} />
                 }
                 footer={<SidebarFooter />}
                 align="center"
                 full="vertical"
               >
-                <MainNavigation
-                  onClose={onClose}
-                  pathname={pathname}
-                  show={show}
-                />
+                <MainNavigation onClose={onClose} pathname={pathname} show={show} />
               </GradientBackground>
             </motion.div>
           </Layer>
         )}
       </AnimatePresence>
     </Box>
-  );
-};
+  )
+}
 
 Sidebar.propTypes = {
   onClose: PropTypes.func.isRequired,
   show: PropTypes.bool.isRequired,
-};
+}
 
-export default Sidebar;
+export default Sidebar

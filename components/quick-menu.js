@@ -1,18 +1,18 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Button } from "grommet";
-import { Close, AppsRounded } from "grommet-icons";
-import styled from "styled-components";
-import { motion } from "framer-motion";
-import styleSettings from "lib/style-settings/index";
+import React from "react"
+import PropTypes from "prop-types"
+import { Button } from "grommet"
+import { Close, AppsRounded } from "grommet-icons"
+import styled from "styled-components"
+import { motion } from "framer-motion"
+import styleSettings from "lib/style-settings/index"
 
 const {
   spacerBase,
   elevation: { light },
-} = styleSettings;
+} = styleSettings
 
-const diameter = "288px";
-const radius = "144px";
+const diameter = "288px"
+const radius = "144px"
 const Circle = styled.div`
   position: relative;
   width: ${diameter};
@@ -22,7 +22,7 @@ const Circle = styled.div`
   padding: 0;
   border-radius: 50%;
   z-index: 0;
-`;
+`
 
 const MainButton = styled(Button)`
   position: absolute;
@@ -31,7 +31,7 @@ const MainButton = styled(Button)`
   margin: -${spacerBase};
   border-radius: 50%;
   box-shadow: ${light.medium};
-`;
+`
 
 const SubButton = styled(Button)`
   position: absolute;
@@ -41,18 +41,18 @@ const SubButton = styled(Button)`
   border-radius: 50%;
   box-shadow: ${light.medium};
   ${({ count, index, cycle }) => {
-    const angle = 90 / count;
-    const rotation = angle * (index + count * (cycle - 1) + 0.5);
+    const angle = 90 / count
+    const rotation = angle * (index + count * (cycle - 1) + 0.5)
     return `
       transform: rotate(${rotation}deg) translate(${radius}) rotate(-${rotation}deg);
-    `;
+    `
   }}
-`;
+`
 
 const mainIconAnimation = {
   hidden: { rotate: 0 },
   visible: { rotate: 180 },
-};
+}
 
 const subMenuCircleAnimation = {
   hidden: ({ index, count }) => ({
@@ -71,15 +71,15 @@ const subMenuCircleAnimation = {
       staggerChildren: 0.01 * index,
     },
   }),
-};
+}
 
 const subIconAnimation = {
   hidden: { opacity: 0 },
   visible: { opacity: 1 },
-};
+}
 
 const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
-  const { length: count } = subMenu;
+  const { length: count } = subMenu
   return (
     <Circle>
       <MainButton
@@ -96,7 +96,7 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
         primary
         hoverIndicator
         onClick={() => {
-          setIsOpen((prevIsOpen) => !prevIsOpen);
+          setIsOpen((prevIsOpen) => !prevIsOpen)
         }}
       />
       {subMenu.map(({ name, link, icon }, index) => (
@@ -120,8 +120,8 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
         </motion.div>
       ))}
     </Circle>
-  );
-};
+  )
+}
 
 QuickMenu.propTypes = {
   subMenu: PropTypes.arrayOf(
@@ -133,6 +133,6 @@ QuickMenu.propTypes = {
   ).isRequired,
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
-};
+}
 
-export default QuickMenu;
+export default QuickMenu
