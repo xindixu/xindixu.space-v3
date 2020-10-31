@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Box, Heading } from "grommet";
 import styled from "styled-components";
 import { useRouter } from "next/router";
@@ -18,19 +17,15 @@ const Image = styled(Box)`
   `}
 `;
 
-const Header = (props) => {
+const Header = () => {
   const { pathname } = useRouter();
 
   const { name, background } = linksByPathname[pathname];
   return (
-    <Box fill align="center" justify="center">
-      <Image {...background} fill>
-        <Heading>{name}</Heading>
-      </Image>
-    </Box>
+    <Image {...background} fill align="center" justify="center">
+      <Heading>{name}</Heading>
+    </Image>
   );
 };
-
-Header.propTypes = {};
 
 export default Header;
