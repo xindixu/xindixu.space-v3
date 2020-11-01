@@ -8,7 +8,6 @@ import Header from "components/header"
 
 const Work = ({ setHeaderRef, slug, work = {} }) => {
   const { name, thumbnail } = work
-  console.log(work)
 
   return (
     <>
@@ -67,7 +66,7 @@ const Work = ({ setHeaderRef, slug, work = {} }) => {
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  const work = await getWork(slug)
+  const work = await getWork({ slug })
   return {
     props: JSON.parse(
       JSON.stringify({

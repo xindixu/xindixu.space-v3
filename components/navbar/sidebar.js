@@ -83,8 +83,9 @@ const linkAnimation = {
 const SidebarFooter = () => "Built with Next.js"
 
 const SidebarButton = ({ icon, label, link, onClick, active, show }) => (
-  <Link href={link}>
+  <Link href={link} passHref>
     <Button
+      as="a"
       hoverIndicator
       full="horizontal"
       size="large"

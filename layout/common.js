@@ -2,7 +2,6 @@ import React from "react"
 import { useInView } from "react-intersection-observer"
 import PropTypes from "prop-types"
 import usePageConfig from "hooks/usePageConfig"
-
 import Title from "components/title"
 import Navbar from "components/navbar"
 import Header from "components/header"
@@ -27,7 +26,7 @@ const Common = ({ children }) => {
 }
 
 Common.propTypes = {
-  children: PropTypes.element.isRequired,
+  children: PropTypes.func.isRequired,
 }
 
 export default Common
