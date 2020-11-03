@@ -119,26 +119,6 @@ const About = () => {
           </Box>
         </div>
       </Right>
-      <p>
-        n the example above, Parent passes its ref callback as an inputRef prop
-        to the CustomTextInput, and the CustomTextInput passes the same function
-        as a special ref attribute to the . As a result, this.inputElement in
-        Parent will be set to the DOM node corresponding to the element in the
-        CustomTextInput. Legacy API: String Refs If you worked with React
-        before, you might be familiar with an older API where the ref attribute
-        is a string, like "textInput", and the DOM node is accessed as
-        this.refs.textInput. We advise against it because string refs have some
-        issues, are considered legacy, and are likely to be removed in one of
-        the future releases. Note If you’re currently using this.refs.textInput
-        to access refs, we recommend using either the callback pattern or the
-        createRef API instead. Caveats with callback refs If the ref callback is
-        defined as an inline function, it will get called twice during updates,
-        first with null and then again with the DOM element. This is because a
-        new instance of the function is created with each render, so React needs
-        to clear the old ref and set up the new one. You can avoid this by
-        defining the ref callback as a bound method on the class, but note that
-        it shouldn’t matter in most cases.
-      </p>
     </Main>
   )
 }
