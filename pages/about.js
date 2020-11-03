@@ -1,22 +1,12 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { motion, useMotionValue } from "framer-motion"
-import { useInView } from "react-intersection-observer"
-
-import { Main, WorldMap, Box, Paragraph, ThemeContext } from "grommet"
+import { Main, WorldMap, Box, Paragraph, ThemeContext, Heading } from "grommet"
 import styled from "styled-components"
-import { name } from "assets/svg/name"
-import styleSettings from "lib/style-settings"
+import Name from "components/name"
 import { media } from "lib/style-settings/media-query"
+import styleSettings from "lib/style-settings"
 
-const { pink, spacerSm } = styleSettings
-const SvgWrapper = styled(Box)`
-  div,
-  svg {
-    width: 100%;
-    height: 100%;
-  }
-`
+const { spacerLg } = styleSettings
 
 const Half = styled(Box).attrs({
   margin: { vertical: "medium" },
@@ -42,47 +32,29 @@ const WordMapWithActivePlace = styled(WorldMap)`
   }
 `
 
-const svgAnimation = {
-  in: {
-    pathLength: 1,
-  },
-  out: { pathLength: 0 },
-}
+const Location = styled(Box)`
+  ${({ position }) => `
+      margin-left: ${position};
+  `}
+  margin-top: -${spacerLg};
+`
+const Label = ({ place, monthDay, year, position }) => (
+  <Location position={position}>
+    <span>{place}</span>
+    <Heading size="small">
+      {monthDay}
+      <br />
+      {year}
+    </Heading>
+  </Location>
+)
 
 const About = () => {
-  const [ref, isNameInView] = useInView({ delay: 1000 })
-  const pathLength = useMotionValue(isNameInView ? 0 : 1)
-
   return (
-    <Main pad="xlarge">
-      <Left>
+    <Main pad="xlarge" fill={false}>
+      <Left direction="row">
         <div>
-          <SvgWrapper direction="row" width="medium">
-            <div ref={ref}>
-              <svg viewBox="0 0 1010 344" xmlns="http://www.w3.org/2000/svg">
-                <g
-                  transform="translate(0,344) scale(0.1,-0.1)"
-                  fill={pink}
-                  stroke="none"
-                >
-                  {name.map((d, index) => (
-                    <motion.path
-                      fill="transparent"
-                      d={d}
-                      stroke={pink}
-                      strokeWidth="40"
-                      custom={index}
-                      initial="out"
-                      animate={isNameInView ? "in" : "out"}
-                      variants={svgAnimation}
-                      style={{ pathLength }}
-                      transition={{ duration: 2 }}
-                    />
-                  ))}
-                </g>
-              </svg>
-            </div>
-          </SvgWrapper>
+          <Name />
           <Box>
             <Paragraph fill>
               I enjoy designing and implementing full-stack features with
@@ -102,7 +74,6 @@ const About = () => {
           </Box>
         </div>
       </Left>
-
       <Right direction="row-reverse">
         <div>
           <ThemeContext.Extend
@@ -120,23 +91,54 @@ const About = () => {
                   name: "Fuzhou, Fujian",
                   location: [26.0745, 119.2965],
                   color: "brand",
-                  onClick: (name) => {},
-                  onHover: (name) => {},
+                  onClick: () => {},
                 },
                 {
                   name: "Austin, TX",
                   location: [30.2672, -97.7431],
                   color: "brand",
-                  onClick: (name) => {},
-                  onHover: (name) => {},
+                  onClick: () => {},
                 },
               ]}
               selectColor="accent-2"
             />
           </ThemeContext.Extend>
-          <div>0</div>
+          <Box direction="row">
+            <Label
+              place="Austin, USA"
+              monthDay="0809"
+              year="2016"
+              position="20%"
+            />
+            <Label
+              place="Fuzhou, China"
+              monthDay="0324"
+              year="1998"
+              position="50%"
+            />
+          </Box>
         </div>
       </Right>
+      <p>
+        n the example above, Parent passes its ref callback as an inputRef prop
+        to the CustomTextInput, and the CustomTextInput passes the same function
+        as a special ref attribute to the . As a result, this.inputElement in
+        Parent will be set to the DOM node corresponding to the element in the
+        CustomTextInput. Legacy API: String Refs If you worked with React
+        before, you might be familiar with an older API where the ref attribute
+        is a string, like "textInput", and the DOM node is accessed as
+        this.refs.textInput. We advise against it because string refs have some
+        issues, are considered legacy, and are likely to be removed in one of
+        the future releases. Note If you’re currently using this.refs.textInput
+        to access refs, we recommend using either the callback pattern or the
+        createRef API instead. Caveats with callback refs If the ref callback is
+        defined as an inline function, it will get called twice during updates,
+        first with null and then again with the DOM element. This is because a
+        new instance of the function is created with each render, so React needs
+        to clear the old ref and set up the new one. You can avoid this by
+        defining the ref callback as a bound method on the class, but note that
+        it shouldn’t matter in most cases.
+      </p>
     </Main>
   )
 }
