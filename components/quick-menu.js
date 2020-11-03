@@ -83,7 +83,6 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
   return (
     <Circle>
       <MainButton
-        elevation="medium"
         icon={
           <motion.div
             initial={isOpen ? "hidden" : false}
