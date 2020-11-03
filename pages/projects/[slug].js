@@ -8,7 +8,7 @@ import Header from "components/header"
 import RichText from "components/rich-text"
 import InfoBox from "components/info-box"
 
-const Work = ({ setHeaderRef, slug, work = {} }) => {
+const Work = ({ setHeaderRef, work = {} }) => {
   const { name, thumbnail, labels, description, demoLink, repoLink } = work
 
   const size = useContext(ResponsiveContext)

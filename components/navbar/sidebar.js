@@ -151,13 +151,22 @@ const Sidebar = ({ onClose, show }) => {
             >
               <GradientBackground
                 header={
-                  <Button icon={<Close />} hoverIndicator alignSelf="end" onClick={onClose} />
+                  <Button
+                    icon={<Close />}
+                    hoverIndicator
+                    alignSelf="end"
+                    onClick={onClose}
+                  />
                 }
                 footer={<SidebarFooter />}
                 align="center"
                 full="vertical"
               >
-                <MainNavigation onClose={onClose} pathname={pathname} show={show} />
+                <MainNavigation
+                  onClose={onClose}
+                  pathname={pathname}
+                  show={show}
+                />
               </GradientBackground>
             </motion.div>
           </Layer>
