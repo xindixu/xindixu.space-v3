@@ -4,8 +4,8 @@ export const links = [
   { icon: <Home />, name: "Home", link: "/" },
   {
     icon: <Organization />,
-    name: "Experiences",
-    link: "/experiences",
+    name: "Work",
+    link: "/work",
   },
   {
     icon: <Briefcase />,
@@ -26,10 +26,10 @@ export const linksByPathname = {
     link: "/",
     background: { url: "/img/bg/bg-light-2.jpg" },
   },
-  "/experiences": {
+  "/work": {
     icon: <Organization />,
-    name: "Experiences",
-    link: "/experiences",
+    name: "Work",
+    link: "/work",
     background: { url: "/img/bg/bg-light-3.jpg" },
   },
   "/projects": {
@@ -44,4 +44,9 @@ export const linksByPathname = {
     link: "/contact",
     background: { url: "/img/bg/bg-light-7.jpg" },
   },
+}
+
+export const errorPage = {
+  name: "Error",
+  background: { url: "/img/bg/bg-light-1.jpg" },
 }

@@ -1,5 +1,5 @@
 import { useRouter } from "next/router"
-import { linksByPathname } from "contents/routes"
+import { linksByPathname, errorPage } from "contents/routes"
 
 const usePageConfig = () => {
   const { pathname } = useRouter()
@@ -7,7 +7,7 @@ const usePageConfig = () => {
 
   return {
     isTopLevel: paths.length === 1,
-    config: linksByPathname[paths[0]] || {},
+    config: linksByPathname[paths[0]] || errorPage,
   }
 }
 

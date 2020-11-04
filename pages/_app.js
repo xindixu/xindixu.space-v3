@@ -9,6 +9,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    overflow: initial;
   }
 `
 
@@ -17,7 +18,9 @@ const App = ({ Component, pageProps }) => (
     <Grommet theme={customTheme} full>
       <GlobalStyle />
       <CommonLayout>
-        {({ setHeaderRef }) => <Component {...pageProps} setHeaderRef={setHeaderRef} />}
+        {({ setHeaderRef }) => (
+          <Component {...pageProps} setHeaderRef={setHeaderRef} />
+        )}
       </CommonLayout>
     </Grommet>
   </>

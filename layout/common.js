@@ -18,7 +18,14 @@ const Common = ({ children }) => {
     <>
       <Title name={name} />
       <Navbar isHeaderInView={isHeaderInView} />
-      {isTopLevel && <Header ref={ref} name={name} background={background} full={isTopLevel} />}
+      {isTopLevel && (
+        <Header
+          ref={ref}
+          name={name}
+          background={background}
+          full={isTopLevel}
+        />
+      )}
       {children({ setHeaderRef: ref })}
       <Footer />
     </>
