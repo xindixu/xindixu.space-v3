@@ -33,7 +33,7 @@ const Timeline = (props) => {
       {experiences.map(({ company, jobTitle, list, date, icon }) => (
         <VerticalTimelineElement
           className="vertical-timeline-element--work"
-          contentStyle={{ background: pink }}
+          contentStyle={{ border: `1px solid ${pink}` }}
           contentArrowStyle={{ borderRight: `7px solid ${pink}` }}
           date={date}
           iconStyle={{ background: pink }}

@@ -55,7 +55,7 @@ const slideMenuAnimation = {
     },
   },
   hidden: {
-    x: 300,
+    x: 400,
     transition: {
       delay: 0.5,
     },
@@ -87,21 +87,25 @@ const SidebarButton = ({ icon, label, link, onClick, active, show }) => (
     <Button
       as="a"
       hoverIndicator
-      full="horizontal"
+      fill="horizontal"
       size="large"
       icon={icon}
       label={label}
       onClick={onClick}
       active={active}
       color="white"
-      margin={{ horizontal: "large" }}
       style={{ background: "white" }}
     />
   </Link>
 )
 
-const MainNavigation = ({ onClose, pathname, show }) => (
-  <Nav gap="medium" full="horizontal" alignSelf="stretch">
+const MainNavigation = ({ isBigScreen, onClose, pathname, show }) => (
+  <Nav
+    gap={isBigScreen ? "medium" : "large"}
+    full="horizontal"
+    alignSelf="stretch"
+    pad={{ horizontal: "large" }}
+  >
     {links.map(({ icon, name, link }, index) => (
       <motion.div
         key={name}
@@ -163,6 +167,7 @@ const Sidebar = ({ onClose, show }) => {
                 full="vertical"
               >
                 <MainNavigation
+                  isBigScreen={isBigScreen}
                   onClose={onClose}
                   pathname={pathname}
                   show={show}

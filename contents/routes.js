@@ -1,5 +1,5 @@
-import { ContactInfo, Organization, Briefcase, Home } from "grommet-icons"
-import Work from "pages/work"
+import { ContactInfo, Book, Briefcase, Home } from "grommet-icons"
+import Experiences from "pages/experiences"
 import Projects from "pages/projects"
 import Contact from "pages/contact"
 import Index from "pages/index"
@@ -7,10 +7,10 @@ import Index from "pages/index"
 export const links = [
   { icon: <Home />, name: "Home", link: "/", component: <Index /> },
   {
-    icon: <Organization />,
-    name: "Work",
-    link: "/work",
-    component: <Work />,
+    icon: <Book />,
+    name: "Life Story",
+    link: "/experiences",
+    component: <Experiences />,
   },
   {
     icon: <Briefcase />,
@@ -33,10 +33,10 @@ export const linksByPathname = {
     link: "/",
     background: { url: "/img/bg/bg-light-2.jpg" },
   },
-  "/work": {
-    icon: <Organization />,
-    name: "Work",
-    link: "/work",
+  "/experiences": {
+    icon: <Book />,
+    name: "Life Story",
+    link: "/experiences",
     background: { url: "/img/bg/bg-light-3.jpg" },
   },
   "/projects": {
