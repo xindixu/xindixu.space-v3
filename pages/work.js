@@ -2,6 +2,7 @@ import React from "react"
 import styled from "styled-components"
 import { Main, Box, Tabs, Tab, Text } from "grommet"
 import { experiences } from "contents/experiences"
+import Timeline from "components/timeline"
 
 const VerticalTab = styled(Tabs)`
   flex-direction: row;
@@ -15,8 +16,8 @@ const VerticalTab = styled(Tabs)`
 const Experiences = () => {
   return (
     <>
-      <Main pad="xlarge" justify="center" direction="row">
-        <Box width="xlarge" flex={false}>
+      <Main pad="xlarge" justify="center" direction="row" fill={false}>
+        {/* <Box width="xlarge" flex={false}>
           <VerticalTab>
             {experiences.map(({ name, jobTitle, list, date }) => (
               <Tab
@@ -36,6 +37,9 @@ const Experiences = () => {
               </Tab>
             ))}
           </VerticalTab>
+        </Box> */}
+        <Box width="xlarge">
+          <Timeline />
         </Box>
       </Main>
     </>

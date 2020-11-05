@@ -26,8 +26,8 @@ const mainIconAnimation = {
 
 const Index = ({ demoLink, repoLink }) => {
   const links = [
-    { name: "Demo", link: demoLink, icon: <Github /> },
-    { name: "Repo", link: repoLink, icon: <Monitor /> },
+    { name: "Demo", link: demoLink, icon: <Monitor /> },
+    { name: "Repo", link: repoLink, icon: <Github /> },
     { name: "Comments", link: demoLink, icon: <Contact /> },
   ]
   return (
