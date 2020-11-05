@@ -12,9 +12,9 @@ import {
   Text,
   Image,
 } from "grommet"
-import { getAllWorks } from "lib/contentful/work"
+import { getAllProjects } from "lib/contentful/project"
 
-const Work = ({ name, slug, thumbnail }) => (
+const Project = ({ name, slug, thumbnail }) => (
   <Link href={`/projects/${slug}`}>
     <Card>
       <CardBody height="medium">
@@ -31,7 +31,7 @@ const Work = ({ name, slug, thumbnail }) => (
   </Link>
 )
 
-const Works = ({ works = [] }) => {
+const Projects = ({ projects = [] }) => {
   const size = useContext(ResponsiveContext)
 
   return (
@@ -44,8 +44,8 @@ const Works = ({ works = [] }) => {
           size: size === "small" ? "100%" : "medium",
         }}
       >
-        {works.map(({ name, slug, thumbnail }) => (
-          <Work key={slug} name={name} slug={slug} thumbnail={thumbnail} />
+        {projects.map(({ name, slug, thumbnail }) => (
+          <Project key={slug} name={name} slug={slug} thumbnail={thumbnail} />
         ))}
       </Grid>
     </Main>
@@ -60,21 +60,21 @@ const FAKE = () => ({
 })
 
 export async function getStaticProps() {
-  const { entries } = await getAllWorks()
+  const { entries } = await getAllProjects()
 
   // Next.js expects the props to be json stringify-able
   // https://dev.to/ryyppy/reason-records-nextjs-undefined-and-getstaticprops-5d46
   return {
     props: JSON.parse(
       JSON.stringify({
-        works: [...entries],
+        projects: [...entries],
       })
     ),
   }
 }
 
-Works.propTypes = {
-  works: PropTypes.arrayOf(
+Projects.propTypes = {
+  projects: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,
@@ -83,4 +83,4 @@ Works.propTypes = {
   ).isRequired,
 }
 
-export default Works
+export default Projects

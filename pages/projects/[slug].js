@@ -3,13 +3,13 @@ import PropTypes from "prop-types"
 import { format, parseISO } from "date-fns"
 import { Main, Box, ResponsiveContext } from "grommet"
 
-import { getWork, getAllWorkSlugs } from "lib/contentful/work"
+import { getProject, getAllProjectSlugs } from "lib/contentful/project"
 import Header from "components/header"
 import RichText from "components/rich-text"
 import InfoBox from "components/info-box"
 
-const Work = ({ setHeaderRef, work = {} }) => {
-  const { name, thumbnail, labels, description, demoLink, repoLink } = work
+const Project = ({ setHeaderRef, project = {} }) => {
+  const { name, thumbnail, labels, description, demoLink, repoLink } = project
 
   const size = useContext(ResponsiveContext)
 
@@ -38,11 +38,11 @@ const Work = ({ setHeaderRef, work = {} }) => {
 }
 
 export async function getStaticProps({ params: { slug } }) {
-  const work = await getWork({ slug })
+  const project = await getProject({ slug })
   return {
     props: JSON.parse(
       JSON.stringify({
-        work,
+        project,
         slug,
       })
     ),
@@ -50,7 +50,7 @@ export async function getStaticProps({ params: { slug } }) {
 }
 
 export async function getStaticPaths() {
-  const paths = await getAllWorkSlugs()
+  const paths = await getAllProjectSlugs()
 
   return {
     paths: paths.map((slug) => `/projects/${slug}`),
@@ -58,6 +58,6 @@ export async function getStaticPaths() {
   }
 }
 
-Work.propTypes = {}
+Project.propTypes = {}
 
-export default Work
+export default Project

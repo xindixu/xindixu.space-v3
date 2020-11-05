@@ -1,21 +1,28 @@
 import { ContactInfo, Organization, Briefcase, Home } from "grommet-icons"
+import Work from "pages/work"
+import Projects from "pages/projects"
+import Contact from "pages/contact"
+import Index from "pages/index"
 
 export const links = [
-  { icon: <Home />, name: "Home", link: "/" },
+  { icon: <Home />, name: "Home", link: "/", component: <Index /> },
   {
     icon: <Organization />,
     name: "Work",
     link: "/work",
+    component: <Work />,
   },
   {
     icon: <Briefcase />,
     name: "Projects",
     link: "/projects",
+    component: <Projects />,
   },
   {
     icon: <ContactInfo />,
     name: "Contact",
     link: "/contact",
+    component: <Contact />,
   },
 ]
 
