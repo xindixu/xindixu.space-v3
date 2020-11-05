@@ -53,7 +53,7 @@ export async function getStaticPaths() {
   const paths = await getAllWorkSlugs()
 
   return {
-    paths: paths.map((slug) => `/work/${slug}`),
+    paths: paths.map((slug) => `/projects/${slug}`),
     fallback: true,
   }
 }

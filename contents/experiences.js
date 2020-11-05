@@ -36,7 +36,7 @@ export const experiences = [
 
     list: [
       "Designed and implemented features in Nokia’s Demo System built with Django to improve user experience, ease of use, and scalability",
-      "Created customer feedback and ra7ng system to collect user comments for future improvements, set up one-to-many model for Postgres database and view-controller logics",
+      "Created customer feedback and rating system to collect user comments for future improvements, set up one-to-many model for Postgres database and view-controller logics",
       "Redesigned Demo Center WordPress website based on interview feedback and design thinking methodology, which resulted in 400% increase in visits per month",
     ],
   },

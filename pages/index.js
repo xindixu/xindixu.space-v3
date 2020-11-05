@@ -38,6 +38,7 @@ const Location = styled(Box)`
   `}
   margin-top: -${spacerLg};
 `
+
 const Label = ({ place, monthDay, year, position }) => (
   <Location position={position}>
     <span>{place}</span>

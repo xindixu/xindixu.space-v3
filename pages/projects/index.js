@@ -2,11 +2,20 @@ import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import { get } from "lodash"
 import Link from "next/link"
-import { Main, Card, CardBody, CardFooter, Grid, ResponsiveContext, Text, Image } from "grommet"
+import {
+  Main,
+  Card,
+  CardBody,
+  CardFooter,
+  Grid,
+  ResponsiveContext,
+  Text,
+  Image,
+} from "grommet"
 import { getAllWorks } from "lib/contentful/work"
 
 const Work = ({ name, slug, thumbnail }) => (
-  <Link href={`/work/${slug}`}>
+  <Link href={`/projects/${slug}`}>
     <Card>
       <CardBody height="medium">
         <Image
