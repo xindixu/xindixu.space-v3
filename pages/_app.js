@@ -1,5 +1,5 @@
 import React from "react"
-import { createGlobalStyle } from "styled-components"
+import styled, { createGlobalStyle } from "styled-components"
 import { Grommet } from "grommet"
 import CommonLayout from "layout/common"
 import customTheme from "lib/style-settings/theme"
@@ -13,9 +13,14 @@ const GlobalStyle = createGlobalStyle`
   }
 `
 
+// This fix the bug where next.js wouldn't scroll back to top when page changes
+const NoOverflow = styled(Grommet)`
+  overflow: initial;
+`
+
 const App = ({ Component, pageProps }) => (
   <>
-    <Grommet theme={customTheme} full>
+    <NoOverflow theme={customTheme} full>
       <GlobalStyle />
       <CommonLayout>
         {({ setContentRef, setHeaderRef }) => (
@@ -26,7 +31,7 @@ const App = ({ Component, pageProps }) => (
           />
         )}
       </CommonLayout>
-    </Grommet>
+    </NoOverflow>
   </>
 )
 
