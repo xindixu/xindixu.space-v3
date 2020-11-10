@@ -23,7 +23,7 @@ const AnimatedSvg = ({ inView, viewBox, children }) => {
         animate: inView ? "in" : "out",
         variants: svgAnimation,
         style: { pathLength },
-        transition: { duration: 2 },
+        transition: { duration: inView ? 2 : 0.1 },
       })}
     </svg>
   )

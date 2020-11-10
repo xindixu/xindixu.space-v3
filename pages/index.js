@@ -1,21 +1,11 @@
 import React from "react"
 import PropTypes from "prop-types"
-import {
-  Main,
-  WorldMap,
-  Box,
-  Paragraph,
-  ThemeContext,
-  Heading,
-  Text,
-} from "grommet"
+import { Main, Box, Paragraph, Text } from "grommet"
 import styled from "styled-components"
 import Image from "next/image"
 import Name from "components/name"
+import Map from "components/map"
 import { media } from "lib/style-settings/media-query"
-import styleSettings from "lib/style-settings"
-
-const { spacerLg } = styleSettings
 
 const Half = styled(Box).attrs({
   margin: { vertical: "medium" },
@@ -37,30 +27,6 @@ const Left = styled(Half).attrs({
 const Right = styled(Half).attrs({
   direction: "row-reverse",
 })``
-
-const WordMapWithActivePlace = styled(WorldMap)`
-  [role="button"] {
-    stroke-width: 20px;
-  }
-`
-
-const Location = styled(Box)`
-  ${({ position }) => `
-      margin-left: ${position};
-  `}
-  margin-top: -${spacerLg};
-`
-
-const Label = ({ place, monthDay, year, position }) => (
-  <Location position={position}>
-    <span>{place}</span>
-    <Heading size="small">
-      {monthDay}
-      <br />
-      {year}
-    </Heading>
-  </Location>
-)
 
 const Index = ({ setContentRef }) => {
   return (
@@ -93,7 +59,7 @@ const Index = ({ setContentRef }) => {
         </div>
       </Left>
       <Right>
-        <Box direction="row" align="top" gap="large">
+        <Box direction="row" align="start" gap="large">
           <Name />
           <Box width="medium">
             <Image
@@ -106,63 +72,9 @@ const Index = ({ setContentRef }) => {
         </Box>
       </Right>
       <Left>
-        <div>
-          <ThemeContext.Extend
-            value={{
-              worldMap: {
-                place: { active: "8px" },
-                hover: { color: "light-3" },
-              },
-            }}
-          >
-            <WordMapWithActivePlace
-              color="light-3"
-              places={[
-                {
-                  name: "Fuzhou, Fujian",
-                  location: [26.0745, 119.2965],
-                  color: "brand",
-                  onClick: () => {},
-                },
-                {
-                  name: "Austin, TX",
-                  location: [30.2672, -97.7431],
-                  color: "brand",
-                  onClick: () => {},
-                },
-              ]}
-              selectColor="accent-2"
-            />
-          </ThemeContext.Extend>
-          <Box direction="row">
-            <Label
-              place="Austin, USA"
-              monthDay="0809"
-              year="2016"
-              position="20%"
-            />
-            <Label
-              place="Fuzhou, China"
-              monthDay="0324"
-              year="1998"
-              position="50%"
-            />
-          </Box>
-        </div>
+        <Map />
       </Left>
-      <Right>
-        <Box direction="row" align="top" gap="large">
-          <Name />
-          <Box width="medium">
-            <Image
-              src="/img/shared/profile.jpg"
-              layout="fill"
-              width={942}
-              height={942}
-            />
-          </Box>
-        </Box>
-      </Right>
+      <Right />
     </Main>
   )
 }

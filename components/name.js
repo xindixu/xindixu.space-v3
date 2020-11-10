@@ -1,7 +1,7 @@
 import React from "react"
+import { Box } from "grommet"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import { Box } from "grommet"
 import styled from "styled-components"
 import { nameEn } from "assets/svg/name-en"
 import { nameZh } from "assets/svg/name-zh"
@@ -31,13 +31,13 @@ const names = [
 ]
 
 const Name = () => {
-  const [ref, isNameInView] = useInView({ delay: 1000 })
+  const [ref, inView] = useInView({ delay: 1000 })
 
   return (
     <SvgWrapper direction="row" width="medium">
       <Box ref={ref}>
         {names.map(({ paths, height, width }) => (
-          <AnimatedSvg viewBox={`0 0 ${width} ${height}`} inView={isNameInView}>
+          <AnimatedSvg viewBox={`0 0 ${width} ${height}`} inView={inView}>
             {(props) => (
               <g
                 transform={`translate(0,${height}) scale(0.1,-0.1)`}
