@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import PropTypes from "prop-types"
-import { Box, Heading } from "grommet"
+import { Box, Heading, Drop } from "grommet"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
@@ -8,7 +8,7 @@ import BaseMap from "assets/svg/map.svg"
 import styleSettings from "lib/style-settings"
 import AnimatedSvg from "components/animated-svg"
 
-const { spacerLg } = styleSettings
+const { spacer, pink } = styleSettings
 
 const SIZE = 5
 
@@ -16,7 +16,7 @@ const Location = styled(Box)`
   ${({ position }) => `
       margin-left: ${position};
   `}
-  margin-top: -${spacerLg};
+  margin-top: -${spacer};
 `
 
 const Label = ({ place, monthDay, year, position }) => (
@@ -40,28 +40,24 @@ const Map = () => {
         {(props) => (
           <>
             <BaseMap />
+
             <path
               strokeLinecap="round"
               strokeWidth={SIZE}
-              stroke="#e2b4bd"
-              role="button"
-              aria-label="Fuzhou, Fujian"
-              tabIndex="0"
+              stroke={pink}
               d="M760 220 h0"
             />
+
             <path
               strokeLinecap="round"
               strokeWidth={SIZE}
-              stroke="#e2b4bd"
-              role="button"
-              aria-label="Austin, TX"
-              tabIndex="0"
+              stroke={pink}
               d="M190 210 h0"
             />
             <motion.path
               strokeLinecap="round"
               strokeWidth={SIZE}
-              stroke="#e2b4bd"
+              stroke={pink}
               fill="none"
               d="M760 220 C 696 108 393 123 190 210"
               ref={lineRef}
@@ -72,7 +68,7 @@ const Map = () => {
       </AnimatedSvg>
 
       <Box direction="row">
-        <Label place="Austin, USA" monthDay="0809" year="2016" position="20%" />
+        <Label place="Austin, USA" monthDay="0809" year="2016" position="15%" />
         <Label
           place="Fuzhou, China"
           monthDay="0324"
