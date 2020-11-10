@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useRef } from "react"
 import { useInView } from "react-intersection-observer"
 import PropTypes from "prop-types"
 import usePageConfig from "hooks/usePageConfig"
@@ -8,11 +8,19 @@ import Header from "components/header"
 import Footer from "components/footer"
 
 const Common = ({ children }) => {
-  const [ref, isHeaderInView] = useInView({ threshold: 0.05 })
+  const [headerRef, isHeaderInView] = useInView({ threshold: 0.05 })
+
+  const contentRef = useRef(null)
   const {
     config: { name, background },
     isTopLevel,
   } = usePageConfig()
+
+  useEffect(() => {
+    if (headerRef) {
+      console.log(headerRef.current)
+    }
+  }, [headerRef])
 
   return (
     <>
@@ -20,13 +28,13 @@ const Common = ({ children }) => {
       <Navbar isHeaderInView={isHeaderInView} />
       {isTopLevel && (
         <Header
-          ref={ref}
+          ref={headerRef}
           name={name}
           background={background}
           full={isTopLevel}
         />
       )}
-      {children({ setHeaderRef: ref })}
+      {children({ setContentRef: contentRef, setHeaderRef: headerRef })}
       <Footer />
     </>
   )

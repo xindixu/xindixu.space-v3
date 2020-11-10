@@ -50,9 +50,9 @@ const Label = ({ place, monthDay, year, position }) => (
   </Location>
 )
 
-const Index = () => {
+const Index = ({ setContentRef }) => {
   return (
-    <Main pad="xlarge" fill={false}>
+    <Main ref={setContentRef} pad="xlarge" fill={false}>
       <Left direction="row">
         <div>
           <Name />

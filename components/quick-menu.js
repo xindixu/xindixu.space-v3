@@ -68,7 +68,6 @@ const subMenuCircleAnimation = {
     transition: {
       when: "beforeChildren",
       delay: 0.1 * index,
-      staggerChildren: 0.01 * index,
     },
   }),
 }
