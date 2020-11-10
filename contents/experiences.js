@@ -1,4 +1,4 @@
-import { Briefcase } from "grommet-icons"
+import { Briefcase, Workshop } from "grommet-icons"
 
 export const experiences = [
   {
@@ -10,6 +10,17 @@ export const experiences = [
       "Implement features align with product strategy and create accessible and interactive components for Employees Networking web app",
       "Migrate legacy code to modern frontend technologies incrementally",
       "Research and plan development process and investigate new technologies to improve web app performance",
+    ],
+  },
+  {
+    company: "the University of Texas at Austin",
+    jobTitle: "Advertising Major & CS Minor",
+    date: "08/2016 – 05/2020",
+    icon: <Workshop />,
+    list: [
+      "Took 30 credit hours of CS classes, built various web apps, mobile apps, and games with industry-standard technologies",
+      "Conducted dozens of advertising projects, graduated from Texas Media & Analytics, the top 1 advertising program in the U.S.",
+      "Completed Business minor, learned Japanese, built Raptors for theater show",
     ],
   },
   {
