@@ -1,7 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Main, WorldMap, Box, Paragraph, ThemeContext, Heading } from "grommet"
+import {
+  Main,
+  WorldMap,
+  Box,
+  Paragraph,
+  ThemeContext,
+  Heading,
+  Text,
+} from "grommet"
 import styled from "styled-components"
+import Image from "next/image"
 import Name from "components/name"
 import { media } from "lib/style-settings/media-query"
 import styleSettings from "lib/style-settings"
@@ -22,9 +31,12 @@ const Half = styled(Box).attrs({
   `}
 `
 
-const Left = styled(Half)``
-
-const Right = styled(Half)``
+const Left = styled(Half).attrs({
+  direction: "row",
+})``
+const Right = styled(Half).attrs({
+  direction: "row-reverse",
+})``
 
 const WordMapWithActivePlace = styled(WorldMap)`
   [role="button"] {
@@ -52,11 +64,16 @@ const Label = ({ place, monthDay, year, position }) => (
 
 const Index = ({ setContentRef }) => {
   return (
-    <Main ref={setContentRef} pad="xlarge" fill={false}>
-      <Left direction="row">
+    <Main ref={setContentRef} pad="xlarge" fill={false} gap="large">
+      <Left>
         <div>
-          <Name />
-          <Box>
+          <Text size="xxlarge">
+            <span role="img" aria-label="Waving Hand">
+              👋
+            </span>{" "}
+            Hi there,
+          </Text>
+          <Box pad={{ vertical: "medium" }}>
             <Paragraph fill>
               I enjoy designing and implementing full-stack features with
               complex functionalities at Pingboard. I&apos;ve helped migrate
@@ -75,7 +92,20 @@ const Index = ({ setContentRef }) => {
           </Box>
         </div>
       </Left>
-      <Right direction="row-reverse">
+      <Right>
+        <Box direction="row" align="top" gap="large">
+          <Name />
+          <Box width="medium">
+            <Image
+              src="/img/shared/profile.jpg"
+              layout="fill"
+              width={942}
+              height={942}
+            />
+          </Box>
+        </Box>
+      </Right>
+      <Left>
         <div>
           <ThemeContext.Extend
             value={{
@@ -119,6 +149,19 @@ const Index = ({ setContentRef }) => {
             />
           </Box>
         </div>
+      </Left>
+      <Right>
+        <Box direction="row" align="top" gap="large">
+          <Name />
+          <Box width="medium">
+            <Image
+              src="/img/shared/profile.jpg"
+              layout="fill"
+              width={942}
+              height={942}
+            />
+          </Box>
+        </Box>
       </Right>
     </Main>
   )

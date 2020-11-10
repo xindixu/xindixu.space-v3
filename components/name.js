@@ -4,7 +4,8 @@ import { motion, useMotionValue } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { Box } from "grommet"
 import styled from "styled-components"
-import { name } from "assets/svg/name"
+import { nameEn } from "assets/svg/name-en"
+import { nameZh } from "assets/svg/name-zh"
 import styleSettings from "lib/style-settings"
 
 const { pink } = styleSettings
@@ -13,7 +14,6 @@ const SvgWrapper = styled(Box)`
   div,
   svg {
     width: 100%;
-    height: 100%;
   }
 `
 
@@ -29,19 +29,16 @@ const Name = (props) => {
   const pathLength = useMotionValue(isNameInView ? 0 : 1)
   return (
     <SvgWrapper direction="row" width="medium">
-      <div ref={ref}>
-        <svg
-          viewBox="0 0 1010 344"
-          xmlns="http://www.w3.org/2000/svg"
-          ref={ref}
-        >
+      <Box ref={ref}>
+        <svg viewBox="0 0 1084 316" xmlns="http://www.w3.org/2000/svg">
           <g
-            transform="translate(0,344) scale(0.1,-0.1)"
+            transform="translate(0,316) scale(0.1,-0.1)"
             fill={pink}
             stroke="none"
           >
-            {name.map((d, index) => (
+            {nameEn.map((d, index) => (
               <motion.path
+                // eslint-disable-next-line react/no-array-index-key
                 key={index}
                 fill="transparent"
                 d={d}
@@ -57,7 +54,31 @@ const Name = (props) => {
             ))}
           </g>
         </svg>
-      </div>
+        <svg viewBox="0 0 1084 424" xmlns="http://www.w3.org/2000/svg">
+          <g
+            transform="translate(0,424) scale(0.1,-0.1)"
+            fill={pink}
+            stroke="none"
+          >
+            {nameZh.map((d, index) => (
+              <motion.path
+                // eslint-disable-next-line react/no-array-index-key
+                key={index}
+                fill="transparent"
+                d={d}
+                stroke={pink}
+                strokeWidth="40"
+                custom={index}
+                initial="out"
+                animate={isNameInView ? "in" : "out"}
+                variants={svgAnimation}
+                style={{ pathLength }}
+                transition={{ duration: 2 }}
+              />
+            ))}
+          </g>
+        </svg>
+      </Box>
     </SvgWrapper>
   )
 }
