@@ -3,7 +3,14 @@ import { Box, Heading } from "grommet"
 import styled from "styled-components"
 import styleSettings from "lib/style-settings"
 
-const { pink, white, spacerXs, spacerSm, spacerXxl } = styleSettings
+const {
+  pink,
+  "accent-4": beige,
+  white,
+  spacerXs,
+  spacerSm,
+  spacerXxl,
+} = styleSettings
 
 const Image = styled(Box)`
   ${({ url, position = "center" }) => `
@@ -24,7 +31,7 @@ const Content = styled(Box)`
 `
 
 const Label = styled(Box)`
-  background: ${pink};
+  background: ${beige};
   margin: ${spacerXs} ${spacerSm};
 `
 
