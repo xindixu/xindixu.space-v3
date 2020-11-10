@@ -1,6 +1,6 @@
 import React, { useRef } from "react"
 import PropTypes from "prop-types"
-import { Box, Heading, Drop } from "grommet"
+import { Box, Text, Drop } from "grommet"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
@@ -8,25 +8,43 @@ import BaseMap from "assets/svg/map.svg"
 import styleSettings from "lib/style-settings"
 import AnimatedSvg from "components/animated-svg"
 
-const { spacer, pink } = styleSettings
+const { spacerSm, spacerBase, pink } = styleSettings
 
 const SIZE = 5
 
-const Location = styled(Box)`
+const Location = styled.div`
   ${({ position }) => `
       margin-left: ${position};
   `}
-  margin-top: -${spacer};
+  margin-top: -${spacerBase};
+  display: block;
 `
 
-const Label = ({ place, monthDay, year, position }) => (
+const HorizontalText = styled.div`
+  padding-bottom: ${spacerSm};
+`
+
+const VerticalText = styled.div`
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  float: right;
+  padding-top: ${spacerSm};
+`
+
+const Date = styled(Text)`
+  margin: 0;
+  display: block;
+`
+
+const Label = ({ place, country, monthDay, year, position }) => (
   <Location position={position}>
-    <span>{place}</span>
-    <Heading size="small">
+    <HorizontalText>{place}</HorizontalText>
+    <VerticalText>{country}</VerticalText>
+    <Date size="xlarge">
       {monthDay}
       <br />
       {year}
-    </Heading>
+    </Date>
   </Location>
 )
 
@@ -68,9 +86,16 @@ const Map = () => {
       </AnimatedSvg>
 
       <Box direction="row">
-        <Label place="Austin, USA" monthDay="0809" year="2016" position="15%" />
         <Label
-          place="Fuzhou, China"
+          place="Austin, Texas"
+          country="U.S.A."
+          monthDay="0809"
+          year="2016"
+          position="15%"
+        />
+        <Label
+          place="Fuzhou, Fujian"
+          country="China"
           monthDay="0324"
           year="1998"
           position="50%"

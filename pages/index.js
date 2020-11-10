@@ -74,7 +74,17 @@ const Index = ({ setContentRef }) => {
       <Left>
         <Map />
       </Left>
-      <Right />
+      <Right>
+        <div>
+          <Paragraph fill>
+            I spent the first 18 years of my life in Fuzhou, China. I missed all
+            my close friends and tasty foodies there. I moved to Austin, TX for
+            my undergrad. I went to the University of Texas at Austin for 4
+            years. Since graduation, I've been working at Pingboard as a
+            Software Engineer.
+          </Paragraph>
+        </div>
+      </Right>
     </Main>
   )
 }
