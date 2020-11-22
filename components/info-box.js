@@ -1,12 +1,13 @@
 import React from "react"
 import { Button, Box } from "grommet"
 import styled from "styled-components"
-import { Github, Monitor, Contact } from "grommet-icons"
+import { Github, Monitor } from "grommet-icons"
 import { motion } from "framer-motion"
 import styleSettings from "lib/style-settings/index"
 
 const {
   elevation: { light },
+  colors: { "light-5": gray },
 } = styleSettings
 
 const IconButton = styled(Button)`
@@ -24,29 +25,30 @@ const mainIconAnimation = {
   }),
 }
 
-const Index = ({ demoLink, repoLink }) => {
+const InfoBox = ({ demoLink, repoLink }) => {
   const links = [
-    { name: "Demo", link: demoLink, icon: <Monitor /> },
-    { name: "Repo", link: repoLink, icon: <Github /> },
-    // { name: "Comments", link: demoLink, icon: <Contact /> },
+    { name: "Demo", link: demoLink, icon: <Monitor />, disabled: !demoLink },
+    { name: "Repo", link: repoLink, icon: <Github />, disabled: !repoLink },
   ]
   return (
     <Box gap="small" responsive={false}>
-      {links.map(({ name, link, icon }, index) => (
+      {links.map(({ name, link, icon, disabled }, index) => (
         <motion.div
+          key={name}
           initial="hidden"
           animate="visible"
           variants={mainIconAnimation}
           custom={index}
         >
           <IconButton
-            fill
-            href={link}
             a11yTitle={name}
+            disabled={disabled}
+            fill
+            hoverIndicator
+            href={link}
+            icon={icon}
             primary
             target="_blank"
-            icon={icon}
-            hoverIndicator
           />
         </motion.div>
       ))}
@@ -54,4 +56,4 @@ const Index = ({ demoLink, repoLink }) => {
   )
 }
 
-export default Index
+export default InfoBox

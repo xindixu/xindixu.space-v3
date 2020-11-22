@@ -43,7 +43,6 @@ export async function getStaticProps({ params: { slug } }) {
     props: JSON.parse(
       JSON.stringify({
         project,
-        slug,
       })
     ),
   }
@@ -58,6 +57,17 @@ export async function getStaticPaths() {
   }
 }
 
-Project.propTypes = {}
+Project.propTypes = {
+  project: PropTypes.shape({
+    name: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    thumbnail: PropTypes.shape({
+      src: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+  setHeaderRef: PropTypes.func.isRequired,
+}
 
 export default Project
