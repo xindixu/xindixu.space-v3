@@ -19,7 +19,7 @@ const Project = ({ setHeaderRef, project = {} }) => {
         ref={setHeaderRef}
         name={name}
         labels={labels}
-        background={{ url: thumbnail }}
+        background={{ url: thumbnail.src }}
         full={false}
       />
 
