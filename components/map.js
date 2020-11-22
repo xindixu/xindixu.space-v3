@@ -1,6 +1,5 @@
 import React, { useRef } from "react"
-import PropTypes from "prop-types"
-import { Box, Text, Drop } from "grommet"
+import { Box, Text } from "grommet"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
@@ -104,7 +103,5 @@ const Map = () => {
     </Box>
   )
 }
-
-Map.propTypes = {}
 
 export default Map

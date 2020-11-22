@@ -1,5 +1,6 @@
 import React, { useContext } from "react"
 import PropTypes from "prop-types"
+import styled from "styled-components"
 import Link from "next/link"
 import Image from "next/image"
 import {
@@ -11,11 +12,46 @@ import {
   ResponsiveContext,
   Text,
 } from "grommet"
+import { useInView } from "react-intersection-observer"
+import { motion } from "framer-motion"
 import { getAllProjects } from "lib/contentful/project"
+import styleSettings from "lib/style-settings/index"
+
+const {
+  spacerSm,
+  elevation: { light },
+} = styleSettings
+
+const AnimatedCard = styled(Card)`
+  transition: 0.2s;
+
+  :hover {
+    transform: translateY(-${spacerSm});
+    box-shadow: ${light.medium};
+  }
+`
+
+const cardAnimation = {
+  out: ({ index }) => ({
+    translateY: -16,
+    opacity: 0,
+    transition: {
+      delay: 0.1 * index,
+    },
+  }),
+  in: ({ index }) => ({
+    translateY: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.5,
+      delay: 0.1 * index,
+    },
+  }),
+}
 
 const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
   <Link href={`/projects/${slug}`}>
-    <Card>
+    <AnimatedCard>
       <Box>
         <Image
           // TODO: fallback url
@@ -28,12 +64,13 @@ const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
       <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
         <Text>{name}</Text>
       </CardFooter>
-    </Card>
+    </AnimatedCard>
   </Link>
 )
 
 const Projects = ({ projects = [] }) => {
   const size = useContext(ResponsiveContext)
+  const [ref, inView] = useInView({ delay: 1000 })
 
   return (
     <Main pad="xlarge" fill={false}>
@@ -43,9 +80,18 @@ const Projects = ({ projects = [] }) => {
           count: "fit",
           size: size === "small" ? "100%" : "medium",
         }}
+        ref={ref}
       >
-        {projects.map(({ name, slug, thumbnail }) => (
-          <Project key={slug} name={name} slug={slug} thumbnail={thumbnail} />
+        {projects.map(({ name, slug, thumbnail }, index) => (
+          <motion.div
+            key={slug}
+            initial={inView ? "out" : false}
+            animate={inView ? "in" : "out"}
+            variants={cardAnimation}
+            custom={{ index }}
+          >
+            <Project name={name} slug={slug} thumbnail={thumbnail} />
+          </motion.div>
         ))}
       </Grid>
     </Main>
