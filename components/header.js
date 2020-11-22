@@ -1,5 +1,6 @@
 import React from "react"
-import { Box, Heading } from "grommet"
+import { Box, Heading, Stack } from "grommet"
+import Image from "next/image"
 import styled from "styled-components"
 import styleSettings from "lib/style-settings"
 
@@ -12,17 +13,8 @@ const {
   size: { large },
 } = styleSettings
 
-const Image = styled(Box)`
-  ${({ url, position = "center" }) => `
-    background: url(${url});
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: ${position};
-  `}
-`
-
 const Gradient = styled(Box)`
-  background: radial-gradient(circle, ${white}00 60%, ${pink}66 100%);
+  background: radial-gradient(circle, ${white}00 60%, ${pink}60 100%);
 `
 
 const Content = styled(Box)`
@@ -37,28 +29,40 @@ const Label = styled(Box)`
   margin: ${spacerXs} ${spacerSm};
 `
 
-const Header = React.forwardRef(({ name, background, full, labels }, ref) => (
-  <Image {...background} fill={full ? true : "horizontal"} ref={ref}>
-    <Gradient fill align="center" justify="center">
-      <Content align="center" justify="center" full={full}>
-        <Heading
-          color="black"
-          size={full ? "xlarge" : "medium"}
-          textAlign="center"
-        >
-          {name}
-        </Heading>
-        <Box direction="row" wrap justify="center">
-          {labels &&
-            labels.map((label) => (
-              <Label key={label} pad={{ horizontal: "small" }} round>
-                {label}
-              </Label>
-            ))}
+const Header = React.forwardRef(
+  ({ name, background: { src, width, height }, full, labels }, ref) => {
+    const fill = full ? { fill: true } : { fill: "horizontal" }
+
+    const size = full
+      ? { height: "100vh", width: "100vw" }
+      : { height: "50vh", width: "100vw" }
+
+    return (
+      <Stack anchor="center" {...fill}>
+        <Box {...fill} {...size} ref={ref}>
+          <Image src={src} layout="fill" priority objectFit="cover" />
         </Box>
-      </Content>
-    </Gradient>
-  </Image>
-))
+        <Gradient {...size} />
+        <Content full={full} align="center" justify="center">
+          <Heading
+            color="black"
+            size={full ? "xlarge" : "medium"}
+            textAlign="center"
+          >
+            {name}
+          </Heading>
+          <Box direction="row" wrap justify="center">
+            {labels &&
+              labels.map((label) => (
+                <Label key={label} pad={{ horizontal: "small" }} round>
+                  {label}
+                </Label>
+              ))}
+          </Box>
+        </Content>
+      </Stack>
+    )
+  }
+)
 
 export default Header

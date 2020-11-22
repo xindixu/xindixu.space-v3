@@ -31,29 +31,29 @@ export const linksByPathname = {
     icon: <Home />,
     name: "Home",
     link: "/",
-    background: { url: "/img/bg/bg-light-2.jpg" },
+    background: { src: "/img/bg/bg-light-2.jpg", width: 1440, height: 960 },
   },
   "/experiences": {
     icon: <Book />,
     name: "Life Story",
     link: "/experiences",
-    background: { url: "/img/bg/bg-light-3.jpg" },
+    background: { src: "/img/bg/bg-light-3.jpg", width: 1440, height: 960 },
   },
   "/projects": {
     icon: <Briefcase />,
     name: "Projects",
     link: "/projects",
-    background: { url: "/img/bg/bg-light-6.jpg" },
+    background: { src: "/img/bg/bg-light-6.jpg", width: 1440, height: 960 },
   },
   "/contact": {
     icon: <ContactInfo />,
     name: "Contact",
     link: "/contact",
-    background: { url: "/img/bg/bg-light-1.jpg" },
+    background: { src: "/img/bg/bg-light-1.jpg", width: 1440, height: 960 },
   },
 }
 
 export const errorPage = {
   name: "404",
-  background: { url: "/img/bg/bg-light-5.jpg" },
+  background: { src: "/img/bg/bg-light-5.jpg", width: 1440, height: 960 },
 }

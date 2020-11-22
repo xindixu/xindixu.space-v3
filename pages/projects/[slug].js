@@ -9,7 +9,7 @@ import InfoBox from "components/info-box"
 const Project = ({ setHeaderRef, project = {} }) => {
   const {
     name,
-    thumbnail: { src } = {},
+    thumbnail: { src, width, height } = {},
     labels,
     description,
     demoLink,
@@ -21,11 +21,11 @@ const Project = ({ setHeaderRef, project = {} }) => {
   return (
     <>
       <Header
+        full={false}
         ref={setHeaderRef}
         name={name}
         labels={labels}
-        background={{ url: src }}
-        full={false}
+        background={{ src: `https:${src}`, width, height }}
       />
 
       <Box pad="xlarge" gap="large" direction="row" justify="center">

@@ -63,7 +63,7 @@ const Index = ({ setContentRef }) => (
         <Box width="medium">
           <Image
             src="/img/shared/profile.jpg"
-            layout="fill"
+            // layout="fill"
             width={942}
             height={942}
           />

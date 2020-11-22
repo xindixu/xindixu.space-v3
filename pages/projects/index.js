@@ -55,7 +55,7 @@ const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
       <Box>
         <Image
           // TODO: fallback url
-          layout="fill"
+          layout="responsive"
           src={`https:${src}`}
           width={width}
           height={height}
