@@ -32,6 +32,7 @@ const Timeline = (props) => {
     <Wrapper>
       {experiences.map(({ company, jobTitle, list, date, icon }) => (
         <VerticalTimelineElement
+          key={date}
           className="vertical-timeline-element--work"
           contentStyle={{ border: `1px solid ${pink}` }}
           contentArrowStyle={{ borderRight: `7px solid ${pink}` }}

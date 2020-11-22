@@ -49,7 +49,7 @@ export const linksByPathname = {
     icon: <ContactInfo />,
     name: "Contact",
     link: "/contact",
-    background: { url: "/img/bg/bg-light-7.jpg" },
+    background: { url: "/img/bg/bg-light-1.jpg" },
   },
 }
 

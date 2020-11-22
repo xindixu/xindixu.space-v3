@@ -9,7 +9,7 @@ const {
   white,
   spacerXs,
   spacerSm,
-  spacerXxl,
+  size: { medium, large },
 } = styleSettings
 
 const Image = styled(Box)`
@@ -26,8 +26,10 @@ const Gradient = styled(Box)`
 `
 
 const Content = styled(Box)`
-  padding: ${spacerXxl};
-  background: radial-gradient(circle, ${white}55 60%, ${white} 100%);
+  ${({ full }) => `
+    width: ${full ? large : `calc(${large} / 1.5)`};
+    height: ${full ? large : `calc(${large} / 1.5)`};
+    background: radial-gradient(circle, ${white}55 60%, ${white} 100%);`}
 `
 
 const Label = styled(Box)`
@@ -38,7 +40,7 @@ const Label = styled(Box)`
 const Header = React.forwardRef(({ name, background, full, labels }, ref) => (
   <Image {...background} fill={full ? true : "horizontal"} ref={ref}>
     <Gradient fill align="center" justify="center">
-      <Content>
+      <Content align="center" justify="center" full={full}>
         <Heading
           color="black"
           size={full ? "xlarge" : "medium"}
@@ -46,7 +48,7 @@ const Header = React.forwardRef(({ name, background, full, labels }, ref) => (
         >
           {name}
         </Heading>
-        <Box direction="row" wrap>
+        <Box direction="row" wrap justify="center">
           {labels &&
             labels.map((label) => (
               <Label key={label} pad={{ horizontal: "small" }} round>
