@@ -1,6 +1,5 @@
 import React, { useContext } from "react"
 import PropTypes from "prop-types"
-import { format, parseISO } from "date-fns"
 import { Main, Box, ResponsiveContext } from "grommet"
 
 import { getProject, getAllProjectSlugs } from "lib/contentful/project"
@@ -9,7 +8,14 @@ import RichText from "components/rich-text"
 import InfoBox from "components/info-box"
 
 const Project = ({ setHeaderRef, project = {} }) => {
-  const { name, thumbnail, labels, description, demoLink, repoLink } = project
+  const {
+    name,
+    thumbnail: { src },
+    labels,
+    description,
+    demoLink,
+    repoLink,
+  } = project
 
   const size = useContext(ResponsiveContext)
 
@@ -19,7 +25,7 @@ const Project = ({ setHeaderRef, project = {} }) => {
         ref={setHeaderRef}
         name={name}
         labels={labels}
-        background={{ url: thumbnail.src }}
+        background={{ url: src }}
         full={false}
       />
 

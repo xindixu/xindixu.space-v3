@@ -52,13 +52,6 @@ const Projects = ({ projects = [] }) => {
   )
 }
 
-const FAKE = () => ({
-  name: "fake",
-  slug: `fake-${Math.random()}`,
-  thumbnail:
-    "//images.ctfassets.net/erckh4cqp51i/3M2MNu9R6E5lmp3kTJUhLG/a43833c68f570e4a13dec1603c0d25b1/bg-dark-2.jpg",
-})
-
 export async function getStaticProps() {
   const { entries } = await getAllProjects()
   // Next.js expects the props to be json stringify-able
