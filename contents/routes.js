@@ -54,6 +54,6 @@ export const linksByPathname = {
 }
 
 export const errorPage = {
-  name: "Error",
-  background: { url: "/img/bg/bg-light-1.jpg" },
+  name: "404",
+  background: { url: "/img/bg/bg-light-5.jpg" },
 }

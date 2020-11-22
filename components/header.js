@@ -9,7 +9,7 @@ const {
   white,
   spacerXs,
   spacerSm,
-  size: { medium, large },
+  size: { large },
 } = styleSettings
 
 const Image = styled(Box)`
@@ -27,9 +27,9 @@ const Gradient = styled(Box)`
 
 const Content = styled(Box)`
   ${({ full }) => `
-    width: ${full ? large : `calc(${large} / 1.5)`};
+    width: ${large};
     height: ${full ? large : `calc(${large} / 1.5)`};
-    background: radial-gradient(circle, ${white}55 60%, ${white} 100%);`}
+    background: radial-gradient(circle, ${white}55 20%, ${white} 100%);`}
 `
 
 const Label = styled(Box)`

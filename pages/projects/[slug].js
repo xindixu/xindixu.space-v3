@@ -1,7 +1,6 @@
 import React, { useContext } from "react"
 import PropTypes from "prop-types"
 import { Main, Box, ResponsiveContext } from "grommet"
-
 import { getProject, getAllProjectSlugs } from "lib/contentful/project"
 import Header from "components/header"
 import RichText from "components/rich-text"

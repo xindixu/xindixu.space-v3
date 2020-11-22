@@ -106,14 +106,15 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
           custom={{ index, count }}
         >
           <SubButton
-            tabIndex={isOpen - 1}
-            hoverIndicator
-            cycle={count}
             count={count}
-            index={index}
-            icon={<motion.div variants={subIconAnimation}>{icon}</motion.div>}
+            cycle={count}
+            hoverIndicator
             href={link}
+            icon={<motion.div variants={subIconAnimation}>{icon}</motion.div>}
+            index={index}
             primary
+            tabIndex={isOpen - 1}
+            target="_blank"
           />
         </motion.div>
       ))}
