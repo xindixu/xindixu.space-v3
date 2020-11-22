@@ -63,7 +63,6 @@ export async function getStaticPaths() {
   }
 }
 
-
 Project.propTypes = {
   project: PropTypes.shape({
     name: PropTypes.string.isRequired,
@@ -73,7 +72,7 @@ Project.propTypes = {
       width: PropTypes.number.isRequired,
       height: PropTypes.number.isRequired,
     }).isRequired,
-  }).,
+  }).isRequired,
   setHeaderRef: PropTypes.func.isRequired,
 }
 
