@@ -34,7 +34,12 @@ const Common = ({ children }) => {
           full={isTopLevel}
         />
       )}
-      {children({ setContentRef: contentRef, setHeaderRef: headerRef })}
+      {children({
+        setContentRef: (node) => {
+          contentRef.current = node
+        },
+        setHeaderRef: headerRef,
+      })}
       <Footer />
     </>
   )
