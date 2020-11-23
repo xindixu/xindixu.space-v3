@@ -6,9 +6,13 @@ const useClick = ({ node }) => {
   useEffect(() => {
     const getCoordinates = (e) => {
       if (e.type === "mousedown") {
-        return setCoordinates({ x: e.pageX, y: e.pageY })
+        return setCoordinates({ x: e.clientX, y: e.clientY })
       }
-      return setCoordinates({ x: e.touches[0].pageX, y: e.touches[0].pageY })
+
+      return setCoordinates({
+        x: e.touches[0].clientX,
+        y: e.touches[0].clientY,
+      })
     }
 
     if (node) {
