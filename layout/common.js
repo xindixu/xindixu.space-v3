@@ -26,19 +26,20 @@ const Common = ({ children }) => {
     <>
       <Title name={name} />
       <Navbar isHeaderInView={isHeaderInView} />
-      {isTopLevel && (
-        <Header
-          ref={headerRef}
-          name={name}
-          background={background}
-          full={isTopLevel}
-        />
-      )}
+
       {children({
         setContentRef: (node) => {
           contentRef.current = node
         },
         setHeaderRef: headerRef,
+        header: isTopLevel && (
+          <Header
+            ref={headerRef}
+            name={name}
+            background={background}
+            full={isTopLevel}
+          />
+        ),
       })}
       <Footer />
     </>

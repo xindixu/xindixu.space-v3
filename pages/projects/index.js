@@ -18,7 +18,6 @@ import { getAllProjects } from "lib/contentful/project"
 import styleSettings from "lib/style-settings/index"
 
 const {
-  spacerSm,
   elevation: { light },
 } = styleSettings
 

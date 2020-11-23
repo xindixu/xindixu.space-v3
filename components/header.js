@@ -29,17 +29,22 @@ const Label = styled(Box)`
   margin: ${spacerXs} ${spacerSm};
 `
 
-const Header = React.forwardRef(
-  ({ name, background: { src, width, height }, full, labels }, ref) => {
-    const fill = full ? { fill: true } : { fill: "horizontal" }
+const Wrapper = styled(Stack)`
+  ${({ full }) => `
+    height: ${full ? "100vh" : "50vh"};
+    width: 100vw;
+  `}
+`
 
+const Header = React.forwardRef(
+  ({ name, background: { src }, full, labels }, ref) => {
     const size = full
       ? { height: "100vh", width: "100vw" }
       : { height: "50vh", width: "100vw" }
 
     return (
-      <Stack anchor="center" {...fill} {...size}>
-        <Box {...fill} {...size} ref={ref}>
+      <Wrapper anchor="center" full={full}>
+        <Box {...size} ref={ref}>
           <Image src={src} layout="fill" priority objectFit="cover" />
         </Box>
         <Gradient {...size} />
@@ -60,7 +65,7 @@ const Header = React.forwardRef(
               ))}
           </Box>
         </Content>
-      </Stack>
+      </Wrapper>
     )
   }
 )

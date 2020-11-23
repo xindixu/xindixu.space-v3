@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { Footer, Box } from "grommet"
+import { Footer as BaseFooter, Box } from "grommet"
 import styled from "styled-components"
 import { links } from "contents/social-media"
 import QuickMenu from "components/quick-menu"
@@ -10,15 +10,15 @@ const FixBottom = styled(Box)`
   left: 0;
 `
 
-const Index = () => {
+const Footer = () => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <FixBottom>
-      <Footer pad="small">
+      <BaseFooter pad="small">
         <QuickMenu subMenu={links} isOpen={isOpen} setIsOpen={setIsOpen} />
-      </Footer>
+      </BaseFooter>
     </FixBottom>
   )
 }
 
-export default Index
+export default Footer

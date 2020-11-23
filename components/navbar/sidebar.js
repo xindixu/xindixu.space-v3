@@ -146,7 +146,6 @@ const Sidebar = ({ onClose, show }) => {
             style={{ background: "none" }}
           >
             <motion.div
-              key="sidebar"
               variants={isBigScreen ? slideMenuAnimation : circleMenuAnimation}
               exit="hidden"
               initial={show ? "hidden" : "visible"}

@@ -1,6 +1,6 @@
 import React from "react"
 import styled, { createGlobalStyle } from "styled-components"
-import { Grommet } from "grommet"
+import { Grommet, Box } from "grommet"
 import { motion } from "framer-motion"
 import CommonLayout from "layout/common"
 import useClick from "hooks/use-click"
@@ -22,6 +22,7 @@ const NoOverflow = styled(Grommet)`
 
 const PageAnimate = styled(motion.div)`
   ${({ maxHeight }) => `
+    display: block;
     overflow: hidden;
     max-height: ${maxHeight}px;
     position: relative;
@@ -35,7 +36,6 @@ const pageAnimation = {
   pageAnimate: ({ x, y }) => ({
     clipPath: `circle(200% at ${x}px ${y}px)`,
     transition: {
-      delay: 0.5,
       duration: 1,
     },
     transitionEnd: {
@@ -48,14 +48,12 @@ const App = ({ Component, pageProps, router }) => {
   const d = process.browser ? document : null
   const { coordinates } = useClick({ node: d })
 
-  console.log(coordinates)
-  console.log(router.route)
   return (
     <>
       <NoOverflow theme={customTheme} full>
         <GlobalStyle />
         <CommonLayout>
-          {({ setContentRef, setHeaderRef }) => (
+          {({ setContentRef, setHeaderRef, header }) => (
             <PageAnimate
               key={router.route}
               initial="pageInitial"
@@ -64,6 +62,7 @@ const App = ({ Component, pageProps, router }) => {
               custom={coordinates}
               maxHeight={d?.documentElement?.clientHeight}
             >
+              {header}
               <Component
                 {...pageProps}
                 setHeaderRef={setHeaderRef}
