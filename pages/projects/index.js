@@ -22,11 +22,8 @@ const {
   elevation: { light },
 } = styleSettings
 
-const AnimatedCard = styled(Card)`
-  transition: 0.2s;
-
+const ActiveCard = styled(Card)`
   :hover {
-    transform: translateY(-${spacerSm});
     box-shadow: ${light.medium};
   }
 `
@@ -49,23 +46,32 @@ const cardAnimation = {
   }),
 }
 
+const cardHoverAnimation = {
+  translateY: -16,
+  transition: {
+    duration: 0.2,
+  },
+}
+
 const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
-  <Link href={`/projects/${slug}`}>
-    <AnimatedCard>
-      <Box>
-        <Image
-          // TODO: fallback url
-          layout="responsive"
-          src={`https:${src}`}
-          width={width}
-          height={height}
-        />
-      </Box>
-      <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
-        <Text>{name}</Text>
-      </CardFooter>
-    </AnimatedCard>
-  </Link>
+  <motion.div whileHover={cardHoverAnimation}>
+    <Link href={`/projects/${slug}`}>
+      <ActiveCard>
+        <Box>
+          <Image
+            // TODO: fallback url
+            layout="responsive"
+            src={`https:${src}`}
+            width={width}
+            height={height}
+          />
+        </Box>
+        <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
+          <Text>{name}</Text>
+        </CardFooter>
+      </ActiveCard>
+    </Link>
+  </motion.div>
 )
 
 const Projects = ({ projects = [] }) => {

@@ -38,16 +38,9 @@ const Header = React.forwardRef(
       : { height: "50vh", width: "100vw" }
 
     return (
-      <Stack anchor="center" {...fill}>
+      <Stack anchor="center" {...fill} {...size}>
         <Box {...fill} {...size} ref={ref}>
-          <Image
-            src={src}
-            layout="responsive"
-            // priority
-            width={width}
-            height={height}
-            // objectFit="cover"
-          />
+          <Image src={src} layout="fill" priority objectFit="cover" />
         </Box>
         <Gradient {...size} />
         <Content full={full} align="center" justify="center">
