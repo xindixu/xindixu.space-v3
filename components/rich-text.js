@@ -33,7 +33,6 @@ const options = {
   },
 }
 
-const RichText = ({ document }) =>
-  console.log(document) || documentToReactComponents(document, options)
+const RichText = ({ document }) => documentToReactComponents(document, options)
 
 export default RichText

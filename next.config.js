@@ -1,6 +1,18 @@
 module.exports = {
   images: {
-    deviceSizes: [320, 420, 768, 1024, 1200],
+    deviceSizes: [
+      320,
+      420,
+      768,
+      1024,
+      1112,
+      1366,
+      1440,
+      1680,
+      1920,
+      2048,
+      3840,
+    ],
     domains: ["images.ctfassets.net"],
   },
   webpack(config) {
