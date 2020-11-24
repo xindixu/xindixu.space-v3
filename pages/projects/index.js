@@ -63,6 +63,7 @@ const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
             src={`https:${src}`}
             width={width}
             height={height}
+            alt={`devices showing different screenshots of project ${name}`}
           />
         </Box>
         <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
