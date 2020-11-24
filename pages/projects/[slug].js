@@ -28,12 +28,20 @@ const Project = ({ setHeaderRef, project = {} }) => {
         background={{ src: `https:${src}`, width, height }}
       />
 
-      <Box pad="xlarge" gap="large" direction="row" justify="center">
-        {size === "large" && (
-          <Box responsive={false}>
-            <InfoBox demoLink={demoLink} repoLink={repoLink} />
-          </Box>
-        )}
+      <Box
+        pad="xlarge"
+        gap="large"
+        direction={size === "large" ? "row" : "column"}
+        justify="center"
+      >
+        <Box
+          responsive={false}
+          direction={size === "large" ? "column" : "row"}
+          gap="small"
+        >
+          <InfoBox demoLink={demoLink} repoLink={repoLink} />
+        </Box>
+
         <Main width="xlarge" flex={false}>
           <RichText document={description} />
         </Main>

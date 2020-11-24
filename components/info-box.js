@@ -1,5 +1,5 @@
-import React from "react"
-import { Button, Box } from "grommet"
+import React, { useContext } from "react"
+import { Button, Box, ResponsiveContext } from "grommet"
 import styled from "styled-components"
 import { Github, Monitor } from "grommet-icons"
 import { motion } from "framer-motion"
@@ -7,11 +7,11 @@ import styleSettings from "lib/style-settings/index"
 
 const {
   elevation: { light },
-  colors: { "light-5": gray },
+  borderSize: { xlarge },
 } = styleSettings
 
 const IconButton = styled(Button)`
-  border-radius: 50%;
+  border-radius: ${xlarge};
   box-shadow: ${light.medium};
 `
 
@@ -26,12 +26,18 @@ const mainIconAnimation = {
 }
 
 const InfoBox = ({ demoLink, repoLink }) => {
+  const size = useContext(ResponsiveContext)
+
   const links = [
     { name: "Demo", link: demoLink, icon: <Monitor />, disabled: !demoLink },
     { name: "Repo", link: repoLink, icon: <Github />, disabled: !repoLink },
   ]
   return (
-    <Box gap="small" responsive={false}>
+    <Box
+      gap="small"
+      responsive={false}
+      direction={size === "large" ? "column" : "row"}
+    >
       {links.map(({ name, link, icon, disabled }, index) => (
         <motion.div
           key={name}
