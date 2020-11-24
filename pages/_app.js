@@ -56,7 +56,7 @@ const App = ({ Component, pageProps, router }) => {
           {({ setContentRef, setHeaderRef, header }) => (
             <PageAnimate
               key={router.route}
-              initial={false}
+              initial="pageInitial"
               animate="pageAnimate"
               variants={pageAnimation}
               custom={coordinates}
