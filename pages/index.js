@@ -63,7 +63,7 @@ const Index = ({ setContentRef }) => (
         <Box width="medium">
           <Image
             src="/img/shared/profile.jpg"
-            // layout="fill"
+            alt="profile picture of Xindi"
             width={942}
             height={942}
           />
@@ -79,8 +79,7 @@ const Index = ({ setContentRef }) => (
           I spent the first 18 years of my life in Fuzhou, China. I missed all
           my close friends and tasty foodies there. I moved to Austin, TX for my
           undergrad. I went to the University of Texas at Austin for 4 years.
-          Since graduation, I've been working at Pingboard as a Software
-          Engineer.
+          Now, I&apos;m working at Pingboard as a Software Engineer.
         </Paragraph>
       </div>
     </Right>

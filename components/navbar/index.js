@@ -30,7 +30,11 @@ const Navbar = ({ isHeaderInView }) => {
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
           <Text margin="none">XindiXu.Space</Text>
-          <Button icon={<Menu />} onClick={() => setShowSideBar(true)} />
+          <Button
+            icon={<Menu />}
+            onClick={() => setShowSideBar(true)}
+            a11yTitle="open menu"
+          />
         </Header>
       </FixTop>
 

@@ -17,6 +17,7 @@ const AnimatedSvg = ({ inView, viewBox, children }) => {
       preserveAspectRatio="xMinYMin meet"
       xmlns="http://www.w3.org/2000/svg"
       viewBox={viewBox}
+      role="presentation"
     >
       {children({
         initial: "out",

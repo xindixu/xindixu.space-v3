@@ -37,7 +37,7 @@ const Wrapper = styled(Stack)`
 `
 
 const Header = React.forwardRef(
-  ({ name, background: { src }, full, labels }, ref) => {
+  ({ name, background: { src, alt }, full, labels }, ref) => {
     const size = full
       ? { height: "100vh", width: "100vw" }
       : { height: "50vh", width: "100vw" }
@@ -45,7 +45,7 @@ const Header = React.forwardRef(
     return (
       <Wrapper anchor="center" full={full}>
         <Box {...size} ref={ref}>
-          <Image src={src} layout="fill" priority objectFit="cover" />
+          <Image src={src} layout="fill" priority objectFit="cover" alt={alt} />
         </Box>
         <Gradient {...size} />
         <Content full={full} align="center" justify="center">

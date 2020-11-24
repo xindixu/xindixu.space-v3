@@ -82,6 +82,7 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
   return (
     <Circle>
       <MainButton
+        a11yTitle={`${isOpen ? "close" : "open"} sub-menu`}
         icon={
           <motion.div
             initial={isOpen ? "hidden" : false}
@@ -106,6 +107,7 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
           custom={{ index, count }}
         >
           <SubButton
+            a11yTitle={name}
             count={count}
             cycle={count}
             hoverIndicator

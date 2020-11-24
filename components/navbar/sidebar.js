@@ -159,6 +159,7 @@ const Sidebar = ({ onClose, show }) => {
                     hoverIndicator
                     alignSelf="end"
                     onClick={onClose}
+                    a11yTitle="close menu"
                   />
                 }
                 footer={<SidebarFooter />}

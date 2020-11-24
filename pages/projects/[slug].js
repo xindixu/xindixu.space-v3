@@ -25,7 +25,12 @@ const Project = ({ setHeaderRef, project = {} }) => {
         ref={setHeaderRef}
         name={name}
         labels={labels}
-        background={{ src: `https:${src}`, width, height }}
+        background={{
+          src: `https:${src}`,
+          width,
+          height,
+          alt: `devices showing different screenshots of project ${name}`,
+        }}
       />
 
       <Box
