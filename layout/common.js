@@ -38,7 +38,7 @@ const Common = ({ children }) => {
             name={name}
             background={background}
             full={isTopLevel}
-            alt=""
+            alt="floral background image to decorate the header"
           />
         ),
       })}
