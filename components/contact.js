@@ -3,6 +3,7 @@ import { isEmpty } from "lodash"
 import { Box, Form, TextArea, TextInput, FormField, Button } from "grommet"
 import { send } from "lib/email"
 import Toast from "components/toast"
+import Loader from "components/loader"
 
 const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 const Contact = () => {
@@ -57,8 +58,9 @@ const Contact = () => {
               type="submit"
               disabled={isSubmitting}
               primary
-              label="Send Email"
+              label={<Loader loading={isSubmitting}>Send Email</Loader>}
             />
+
             <Button type="reset" label="Reset" />
           </Box>
         </Box>
