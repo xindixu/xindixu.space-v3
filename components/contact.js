@@ -12,11 +12,11 @@ const Contact = () => {
   const onSubmit = () => {
     setIsSubmitting(true)
     send(form)
-      .then((resp) => {
+      .then(() => {
         setForm({})
         setToast({ mode: "ok", content: "Your email has been sent!" })
       })
-      .catch((err) => {
+      .catch(() => {
         setToast({
           mode: "error",
           content: "We couldn't send your email. Try again in a few minutes",

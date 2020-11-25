@@ -146,20 +146,20 @@ const Sidebar = ({ onClose, show }) => {
             style={{ background: "none" }}
           >
             <motion.div
-              variants={isBigScreen ? slideMenuAnimation : circleMenuAnimation}
+              animate={show ? "visible" : "hidden"}
               exit="hidden"
               initial={show ? "hidden" : "visible"}
-              animate={show ? "visible" : "hidden"}
               style={{ height: "100%" }}
+              variants={isBigScreen ? slideMenuAnimation : circleMenuAnimation}
             >
               <GradientBackground
                 header={
                   <Button
-                    icon={<Close />}
-                    hoverIndicator
-                    alignSelf="end"
-                    onClick={onClose}
                     a11yTitle="close menu"
+                    alignSelf="end"
+                    hoverIndicator
+                    icon={<Close />}
+                    onClick={onClose}
                   />
                 }
                 footer={<SidebarFooter />}
