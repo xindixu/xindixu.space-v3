@@ -12,6 +12,7 @@
     "@svgr/webpack": "^5.5.0",
     "contentful": "^7.14.14",
     "date-fns": "^2.16.1",
+    "emailjs-com": "^2.6.4",
     "framer-motion": "^2.9.4",
     "grommet": "^2.15.2",
     "grommet-icons": "^4.5.0",
