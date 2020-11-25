@@ -1,5 +1,6 @@
-import React from "react"
+import React, { useRef } from "react"
 import PropTypes from "prop-types"
+import { useClickAway } from "react-use"
 import { Button } from "grommet"
 import { Close, AppsRounded } from "grommet-icons"
 import styled from "styled-components"
@@ -79,8 +80,15 @@ const subIconAnimation = {
 
 const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
   const { length: count } = subMenu
+  const ref = useRef(null)
+  useClickAway(ref, () => {
+    if (isOpen) {
+      setIsOpen(false)
+    }
+  })
+
   return (
-    <Circle>
+    <Circle ref={ref}>
       <MainButton
         a11yTitle={`${isOpen ? "close" : "open"} sub-menu`}
         icon={
