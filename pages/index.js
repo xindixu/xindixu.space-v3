@@ -58,9 +58,9 @@ const Index = ({ setContentRef }) => (
       </div>
     </Left>
     <Right>
-      <Box direction="row" align="start" gap="large">
+      <Box direction="row" align="center" gap="large">
         <Name />
-        <Box width="medium">
+        <Box width="small" round="full">
           <Image
             src="/img/shared/profile.jpg"
             alt="profile picture of Xindi"
@@ -78,8 +78,9 @@ const Index = ({ setContentRef }) => (
         <Paragraph fill>
           I spent the first 18 years of my life in Fuzhou, China. I missed all
           my close friends and tasty foodies there. I moved to Austin, TX for my
-          undergrad. I went to the University of Texas at Austin for 4 years.
-          Now, I&apos;m working at Pingboard as a Software Engineer.
+          undergrad at University of Texas at Austin. After graduation, I worked
+          at Pingboard as a Software Engineer for a year. Soon, I&apos;ll join
+          Columbia University as a MSCS student.
         </Paragraph>
       </div>
     </Right>

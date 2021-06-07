@@ -34,7 +34,7 @@ const Name = () => {
   const [ref, inView] = useInView({ delay: 1000 })
 
   return (
-    <SvgWrapper direction="row" width="medium">
+    <SvgWrapper direction="row" width="small">
       <Box ref={ref}>
         {names.map(({ paths, height, width }, index) => (
           <AnimatedSvg
