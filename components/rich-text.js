@@ -50,6 +50,12 @@ const options = {
     [BLOCKS.HEADING_1]: (_, children) => (
       <Heading level={2}>{children}</Heading>
     ),
+    [BLOCKS.HEADING_2]: (_, children) => (
+      <Heading level={3}>{children}</Heading>
+    ),
+    [BLOCKS.HEADING_3]: (_, children) => (
+      <Heading level={4}>{children}</Heading>
+    ),
     [BLOCKS.UL_LIST]: (_, children) => <ULList>{children}</ULList>,
     [BLOCKS.LIST_ITEM]: (_, children) => <ListItem>{children}</ListItem>,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
