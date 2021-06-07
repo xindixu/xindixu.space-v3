@@ -2,19 +2,28 @@ import { Briefcase, Workshop } from "grommet-icons"
 
 export const experiences = [
   {
+    company: "Columbia University",
+    jobTitle: "MS in CS",
+    date: "08/2021 – Present",
+    icon: <Workshop />,
+    list: [],
+  },
+  {
     company: "Pingboard",
     jobTitle: "Software Engineer",
-    date: "06/2020 – Present",
+    date: "06/2020 – 06/2021",
     icon: <Briefcase />,
     list: [
-      "Implement features align with product strategy and create accessible and interactive components for Employees Networking web app",
-      "Migrate legacy code to modern frontend technologies incrementally",
-      "Research and plan development process and investigate new technologies to improve web app performance",
+      "Consistently delivered intricate, accessible, and performant features with thorough tests and documentations for Employees Networking app built with React, JavaScript, Ruby on Rails",
+      "Researched and built complex features such as drag-n-drop sortable lists, real-time agenda editing",
+      "Boosted initial load speed by 10% via migrating legacy code, building over 10 single-page apps with best-fit design patterns, and outsourcing heavy calculation to web workers",
+      "Improved accessibility with keyboard navigations aligned with web accessibility guidelines and create animations for a native-like experience",
+      "Investigated and planed development process, contributed ideas to bi-monthly reflection meetings, and researched and presented new technologies to engineers",
     ],
   },
   {
     company: "the University of Texas at Austin",
-    jobTitle: "Advertising Major & CS Minor",
+    jobTitle: "BS in Advertising & CS Minor",
     date: "08/2016 – 05/2020",
     icon: <Workshop />,
     list: [
@@ -29,7 +38,6 @@ export const experiences = [
     date: "06/2019 – 05/2020",
     icon: <Briefcase />,
     list: [
-      "Implement features align with product strategy and create accessible and interactive components for Employees Networking web app",
       "Linked Slack with Pingboard app where user generated contents can be automatically synchronized to both platforms",
       "Created backend APIs with recursive SQL to fetch and filter recruiting data, feature recruiting information in home page and weekly emails",
     ],
