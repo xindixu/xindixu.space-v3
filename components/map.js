@@ -139,6 +139,7 @@ const Map = () => {
         {labels.map((props, i) => (
           <Label
             {...props}
+            key={props.year}
             position={`${
               isSmUp ? bigScreenPositions[i] : smallScreenPositions[i]
             }%`}
