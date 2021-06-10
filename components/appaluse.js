@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useCallback, useEffect, useState } from "react"
 import styled from "styled-components"
 import {
   Box,
@@ -13,11 +13,13 @@ import {
 } from "grommet"
 import { Previous, Next } from "grommet-icons"
 import { AnimatePresence, motion } from "framer-motion"
+import { useInView } from "react-intersection-observer"
 import { format } from "date-fns"
 import { applauses } from "contents/applauses"
 
 const SHORT_DATE_FORMAT = "MMM d, yyyy"
-
+const READING_TIME = 10000 // 10 secs
+const AUTOPLAY_TIME = 5000 // 5 secs
 const IconButton = styled(Button)`
   border-radius: 50%;
 `
@@ -82,7 +84,6 @@ const Base = ({
             a11yTitle="previous"
             round="full"
             size="small"
-            disabled={index === 0}
             onClick={() => paginate(-1)}
           />
           <Text margin={{ horizontal: "small" }} size="small">
@@ -93,7 +94,6 @@ const Base = ({
             a11yTitle="next"
             round="full"
             size="small"
-            disabled={index === length - 1}
             onClick={() => paginate(1)}
           />
         </Box>
@@ -103,42 +103,71 @@ const Base = ({
 )
 
 const Appause = () => {
+  const [ref, inView] = useInView({ delay: 1000 })
+  const [paused, setPaused] = useState(false)
   const { length } = applauses
 
   const [[page, direction], setPage] = useState([0, 0])
   const index = page % length
   const { message, createdAt, sender, likes } = applauses[index]
 
-  const paginate = (newDirection) =>
-    setPage([page + newDirection, newDirection])
+  const paginate = useCallback(
+    (newDirection) => setPage([page + newDirection, newDirection]),
+    [page]
+  )
+
+  useEffect(() => {
+    if (paused) {
+      setTimeout(() => {
+        setPaused(false)
+      }, READING_TIME)
+    }
+  }, [paused])
+
+  useEffect(() => {
+    let timer
+    if (inView && !paused) {
+      timer = setInterval(() => {
+        paginate(1)
+      }, AUTOPLAY_TIME)
+    }
+    return () => {
+      clearTimeout(timer)
+    }
+  }, [inView, paginate, paused])
 
   return (
-    <AnimatePresence initial={false} custom={direction}>
-      <Stack anchor="top-right">
-        <motion.div
-          key={page}
-          custom={direction}
-          variants={variants}
-          initial="enter"
-          animate="center"
-          exit="exit"
-          transition={{
-            x: { type: "spring", stiffness: 300, damping: 30 },
-            opacity: { duration: 0.2 },
-          }}
-        >
-          <Base
-            createdAt={createdAt}
-            index={index}
-            length={length}
-            likes={likes}
-            message={message}
-            paginate={paginate}
-            sender={sender}
-          />
-        </motion.div>
-      </Stack>
-    </AnimatePresence>
+    <div ref={ref}>
+      <AnimatePresence initial={false} custom={direction}>
+        <Stack anchor="top-right">
+          <motion.div
+            key={page}
+            custom={direction}
+            variants={variants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            transition={{
+              x: { type: "spring", stiffness: 300, damping: 30 },
+              opacity: { duration: 0.2 },
+            }}
+          >
+            <Base
+              createdAt={createdAt}
+              index={index}
+              length={length}
+              likes={likes}
+              message={message}
+              paginate={(newDirection) => {
+                paginate(newDirection)
+                setPaused(true)
+              }}
+              sender={sender}
+            />
+          </motion.div>
+        </Stack>
+      </AnimatePresence>
+    </div>
   )
 }
 
