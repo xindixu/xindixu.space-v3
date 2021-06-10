@@ -11,8 +11,7 @@ import {
   Button,
 } from "grommet"
 import { Previous, Next } from "grommet-icons"
-import { useCycle, motion } from "framer-motion"
-
+// import { useCycle, motion } from "framer-motion"
 import { format } from "date-fns"
 import { applauses } from "contents/applauses"
 

@@ -28,6 +28,9 @@ const Left = styled(Half).attrs({
 const Right = styled(Half).attrs({
   direction: "row-reverse",
 })``
+const Avatar = styled(Image)`
+  border-radius: 100%;
+`
 
 const Index = ({ setContentRef }) => (
   <Main ref={setContentRef} pad="xlarge" fill={false} gap="large">
@@ -62,7 +65,7 @@ const Index = ({ setContentRef }) => (
       <Box direction="row" align="center" gap="large">
         <Name />
         <Box width="small" round="full">
-          <Image
+          <Avatar
             src="/img/shared/profile.jpg"
             alt="profile picture of Xindi"
             width={942}
