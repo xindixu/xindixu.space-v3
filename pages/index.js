@@ -9,13 +9,14 @@ import Applause from "components/appaluse"
 import { media } from "lib/style-settings/media-query"
 
 const Half = styled(Box).attrs({
-  margin: { vertical: "medium" },
+  margin: { horizontal: "xlarge" },
+  pad: { vertical: "large" },
 })`
   & > div {
     max-width: 100%;
   }
 
-  ${media.screenMdUp`
+  ${media.screenXlUp`
     & > div {
       max-width: 50%;
     }
@@ -33,7 +34,7 @@ const Avatar = styled(Image)`
 `
 
 const Index = ({ setContentRef }) => (
-  <Main ref={setContentRef} pad="xlarge" fill={false} gap="large">
+  <Main ref={setContentRef} fill={false} gap="large">
     <Left>
       <div>
         <Text size="xxlarge">
@@ -74,20 +75,23 @@ const Index = ({ setContentRef }) => (
         </Box>
       </Box>
     </Right>
-    <Left>
-      <Map />
-    </Left>
-    <Right>
-      <div>
-        <Paragraph fill>
-          I spent the first 18 years of my life in Fuzhou, China. I missed all
-          my close friends and tasty foodies there. I moved to Austin, TX for my
-          undergrad at University of Texas at Austin. After graduation, I worked
-          at Pingboard as a Software Engineer for a year. Soon, I&apos;ll join
-          Columbia University as a MSCS student.
-        </Paragraph>
-      </div>
-    </Right>
+    <Box background="bg-paper">
+      <Left>
+        <Map />
+      </Left>
+      <Right>
+        <div>
+          <Paragraph fill>
+            I spent the first 18 years of my life in Fuzhou, China. I missed all
+            my close friends and tasty foodies there. I moved to Austin, TX for
+            my undergrad at University of Texas at Austin. After graduation, I
+            worked at Pingboard as a Software Engineer for a year. Soon,
+            I&apos;ll join Columbia University as a MSCS student.
+          </Paragraph>
+        </div>
+      </Right>
+    </Box>
+
     <Left>
       <Applause />
     </Left>
