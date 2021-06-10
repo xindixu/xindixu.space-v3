@@ -7,9 +7,16 @@ import { useInView } from "react-intersection-observer"
 import BaseMap from "assets/svg/map.svg"
 import styleSettings from "lib/style-settings"
 import AnimatedSvg from "components/animated-svg"
-import { mediaQuery } from "lib/style-settings/media-query"
+import { mediaQuery, media } from "lib/style-settings/media-query"
 
-const { spacerSm, spacerBase, pink } = styleSettings
+const {
+  spacerSm,
+  spacerBase,
+  pink,
+  fontSizeLg,
+  fontSizeSm,
+  fontSizeBase,
+} = styleSettings
 
 const SIZE = 5
 
@@ -35,24 +42,27 @@ const VerticalText = styled.div`
 const Date = styled(Text)`
   margin: 0;
   display: block;
+
+  font-size: ${fontSizeSm};
+  ${media.screenSmUp`
+    font-size: ${fontSizeBase};
+  `}
+  ${media.screenLgUp`
+    font-size: ${fontSizeLg};
+  `}
 `
 
-const Label = ({ place, country, monthDay, year, position }) => {
-  const isBigScreen = useMedia(mediaQuery.screenBaseAndUp)
-  const isMediumScreen = useMedia(mediaQuery.screenSmAndUp)
-
-  return (
-    <Location position={position}>
-      <HorizontalText>{place}</HorizontalText>
-      <VerticalText>{country}</VerticalText>
-      <Date size={isBigScreen ? "large" : isMediumScreen ? "medium" : "small"}>
-        {monthDay}
-        <br />
-        {year}
-      </Date>
-    </Location>
-  )
-}
+const Label = ({ place, country, monthDay, year, position }) => (
+  <Location position={position}>
+    <HorizontalText>{place}</HorizontalText>
+    <VerticalText>{country}</VerticalText>
+    <Date>
+      {monthDay}
+      <br />
+      {year}
+    </Date>
+  </Location>
+)
 
 const labels = [
   {
