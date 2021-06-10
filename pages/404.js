@@ -1,5 +1,3 @@
-import React from "react"
-
-const Error = (props) => null
+const Error = () => null
 
 export default Error

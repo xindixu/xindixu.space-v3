@@ -9,14 +9,8 @@ import styleSettings from "lib/style-settings"
 import AnimatedSvg from "components/animated-svg"
 import { mediaQuery, media } from "lib/style-settings/media-query"
 
-const {
-  spacerSm,
-  spacerBase,
-  pink,
-  fontSizeLg,
-  fontSizeSm,
-  fontSizeBase,
-} = styleSettings
+const { spacerSm, spacerBase, pink, fontSizeLg, fontSizeSm, fontSizeBase } =
+  styleSettings
 
 const SIZE = 5
 

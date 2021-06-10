@@ -36,11 +36,11 @@ const Name = () => {
   return (
     <SvgWrapper direction="row" width="small">
       <Box ref={ref}>
-        {names.map(({ paths, height, width }, index) => (
+        {names.map(({ paths, height, width }, nameIndex) => (
           <AnimatedSvg
             inView={inView}
             // eslint-disable-next-line react/no-array-index-key
-            key={index}
+            key={nameIndex}
             viewBox={`0 0 ${width} ${height}`}
           >
             {(props) => (

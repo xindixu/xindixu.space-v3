@@ -1,8 +1,4 @@
 import React, { useContext } from "react"
-import PropTypes from "prop-types"
-import styled from "styled-components"
-import Link from "next/link"
-import Image from "next/image"
 import {
   Box,
   Card,
@@ -12,9 +8,13 @@ import {
   ResponsiveContext,
   Text,
 } from "grommet"
-import { useInView } from "react-intersection-observer"
+import Image from "next/image"
+import Link from "next/link"
+import PropTypes from "prop-types"
 import { motion } from "framer-motion"
-import { getAllProjects } from "lib/contentful/project"
+import styled from "styled-components"
+import { useInView } from "react-intersection-observer"
+import { getAllProjects } from "lib/content/project"
 import styleSettings from "lib/style-settings/index"
 
 const {

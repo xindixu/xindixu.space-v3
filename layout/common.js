@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react"
+import React, { useRef } from "react"
 import { useInView } from "react-intersection-observer"
 import PropTypes from "prop-types"
 import usePageConfig from "hooks/use-page-config"
@@ -16,11 +16,11 @@ const Common = ({ children }) => {
     isTopLevel,
   } = usePageConfig()
 
-  useEffect(() => {
-    if (headerRef) {
-      console.log(headerRef.current)
-    }
-  }, [headerRef])
+  // useEffect(() => {
+  //   if (headerRef) {
+  //     console.log(headerRef.current)
+  //   }
+  // }, [headerRef])
 
   return (
     <>

@@ -14,11 +14,11 @@ import { links } from "contents/routes"
 const { pink, black } = styleSettings
 
 const GradientBackground = styled(GSidebar)`
-  ${({ isBigScreen }) => `
+  ${({ isBaseUp }) => `
     background: linear-gradient(
       0deg,
       ${black}BB -10%,
-      ${pink}${isBigScreen ? "88" : "BB"} 90%,
+      ${pink}${isBaseUp ? "88" : "BB"} 90%,
       ${pink} 100%
     );
 `}
@@ -82,7 +82,7 @@ const linkAnimation = {
 
 const SidebarFooter = () => "Built with Next.js"
 
-const SidebarButton = ({ icon, label, link, onClick, active, show }) => (
+const SidebarButton = ({ icon, label, link, onClick, active }) => (
   <Link href={link} passHref>
     <Button
       as="a"
@@ -99,9 +99,9 @@ const SidebarButton = ({ icon, label, link, onClick, active, show }) => (
   </Link>
 )
 
-const MainNavigation = ({ isBigScreen, onClose, pathname, show }) => (
+const MainNavigation = ({ isBaseUp, onClose, show }) => (
   <Nav
-    gap={isBigScreen ? "medium" : "large"}
+    gap={isBaseUp ? "medium" : "large"}
     full="horizontal"
     alignSelf="stretch"
     pad={{ horizontal: "large" }}
@@ -129,7 +129,7 @@ const MainNavigation = ({ isBigScreen, onClose, pathname, show }) => (
 )
 
 const Sidebar = ({ onClose, show }) => {
-  const isBigScreen = useMedia(mediaQuery.screenBaseAndUp)
+  const isBaseUp = useMedia(mediaQuery.screenBaseAndUp)
   const { pathname } = useRouter()
   return (
     <Box>
@@ -150,7 +150,7 @@ const Sidebar = ({ onClose, show }) => {
               exit="hidden"
               initial={show ? "hidden" : "visible"}
               style={{ height: "100%" }}
-              variants={isBigScreen ? slideMenuAnimation : circleMenuAnimation}
+              variants={isBaseUp ? slideMenuAnimation : circleMenuAnimation}
             >
               <GradientBackground
                 header={
@@ -167,7 +167,7 @@ const Sidebar = ({ onClose, show }) => {
                 full="vertical"
               >
                 <MainNavigation
-                  isBigScreen={isBigScreen}
+                  isBaseUp={isBaseUp}
                   onClose={onClose}
                   pathname={pathname}
                   show={show}
