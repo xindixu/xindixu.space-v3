@@ -63,7 +63,12 @@ const Appause = () => {
             round="large"
             pad={{ vertical: "xxsmall", horizontal: "small" }}
           >
-            <Text size="small">👏 {likes}</Text>
+            <Text size="small">
+              <span role="img" aria-label="Clapping hand">
+                👏
+              </span>{" "}
+              {likes}
+            </Text>
           </Box>
           <Box direction="row" align="center">
             <IconButton

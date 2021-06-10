@@ -1,6 +1,7 @@
 import React from "react"
 import PropTypes from "prop-types"
 import { Main, Box, Paragraph, Text } from "grommet"
+import { motion } from "framer-motion"
 import styled from "styled-components"
 import Image from "next/image"
 import Name from "components/name"
@@ -29,6 +30,9 @@ const Left = styled(Half).attrs({
 const Right = styled(Half).attrs({
   direction: "row-reverse",
 })``
+const Hand = styled(motion.div)`
+  width: min-content;
+`
 const Avatar = styled(Image)`
   border-radius: 100%;
 `
@@ -37,12 +41,19 @@ const Index = ({ setContentRef }) => (
   <Main ref={setContentRef} fill={false} gap="large">
     <Left>
       <div>
-        <Text size="xxlarge">
-          <span role="img" aria-label="Waving Hand">
-            👋
-          </span>{" "}
-          Hi there,
-        </Text>
+        <Box direction="row" gap="small">
+          <Hand
+            animate={{ rotate: [0, 30, -10] }}
+            transition={{ loop: Infinity, repeatDelay: 0.5 }}
+          >
+            <Text size="xxlarge">
+              <span role="img" aria-label="Waving Hand">
+                👋
+              </span>
+            </Text>
+          </Hand>
+          <Text size="xxlarge"> Hi there,</Text>
+        </Box>
         <Box pad={{ vertical: "medium" }}>
           <Paragraph fill>
             I enjoy designing and implementing full-stack features with complex
