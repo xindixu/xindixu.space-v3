@@ -5,6 +5,7 @@ import styled from "styled-components"
 import Image from "next/image"
 import Name from "components/name"
 import Map from "components/map"
+import Applause from "components/appaluse"
 import { media } from "lib/style-settings/media-query"
 
 const Half = styled(Box).attrs({
@@ -84,6 +85,9 @@ const Index = ({ setContentRef }) => (
         </Paragraph>
       </div>
     </Right>
+    <Left>
+      <Applause />
+    </Left>
   </Main>
 )
 
