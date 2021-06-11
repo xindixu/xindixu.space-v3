@@ -15,6 +15,8 @@ const Filters = ({ onChange }) => {
 
   useEffect(() => {
     onChange(Object.values(selectedTagIds).filter((id) => !id.endsWith("all")))
+    // setState callback
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedTagIds])
 
   return Object.entries(tagGroups).map(([key, ids]) => {
