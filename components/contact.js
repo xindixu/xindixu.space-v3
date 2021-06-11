@@ -1,9 +1,21 @@
 import React, { useState } from "react"
 import { isEmpty } from "lodash"
 import { Box, Form, TextArea, TextInput, FormField, Button } from "grommet"
-import { send } from "lib/email"
+import styled from "styled-components"
 import Toast from "components/toast"
 import Loader from "components/loader"
+import { send } from "lib/email"
+import styleSettings from "lib/style-settings"
+
+const { readable } = styleSettings
+
+const ReadableForm = styled(Form)`
+  &&& {
+    align-self: center;
+    width: 100%;
+    max-width: ${readable};
+  }
+`
 
 const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 const Contact = () => {
@@ -26,7 +38,7 @@ const Contact = () => {
   }
   return (
     <>
-      <Form
+      <ReadableForm
         onSubmit={({ value }) => onSubmit(value)}
         validate="blur"
         disabled={isSubmitting}
@@ -64,7 +76,7 @@ const Contact = () => {
             <Button type="reset" label="Reset" />
           </Box>
         </Box>
-      </Form>
+      </ReadableForm>
 
       <Toast
         isOpen={!isEmpty(toast)}

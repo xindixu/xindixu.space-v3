@@ -12,7 +12,7 @@ import Applause from "components/appaluse"
 import { media } from "lib/style-settings/media-query"
 import styleSettings from "lib/style-settings"
 
-const { beige, spacerXl, spacerLg, spacerBase } = styleSettings
+const { readable, beige, spacerXl, spacerLg, spacerBase } = styleSettings
 const Half = styled(Box).attrs({
   margin: { horizontal: "xlarge" },
   pad: { vertical: "large" },
@@ -30,17 +30,20 @@ const Half = styled(Box).attrs({
 
 const Left = styled(Half).attrs({
   direction: "row",
+  margin: "none",
 })``
 const Right = styled(Half).attrs({
   direction: "row-reverse",
+  margin: "none",
 })``
 
 const BaseReadableRow = styled(Box).attrs({
   alignContent: "center",
+  pad: { horizontal: "xlarge" },
 })`
   & > div {
-    max-width: 1920px;
     align-self: center;
+    max-width: ${readable};
     width: 100%;
   }
 `

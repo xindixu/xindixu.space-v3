@@ -10,12 +10,16 @@ import { experiences } from "contents/experiences"
 import styleSettings from "lib/style-settings"
 
 const {
+  readable,
   pink,
   elevation: { light },
 } = styleSettings
 
 const Wrapper = styled(VerticalTimeline)`
   &&& {
+    width: 100%;
+    max-width: ${readable};
+
     &::before {
       background: ${pink};
     }

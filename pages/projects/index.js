@@ -20,12 +20,18 @@ import styleSettings from "lib/style-settings"
 
 const {
   elevation: { light },
+  readable,
 } = styleSettings
 
 const ActiveCard = styled(Card)`
   :hover {
     box-shadow: ${light.medium};
   }
+`
+
+const ReadableContent = styled(Box)`
+  width: 100%;
+  max-width ${readable};  
 `
 
 const cardAnimation = {
@@ -86,29 +92,33 @@ const Projects = ({ initialProjects = [] }) => {
   }
 
   return (
-    <Main pad="xlarge" fill={false}>
-      <Filters onChange={updateProjects} />
-      <Grid
-        gap="medium"
-        margin={{ top: "medium" }}
-        columns={{
-          count: "fill",
-          size: size === "small" ? "100%" : "medium",
-        }}
-        ref={ref}
-      >
-        {projects.map(({ name, slug, devices }, index) => (
-          <motion.div
-            key={slug}
-            initial={inView ? "out" : false}
-            animate={inView ? "in" : "out"}
-            variants={cardAnimation}
-            custom={{ index }}
-          >
-            <Project name={name} slug={slug} thumbnail={devices} />
-          </motion.div>
-        ))}
-      </Grid>
+    <Main pad="xlarge" fill={false} justify="center" direction="row">
+      <ReadableContent>
+        <div>
+          <Filters onChange={updateProjects} />
+        </div>
+        <Grid
+          gap="medium"
+          margin={{ top: "medium" }}
+          columns={{
+            count: "fill",
+            size: size === "small" ? "100%" : "medium",
+          }}
+          ref={ref}
+        >
+          {projects.map(({ name, slug, devices }, index) => (
+            <motion.div
+              key={slug}
+              initial={inView ? "out" : false}
+              animate={inView ? "in" : "out"}
+              variants={cardAnimation}
+              custom={{ index }}
+            >
+              <Project name={name} slug={slug} thumbnail={devices} />
+            </motion.div>
+          ))}
+        </Grid>
+      </ReadableContent>
     </Main>
   )
 }
