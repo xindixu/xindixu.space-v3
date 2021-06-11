@@ -16,7 +16,7 @@ import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
 import Filters from "components/filters"
 import { getAllProjects } from "lib/content/project"
-import styleSettings from "lib/style-settings/index"
+import styleSettings from "lib/style-settings"
 
 const {
   elevation: { light },
@@ -90,8 +90,9 @@ const Projects = ({ initialProjects = [] }) => {
       <Filters onChange={updateProjects} />
       <Grid
         gap="medium"
+        margin={{ top: "medium" }}
         columns={{
-          count: "fit",
+          count: "fill",
           size: size === "small" ? "100%" : "medium",
         }}
         ref={ref}

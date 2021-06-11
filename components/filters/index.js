@@ -6,7 +6,7 @@ import { getAllTags } from "lib/content/tag"
 
 const Filters = ({ onChange }) => {
   const tagGroups = getAllTags()
-  const [selectedTags, setSelectedTags] = useState(() =>
+  const [selectedTagIds, setSelectedTagIds] = useState(() =>
     Object.keys(tagGroups).reduce((memo, key) => {
       memo[key] = getAllId(key)
       return memo
@@ -14,27 +14,27 @@ const Filters = ({ onChange }) => {
   )
 
   useEffect(() => {
-    onChange(Object.values(selectedTags).filter((id) => !id.endsWith("all")))
-  }, [selectedTags])
+    onChange(Object.values(selectedTagIds).filter((id) => !id.endsWith("all")))
+  }, [selectedTagIds])
 
-  return Object.entries(tagGroups).map(([key, values]) => {
+  return Object.entries(tagGroups).map(([key, ids]) => {
     const allId = getAllId(key)
 
     return (
       <Group
         key={key}
         groupName={key}
-        selectedTag={selectedTags[key]}
-        values={values}
+        selectedTagId={selectedTagIds[key]}
+        ids={ids}
         onDeselect={() =>
-          setSelectedTags((prevSelectedTags) => ({
-            ...prevSelectedTags,
+          setSelectedTagIds((prevSelectedTagIds) => ({
+            ...prevSelectedTagIds,
             [key]: allId,
           }))
         }
         onSelect={(id) =>
-          setSelectedTags((prevSelectedTags) => ({
-            ...prevSelectedTags,
+          setSelectedTagIds((prevSelectedTagIds) => ({
+            ...prevSelectedTagIds,
             [key]: id,
           }))
         }

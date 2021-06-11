@@ -1,42 +1,104 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Box, Button, Text } from "grommet"
+import { Box, Button, Text, Select } from "grommet"
 import { capitalize } from "lodash"
-import { getAllId } from "./utils"
+import { useMedia } from "react-use"
+import styled from "styled-components"
+import { getAllId, getName } from "./utils"
+import { mediaQuery } from "lib/style-settings/media-query"
+import styleSettings from "lib/style-settings"
+
+const { spacerLg } = styleSettings
 
 const DynamicButton = ({ selected, onClick, label }) => {
+  const isSmUp = useMedia(mediaQuery.screenSmAndUp)
+
   const type = selected ? { primary: true } : { default: true }
-  return <Button {...type} label={label} onClick={onClick} />
+  return (
+    <Button
+      {...type}
+      label={label}
+      onClick={onClick}
+      size={isSmUp ? "medium" : "small"}
+    />
+  )
 }
 
-const Group = ({ groupName, values, selectedTag, onSelect, onDeselect }) => {
+const FixedWidthText = styled(Text)`
+  width: ${spacerLg};
+`
+
+const FullWidthSelect = styled.div`
+  width: 100%;
+  &&& {
+    button {
+      width: 100%;
+    }
+  }
+`
+
+const Group = ({ groupName, ids, selectedTagId, onSelect, onDeselect }) => {
   const allId = getAllId(groupName)
-  const selectedAll = selectedTag === allId
+  const selectedAll = selectedTagId === allId
+
+  const isSmUp = useMedia(mediaQuery.screenSmAndUp)
 
   return (
     <Box
       direction="row"
       align="center"
-      gap="small"
       margin={{ bottom: "small" }}
+      fill="horizontal"
     >
-      <Text>{capitalize(groupName)}</Text>
-      <DynamicButton
-        label="All"
-        selected={selectedAll}
-        onClick={() => (selectedAll ? onDeselect(allId) : onSelect(allId))}
-      />
-      {values.map(({ id, name }) => {
-        const selected = selectedTag === id
-        return (
+      <FixedWidthText margin={{ right: "small" }}>
+        {capitalize(groupName)}
+      </FixedWidthText>
+      {isSmUp ? (
+        <Box gap="small" direction="row">
           <DynamicButton
-            key={id}
-            selected={selected}
-            label={capitalize(`${name.split(":")[1]}`)}
-            onClick={() => (selected ? onDeselect(id) : onSelect(id))}
+            label="All"
+            onClick={() => (selectedAll ? onDeselect(allId) : onSelect(allId))}
+            selected={selectedAll}
           />
-        )
-      })}
+          {ids.map((id) => {
+            const selected = selectedTagId === id
+            return (
+              <DynamicButton
+                key={id}
+                selected={selected}
+                label={capitalize(getName(id))}
+                onClick={() => (selected ? onDeselect(id) : onSelect(id))}
+              />
+            )
+          })}
+        </Box>
+      ) : (
+        <FullWidthSelect>
+          <Select
+            size="medium"
+            name="select"
+            placeholder="Select"
+            value={selectedTagId}
+            valueLabel={
+              <Box
+                fill
+                margin={{ vertical: "small", horizontal: "medium" }}
+                round="large"
+              >
+                {capitalize(getName(selectedTagId)) || "Select..."}
+              </Box>
+            }
+            options={ids}
+            onChange={({ option }) => onSelect(option)}
+          >
+            {(option) => (
+              <Box pad={{ vertical: "small", horizontal: "medium" }}>
+                {capitalize(getName(option))}
+              </Box>
+            )}
+          </Select>
+        </FullWidthSelect>
+      )}
     </Box>
   )
 }
@@ -49,7 +111,7 @@ Group.propTypes = {
       name: PropTypes.string.isRequired,
     }).isRequired
   ).isRequired,
-  selectedTag: PropTypes.string.isRequired,
+  selectedTagId: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
   onDeselect: PropTypes.func.isRequired,
 }
