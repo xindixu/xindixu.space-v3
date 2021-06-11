@@ -3,7 +3,7 @@ import styled from "styled-components"
 import { get } from "lodash"
 import { BLOCKS, MARKS } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { Paragraph, Heading } from "grommet"
+import { Box, Text, Paragraph, Heading } from "grommet"
 import Image from "next/image"
 import styleSettings from "lib/style-settings"
 
@@ -27,18 +27,30 @@ const Video = styled.video`
   height: auto;
 `
 
-const EmbeddedImage = ({ url, title, width, height }) => (
-  <Image
-    src={`https:${url}`}
-    layout="responsive"
-    width={width}
-    height={height}
-    alt={title}
-  />
+const Description = ({ description }) => (
+  <Text color="dark-6" size="small" margin={{ bottom: "small" }}>
+    {description}
+  </Text>
 )
 
-const EmbeddedVideo = ({ url, title }) => (
-  <Video controls name={title} playsinline src={`https:${url}`} />
+const EmbeddedImage = ({ description, url, title, width, height }) => (
+  <Box margin={{ bottom: "medium" }}>
+    <Description description={description} />
+    <Image
+      src={`https:${url}`}
+      layout="responsive"
+      width={width}
+      height={height}
+      alt={title}
+    />
+  </Box>
+)
+
+const EmbeddedVideo = ({ url, title, description }) => (
+  <Box margin={{ bottom: "medium" }}>
+    <Description description={description} />
+    <Video controls name={title} playsinline src={`https:${url}`} />
+  </Box>
 )
 
 const options = {
@@ -59,7 +71,7 @@ const options = {
     [BLOCKS.UL_LIST]: (_, children) => <ULList>{children}</ULList>,
     [BLOCKS.LIST_ITEM]: (_, children) => <ListItem>{children}</ListItem>,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
-      const { title, file } = get(node, "data.target.fields")
+      const { title, file, description } = get(node, "data.target.fields")
       const { url, contentType, details } = file
 
       if (contentType.startsWith("image")) {
@@ -67,16 +79,19 @@ const options = {
 
         return (
           <EmbeddedImage
-            url={url}
-            width={width}
+            description={description}
             height={height}
             title={title}
+            url={url}
+            width={width}
           />
         )
       }
 
       if (contentType.startsWith("video")) {
-        return <EmbeddedVideo url={url} title={title} />
+        return (
+          <EmbeddedVideo url={url} title={title} description={description} />
+        )
       }
 
       return null
