@@ -9,7 +9,7 @@ import InfoBox from "components/info-box"
 const Project = ({ setHeaderRef, project = {} }) => {
   const {
     name,
-    thumbnail: { src, width, height } = {},
+    devices: { src, width, height } = {},
     labels,
     description,
     demoLink,
@@ -79,7 +79,7 @@ Project.propTypes = {
   project: PropTypes.shape({
     name: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
-    thumbnail: PropTypes.shape({
+    devices: PropTypes.shape({
       src: PropTypes.string.isRequired,
       width: PropTypes.number.isRequired,
       height: PropTypes.number.isRequired,

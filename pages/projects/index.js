@@ -88,7 +88,7 @@ const Projects = ({ projects = [] }) => {
         }}
         ref={ref}
       >
-        {projects.map(({ name, slug, thumbnail }, index) => (
+        {projects.map(({ name, slug, devices }, index) => (
           <motion.div
             key={slug}
             initial={inView ? "out" : false}
@@ -96,7 +96,7 @@ const Projects = ({ projects = [] }) => {
             variants={cardAnimation}
             custom={{ index }}
           >
-            <Project name={name} slug={slug} thumbnail={thumbnail} />
+            <Project name={name} slug={slug} thumbnail={devices} />
           </motion.div>
         ))}
       </Grid>
