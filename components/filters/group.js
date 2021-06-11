@@ -105,12 +105,7 @@ const Group = ({ groupName, ids, selectedTagId, onSelect, onDeselect }) => {
 
 Group.propTypes = {
   groupName: PropTypes.string.isRequired,
-  values: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-    }).isRequired
-  ).isRequired,
+  ids: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   selectedTagId: PropTypes.string.isRequired,
   onSelect: PropTypes.func.isRequired,
   onDeselect: PropTypes.func.isRequired,

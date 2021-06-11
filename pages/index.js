@@ -1,9 +1,10 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Main, Box, Paragraph, Text } from "grommet"
+import { Main, Box, Paragraph, Text, Button, Heading } from "grommet"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import Image from "next/image"
+import Link from "next/link"
 import Name from "components/name"
 import Map from "components/map"
 import Applause from "components/appaluse"
@@ -39,53 +40,55 @@ const Avatar = styled(Image)`
 
 const Index = ({ setContentRef }) => (
   <Main ref={setContentRef} fill={false} gap="large">
-    <Left>
-      <div>
-        <Box direction="row" gap="small">
-          <Hand
-            animate={{ rotate: [0, 30, -10] }}
-            transition={{ loop: Infinity, repeatDelay: 0.5 }}
-          >
-            <Text size="xxlarge">
-              <span role="img" aria-label="Waving Hand">
-                👋
-              </span>
-            </Text>
-          </Hand>
-          <Text size="xxlarge"> Hi there,</Text>
+    <Box>
+      <Left>
+        <Box>
+          <Box direction="row" gap="small">
+            <Hand
+              animate={{ rotate: [0, 30, -10] }}
+              transition={{ loop: Infinity, repeatDelay: 0.5 }}
+            >
+              <Heading level={2}>
+                <span role="img" aria-label="Waving Hand">
+                  👋
+                </span>
+              </Heading>
+            </Hand>
+            <Heading level={2}> Hi there,</Heading>
+          </Box>
+          <Box>
+            <Paragraph fill>
+              I enjoy designing and implementing full-stack features with
+              complex functionalities at Pingboard. I&apos;ve helped migrate
+              legacy front-end code to modern technologies. I&apos;m passionate
+              about improving user experience and understand technologies on a
+              deeper level.
+            </Paragraph>
+            <Paragraph fill>
+              I graduated with an Advertising major with Element of Computing
+              Certificate and a Business Minor at the University of Texas at
+              Austin. I earned the Element of Computing Certificate by taking 30
+              hours of Computer Science classes. I mastered software engineering
+              principles and worked with peers to design and built full-stack
+              web apps, iOS apps, games, and computer graphics.
+            </Paragraph>
+          </Box>
         </Box>
-        <Box pad={{ vertical: "medium" }}>
-          <Paragraph fill>
-            I enjoy designing and implementing full-stack features with complex
-            functionalities at Pingboard. I&apos;ve helped migrate legacy
-            front-end code to modern technologies. I&apos;m passionate about
-            improving user experience and understand technologies on a deeper
-            level.
-          </Paragraph>
-          <Paragraph fill>
-            I graduated with an Advertising major with Element of Computing
-            Certificate and a Business Minor at the University of Texas at
-            Austin. I earned the Element of Computing Certificate by taking 30
-            hours of Computer Science classes. I mastered software engineering
-            principles and worked with peers to design and built full-stack web
-            apps, iOS apps, games, and computer graphics.
-          </Paragraph>
+      </Left>
+      <Right>
+        <Box direction="row" align="center" gap="large">
+          <Name />
+          <Box width="small" round="full">
+            <Avatar
+              src="/img/shared/profile.jpg"
+              alt="profile picture of Xindi"
+              width={942}
+              height={942}
+            />
+          </Box>
         </Box>
-      </div>
-    </Left>
-    <Right>
-      <Box direction="row" align="center" gap="large">
-        <Name />
-        <Box width="small" round="full">
-          <Avatar
-            src="/img/shared/profile.jpg"
-            alt="profile picture of Xindi"
-            width={942}
-            height={942}
-          />
-        </Box>
-      </Box>
-    </Right>
+      </Right>
+    </Box>
     <Box background="bg-paper">
       <Left>
         <Map />
@@ -102,10 +105,24 @@ const Index = ({ setContentRef }) => (
         </div>
       </Right>
     </Box>
-
-    <Left>
-      <Applause />
-    </Left>
+    <Box>
+      <Left>
+        <Box>
+          <Heading level={2}>Applauses from coworkers</Heading>
+          <Applause />
+        </Box>
+      </Left>
+    </Box>
+    <Box background="bg-paper">
+      <Box direction="row" gap="medium" margin="large" justify="center">
+        <Link href="/projects" passHref>
+          <Button as="a" primary label="View Selected Projects" size="large" />
+        </Link>
+        <Link href="/experiences" passHref>
+          <Button as="a" primary label="View My Life Story" size="large" />
+        </Link>
+      </Box>
+    </Box>
   </Main>
 )
 

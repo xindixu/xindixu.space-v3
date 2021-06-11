@@ -1,16 +1,6 @@
 import React, { useCallback, useEffect, useState } from "react"
 import styled from "styled-components"
-import {
-  Box,
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Heading,
-  Stack,
-  Text,
-} from "grommet"
+import { Box, Button, Card, CardBody, CardFooter, Stack, Text } from "grommet"
 import { Previous, Next } from "grommet-icons"
 import { AnimatePresence, motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
@@ -51,11 +41,6 @@ const Base = ({
   sender: { name, jobTitle },
 }) => (
   <Card height="medium" width="medium" gap="medium" pad="medium">
-    <CardHeader>
-      <Heading level={4} margin="none">
-        Applauses from my coworkers
-      </Heading>
-    </CardHeader>
     <CardBody>&ldquo;{message}&rdquo;</CardBody>
     <CardFooter direction="column" align="start">
       <Box direction="row" justify="start">
