@@ -34,6 +34,17 @@ const Left = styled(Half).attrs({
 const Right = styled(Half).attrs({
   direction: "row-reverse",
 })``
+
+const BaseReadableRow = styled(Box).attrs({
+  alignContent: "center",
+})`
+  & > div {
+    max-width: 1920px;
+    align-self: center;
+    width: 100%;
+  }
+`
+
 const Hand = styled(motion.div)`
   width: min-content;
 `
@@ -57,9 +68,15 @@ const RightQuote = styled(Quote)`
   margin-right: -${spacerBase};
 `
 
+const ReadableRow = ({ children, ...props }) => (
+  <BaseReadableRow {...props}>
+    <div>{children}</div>
+  </BaseReadableRow>
+)
+
 const Index = ({ setContentRef }) => (
   <Main ref={setContentRef} fill={false} gap="large">
-    <Box>
+    <ReadableRow>
       <Left>
         <Box>
           <Box direction="row" gap="small">
@@ -105,8 +122,8 @@ const Index = ({ setContentRef }) => (
           </Box>
         </Box>
       </Left>
-    </Box>
-    <Box background="bg-paper">
+    </ReadableRow>
+    <ReadableRow background="bg-paper">
       <Right>
         <Box direction="column" gap="large">
           <Map />
@@ -119,26 +136,28 @@ const Index = ({ setContentRef }) => (
           </Paragraph>
         </Box>
       </Right>
-    </Box>
-    <Box>
+    </ReadableRow>
+    <ReadableRow>
       <Left>
         <Box fill="horizontal">
           <Heading level={2}>Applauses from coworkers</Heading>
           <LeftQuote>&ldquo;</LeftQuote>
-          <Box fill="horizontal" justify="center">
+          <Box justify="center">
             <Applause />
           </Box>
           <RightQuote>&rdquo;</RightQuote>
         </Box>
       </Left>
+    </ReadableRow>
+    <ReadableRow background="bg-paper">
       <Right>
-        <Box fill>
+        <Box fill="horizontal" direction="column" gap="large">
           <Heading level={2}>Commits on GitHub</Heading>
           <Contribution />
         </Box>
       </Right>
-    </Box>
-    <Box background="bg-paper">
+    </ReadableRow>
+    <ReadableRow>
       <Box direction="row" gap="medium" margin="large" justify="center">
         <Link href="/projects" passHref>
           <Button as="a" primary label="View Selected Projects" size="large" />
@@ -147,7 +166,7 @@ const Index = ({ setContentRef }) => (
           <Button as="a" primary label="View My Life Story" size="large" />
         </Link>
       </Box>
-    </Box>
+    </ReadableRow>
   </Main>
 )
 
