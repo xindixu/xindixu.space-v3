@@ -1,4 +1,4 @@
-import React, { useContext } from "react"
+import React, { useContext, useState, useEffect } from "react"
 import {
   Box,
   Card,
@@ -14,6 +14,7 @@ import PropTypes from "prop-types"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
+import Filters from "components/filters"
 import { getAllProjects } from "lib/content/project"
 import styleSettings from "lib/style-settings/index"
 
@@ -74,12 +75,19 @@ const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
   </motion.div>
 )
 
-const Projects = ({ projects = [] }) => {
+const Projects = ({ initialProjects = [] }) => {
   const size = useContext(ResponsiveContext)
   const [ref, inView] = useInView({ delay: 1000 })
+  const [projects, setProjects] = useState(initialProjects)
+
+  const updateProjects = async (tags) => {
+    const { entries } = await getAllProjects({ tags: Object.values(tags) })
+    setProjects(entries)
+  }
 
   return (
     <Main pad="xlarge" fill={false}>
+      <Filters onChange={updateProjects} />
       <Grid
         gap="medium"
         columns={{
@@ -111,14 +119,15 @@ export async function getStaticProps() {
   return {
     props: JSON.parse(
       JSON.stringify({
-        projects: [...entries],
+        // initialProjects: [],
+        initialProjects: [...entries],
       })
     ),
   }
 }
 
 Projects.propTypes = {
-  projects: PropTypes.arrayOf(
+  initialProjects: PropTypes.arrayOf(
     PropTypes.shape({
       name: PropTypes.string.isRequired,
       slug: PropTypes.string.isRequired,

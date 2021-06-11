@@ -14,7 +14,7 @@ const Filters = ({ onChange }) => {
   )
 
   useEffect(() => {
-    onChange(selectedTags)
+    onChange(Object.values(selectedTags).filter((id) => !id.endsWith("all")))
   }, [selectedTags])
 
   return Object.entries(tagGroups).map(([key, values]) => {
@@ -43,6 +43,8 @@ const Filters = ({ onChange }) => {
   })
 }
 
-Filters.propTypes = {}
+Filters.propTypes = {
+  onChange: PropTypes.func.isRequired,
+}
 
 export default Filters

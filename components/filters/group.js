@@ -41,6 +41,17 @@ const Group = ({ groupName, values, selectedTag, onSelect, onDeselect }) => {
   )
 }
 
-Group.propTypes = {}
+Group.propTypes = {
+  groupName: PropTypes.string.isRequired,
+  values: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+    }).isRequired
+  ).isRequired,
+  selectedTag: PropTypes.string.isRequired,
+  onSelect: PropTypes.func.isRequired,
+  onDeselect: PropTypes.func.isRequired,
+}
 
 export default Group
