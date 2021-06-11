@@ -7,6 +7,7 @@ import Image from "next/image"
 import Link from "next/link"
 import Name from "components/name"
 import Map from "components/map"
+import Contribution from "components/contribution"
 import Applause from "components/appaluse"
 import { media } from "lib/style-settings/media-query"
 
@@ -112,6 +113,12 @@ const Index = ({ setContentRef }) => (
           <Applause />
         </Box>
       </Left>
+      <Right>
+        <Box fill>
+          <Heading level={2}>Commits on GitHub</Heading>
+          <Contribution />
+        </Box>
+      </Right>
     </Box>
     <Box background="bg-paper">
       <Box direction="row" gap="medium" margin="large" justify="center">
