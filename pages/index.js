@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import { Main, Box, Paragraph, Text, Button, Heading } from "grommet"
+import { Main, Box, Paragraph, Button, Heading } from "grommet"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import Image from "next/image"
@@ -12,7 +12,7 @@ import Applause from "components/appaluse"
 import { media } from "lib/style-settings/media-query"
 import styleSettings from "lib/style-settings"
 
-const { spacerLg, spacerBase } = styleSettings
+const { beige, spacerXl, spacerLg, spacerBase } = styleSettings
 const Half = styled(Box).attrs({
   margin: { horizontal: "xlarge" },
   pad: { vertical: "large" },
@@ -40,16 +40,21 @@ const Hand = styled(motion.div)`
 const Avatar = styled(Image)`
   border-radius: 100%;
 `
-const LeftQuote = styled(Text)`
-  margin-left: -${spacerLg};
-  line-height: ${spacerBase};
+
+const Quote = styled.div`
+  color: ${beige};
+  font-size: ${spacerXl};
 `
 
-const RightQuote = styled(Text)`
+const LeftQuote = styled(Quote)`
+  margin-top: ${spacerBase};
+  margin-left: -${spacerBase};
+`
+
+const RightQuote = styled(Quote)`
   text-align: right;
-  margin-right: -${spacerLg};
   margin-top: ${spacerLg};
-  line-height: ${spacerBase};
+  margin-right: -${spacerBase};
 `
 
 const Index = ({ setContentRef }) => (
@@ -117,17 +122,13 @@ const Index = ({ setContentRef }) => (
     </Box>
     <Box>
       <Left>
-        <Box>
+        <Box fill="horizontal">
           <Heading level={2}>Applauses from coworkers</Heading>
-          <LeftQuote size="6xl" color="beige">
-            &ldquo;
-          </LeftQuote>
-          <Box>
+          <LeftQuote>&ldquo;</LeftQuote>
+          <Box fill="horizontal" justify="center">
             <Applause />
           </Box>
-          <RightQuote size="6xl" color="beige">
-            &rdquo;
-          </RightQuote>
+          <RightQuote>&rdquo;</RightQuote>
         </Box>
       </Left>
       <Right>

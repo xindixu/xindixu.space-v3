@@ -122,9 +122,9 @@ const Appause = () => {
   }, [inView, paginate, paused])
 
   return (
-    <div ref={ref}>
+    <Box ref={ref}>
       <AnimatePresence initial={false} custom={direction}>
-        <Stack anchor="top-right">
+        <Stack anchor="top-right" alignSelf="center">
           <motion.div
             key={page}
             custom={direction}
@@ -136,6 +136,7 @@ const Appause = () => {
               x: { type: "spring", stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
+            style={{ width: "min-content" }}
           >
             <Base
               createdAt={createdAt}
@@ -152,7 +153,7 @@ const Appause = () => {
           </motion.div>
         </Stack>
       </AnimatePresence>
-    </div>
+    </Box>
   )
 }
 
