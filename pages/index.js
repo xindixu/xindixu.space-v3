@@ -10,7 +10,9 @@ import Map from "components/map"
 import Contribution from "components/contribution"
 import Applause from "components/appaluse"
 import { media } from "lib/style-settings/media-query"
+import styleSettings from "lib/style-settings"
 
+const { spacerLg, spacerBase } = styleSettings
 const Half = styled(Box).attrs({
   margin: { horizontal: "xlarge" },
   pad: { vertical: "large" },
@@ -37,6 +39,17 @@ const Hand = styled(motion.div)`
 `
 const Avatar = styled(Image)`
   border-radius: 100%;
+`
+const LeftQuote = styled(Text)`
+  margin-left: -${spacerLg};
+  line-height: ${spacerBase};
+`
+
+const RightQuote = styled(Text)`
+  text-align: right;
+  margin-right: -${spacerLg};
+  margin-top: ${spacerLg};
+  line-height: ${spacerBase};
 `
 
 const Index = ({ setContentRef }) => (
@@ -74,28 +87,24 @@ const Index = ({ setContentRef }) => (
               web apps, iOS apps, games, and computer graphics.
             </Paragraph>
           </Box>
-        </Box>
-      </Left>
-      <Right>
-        <Box direction="row" align="center" gap="large">
-          <Name />
-          <Box width="small" round="full">
-            <Avatar
-              src="/img/shared/profile.jpg"
-              alt="profile picture of Xindi"
-              width={942}
-              height={942}
-            />
+          <Box direction="row" align="center" justify="end" gap="large">
+            <Name />
+            <Box width="small" round="full">
+              <Avatar
+                src="/img/shared/profile.jpg"
+                alt="profile picture of Xindi"
+                width={942}
+                height={942}
+              />
+            </Box>
           </Box>
         </Box>
-      </Right>
+      </Left>
     </Box>
     <Box background="bg-paper">
-      <Left>
-        <Map />
-      </Left>
       <Right>
-        <div>
+        <Box direction="column" gap="large">
+          <Map />
           <Paragraph fill>
             I spent the first 18 years of my life in Fuzhou, China. I missed all
             my close friends and tasty foodies there. I moved to Austin, TX for
@@ -103,14 +112,22 @@ const Index = ({ setContentRef }) => (
             worked at Pingboard as a Software Engineer for a year. Soon,
             I&apos;ll join Columbia University as a MSCS student.
           </Paragraph>
-        </div>
+        </Box>
       </Right>
     </Box>
     <Box>
       <Left>
         <Box>
           <Heading level={2}>Applauses from coworkers</Heading>
-          <Applause />
+          <LeftQuote size="6xl" color="beige">
+            &ldquo;
+          </LeftQuote>
+          <Box>
+            <Applause />
+          </Box>
+          <RightQuote size="6xl" color="beige">
+            &rdquo;
+          </RightQuote>
         </Box>
       </Left>
       <Right>
