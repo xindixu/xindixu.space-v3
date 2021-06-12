@@ -3,13 +3,12 @@ import Link from "next/link"
 import PropTypes from "prop-types"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { useMedia } from "react-use"
 import { Box, Button, Layer, Nav, Sidebar as GSidebar } from "grommet"
 import { Close } from "grommet-icons"
 import { motion, AnimatePresence } from "framer-motion"
-import { mediaQuery } from "lib/style-settings/media-query"
 import styleSettings from "lib/style-settings"
 import { links } from "contents/routes"
+import useMedia from "hooks/use-media"
 
 const { pink, black } = styleSettings
 
@@ -129,7 +128,7 @@ const MainNavigation = ({ isBaseUp, onClose, show }) => (
 )
 
 const Sidebar = ({ onClose, show }) => {
-  const isBaseUp = useMedia(mediaQuery.screenBaseAndUp)
+  const isBaseUp = useMedia("base")
   const { pathname } = useRouter()
   return (
     <Box>

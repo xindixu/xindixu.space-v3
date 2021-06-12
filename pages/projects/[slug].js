@@ -2,14 +2,14 @@ import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 import styled from "styled-components"
 import { Main, Box } from "grommet"
-import { useWindowScroll, useMedia } from "react-use"
+import { useWindowScroll } from "react-use"
 import { getProject, getAllProjectSlugs } from "lib/content/project"
 import Header from "components/header"
 import RichText from "components/rich-text"
 import InfoBox from "components/info-box"
 import TableOfContent from "components/table-of-content"
 import styleSettings from "lib/style-settings"
-import { mediaQuery } from "lib/style-settings/media-query"
+import useMedia from "hooks/use-media"
 
 const { spacerXl, spacerXxl } = styleSettings
 
@@ -56,7 +56,8 @@ const Project = ({ setHeaderRef, project = {} }) => {
   const contentRef = useRef()
   const [showToolbox, setShowToolbox] = useState(false)
   const { y } = useWindowScroll()
-  const isXlUp = useMedia(mediaQuery.screenXlAndUp)
+
+  const isXlUp = useMedia("xl")
 
   useEffect(() => {
     if (contentRef.current) {

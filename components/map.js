@@ -2,12 +2,12 @@ import React, { useRef } from "react"
 import { Box, Text } from "grommet"
 import { motion } from "framer-motion"
 import styled from "styled-components"
-import { useMedia } from "react-use"
 import { useInView } from "react-intersection-observer"
 import BaseMap from "assets/svg/map.svg"
 import styleSettings from "lib/style-settings"
 import AnimatedSvg from "components/animated-svg"
-import { mediaQuery, media } from "lib/style-settings/media-query"
+import { media } from "lib/style-settings/media-query"
+import useMedia from "hooks/use-media"
 
 const { spacerSm, spacerBase, pink, fontSizeLg, fontSizeSm, fontSizeBase } =
   styleSettings
@@ -38,10 +38,10 @@ const Date = styled(Text)`
   display: block;
 
   font-size: ${fontSizeSm};
-  ${media.screenSmUp`
+  ${media.smUp`
     font-size: ${fontSizeBase};
   `}
-  ${media.screenLgUp`
+  ${media.lgUp`
     font-size: ${fontSizeLg};
   `}
 `
@@ -86,7 +86,7 @@ const Map = () => {
   const [ref, inView] = useInView({ delay: 1000 })
   const fuzhouToAustin = useRef(null)
   const austinToNewYorkCity = useRef(null)
-  const isSmUp = useMedia(mediaQuery.screenSmAndUp)
+  const isSmUp = useMedia("sm")
 
   return (
     <Box fill ref={ref} width={{ max: "large" }}>

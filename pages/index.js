@@ -21,7 +21,7 @@ const Half = styled(Box).attrs({
     max-width: 100%;
   }
 
-  ${media.screenXlUp`
+  ${media.xlUp`
     & > div {
       max-width: 50%;
     }
