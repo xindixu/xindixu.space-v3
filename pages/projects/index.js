@@ -94,9 +94,9 @@ const Projects = ({ initialProjects = [] }) => {
   return (
     <Main pad="xlarge" fill={false} justify="center" direction="row">
       <ReadableContent>
-        <div>
+        <Box>
           <Filters onChange={updateProjects} />
-        </div>
+        </Box>
         <Grid
           gap="medium"
           margin={{ top: "medium" }}

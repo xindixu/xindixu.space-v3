@@ -80,7 +80,7 @@ const labels = [
 ]
 
 const smallScreenPositions = [20, 20, 5]
-const bigScreenPositions = [20, 20, 5]
+const bigScreenPositions = [20, 30, 5]
 
 const Map = () => {
   const [ref, inView] = useInView({ delay: 1000 })
@@ -89,7 +89,7 @@ const Map = () => {
   const isSmUp = useMedia(mediaQuery.screenSmAndUp)
 
   return (
-    <Box fill ref={ref}>
+    <Box fill ref={ref} width={{ max: "large" }}>
       <AnimatedSvg viewBox="0 0 940 460" inView={inView}>
         {(props) => (
           <>

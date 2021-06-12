@@ -1,7 +1,7 @@
 import React, { useContext } from "react"
 import { Button, Box, ResponsiveContext } from "grommet"
 import styled from "styled-components"
-import { Github, Monitor } from "grommet-icons"
+import { Github, Monitor, Previous } from "grommet-icons"
 import { motion } from "framer-motion"
 import styleSettings from "lib/style-settings/index"
 
@@ -58,6 +58,23 @@ const InfoBox = ({ demoLink, repoLink }) => {
           />
         </motion.div>
       ))}
+
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={mainIconAnimation}
+        custom={2}
+      >
+        <IconButton
+          alignSelf="end"
+          a11yTitle="go back"
+          fill
+          hoverIndicator
+          href="/projects"
+          icon={<Previous />}
+          primary
+        />
+      </motion.div>
     </Box>
   )
 }

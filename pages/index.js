@@ -128,7 +128,7 @@ const Index = ({ setContentRef }) => (
     </ReadableRow>
     <ReadableRow background="bg-paper">
       <Right>
-        <Box direction="column" gap="large">
+        <Box direction="column" gap="large" align="center">
           <Map />
           <Paragraph fill>
             I spent the first 18 years of my life in Fuzhou, China. I missed all
