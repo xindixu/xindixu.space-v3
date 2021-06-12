@@ -27,20 +27,20 @@ const circleMenuAnimation = {
   visible: {
     clipPath: "circle(1500px at 110% -10%)",
     transition: {
-      when: "beforeChildren",
-      type: "spring",
-      stiffness: 40,
+      duration: 0.3,
       restDelta: 2,
-      duration: 0.5,
+      stiffness: 40,
+      type: "spring",
+      when: "beforeChildren",
     },
   },
   hidden: {
     clipPath: "circle(50px at 110% -10%)",
     transition: {
-      delay: 0.5,
-      type: "spring",
-      stiffness: 400,
       damping: 40,
+      delay: 0.2,
+      stiffness: 400,
+      type: "spring",
     },
   },
 }
@@ -49,14 +49,15 @@ const slideMenuAnimation = {
   visible: {
     x: 0,
     transition: {
+      duration: 0.3,
       when: "beforeChildren",
-      duration: 0.5,
     },
   },
   hidden: {
-    x: 400,
+    x: 350,
     transition: {
       delay: 0.5,
+      duration: 0.2,
     },
   },
 }
@@ -66,13 +67,12 @@ const linkAnimation = {
     opacity: 1,
     y: 0,
     transition: {
-      delay: 0.5 + 0.1 * index,
+      delay: 0.2 + 0.1 * index,
     },
   }),
   hidden: ({ index, count }) => ({
     opacity: 0,
     y: -10,
-
     transition: {
       delay: 0.1 * (count - index),
     },
@@ -85,14 +85,14 @@ const SidebarButton = ({ icon, label, link, onClick, active }) => (
   <Link href={link} passHref>
     <Button
       as="a"
-      hoverIndicator
+      active={active}
+      color="white"
       fill="horizontal"
-      size="large"
+      hoverIndicator
       icon={icon}
       label={label}
       onClick={onClick}
-      active={active}
-      color="white"
+      size="large"
       style={{ background: "white" }}
     />
   </Link>
@@ -136,13 +136,13 @@ const Sidebar = ({ onClose, show }) => {
         {show && (
           <Layer
             animation="none"
-            position="right"
+            elevation="medium"
             full="vertical"
-            modal
+            modal={false}
             onClickOutside={onClose}
             onEsc={onClose}
-            elevation="medium"
-            style={{ background: "none" }}
+            position="right"
+            style={{ background: "transparent" }}
           >
             <motion.div
               animate={show ? "visible" : "hidden"}
@@ -161,8 +161,8 @@ const Sidebar = ({ onClose, show }) => {
                     onClick={onClose}
                   />
                 }
-                footer={<SidebarFooter />}
                 align="center"
+                footer={<SidebarFooter />}
                 full="vertical"
               >
                 <MainNavigation
