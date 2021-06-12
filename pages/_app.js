@@ -43,29 +43,27 @@ const App = ({ Component, pageProps, router }) => {
   const { coordinates } = useClick({ node: d })
 
   return (
-    <>
-      <NoOverflow theme={customTheme} full>
-        <GlobalStyle />
-        <CommonLayout>
-          {({ setContentRef, setHeaderRef, header }) => (
-            <PageAnimate
-              key={router.route}
-              initial="pageInitial"
-              animate="pageAnimate"
-              variants={pageAnimation}
-              custom={coordinates}
-            >
-              {header}
-              <Component
-                {...pageProps}
-                setHeaderRef={setHeaderRef}
-                setContentRef={setContentRef}
-              />
-            </PageAnimate>
-          )}
-        </CommonLayout>
-      </NoOverflow>
-    </>
+    <NoOverflow theme={customTheme} full>
+      <GlobalStyle />
+      <CommonLayout>
+        {({ setContentRef, setHeaderRef, header }) => (
+          <PageAnimate
+            key={router.route}
+            initial="pageInitial"
+            animate="pageAnimate"
+            variants={pageAnimation}
+            custom={coordinates}
+          >
+            {header}
+            <Component
+              {...pageProps}
+              setHeaderRef={setHeaderRef}
+              setContentRef={setContentRef}
+            />
+          </PageAnimate>
+        )}
+      </CommonLayout>
+    </NoOverflow>
   )
 }
 
