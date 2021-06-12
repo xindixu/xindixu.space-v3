@@ -43,10 +43,10 @@ const InfoBox = ({ demoLink, repoLink, show }) => {
             {links.map(({ name, link, icon, disabled }, index) => (
               <motion.div
                 key={name}
-                initial="hidden"
                 animate="visible"
-                variants={mainIconAnimation}
                 custom={index}
+                initial="hidden"
+                variants={mainIconAnimation}
               >
                 <IconButton
                   a11yTitle={name}

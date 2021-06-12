@@ -13,6 +13,7 @@ import { mediaQuery } from "lib/style-settings/media-query"
 
 const { spacerXl, spacerXxl } = styleSettings
 
+const THRESHOLD = 150
 const Wrapper = styled.div`
   position: relative;
   margin-top: ${spacerXl};
@@ -29,9 +30,8 @@ const ReadableMain = styled(Main).attrs({
 `
 const Spacer = styled(Box)`
   width: 920px;
-  height: 300px;
-  // background: beige;
   pointer-events: none;
+  // background: beige;
 `
 
 const FloatingBox = styled(Box)`
@@ -56,16 +56,16 @@ const Project = ({ setHeaderRef, project = {} }) => {
   const contentRef = useRef()
   const [showToolbox, setShowToolbox] = useState(false)
   const { y } = useWindowScroll()
-  const isMdUp = useMedia(mediaQuery.screenMdAndUp)
+  const isXlUp = useMedia(mediaQuery.screenXlAndUp)
 
   useEffect(() => {
     if (contentRef.current) {
       const { top } = contentRef.current.getBoundingClientRect()
 
-      if (showToolbox && top > 0) {
+      if (showToolbox && top > THRESHOLD) {
         setShowToolbox(false)
       }
-      if (!showToolbox && top < 0) {
+      if (!showToolbox && top < THRESHOLD) {
         setShowToolbox(true)
       }
     }
@@ -92,7 +92,7 @@ const Project = ({ setHeaderRef, project = {} }) => {
             <RichText mainContent={description} />
           </div>
         </ReadableMain>
-        {isMdUp && (
+        {isXlUp && (
           <FloatingBox
             direction="row"
             fill="horizontal"
@@ -105,7 +105,7 @@ const Project = ({ setHeaderRef, project = {} }) => {
               show={showToolbox}
             />
             <Spacer />
-            <TableOfContent mainContent={description} />
+            <TableOfContent mainContent={description} show={showToolbox} />
           </FloatingBox>
         )}
       </Wrapper>

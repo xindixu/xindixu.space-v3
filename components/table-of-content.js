@@ -3,6 +3,7 @@ import styled from "styled-components"
 import PropTypes from "prop-types"
 import { kebabCase } from "lodash"
 import { Card, Anchor } from "grommet"
+import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings"
 
 const { spacerBase } = styleSettings
@@ -18,6 +19,19 @@ const ListItem = styled.li`
     margin-left: calc(${level - 1} * ${spacerBase});
     `}
 `
+
+const variants = {
+  hidden: {
+    y: -50,
+    opacity: 0,
+  },
+  enter: {
+    y: 0,
+    opacity: 1,
+    transition: { delay: 0.5, duration: 0.5 },
+  },
+}
+
 const parseContent = (mainContent) =>
   mainContent
     .filter(({ nodeType }) => nodeType.startsWith("heading"))
@@ -26,37 +40,53 @@ const parseContent = (mainContent) =>
       level: parseInt(nodeType.split("-")[1] || 0, 10),
     }))
 
-const TableOfContent = ({ mainContent }) => {
+const TableOfContent = ({ mainContent, show }) => {
   const headings = parseContent(mainContent.content)
 
   return (
-    <Card width="small" height="min-content" pad={{ horizontal: "small" }}>
-      <nav aria-label="Table of contents">
-        <List>
-          {headings.map(({ title, level }) => {
-            const id = `#${kebabCase(title)}`
-            return (
-              <ListItem key={title} level={level}>
-                <Anchor
-                  href={id}
-                  label={title}
-                  size="small"
-                  onClick={(e) => {
-                    e.preventDefault()
+    <AnimatePresence>
+      {show && (
+        <motion.div
+          animate="enter"
+          initial="hidden"
+          variants={variants}
+          style={{ height: "min-content" }}
+        >
+          <Card
+            width="small"
+            height="min-content"
+            pad={{ horizontal: "small" }}
+            background="white"
+          >
+            <nav aria-label="Table of contents">
+              <List>
+                {headings.map(({ title, level }) => {
+                  const id = `#${kebabCase(title)}`
+                  return (
+                    <ListItem key={title} level={level}>
+                      <Anchor
+                        href={id}
+                        label={title}
+                        size="small"
+                        onClick={(e) => {
+                          e.preventDefault()
 
-                    if (document !== undefined) {
-                      document.querySelector(id).scrollIntoView({
-                        behavior: "smooth",
-                      })
-                    }
-                  }}
-                />
-              </ListItem>
-            )
-          })}
-        </List>
-      </nav>
-    </Card>
+                          if (document !== undefined) {
+                            document.querySelector(id).scrollIntoView({
+                              behavior: "smooth",
+                            })
+                          }
+                        }}
+                      />
+                    </ListItem>
+                  )
+                })}
+              </List>
+            </nav>
+          </Card>
+        </motion.div>
+      )}
+    </AnimatePresence>
   )
 }
 
