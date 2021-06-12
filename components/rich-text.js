@@ -1,9 +1,9 @@
 import React from "react"
 import styled from "styled-components"
-import { get } from "lodash"
+import { kebabCase, get } from "lodash"
 import { BLOCKS, MARKS } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
-import { Box, Text, Paragraph, Heading } from "grommet"
+import { Box, Text, Paragraph, Heading as BaseHeading } from "grommet"
 import Image from "next/image"
 import styleSettings from "lib/style-settings"
 
@@ -25,6 +25,11 @@ const Video = styled.video`
   visibility: visible;
   width: 100%;
   height: auto;
+`
+
+const Heading = styled(BaseHeading)`
+  padding-top: 72px;
+  margin-top: -72px;
 `
 
 const Description = ({ description }) => (
@@ -60,13 +65,19 @@ const options = {
   renderNode: {
     [BLOCKS.PARAGRAPH]: (_, children) => <Paragraph fill>{children}</Paragraph>,
     [BLOCKS.HEADING_1]: (_, children) => (
-      <Heading level={2}>{children}</Heading>
+      <Heading level={2} id={kebabCase(children)}>
+        {children}
+      </Heading>
     ),
     [BLOCKS.HEADING_2]: (_, children) => (
-      <Heading level={3}>{children}</Heading>
+      <Heading level={3} id={kebabCase(children)}>
+        {children}
+      </Heading>
     ),
     [BLOCKS.HEADING_3]: (_, children) => (
-      <Heading level={4}>{children}</Heading>
+      <Heading level={4} id={kebabCase(children)}>
+        {children}
+      </Heading>
     ),
     [BLOCKS.UL_LIST]: (_, children) => <ULList>{children}</ULList>,
     [BLOCKS.LIST_ITEM]: (_, children) => <ListItem>{children}</ListItem>,
@@ -99,6 +110,7 @@ const options = {
   },
 }
 
-const RichText = ({ document }) => documentToReactComponents(document, options)
+const RichText = ({ mainContent }) =>
+  documentToReactComponents(mainContent, options)
 
 export default RichText

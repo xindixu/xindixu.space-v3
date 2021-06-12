@@ -1,10 +1,47 @@
-import React, { useContext } from "react"
+import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
-import { Main, Box, ResponsiveContext } from "grommet"
+import styled from "styled-components"
+import { Main, Box } from "grommet"
+import { useWindowScroll, useMedia } from "react-use"
 import { getProject, getAllProjectSlugs } from "lib/content/project"
 import Header from "components/header"
 import RichText from "components/rich-text"
 import InfoBox from "components/info-box"
+import TableOfContent from "components/table-of-content"
+import styleSettings from "lib/style-settings"
+import { mediaQuery } from "lib/style-settings/media-query"
+
+const { spacerXl, spacerXxl } = styleSettings
+
+const Wrapper = styled.div`
+  position: relative;
+  margin-top: ${spacerXl};
+`
+
+const ReadableMain = styled(Main).attrs({
+  align: "center",
+  pad: { horizontal: "xlarge" },
+})`
+  & > div {
+    width: 100%;
+    max-width: 920px;
+  }
+`
+const Spacer = styled(Box)`
+  width: 920px;
+  height: 300px;
+  // background: beige;
+  pointer-events: none;
+`
+
+const FloatingBox = styled(Box)`
+  z-index: 1;
+  position: fixed;
+  left: 0;
+  top: ${spacerXxl};
+  justify-content: center;
+  align-items: top;
+`
 
 const Project = ({ setHeaderRef, project = {} }) => {
   const {
@@ -16,7 +53,23 @@ const Project = ({ setHeaderRef, project = {} }) => {
     repoLink,
   } = project
 
-  const size = useContext(ResponsiveContext)
+  const contentRef = useRef()
+  const [showToolbox, setShowToolbox] = useState(false)
+  const { y } = useWindowScroll()
+  const isMdUp = useMedia(mediaQuery.screenMdAndUp)
+
+  useEffect(() => {
+    if (contentRef.current) {
+      const { top } = contentRef.current.getBoundingClientRect()
+
+      if (showToolbox && top > 0) {
+        setShowToolbox(false)
+      }
+      if (!showToolbox && top < 0) {
+        setShowToolbox(true)
+      }
+    }
+  }, [showToolbox, y])
 
   return (
     <>
@@ -33,24 +86,29 @@ const Project = ({ setHeaderRef, project = {} }) => {
         }}
       />
 
-      <Box
-        pad="xlarge"
-        gap="large"
-        direction={size === "large" ? "row" : "column"}
-        justify="center"
-      >
-        <Box
-          responsive={false}
-          direction={size === "large" ? "column" : "row"}
-          gap="small"
-        >
-          <InfoBox demoLink={demoLink} repoLink={repoLink} />
-        </Box>
-
-        <Main width="xlarge" flex={false}>
-          <RichText document={description} />
-        </Main>
-      </Box>
+      <Wrapper>
+        <ReadableMain>
+          <div ref={contentRef}>
+            <RichText mainContent={description} />
+          </div>
+        </ReadableMain>
+        {isMdUp && (
+          <FloatingBox
+            direction="row"
+            fill="horizontal"
+            pad={{ horizontal: "small" }}
+            gap="large"
+          >
+            <InfoBox
+              demoLink={demoLink}
+              repoLink={repoLink}
+              show={showToolbox}
+            />
+            <Spacer />
+            <TableOfContent mainContent={description} />
+          </FloatingBox>
+        )}
+      </Wrapper>
     </>
   )
 }
