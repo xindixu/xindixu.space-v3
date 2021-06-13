@@ -1,8 +1,10 @@
 import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
+import Link from "next/link"
 import styled from "styled-components"
-import { Main, Box } from "grommet"
+import { Main, Box, Button } from "grommet"
 import { useWindowScroll } from "react-use"
+import { Previous } from "grommet-icons"
 import { getProject, getAllProjectSlugs } from "lib/content/project"
 import Header from "components/header"
 import RichText from "components/rich-text"
@@ -21,7 +23,7 @@ const Wrapper = styled.div`
 
 const ReadableMain = styled(Main).attrs({
   align: "center",
-  pad: { horizontal: "xlarge" },
+  pad: { horizontal: "xlarge", bottom: "xlarge" },
 })`
   & > div {
     width: 100%;
@@ -91,6 +93,15 @@ const Project = ({ setHeaderRef, project }) => {
         <ReadableMain>
           <div ref={contentRef}>
             <RichText mainContent={description} />
+            <Link href="/projects" passHref>
+              <Button
+                as="a"
+                margin={{ top: "medium" }}
+                icon={<Previous size="small" />}
+                label="Back"
+                primary
+              />
+            </Link>
           </div>
         </ReadableMain>
         {isXlUp && (

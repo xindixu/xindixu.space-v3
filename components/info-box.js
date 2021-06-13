@@ -60,23 +60,6 @@ const InfoBox = ({ demoLink, repoLink, show }) => {
                 />
               </motion.div>
             ))}
-
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={mainIconAnimation}
-              custom={2}
-            >
-              <IconButton
-                alignSelf="end"
-                a11yTitle="go back"
-                fill
-                hoverIndicator
-                href="/projects"
-                icon={<Previous />}
-                primary
-              />
-            </motion.div>
           </Box>
         )}
       </AnimatePresence>
