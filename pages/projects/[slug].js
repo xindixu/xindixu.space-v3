@@ -43,7 +43,7 @@ const FloatingBox = styled(Box)`
   align-items: top;
 `
 
-const Project = ({ setHeaderRef, project = {} }) => {
+const Project = ({ setHeaderRef, project }) => {
   const {
     name,
     devices: { src, width, height } = {},
@@ -130,7 +130,7 @@ export async function getStaticPaths() {
 
   return {
     paths: paths.map((slug) => `/projects/${slug}`),
-    fallback: true,
+    fallback: false,
   }
 }
 
