@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React from "react"
 import { Box, Text } from "grommet"
 import { motion } from "framer-motion"
 import styled from "styled-components"
@@ -84,13 +84,12 @@ const bigScreenPositions = [20, 30, 5]
 
 const Map = () => {
   const [ref, inView] = useInView({ delay: 1000 })
-  const fuzhouToAustin = useRef(null)
-  const austinToNewYorkCity = useRef(null)
+
   const isSmUp = useMedia("sm")
 
   return (
     <Box fill ref={ref} width={{ max: "large" }}>
-      <AnimatedSvg viewBox="0 0 940 460" inView={inView}>
+      <AnimatedSvg viewBox="0 0 940 460" inView={inView} paths={[]}>
         {(props) => (
           <>
             <BaseMap />
@@ -123,8 +122,8 @@ const Map = () => {
               stroke={pink}
               fill="none"
               d="M360 220 C500 0 650 100 740 210"
-              ref={fuzhouToAustin}
               {...props}
+              custom={{ index: 0 }}
             />
 
             <motion.path
@@ -133,8 +132,8 @@ const Map = () => {
               stroke={pink}
               fill="none"
               d="M740 210 C750 175 780 170 790 170"
-              ref={austinToNewYorkCity}
               {...props}
+              custom={{ index: 1 }}
             />
           </>
         )}
