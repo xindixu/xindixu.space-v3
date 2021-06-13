@@ -24,6 +24,7 @@ const variants = {
   hidden: {
     y: -50,
     opacity: 0,
+    transition: { duration: 0.5 },
   },
   enter: {
     y: 0,
@@ -52,6 +53,7 @@ const TableOfContent = ({ mainContent, show }) => {
         <motion.div
           animate="enter"
           initial="hidden"
+          exit="hidden"
           variants={variants}
           style={{ height: "min-content" }}
         >
@@ -68,9 +70,9 @@ const TableOfContent = ({ mainContent, show }) => {
                   return (
                     <ListItem key={title} level={level}>
                       <Anchor
+                        size="small"
                         href={id}
                         label={title}
-                        size="small"
                         onClick={(e) => {
                           e.preventDefault()
 

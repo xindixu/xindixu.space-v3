@@ -5,6 +5,7 @@ import { groupBy } from "lodash"
 import { format } from "date-fns"
 import { getRecentCommits } from "lib/github"
 import styleSettings from "lib/style-settings/index"
+import { MONTH_DAY_FORMAT } from "utils/datetime"
 
 const { pink } = styleSettings
 
@@ -21,7 +22,7 @@ const parseData = (commits) => {
 
   const keys = Object.keys(commitsByDate)
   const data = keys.map((date) => commitsByDate[date].length)
-  const labels = keys.map((key) => format(new Date(key), "MMM d"))
+  const labels = keys.map((key) => format(new Date(key), MONTH_DAY_FORMAT))
   return {
     labels,
     datasets: [

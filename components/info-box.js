@@ -1,7 +1,7 @@
 import React from "react"
 import { Button, Box } from "grommet"
 import styled from "styled-components"
-import { Github, Monitor, Previous } from "grommet-icons"
+import { Github, Monitor } from "grommet-icons"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings/index"
 
@@ -16,19 +16,36 @@ const IconButton = styled(Button)`
 `
 
 const mainIconAnimation = {
-  hidden: { scale: 0 },
+  hidden: {
+    scale: 0,
+    opacity: 0,
+    transition: {
+      duration: 0.1,
+    },
+  },
   visible: (index) => ({
     scale: 1,
+    opacity: 1,
     transition: {
       delay: 0.5 + index * 0.1,
     },
   }),
 }
 
-const InfoBox = ({ demoLink, repoLink, show }) => {
+const InfoBox = ({ demoLink, repoLink, show, horizontal }) => {
   const links = [
-    { name: "Demo", link: demoLink, icon: <Monitor />, disabled: !demoLink },
-    { name: "Repo", link: repoLink, icon: <Github />, disabled: !repoLink },
+    {
+      name: "Demo",
+      link: demoLink,
+      icon: <Monitor size="small" />,
+      disabled: !demoLink,
+    },
+    {
+      name: "Repo",
+      link: repoLink,
+      icon: <Github size="small" />,
+      disabled: !repoLink,
+    },
   ]
   return (
     <Box width="small" align="end">
@@ -38,13 +55,14 @@ const InfoBox = ({ demoLink, repoLink, show }) => {
             gap="small"
             width="min-content"
             responsive={false}
-            direction="column"
+            direction={horizontal ? "row" : "column"}
           >
             {links.map(({ name, link, icon, disabled }, index) => (
               <motion.div
                 key={name}
                 animate="visible"
                 custom={index}
+                exit="hidden"
                 initial="hidden"
                 variants={mainIconAnimation}
               >

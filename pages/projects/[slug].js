@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 import Link from "next/link"
 import styled from "styled-components"
-import { Main, Box, Button } from "grommet"
+import { Main, Box, Button, Text } from "grommet"
 import { useWindowScroll } from "react-use"
 import { Previous } from "grommet-icons"
 import { getProject, getAllProjectSlugs } from "lib/content/project"
@@ -12,6 +12,7 @@ import InfoBox from "components/info-box"
 import TableOfContent from "components/table-of-content"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
+import { formatDuration } from "utils/datetime"
 
 const { spacerXl, spacerXxl } = styleSettings
 
@@ -45,9 +46,17 @@ const FloatingBox = styled(Box)`
   align-items: top;
 `
 
+const TopBox = styled(Box)`
+  ${({ hide }) => `
+    opacity: ${hide ? 0 : 1};
+  `}
+`
+
 const Project = ({ setHeaderRef, project }) => {
   const {
     name,
+    start,
+    end,
     devices: { src, width, height } = {},
     labels,
     description,
@@ -91,6 +100,18 @@ const Project = ({ setHeaderRef, project }) => {
 
       <Wrapper>
         <ReadableMain>
+          <TopBox
+            fill
+            hide={isXlUp && showToolbox}
+            justify="between"
+            direction="row"
+          >
+            <Text size="small" color="dark-2">
+              {formatDuration({ start, end })}
+            </Text>
+            <InfoBox demoLink={demoLink} repoLink={repoLink} show horizontal />
+          </TopBox>
+
           <div ref={contentRef}>
             <RichText mainContent={description} />
             <Link href="/projects" passHref>
@@ -113,6 +134,7 @@ const Project = ({ setHeaderRef, project }) => {
           >
             <InfoBox
               demoLink={demoLink}
+              horizontal={false}
               repoLink={repoLink}
               show={showToolbox}
             />

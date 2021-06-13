@@ -6,8 +6,8 @@ import { AnimatePresence, motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
 import { format } from "date-fns"
 import { applauses } from "contents/applauses"
+import { MONTH_DAY_YEAR_FORMAT } from "utils/datetime"
 
-const SHORT_DATE_FORMAT = "MMM d, yyyy"
 const READING_TIME = 10000 // 10 secs
 const AUTOPLAY_TIME = 5000 // 5 secs
 const IconButton = styled(Button)`
@@ -47,7 +47,7 @@ const Base = ({
         <Text color="gray">&mdash;</Text>
         <Text color="gray" margin={{ horizontal: "xsmall" }} size="small">
           {name}, {jobTitle} <br />
-          {format(new Date(createdAt), SHORT_DATE_FORMAT)}
+          {format(new Date(createdAt), MONTH_DAY_YEAR_FORMAT)}
         </Text>
       </Box>
       <Box direction="row" align="center" justify="between" fill="horizontal">

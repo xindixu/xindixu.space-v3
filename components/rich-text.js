@@ -33,7 +33,7 @@ const Heading = styled(BaseHeading)`
 `
 
 const Description = ({ description }) => (
-  <Text color="dark-6" size="small" margin={{ bottom: "small" }}>
+  <Text color="dark-2" size="small" margin={{ bottom: "small" }}>
     {description}
   </Text>
 )
