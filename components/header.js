@@ -1,8 +1,9 @@
 import React from "react"
 import { Box, Heading, Stack } from "grommet"
 import Image from "next/image"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import styleSettings from "lib/style-settings"
+import { media } from "lib/style-settings/media-query"
 
 const {
   pink,
@@ -10,18 +11,22 @@ const {
   white,
   spacerXs,
   spacerSm,
-  size: { large },
+  size: { large, medium },
 } = styleSettings
 
 const Gradient = styled(Box)`
   background: radial-gradient(circle, ${white}00 60%, ${pink}60 100%);
 `
-
 const Content = styled(Box)`
-  ${({ full }) => `
-    width: ${large};
-    height: ${full ? large : `calc(${large} / 1.5)`};
-    background: radial-gradient(circle, ${white}55 20%, ${white} 100%);`}
+  width: ${medium};
+  height: ${medium};
+
+  ${media.mdUp`
+        width: ${large};
+        height: ${large};
+      `}
+
+  background: radial-gradient(circle, ${white}55 80%, ${white} 100%);
 `
 
 const Label = styled(Box)`
@@ -30,9 +35,10 @@ const Label = styled(Box)`
 `
 
 const Wrapper = styled(Stack)`
-  ${({ full }) => `
+  ${({ full }) => css`
     height: ${full ? "100vh" : "50vh"};
     width: 100vw;
+    overflow: hidden;
   `}
 `
 
@@ -48,7 +54,7 @@ const Header = React.forwardRef(
           <Image src={src} layout="fill" priority objectFit="cover" alt={alt} />
         </Box>
         <Gradient {...size} />
-        <Content full={full} align="center" justify="center">
+        <Content align="center" justify="center">
           <Heading
             color="black"
             size={full ? "xlarge" : "medium"}

@@ -105,6 +105,7 @@ const Project = ({ setHeaderRef, project }) => {
             hide={isXlUp && showToolbox}
             justify="between"
             direction="row"
+            align="center"
           >
             <Text size="small" color="dark-2">
               {formatDuration({ start, end })}

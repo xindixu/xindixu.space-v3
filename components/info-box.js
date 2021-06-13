@@ -48,7 +48,7 @@ const InfoBox = ({ demoLink, repoLink, show, horizontal }) => {
     },
   ]
   return (
-    <Box width="small" align="end">
+    <Box width={horizontal ? undefined : "small"} align="end">
       <AnimatePresence>
         {show && (
           <Box
