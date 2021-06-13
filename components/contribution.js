@@ -63,6 +63,4 @@ const Contribution = () => {
   )
 }
 
-Contribution.propTypes = {}
-
 export default Contribution
