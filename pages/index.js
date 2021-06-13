@@ -174,7 +174,7 @@ const Index = ({ setContentRef }) => (
 )
 
 Index.propTypes = {
-  setContentRef: PropTypes.func.isRequired,
+  setContentRef: PropTypes.func,
 }
 
 export default Index

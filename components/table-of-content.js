@@ -41,6 +41,9 @@ const parseContent = (mainContent) =>
     }))
 
 const TableOfContent = ({ mainContent, show }) => {
+  if (!mainContent) {
+    return null
+  }
   const headings = parseContent(mainContent.content)
 
   return (
@@ -97,7 +100,7 @@ TableOfContent.propTypes = {
         nodeType: PropTypes.string.isRequired,
       }).isRequired
     ).isRequired,
-  }).isRequired,
+  }),
 }
 
 export default TableOfContent
