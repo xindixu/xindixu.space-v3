@@ -4,7 +4,7 @@ export const MONTH_DAY_FORMAT = "MMM d"
 export const YEAR_FORMAT = "yyyy"
 export const MONTH_DAY_YEAR_FORMAT = `${MONTH_DAY_FORMAT}, ${YEAR_FORMAT}`
 
-export const formatDuration = ({ start, end }) => {
+export const formatDuration = ({ start = "", end = "" } = {}) => {
   const [startYear] = start.split("-")
   const [endYear] = end.split("-")
 
