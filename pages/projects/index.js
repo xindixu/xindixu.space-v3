@@ -117,7 +117,7 @@ const Projects = ({ initialProjects = [], initialTotalPages }) => {
   }, [page, tags])
 
   useEffect(() => {
-    if (loadMoreInView && page < totalPages) {
+    if (loadMoreInView) {
       setPage((prevPage) => prevPage + 1)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -149,15 +149,16 @@ const Projects = ({ initialProjects = [], initialTotalPages }) => {
           ref={gridFef}
         >
           {projects.map(({ name, slug, devices }, index) => (
-            <motion.div
-              key={slug}
-              initial={gridInView ? "out" : false}
-              animate={gridInView ? "in" : "out"}
-              variants={cardAnimation}
-              custom={{ index }}
-            >
-              <Project key={slug} name={name} slug={slug} thumbnail={devices} />
-            </motion.div>
+            <div key={slug}>
+              <motion.div
+                initial={gridInView ? "out" : false}
+                animate={gridInView ? "in" : "out"}
+                variants={cardAnimation}
+                custom={{ index }}
+              >
+                <Project name={name} slug={slug} thumbnail={devices} />
+              </motion.div>
+            </div>
           ))}
         </Grid>
         {page < totalPages && <div ref={loadMoreRef}>load more</div>}

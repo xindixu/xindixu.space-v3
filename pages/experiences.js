@@ -1,5 +1,5 @@
 import React from "react"
-import { Main, Box } from "grommet"
+import { Main } from "grommet"
 import Timeline from "components/timeline"
 
 const Experiences = () => (
