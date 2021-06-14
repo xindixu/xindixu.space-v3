@@ -47,6 +47,7 @@ const Pdf = styled.embed`
 const Heading = styled(BaseHeading)`
   padding-top: 72px;
   margin-top: -72px;
+  pointer-events: none;
 `
 
 const Description = ({ description }) => (

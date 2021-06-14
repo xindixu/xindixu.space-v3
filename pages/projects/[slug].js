@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 import Link from "next/link"
 import styled from "styled-components"
-import { Main, Box, Button, Text } from "grommet"
+import { Main, Box, Button, Text, Anchor } from "grommet"
 import { useWindowScroll } from "react-use"
 import { Previous } from "grommet-icons"
 import { getProject, getAllProjectSlugs } from "lib/content/project"
@@ -13,6 +13,7 @@ import TableOfContent from "components/table-of-content"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
 import { formatDuration } from "utils/datetime"
+import { getName } from "components/filters/utils"
 
 const { spacerXl, spacerXxl } = styleSettings
 
@@ -62,6 +63,7 @@ const Project = ({ setHeaderRef, project }) => {
     description,
     demoLink,
     repoLink,
+    tags,
   } = project
   console.log(project)
 
@@ -104,13 +106,24 @@ const Project = ({ setHeaderRef, project }) => {
           <TopBox
             fill
             hide={isXlUp && showToolbox}
-            justify="between"
+            margin={{ bottom: "medium" }}
             direction="row"
             align="center"
+            justify="between"
           >
-            <Text size="small" color="dark-2">
-              {formatDuration({ start, end })}
-            </Text>
+            <Box>
+              <Box direction="row" gap="small">
+                {tags.map((id) => (
+                  <Link key={id} href="/projects" passHref>
+                    <Anchor label={getName(id)} />
+                  </Link>
+                ))}
+              </Box>
+              <Text size="small" color="dark-2">
+                {formatDuration({ start, end })}
+              </Text>
+            </Box>
+
             <InfoBox demoLink={demoLink} repoLink={repoLink} show horizontal />
           </TopBox>
 

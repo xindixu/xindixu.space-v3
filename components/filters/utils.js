@@ -11,3 +11,4 @@ const tagNameById = {
 
 export const getAllId = (key) => `${key}-all`
 export const getName = (id) => tagNameById[id]
+export const getKey = (id) => id.split("-")[0]
