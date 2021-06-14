@@ -6,6 +6,7 @@ import {
   Grid,
   Main,
   ResponsiveContext,
+  Spinner,
   Text,
 } from "grommet"
 import Image from "next/image"
@@ -94,7 +95,7 @@ const getTagsFromQuery = (query) =>
 
 const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
   const router = useRouter()
-
+  const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(initialTotalPages)
   const [tags, setTags] = useState(initialTags)
@@ -121,10 +122,13 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
     )
 
     const request = async () => {
+      setIsLoading(true)
+      setProjects([])
       const response = await getAllProjects({
         tags: getParam(tags),
         page: 1,
       })
+      setIsLoading(false)
       setProjects(response?.entries)
       setTotalPages(response?.totalPages)
     }
@@ -132,11 +136,14 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
   }, [router, tags])
 
   const loadMoreProject = useCallback(() => {
+    console.log("loadMoreProject")
     const request = async () => {
+      setIsLoading(true)
       const { entries } = await getAllProjects({
         tags: getParam(tags),
         page,
       })
+      setIsLoading(false)
       setProjects((prevProjects) => [...prevProjects, ...entries])
     }
     request()
@@ -163,32 +170,43 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
   return (
     <Main pad="xlarge" fill={false} justify="center" direction="row">
       <ReadableContent>
-        <Box>
+        <Box margin={{ bottom: "medium" }}>
           <Filters tags={tags} setTags={setTags} />
         </Box>
         {hasProjects ? (
-          <Grid
-            gap="medium"
-            margin={{ top: "medium" }}
-            columns={{
-              count: "fill",
-              size: size === "small" ? "100%" : "medium",
-            }}
-            ref={gridFef}
-          >
-            {projects.map(({ name, slug, devices }, index) => (
-              <div key={slug}>
-                <motion.div
-                  initial={gridInView ? "out" : false}
-                  animate={gridInView ? "in" : "out"}
-                  variants={cardAnimation}
-                  custom={{ index }}
-                >
-                  <Project name={name} slug={slug} thumbnail={devices} />
-                </motion.div>
-              </div>
-            ))}
-          </Grid>
+          <>
+            <Grid
+              gap="medium"
+              columns={{
+                count: "fill",
+                size: size === "small" ? "100%" : "medium",
+              }}
+              ref={gridFef}
+            >
+              {projects.map(({ name, slug, devices }, index) => (
+                <div key={slug}>
+                  <motion.div
+                    initial={gridInView ? "out" : false}
+                    animate={gridInView ? "in" : "out"}
+                    variants={cardAnimation}
+                    custom={{ index }}
+                  >
+                    <Project name={name} slug={slug} thumbnail={devices} />
+                  </motion.div>
+                </div>
+              ))}
+            </Grid>
+            {page < totalPages && !isLoading && <div ref={loadMoreRef} />}
+            {isLoading && (
+              <Box
+                align="center"
+                fill="horizontal"
+                margin={{ bottom: "medium" }}
+              >
+                <Spinner size="large" />
+              </Box>
+            )}
+          </>
         ) : (
           <Box
             align="center"
@@ -201,7 +219,6 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
             </Text>
           </Box>
         )}
-        {page < totalPages && <div ref={loadMoreRef}>load more</div>}
       </ReadableContent>
     </Main>
   )
