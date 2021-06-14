@@ -1,9 +1,10 @@
-import React, { useContext } from "react"
+import React from "react"
 import PropTypes from "prop-types"
-import { Box, Button, Text, Select, ResponsiveContext } from "grommet"
+import { Box, Button, Text, Select } from "grommet"
 import { capitalize } from "lodash"
 import styled from "styled-components"
 import { getAllId, getName } from "./utils"
+import useMedia from "hooks/use-media"
 import styleSettings from "lib/style-settings"
 
 const { spacerLg } = styleSettings
@@ -87,7 +88,7 @@ const Group = ({ groupName, ids, selectedTagId, onSelect, onDeselect }) => {
   const allId = getAllId(groupName)
   const selectedAll = selectedTagId === allId
 
-  const size = useContext(ResponsiveContext)
+  const isSmUp = useMedia("sm")
 
   return (
     <Box
@@ -100,20 +101,20 @@ const Group = ({ groupName, ids, selectedTagId, onSelect, onDeselect }) => {
       <FixedWidthText>
         <Text>{capitalize(groupName)}</Text>
       </FixedWidthText>
-      {size === "small" ? (
-        <SelectFilter
-          allId={allId}
-          ids={ids}
-          onSelect={onSelect}
-          selectedTagId={selectedTagId}
-        />
-      ) : (
+      {isSmUp ? (
         <ButtonFilter
           allId={allId}
           ids={ids}
           onDeselect={onDeselect}
           onSelect={onSelect}
           selectedAll={selectedAll}
+          selectedTagId={selectedTagId}
+        />
+      ) : (
+        <SelectFilter
+          allId={allId}
+          ids={ids}
+          onSelect={onSelect}
           selectedTagId={selectedTagId}
         />
       )}
