@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
 import Link from "next/link"
+import { useRouter } from "next/router"
 import styled from "styled-components"
 import { Main, Box, Button, Text, Anchor } from "grommet"
 import { useWindowScroll } from "react-use"
@@ -26,6 +27,7 @@ const Wrapper = styled.div`
 const ReadableMain = styled(Main).attrs({
   align: "center",
   pad: { horizontal: "xlarge", bottom: "xlarge" },
+  margin: { bottom: "xlarge" },
 })`
   & > div {
     width: 100%;
@@ -69,8 +71,8 @@ const Project = ({ setHeaderRef, project }) => {
   const contentRef = useRef()
   const [showToolbox, setShowToolbox] = useState(false)
   const { y } = useWindowScroll()
-
   const isXlUp = useMedia("xl")
+  const router = useRouter()
 
   useEffect(() => {
     if (contentRef.current) {
@@ -135,15 +137,13 @@ const Project = ({ setHeaderRef, project }) => {
 
           <div ref={contentRef}>
             <RichText mainContent={description} />
-            <Link href="/projects" passHref>
-              <Button
-                as="a"
-                margin={{ top: "medium" }}
-                icon={<Previous size="small" />}
-                label="Back"
-                primary
-              />
-            </Link>
+            <Button
+              margin={{ top: "medium" }}
+              icon={<Previous size="small" />}
+              label="Back"
+              onClick={() => router.back()}
+              primary
+            />
           </div>
         </ReadableMain>
         {isXlUp && (

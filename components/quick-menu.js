@@ -4,7 +4,7 @@ import { useClickAway } from "react-use"
 import { Button } from "grommet"
 import { Close, AppsRounded } from "grommet-icons"
 import styled from "styled-components"
-import { motion } from "framer-motion"
+import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings/index"
 
 const {
@@ -27,11 +27,11 @@ const Circle = styled.div`
 
 const MainButton = styled(Button)`
   position: absolute;
-  top: 40%;
-  left: 60%;
-  margin: -${spacerBase};
+  bottom: 16px;
+  left: 16px;
   border-radius: 50%;
   box-shadow: ${light.medium};
+  z-index: 1;
 `
 
 const SubButton = styled(Button)`
@@ -88,7 +88,7 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
   })
 
   return (
-    <Circle ref={ref}>
+    <>
       <MainButton
         a11yTitle={`${isOpen ? "close" : "open"} sub-menu`}
         icon={
@@ -106,29 +106,38 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
           setIsOpen((prevIsOpen) => !prevIsOpen)
         }}
       />
-      {subMenu.map(({ name, link, icon }, index) => (
-        <motion.div
-          key={name}
-          initial={isOpen ? "hidden" : false}
-          animate={isOpen ? "visible" : "hidden"}
-          variants={subMenuCircleAnimation}
-          custom={{ index, count }}
-        >
-          <SubButton
-            a11yTitle={name}
-            count={count}
-            cycle={count}
-            hoverIndicator
-            href={link}
-            icon={<motion.div variants={subIconAnimation}>{icon}</motion.div>}
-            index={index}
-            primary
-            tabIndex={isOpen - 1}
-            target="_blank"
-          />
-        </motion.div>
-      ))}
-    </Circle>
+      <AnimatePresence>
+        {isOpen && (
+          <Circle ref={ref} isOpen={isOpen}>
+            {subMenu.map(({ name, link, icon }, index) => (
+              <motion.div
+                key={name}
+                initial="hidden"
+                animate="visible"
+                exit="hidden"
+                variants={subMenuCircleAnimation}
+                custom={{ index, count }}
+              >
+                <SubButton
+                  a11yTitle={name}
+                  count={count}
+                  cycle={count}
+                  hoverIndicator
+                  href={link}
+                  icon={
+                    <motion.div variants={subIconAnimation}>{icon}</motion.div>
+                  }
+                  index={index}
+                  primary
+                  tabIndex={isOpen - 1}
+                  target="_blank"
+                />
+              </motion.div>
+            ))}
+          </Circle>
+        )}
+      </AnimatePresence>
+    </>
   )
 }
 
