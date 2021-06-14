@@ -159,34 +159,48 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
 
+  const hasProjects = projects.length > 0
   return (
     <Main pad="xlarge" fill={false} justify="center" direction="row">
       <ReadableContent>
         <Box>
           <Filters tags={tags} setTags={setTags} />
         </Box>
-        <Grid
-          gap="medium"
-          margin={{ top: "medium" }}
-          columns={{
-            count: "fill",
-            size: size === "small" ? "100%" : "medium",
-          }}
-          ref={gridFef}
-        >
-          {projects.map(({ name, slug, devices }, index) => (
-            <div key={slug}>
-              <motion.div
-                initial={gridInView ? "out" : false}
-                animate={gridInView ? "in" : "out"}
-                variants={cardAnimation}
-                custom={{ index }}
-              >
-                <Project name={name} slug={slug} thumbnail={devices} />
-              </motion.div>
-            </div>
-          ))}
-        </Grid>
+        {hasProjects ? (
+          <Grid
+            gap="medium"
+            margin={{ top: "medium" }}
+            columns={{
+              count: "fill",
+              size: size === "small" ? "100%" : "medium",
+            }}
+            ref={gridFef}
+          >
+            {projects.map(({ name, slug, devices }, index) => (
+              <div key={slug}>
+                <motion.div
+                  initial={gridInView ? "out" : false}
+                  animate={gridInView ? "in" : "out"}
+                  variants={cardAnimation}
+                  custom={{ index }}
+                >
+                  <Project name={name} slug={slug} thumbnail={devices} />
+                </motion.div>
+              </div>
+            ))}
+          </Grid>
+        ) : (
+          <Box
+            align="center"
+            justify="center"
+            pad={{ vertical: "large", horizontal: "large" }}
+            background="light-1"
+          >
+            <Text color="dark-2">
+              No matching results. How about trying some other filters?
+            </Text>
+          </Box>
+        )}
         {page < totalPages && <div ref={loadMoreRef}>load more</div>}
       </ReadableContent>
     </Main>
