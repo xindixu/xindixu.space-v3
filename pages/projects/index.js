@@ -1,14 +1,5 @@
-import React, { useContext, useState, useCallback, useEffect } from "react"
-import {
-  Box,
-  Card,
-  CardFooter,
-  Grid,
-  Main,
-  ResponsiveContext,
-  Spinner,
-  Text,
-} from "grommet"
+import React, { useState, useCallback, useEffect } from "react"
+import { Box, Card, CardFooter, Grid, Main, Spinner, Text } from "grommet"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import Link from "next/link"
@@ -16,10 +7,12 @@ import PropTypes from "prop-types"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
+import { uniqBy } from "lodash"
 import Filters from "components/filters"
 import { getQuery } from "components/filters/utils"
 import { getAllProjects } from "lib/content/project"
 import styleSettings from "lib/style-settings"
+import useMedia from "hooks/use-media"
 
 const {
   elevation: { light },
@@ -100,8 +93,8 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
   const [totalPages, setTotalPages] = useState(initialTotalPages)
   const [tags, setTags] = useState(initialTags)
 
-  const size = useContext(ResponsiveContext)
-
+  const isSmUp = useMedia("sm")
+  const isMdUp = useMedia("md")
   const [gridFef, gridInView] = useInView({ delay: 1000 })
   const [loadMoreRef, loadMoreInView] = useInView()
 
@@ -136,15 +129,17 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
   }, [router, tags])
 
   const loadMoreProject = useCallback(() => {
-    console.log("loadMoreProject")
     const request = async () => {
       setIsLoading(true)
       const { entries } = await getAllProjects({
         tags: getParam(tags),
         page,
       })
+
       setIsLoading(false)
-      setProjects((prevProjects) => [...prevProjects, ...entries])
+      setProjects((prevProjects) =>
+        uniqBy([...prevProjects, ...entries], (project) => project.slug)
+      )
     }
     request()
   }, [page, tags])
@@ -173,41 +168,36 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
         <Box margin={{ bottom: "medium" }}>
           <Filters tags={tags} setTags={setTags} />
         </Box>
-        {hasProjects ? (
-          <>
-            <Grid
-              gap="medium"
-              columns={{
-                count: "fill",
-                size: size === "small" ? "100%" : "medium",
-              }}
-              ref={gridFef}
-            >
-              {projects.map(({ name, slug, devices }, index) => (
-                <div key={slug}>
-                  <motion.div
-                    initial={gridInView ? "out" : false}
-                    animate={gridInView ? "in" : "out"}
-                    variants={cardAnimation}
-                    custom={{ index }}
-                  >
-                    <Project name={name} slug={slug} thumbnail={devices} />
-                  </motion.div>
-                </div>
-              ))}
-            </Grid>
-            {page < totalPages && !isLoading && <div ref={loadMoreRef} />}
-            {isLoading && (
-              <Box
-                align="center"
-                fill="horizontal"
-                margin={{ bottom: "medium" }}
+
+        <Grid
+          gap="medium"
+          columns={{
+            count: "fill",
+            size: isMdUp ? "medium" : "100%",
+          }}
+          ref={gridFef}
+        >
+          {projects.map(({ name, slug, devices }, index) => (
+            <div key={slug}>
+              <motion.div
+                initial={gridInView ? "out" : false}
+                animate={gridInView ? "in" : "out"}
+                variants={cardAnimation}
+                custom={{ index }}
               >
-                <Spinner size="large" />
-              </Box>
-            )}
-          </>
-        ) : (
+                <Project name={name} slug={slug} thumbnail={devices} />
+              </motion.div>
+            </div>
+          ))}
+        </Grid>
+        {page < totalPages && !isLoading && <div ref={loadMoreRef} />}
+        {isLoading && (
+          <Box align="center" fill="horizontal" margin={{ bottom: "medium" }}>
+            <Spinner size="large" />
+          </Box>
+        )}
+
+        {!isLoading && !hasProjects && (
           <Box
             align="center"
             justify="center"
