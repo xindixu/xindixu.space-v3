@@ -5,7 +5,7 @@ import Group from "./group"
 import { getAllId } from "./utils"
 import { getAllTags } from "lib/content/tag"
 
-const Filters = ({ tags, setTags, onChange }) => {
+const Filters = ({ tags, setTags }) => {
   const tagGroups = getAllTags()
 
   const initialSelectedTags = Object.keys(tagGroups).reduce((memo, key) => {
@@ -28,10 +28,10 @@ const Filters = ({ tags, setTags, onChange }) => {
         selectedTagId={selectedTags[key]}
         ids={ids}
         onDeselect={() =>
-          onChange(
+          setTags((prevTags) =>
             pickBy(
               {
-                ...tags,
+                ...prevTags,
                 [key]: undefined,
               },
               identity
@@ -39,10 +39,10 @@ const Filters = ({ tags, setTags, onChange }) => {
           )
         }
         onSelect={(id) =>
-          onChange(
+          setTags((prevTags) =>
             pickBy(
               {
-                ...tags,
+                ...prevTags,
                 [key]: id === allId ? undefined : id,
               },
               identity

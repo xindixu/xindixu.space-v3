@@ -106,19 +106,30 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
 
   const [projects, setProjects] = useState(initialProjects)
 
-  const filterProjects = useCallback((newTags) => {
+  const filterProjects = useCallback(() => {
     setPage(1)
+
+    router.replace(
+      {
+        pathname: "/projects",
+        query: getQuery(tags),
+      },
+      undefined,
+      {
+        scroll: false,
+      }
+    )
 
     const request = async () => {
       const response = await getAllProjects({
-        tags: getParam(newTags),
+        tags: getParam(tags),
         page: 1,
       })
       setProjects(response?.entries)
       setTotalPages(response?.totalPages)
     }
     request()
-  }, [])
+  }, [router, tags])
 
   const loadMoreProject = useCallback(() => {
     const request = async () => {
@@ -139,6 +150,11 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
   }, [loadMoreInView])
 
   useEffect(() => {
+    filterProjects()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tags])
+
+  useEffect(() => {
     loadMoreProject()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
@@ -147,24 +163,7 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
     <Main pad="xlarge" fill={false} justify="center" direction="row">
       <ReadableContent>
         <Box>
-          <Filters
-            tags={tags}
-            setTags={setTags}
-            onChange={(newTags) => {
-              router.replace(
-                {
-                  pathname: "/projects",
-                  query: getQuery(newTags),
-                },
-                undefined,
-                {
-                  scroll: false,
-                }
-              )
-              setTags(newTags)
-              filterProjects(newTags)
-            }}
-          />
+          <Filters tags={tags} setTags={setTags} />
         </Box>
         <Grid
           gap="medium"
