@@ -65,7 +65,6 @@ const Project = ({ setHeaderRef, project }) => {
     repoLink,
     tags,
   } = project
-  console.log(project)
 
   const contentRef = useRef()
   const [showToolbox, setShowToolbox] = useState(false)
@@ -113,11 +112,18 @@ const Project = ({ setHeaderRef, project }) => {
           >
             <Box>
               <Box direction="row" gap="small">
-                {tags.map((id) => (
-                  <Link key={id} href="/projects" passHref>
-                    <Anchor label={getName(id)} />
-                  </Link>
-                ))}
+                {tags.map((id) => {
+                  const [key, value] = id.split("-")
+                  return (
+                    <Link
+                      key={id}
+                      href={{ pathname: "/projects", query: { [key]: value } }}
+                      passHref
+                    >
+                      <Anchor label={getName(id)} />
+                    </Link>
+                  )
+                })}
               </Box>
               <Text size="small" color="dark-2">
                 {formatDuration({ start, end })}

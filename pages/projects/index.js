@@ -9,12 +9,14 @@ import {
   Text,
 } from "grommet"
 import Image from "next/image"
+import { useRouter } from "next/router"
 import Link from "next/link"
 import PropTypes from "prop-types"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
 import Filters from "components/filters"
+import { getQuery } from "components/filters/utils"
 import { getAllProjects } from "lib/content/project"
 import styleSettings from "lib/style-settings"
 
@@ -81,10 +83,22 @@ const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
   </motion.div>
 )
 
-const Projects = ({ initialProjects = [], initialTotalPages }) => {
+const getParam = (tags) =>
+  Object.values(tags).filter((tag) => !tag.endsWith("all"))
+
+const getTagsFromQuery = (query) =>
+  Object.entries(query).reduce((memo, [key, value]) => {
+    memo[key] = `${key}-${value}`
+    return memo
+  }, {})
+
+const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
+  const router = useRouter()
+
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(initialTotalPages)
-  const [tags, setTags] = useState([])
+  const [tags, setTags] = useState(initialTags)
+
   const size = useContext(ResponsiveContext)
 
   const [gridFef, gridInView] = useInView({ delay: 1000 })
@@ -92,23 +106,24 @@ const Projects = ({ initialProjects = [], initialTotalPages }) => {
 
   const [projects, setProjects] = useState(initialProjects)
 
-  const filterProjects = useCallback(() => {
+  const filterProjects = useCallback((newTags) => {
     setPage(1)
+
     const request = async () => {
       const response = await getAllProjects({
-        tags: Object.values(tags),
+        tags: getParam(newTags),
         page: 1,
       })
       setProjects(response?.entries)
       setTotalPages(response?.totalPages)
     }
     request()
-  }, [tags])
+  }, [])
 
   const loadMoreProject = useCallback(() => {
     const request = async () => {
       const { entries } = await getAllProjects({
-        tags: Object.values(tags),
+        tags: getParam(tags),
         page,
       })
       setProjects((prevProjects) => [...prevProjects, ...entries])
@@ -124,11 +139,6 @@ const Projects = ({ initialProjects = [], initialTotalPages }) => {
   }, [loadMoreInView])
 
   useEffect(() => {
-    filterProjects()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tags])
-
-  useEffect(() => {
     loadMoreProject()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page])
@@ -137,7 +147,24 @@ const Projects = ({ initialProjects = [], initialTotalPages }) => {
     <Main pad="xlarge" fill={false} justify="center" direction="row">
       <ReadableContent>
         <Box>
-          <Filters onChange={setTags} />
+          <Filters
+            tags={tags}
+            setTags={setTags}
+            onChange={(newTags) => {
+              router.replace(
+                {
+                  pathname: "/projects",
+                  query: getQuery(newTags),
+                },
+                undefined,
+                {
+                  scroll: false,
+                }
+              )
+              setTags(newTags)
+              filterProjects(newTags)
+            }}
+          />
         </Box>
         <Grid
           gap="medium"
@@ -167,8 +194,12 @@ const Projects = ({ initialProjects = [], initialTotalPages }) => {
   )
 }
 
-export async function getStaticProps() {
-  const { entries, totalPages } = await getAllProjects()
+export async function getServerSideProps(context) {
+  const { query } = context
+
+  const tags = getTagsFromQuery(query)
+
+  const { entries, totalPages } = await getAllProjects({ tags: getParam(tags) })
   // Next.js expects the props to be json stringify-able
   // https://dev.to/ryyppy/reason-records-nextjs-undefined-and-getstaticprops-5d46
   return {
@@ -176,23 +207,16 @@ export async function getStaticProps() {
       JSON.stringify({
         initialProjects: [...entries],
         initialTotalPages: totalPages,
+        initialTags: tags,
       })
     ),
   }
 }
 
 Projects.propTypes = {
-  initialProjects: PropTypes.arrayOf(
-    PropTypes.shape({
-      name: PropTypes.string.isRequired,
-      slug: PropTypes.string.isRequired,
-      thumbnail: PropTypes.shape({
-        src: PropTypes.string.isRequired,
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
-      }).isRequired,
-    }).isRequired
-  ).isRequired,
+  initialProjects: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+  initialTotalPages: PropTypes.number.isRequired,
+  initialTags: PropTypes.object.isRequired,
 }
 
 export default Projects

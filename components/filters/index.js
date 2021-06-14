@@ -1,23 +1,22 @@
-import React, { useEffect, useState } from "react"
+import React from "react"
 import PropTypes from "prop-types"
+import { identity, pickBy } from "lodash"
 import Group from "./group"
 import { getAllId } from "./utils"
 import { getAllTags } from "lib/content/tag"
 
-const Filters = ({ onChange }) => {
+const Filters = ({ tags, setTags, onChange }) => {
   const tagGroups = getAllTags()
-  const [selectedTagIds, setSelectedTagIds] = useState(() =>
-    Object.keys(tagGroups).reduce((memo, key) => {
-      memo[key] = getAllId(key)
-      return memo
-    }, {})
-  )
 
-  useEffect(() => {
-    onChange(Object.values(selectedTagIds).filter((id) => !id.endsWith("all")))
-    // setState callback
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [selectedTagIds])
+  const initialSelectedTags = Object.keys(tagGroups).reduce((memo, key) => {
+    memo[key] = getAllId(key)
+    return memo
+  }, {})
+
+  const selectedTags = Object.entries(tags).reduce((memo, [key, value]) => {
+    memo[key] = value
+    return memo
+  }, initialSelectedTags)
 
   return Object.entries(tagGroups).map(([key, ids]) => {
     const allId = getAllId(key)
@@ -26,19 +25,29 @@ const Filters = ({ onChange }) => {
       <Group
         key={key}
         groupName={key}
-        selectedTagId={selectedTagIds[key]}
+        selectedTagId={selectedTags[key]}
         ids={ids}
         onDeselect={() =>
-          setSelectedTagIds((prevSelectedTagIds) => ({
-            ...prevSelectedTagIds,
-            [key]: allId,
-          }))
+          onChange(
+            pickBy(
+              {
+                ...tags,
+                [key]: undefined,
+              },
+              identity
+            )
+          )
         }
         onSelect={(id) =>
-          setSelectedTagIds((prevSelectedTagIds) => ({
-            ...prevSelectedTagIds,
-            [key]: id,
-          }))
+          onChange(
+            pickBy(
+              {
+                ...tags,
+                [key]: id === allId ? undefined : id,
+              },
+              identity
+            )
+          )
         }
       />
     )
@@ -46,7 +55,8 @@ const Filters = ({ onChange }) => {
 }
 
 Filters.propTypes = {
-  onChange: PropTypes.func.isRequired,
+  tags: PropTypes.object.isRequired,
+  setTags: PropTypes.func.isRequired,
 }
 
 export default Filters
