@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react"
+import React, { useContext, useState, useCallback, useEffect } from "react"
 import {
   Box,
   Card,
@@ -81,21 +81,63 @@ const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
   </motion.div>
 )
 
-const Projects = ({ initialProjects = [] }) => {
+const Projects = ({ initialProjects = [], initialTotalPages }) => {
+  const [page, setPage] = useState(1)
+  const [totalPages, setTotalPages] = useState(initialTotalPages)
+  const [tags, setTags] = useState([])
   const size = useContext(ResponsiveContext)
-  const [ref, inView] = useInView({ delay: 1000 })
+
+  const [gridFef, gridInView] = useInView({ delay: 1000 })
+  const [loadMoreRef, loadMoreInView] = useInView()
+
   const [projects, setProjects] = useState(initialProjects)
 
-  const updateProjects = async (tags) => {
-    const { entries } = await getAllProjects({ tags: Object.values(tags) })
-    setProjects(entries)
-  }
+  const filterProjects = useCallback(() => {
+    setPage(1)
+    const request = async () => {
+      const response = await getAllProjects({
+        tags: Object.values(tags),
+        page: 1,
+      })
+      setProjects(response?.entries)
+      setTotalPages(response?.totalPages)
+    }
+    request()
+  }, [tags])
+
+  const loadMoreProject = useCallback(() => {
+    const request = async () => {
+      const { entries } = await getAllProjects({
+        tags: Object.values(tags),
+        page,
+      })
+      setProjects((prevProjects) => [...prevProjects, ...entries])
+    }
+    request()
+  }, [page, tags])
+
+  useEffect(() => {
+    if (loadMoreInView && page < totalPages) {
+      setPage((prevPage) => prevPage + 1)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [loadMoreInView])
+
+  useEffect(() => {
+    filterProjects()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [tags])
+
+  useEffect(() => {
+    loadMoreProject()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page])
 
   return (
     <Main pad="xlarge" fill={false} justify="center" direction="row">
       <ReadableContent>
         <Box>
-          <Filters onChange={updateProjects} />
+          <Filters onChange={setTags} />
         </Box>
         <Grid
           gap="medium"
@@ -104,34 +146,35 @@ const Projects = ({ initialProjects = [] }) => {
             count: "fill",
             size: size === "small" ? "100%" : "medium",
           }}
-          ref={ref}
+          ref={gridFef}
         >
           {projects.map(({ name, slug, devices }, index) => (
             <motion.div
               key={slug}
-              initial={inView ? "out" : false}
-              animate={inView ? "in" : "out"}
+              initial={gridInView ? "out" : false}
+              animate={gridInView ? "in" : "out"}
               variants={cardAnimation}
               custom={{ index }}
             >
-              <Project name={name} slug={slug} thumbnail={devices} />
+              <Project key={slug} name={name} slug={slug} thumbnail={devices} />
             </motion.div>
           ))}
         </Grid>
+        {page < totalPages && <div ref={loadMoreRef}>load more</div>}
       </ReadableContent>
     </Main>
   )
 }
 
 export async function getStaticProps() {
-  const { entries } = await getAllProjects()
+  const { entries, totalPages } = await getAllProjects()
   // Next.js expects the props to be json stringify-able
   // https://dev.to/ryyppy/reason-records-nextjs-undefined-and-getstaticprops-5d46
   return {
     props: JSON.parse(
       JSON.stringify({
-        // initialProjects: [],
         initialProjects: [...entries],
+        initialTotalPages: totalPages,
       })
     ),
   }
