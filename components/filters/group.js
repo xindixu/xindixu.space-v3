@@ -11,11 +11,23 @@ const { spacerLg } = styleSettings
 
 const DynamicButton = ({ selected, onClick, label }) => {
   const type = selected ? { primary: true } : { default: true }
-  return <Button {...type} label={label} onClick={onClick} size="medium" />
+  return (
+    <Button
+      {...type}
+      label={label}
+      onClick={onClick}
+      size="medium"
+      margin={{ bottom: "small" }}
+    />
+  )
 }
 
-const FixedWidthText = styled.div`
+const FixedWidthText = styled(Box).attrs({
+  align: "center",
+  direction: "row",
+})`
   width: ${spacerLg};
+  height: 100%;
 `
 
 const FullWidthSelect = styled.div`
@@ -35,7 +47,7 @@ const ButtonFilter = ({
   selectedAll,
   selectedTagId,
 }) => (
-  <Box gap="small" direction="row">
+  <Box gap="small" direction="row" wrap>
     <DynamicButton
       key="all-button"
       label="All"
@@ -48,7 +60,7 @@ const ButtonFilter = ({
         <DynamicButton
           key={id}
           selected={selected}
-          label={capitalize(getName(id))}
+          label={getName(id)}
           onClick={() => (selected ? onDeselect(id) : onSelect(id))}
         />
       )
@@ -69,15 +81,16 @@ const SelectFilter = ({ allId, ids, onSelect, selectedTagId }) => (
           margin={{ vertical: "small", horizontal: "medium" }}
           round="large"
         >
-          {capitalize(getName(selectedTagId)) || "Select..."}
+          {getName(selectedTagId) || "Select..."}
         </Box>
       }
       options={[allId, ...ids]}
       onChange={({ option }) => onSelect(option)}
+      margin={{ bottom: "small" }}
     >
       {(option) => (
         <Box pad={{ vertical: "small", horizontal: "medium" }}>
-          {capitalize(getName(option))}
+          {getName(option)}
         </Box>
       )}
     </Select>
@@ -91,15 +104,9 @@ const Group = ({ groupName, ids, selectedTagId, onSelect, onDeselect }) => {
   const isSmUp = useMedia("sm")
 
   return (
-    <Box
-      direction="row"
-      align="center"
-      margin={{ bottom: "small" }}
-      fill="horizontal"
-      gap="small"
-    >
+    <Box direction="row" align="center" fill="horizontal" gap="small">
       <FixedWidthText>
-        <Text>{capitalize(groupName)}</Text>
+        <Text margin={{ bottom: "small" }}>{capitalize(groupName)}</Text>
       </FixedWidthText>
       {isSmUp ? (
         <ButtonFilter

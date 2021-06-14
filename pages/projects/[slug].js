@@ -63,6 +63,7 @@ const Project = ({ setHeaderRef, project }) => {
     demoLink,
     repoLink,
   } = project
+  console.log(project)
 
   const contentRef = useRef()
   const [showToolbox, setShowToolbox] = useState(false)
