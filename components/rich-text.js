@@ -27,6 +27,23 @@ const Video = styled.video`
   height: auto;
 `
 
+const PdfWrapper = styled(Box)`
+  ${({ ratio }) => `
+    padding-bottom: ${ratio}%;
+  `}
+  position: relative;
+  max-width: 100%;
+`
+
+const Pdf = styled.embed`
+  position: absolute;
+  border: none;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`
+
 const Heading = styled(BaseHeading)`
   padding-top: 72px;
   margin-top: -72px;
@@ -58,6 +75,15 @@ const EmbeddedVideo = ({ url, title, description }) => (
   </Box>
 )
 
+const EmbeddedPdf = ({ description, title, url, width, height }) => (
+  <Box margin={{ bottom: "medium" }}>
+    <Description description={description} />
+    <PdfWrapper ratio={Math.round((height / width) * 100)}>
+      <Pdf name={title} type="application/pdf" src={`https:${url}`} />
+    </PdfWrapper>
+  </Box>
+)
+
 const options = {
   renderMark: {
     [MARKS.CODE]: (text) => <Code>{text}</Code>,
@@ -84,7 +110,6 @@ const options = {
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
       const { title, file, description } = get(node, "data.target.fields")
       const { url, contentType, details } = file
-
       if (contentType.startsWith("image")) {
         const { width, height } = details?.image || {}
 
@@ -102,6 +127,25 @@ const options = {
       if (contentType.startsWith("video")) {
         return (
           <EmbeddedVideo url={url} title={title} description={description} />
+        )
+      }
+
+      return null
+    },
+    [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+      const { media, height, width, title } = get(node, "data.target.fields")
+      const { file, description } = media.fields
+      const { contentType, url } = file
+
+      if (contentType.endsWith("pdf")) {
+        return (
+          <EmbeddedPdf
+            url={url}
+            title={title}
+            description={description}
+            height={height}
+            width={width}
+          />
         )
       }
 
