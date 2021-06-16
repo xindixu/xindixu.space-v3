@@ -7,6 +7,7 @@ const tagNameById = {
   "type-all": "All",
   "type-development": "Development",
   "type-advertising": "Advertising",
+  "type-crafts": "Crafts",
 }
 
 export const getAllId = (key) => `${key}-all`
