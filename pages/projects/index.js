@@ -93,7 +93,6 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
   const [totalPages, setTotalPages] = useState(initialTotalPages)
   const [tags, setTags] = useState(initialTags)
 
-  const isSmUp = useMedia("sm")
   const isMdUp = useMedia("md")
   const [gridFef, gridInView] = useInView({ delay: 1000 })
   const [loadMoreRef, loadMoreInView] = useInView()
@@ -164,39 +163,37 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
   const hasProjects = projects.length > 0
   return (
     <Main pad="xlarge" fill={false} justify="center" direction="row">
-      <ReadableContent>
-        <Box margin={{ bottom: "medium" }}>
-          <Filters tags={tags} setTags={setTags} />
-        </Box>
-
-        <Grid
-          gap="medium"
-          columns={{
-            count: "fill",
-            size: isMdUp ? "medium" : "100%",
-          }}
-          ref={gridFef}
-        >
-          {projects.map(({ name, slug, devices }, index) => (
-            <div key={slug}>
-              <motion.div
-                initial={gridInView ? "out" : false}
-                animate={gridInView ? "in" : "out"}
-                variants={cardAnimation}
-                custom={{ index }}
-              >
-                <Project name={name} slug={slug} thumbnail={devices} />
-              </motion.div>
-            </div>
-          ))}
-        </Grid>
-        {page < totalPages && !isLoading && <div ref={loadMoreRef} />}
-        {isLoading && (
-          <Box align="center" fill="horizontal" margin={{ bottom: "medium" }}>
+      <ReadableContent gap="large">
+        <Filters tags={tags} setTags={setTags} />
+        {projects.length > 0 && (
+          <Grid
+            gap="medium"
+            columns={{
+              count: "fill",
+              size: isMdUp ? "medium" : "100%",
+            }}
+            ref={gridFef}
+          >
+            {projects.map(({ name, slug, devices }, index) => (
+              <div key={slug}>
+                <motion.div
+                  initial={gridInView ? "out" : false}
+                  animate={gridInView ? "in" : "out"}
+                  variants={cardAnimation}
+                  custom={{ index }}
+                >
+                  <Project name={name} slug={slug} thumbnail={devices} />
+                </motion.div>
+              </div>
+            ))}
+            {page < totalPages && !isLoading && <div ref={loadMoreRef} />}
+          </Grid>
+        )}
+        {true && (
+          <Box align="center" fill="horizontal">
             <Spinner size="large" />
           </Box>
         )}
-
         {!isLoading && !hasProjects && (
           <Box
             align="center"

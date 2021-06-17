@@ -81,7 +81,7 @@ const ReadableRow = ({ children, ...props }) => (
 const Index = ({ setContentRef }) => {
   const isXxsUp = useMedia("xxs")
   const isBaseUp = useMedia("base")
-  console.log(isBaseUp)
+
   return (
     <Main ref={setContentRef} fill={false} gap="large">
       <ReadableRow isXxsUp={isXxsUp}>

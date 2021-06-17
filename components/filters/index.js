@@ -1,10 +1,16 @@
 import React from "react"
 import PropTypes from "prop-types"
+import styled from "styled-components"
 import { identity, pickBy } from "lodash"
 import Group from "./group"
 import { getAllId } from "./utils"
 import { getAllTags } from "lib/content/tag"
+import styleSettings from "lib/style-settings"
 
+const { spacerSm } = styleSettings
+const Wrapper = styled.div`
+  margin-bottom: -${spacerSm};
+`
 const Filters = ({ tags, setTags }) => {
   const tagGroups = getAllTags()
 
@@ -18,40 +24,44 @@ const Filters = ({ tags, setTags }) => {
     return memo
   }, initialSelectedTags)
 
-  return Object.entries(tagGroups).map(([key, ids]) => {
-    const allId = getAllId(key)
+  return (
+    <Wrapper>
+      {Object.entries(tagGroups).map(([key, ids]) => {
+        const allId = getAllId(key)
 
-    return (
-      <Group
-        key={key}
-        groupName={key}
-        selectedTagId={selectedTags[key]}
-        ids={ids}
-        onDeselect={() =>
-          setTags((prevTags) =>
-            pickBy(
-              {
-                ...prevTags,
-                [key]: undefined,
-              },
-              identity
-            )
-          )
-        }
-        onSelect={(id) =>
-          setTags((prevTags) =>
-            pickBy(
-              {
-                ...prevTags,
-                [key]: id === allId ? undefined : id,
-              },
-              identity
-            )
-          )
-        }
-      />
-    )
-  })
+        return (
+          <Group
+            key={key}
+            groupName={key}
+            selectedTagId={selectedTags[key]}
+            ids={ids}
+            onDeselect={() =>
+              setTags((prevTags) =>
+                pickBy(
+                  {
+                    ...prevTags,
+                    [key]: undefined,
+                  },
+                  identity
+                )
+              )
+            }
+            onSelect={(id) =>
+              setTags((prevTags) =>
+                pickBy(
+                  {
+                    ...prevTags,
+                    [key]: id === allId ? undefined : id,
+                  },
+                  identity
+                )
+              )
+            }
+          />
+        )
+      })}
+    </Wrapper>
+  )
 }
 
 Filters.propTypes = {
