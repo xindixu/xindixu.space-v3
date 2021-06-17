@@ -79,12 +79,14 @@ const labels = [
   },
 ]
 
+const xSmallScreenPositions = [5, 20, 5]
 const smallScreenPositions = [20, 20, 5]
 const bigScreenPositions = [20, 30, 5]
 
 const Map = () => {
   const [ref, inView] = useInView({ delay: 1000 })
 
+  const isXsUp = useMedia("xs")
   const isSmUp = useMedia("sm")
 
   return (
@@ -144,7 +146,11 @@ const Map = () => {
             {...props}
             key={props.year}
             position={`${
-              isSmUp ? bigScreenPositions[i] : smallScreenPositions[i]
+              isXsUp
+                ? isSmUp
+                  ? bigScreenPositions[i]
+                  : smallScreenPositions[i]
+                : xSmallScreenPositions[i]
             }%`}
           />
         ))}

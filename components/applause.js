@@ -7,11 +7,20 @@ import { useInView } from "react-intersection-observer"
 import { format } from "date-fns"
 import { applauses } from "contents/applauses"
 import { MONTH_DAY_YEAR_FORMAT } from "utils/datetime"
+import useMedia from "hooks/use-media"
 
 const READING_TIME = 10000 // 10 secs
 const AUTOPLAY_TIME = 5000 // 5 secs
 const IconButton = styled(Button)`
   border-radius: 50%;
+`
+
+const StyledCard = styled(Card)`
+  ${({ isXxsUp }) =>
+    isXxsUp ||
+    `
+      width: 100%;
+    `}
 `
 
 const variants = {
@@ -39,8 +48,15 @@ const Base = ({
   message,
   paginate,
   sender: { name, jobTitle },
+  isXxsUp,
 }) => (
-  <Card height="medium" width="medium" gap="medium" pad="medium">
+  <StyledCard
+    height="medium"
+    width="medium"
+    gap="medium"
+    pad="medium"
+    isXxsUp={isXxsUp}
+  >
     <CardBody>&ldquo;{message}&rdquo;</CardBody>
     <CardFooter direction="column" align="start">
       <Box direction="row" justify="start">
@@ -84,7 +100,7 @@ const Base = ({
         </Box>
       </Box>
     </CardFooter>
-  </Card>
+  </StyledCard>
 )
 
 const Appause = () => {
@@ -95,6 +111,8 @@ const Appause = () => {
   const [[page, direction], setPage] = useState([0, 0])
   const index = page % length
   const { message, createdAt, sender, likes } = applauses[index]
+
+  const isXxsUp = useMedia("xxs")
 
   const paginate = useCallback(
     (newDirection) => setPage([page + newDirection, newDirection]),
@@ -136,7 +154,7 @@ const Appause = () => {
               x: { type: "spring", stiffness: 300, damping: 30 },
               opacity: { duration: 0.2 },
             }}
-            style={{ width: "min-content" }}
+            style={{ width: isXxsUp ? "min-content" : undefined }}
           >
             <Base
               createdAt={createdAt}
@@ -149,6 +167,7 @@ const Appause = () => {
                 setPaused(true)
               }}
               sender={sender}
+              isXxsUp={isXxsUp}
             />
           </motion.div>
         </Stack>
