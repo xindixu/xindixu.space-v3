@@ -78,8 +78,7 @@ const ReadableRow = ({ children, ...props }) => (
   </BaseReadableRow>
 )
 
-const Index = ({ setContentRef }) => {
-  const isXxsUp = useMedia("xxs")
+const Index = ({ setContentRef, isXxsUp }) => {
   const isBaseUp = useMedia("base")
 
   return (

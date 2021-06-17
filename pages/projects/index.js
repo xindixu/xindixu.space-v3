@@ -86,7 +86,12 @@ const getTagsFromQuery = (query) =>
     return memo
   }, {})
 
-const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
+const Projects = ({
+  initialProjects = [],
+  initialTotalPages,
+  initialTags,
+  isXxsUp,
+}) => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState(1)
@@ -161,8 +166,14 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
   }, [page])
 
   const hasProjects = projects.length > 0
+
   return (
-    <Main pad="xlarge" fill={false} justify="center" direction="row">
+    <Main
+      pad={{ horizontal: isXxsUp ? "xlarge" : "medium", vertical: "xlarge" }}
+      fill={false}
+      justify="center"
+      direction="row"
+    >
       <ReadableContent gap="large">
         <Filters tags={tags} setTags={setTags} />
         {projects.length > 0 && (
@@ -189,7 +200,7 @@ const Projects = ({ initialProjects = [], initialTotalPages, initialTags }) => {
             {page < totalPages && !isLoading && <div ref={loadMoreRef} />}
           </Grid>
         )}
-        {true && (
+        {isLoading && (
           <Box align="center" fill="horizontal">
             <Spinner size="large" />
           </Box>

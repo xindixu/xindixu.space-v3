@@ -16,19 +16,21 @@ import useMedia from "hooks/use-media"
 import { formatDuration } from "utils/datetime"
 import { getName } from "components/filters/utils"
 
-const { spacerXl, spacerXxl } = styleSettings
+const { spacerXxl } = styleSettings
 
 const THRESHOLD = 150
 const Wrapper = styled.div`
   position: relative;
-  margin-top: ${spacerXl};
 `
 
-const ReadableMain = styled(Main).attrs({
+const ReadableMain = styled(Main).attrs(({ isXxsUp }) => ({
   align: "center",
-  pad: { horizontal: "xlarge", bottom: "xlarge" },
+  pad: {
+    horizontal: isXxsUp ? "xlarge" : "medium",
+    vertical: "xlarge",
+  },
   margin: { bottom: "xlarge" },
-})`
+}))`
   & > div {
     width: 100%;
     max-width: 920px;
@@ -55,7 +57,7 @@ const TopBox = styled(Box)`
   `}
 `
 
-const Project = ({ setHeaderRef, project }) => {
+const Project = ({ setHeaderRef, project, isXxsUp }) => {
   const {
     name,
     start,
@@ -103,7 +105,7 @@ const Project = ({ setHeaderRef, project }) => {
       />
 
       <Wrapper>
-        <ReadableMain>
+        <ReadableMain isXxsUp={isXxsUp}>
           <TopBox
             fill
             hide={isXlUp && showToolbox}

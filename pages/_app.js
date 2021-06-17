@@ -46,7 +46,7 @@ const App = ({ Component, pageProps, router }) => {
     <NoOverflow theme={customTheme} full>
       <GlobalStyle />
       <CommonLayout>
-        {({ setContentRef, setHeaderRef, header }) => (
+        {({ setContentRef, setHeaderRef, header, isXxsUp }) => (
           <PageAnimate
             key={router.route}
             initial="pageInitial"
@@ -59,6 +59,7 @@ const App = ({ Component, pageProps, router }) => {
               {...pageProps}
               setHeaderRef={setHeaderRef}
               setContentRef={setContentRef}
+              isXxsUp={isXxsUp}
             />
           </PageAnimate>
         )}

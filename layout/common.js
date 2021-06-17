@@ -6,21 +6,17 @@ import Title from "components/title"
 import Navbar from "components/navbar"
 import Header from "components/header"
 import Footer from "components/footer"
+import useMedia from "hooks/use-media"
 
 const Common = ({ children }) => {
   const [headerRef, isHeaderInView] = useInView({ threshold: 0.05 })
+  const isXxsUp = useMedia("xxs")
 
   const contentRef = useRef(null)
   const {
     config: { name, background },
     isTopLevel,
   } = usePageConfig()
-
-  // useEffect(() => {
-  //   if (headerRef) {
-  //     console.log(headerRef.current)
-  //   }
-  // }, [headerRef])
 
   return (
     <>
@@ -41,6 +37,7 @@ const Common = ({ children }) => {
             alt="floral background image to decorate the header"
           />
         ),
+        isXxsUp,
       })}
       <Footer />
     </>
