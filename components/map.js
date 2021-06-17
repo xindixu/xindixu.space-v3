@@ -12,7 +12,8 @@ import useMedia from "hooks/use-media"
 const { spacerSm, spacerBase, pink, fontSizeLg, fontSizeSm, fontSizeBase } =
   styleSettings
 
-const SIZE = 5
+const ROUTE_SIZE = 5
+const PLACE_SIZE = 10
 
 const Location = styled.div`
   ${({ position }) => `
@@ -98,14 +99,14 @@ const Map = () => {
             {/* Fuzhou */}
             <path
               strokeLinecap="round"
-              strokeWidth={SIZE}
+              strokeWidth={PLACE_SIZE}
               stroke={pink}
               d="M360 220 h0"
             />
             {/* Austin */}
             <path
               strokeLinecap="round"
-              strokeWidth={SIZE}
+              strokeWidth={PLACE_SIZE}
               stroke={pink}
               d="M740 210 h0"
             />
@@ -113,14 +114,14 @@ const Map = () => {
             {/* New York */}
             <path
               strokeLinecap="round"
-              strokeWidth={SIZE}
+              strokeWidth={PLACE_SIZE}
               stroke={pink}
               d="M790 170 h0"
             />
 
             <motion.path
               strokeLinecap="round"
-              strokeWidth={SIZE}
+              strokeWidth={ROUTE_SIZE}
               stroke={pink}
               fill="none"
               d="M360 220 C500 0 650 100 740 210"
@@ -130,7 +131,7 @@ const Map = () => {
 
             <motion.path
               strokeLinecap="round"
-              strokeWidth={SIZE}
+              strokeWidth={ROUTE_SIZE}
               stroke={pink}
               fill="none"
               d="M740 210 C750 175 780 170 790 170"
