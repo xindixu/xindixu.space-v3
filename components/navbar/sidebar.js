@@ -3,7 +3,7 @@ import Link from "next/link"
 import PropTypes from "prop-types"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { Box, Button, Layer, Nav, Sidebar as GSidebar } from "grommet"
+import { Box, Button, Layer, Nav, Sidebar as GSidebar, Text } from "grommet"
 import { Close } from "grommet-icons"
 import { motion, AnimatePresence } from "framer-motion"
 import styleSettings from "lib/style-settings"
@@ -79,7 +79,7 @@ const linkAnimation = {
   }),
 }
 
-const SidebarFooter = () => "Built with Next.js"
+const SidebarFooter = () => <Text color="light-5">Built with Next.js</Text>
 
 const SidebarButton = ({ icon, label, link, onClick, active }) => (
   <Link href={link} passHref>

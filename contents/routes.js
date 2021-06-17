@@ -1,8 +1,10 @@
 import { ContactInfo, Book, Briefcase, Home } from "grommet-icons"
-import Experiences from "pages/experiences"
-import Projects from "pages/projects"
+import CasperIcon from "components/casper-icon"
+import Casper from "pages/casper"
 import Contact from "pages/contact"
+import Experiences from "pages/experiences"
 import Index from "pages/index"
+import Projects from "pages/projects"
 
 export const links = [
   { icon: <Home />, name: "Home", link: "/", component: <Index /> },
@@ -23,6 +25,12 @@ export const links = [
     name: "Contact",
     link: "/contact",
     component: <Contact />,
+  },
+  {
+    icon: <CasperIcon />,
+    name: "Casper",
+    link: "/casper",
+    component: <Casper />,
   },
 ]
 
@@ -51,9 +59,15 @@ export const linksByPathname = {
     link: "/contact",
     background: { src: "/img/bg/bg-light-1.jpg", width: 1440, height: 960 },
   },
+  "/casper": {
+    icon: <CasperIcon />,
+    name: "Casper",
+    link: "/casper",
+    background: { src: "/img/bg/bg-light-4.jpg", width: 1440, height: 960 },
+  },
 }
 
 export const errorPage = {
   name: "404",
-  background: { src: "/img/bg/bg-light-7.jpg", width: 1440, height: 960 },
+  background: { src: "/img/bg/bg-light-5.jpg", width: 1440, height: 960 },
 }
