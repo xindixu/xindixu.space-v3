@@ -108,12 +108,12 @@ const Index = ({ setContentRef, isXxsUp }) => {
                 technologies on a deeper level.
               </Paragraph>
               <Paragraph fill>
-                I graduated with an Advertising major with Element of Computing
-                Certificate and a Business Minor at the University of Texas at
-                Austin. I earned the Element of Computing Certificate by taking
-                30 hours of Computer Science classes. I mastered software
-                engineering principles and worked with peers to design and built
-                full-stack web apps, iOS apps, games, and computer graphics.
+                I graduated with an Advertising major and a minor in Computer
+                Science and Business from the University of Texas at Austin. I
+                took 30 hours of Computer Science classes. I mastered software
+                engineering principles via working with peers to design and
+                build full-stack web apps, iOS apps, games, and computer
+                graphics.
               </Paragraph>
             </Box>
             <Box direction="row" align="center" justify="end" gap="large">
