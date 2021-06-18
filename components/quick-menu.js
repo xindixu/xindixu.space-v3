@@ -74,8 +74,8 @@ const subMenuCircleAnimation = {
 }
 
 const subIconAnimation = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1 },
+  hidden: { scale: 0, transition: { duration: 0.2 } },
+  visible: { scale: 1, transition: { duration: 0.1 } },
 }
 
 const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
@@ -100,23 +100,22 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
             {isOpen ? <Close /> : <AppsRounded />}
           </motion.div>
         }
-        primary
         hoverIndicator
-        onClick={() => {
-          setIsOpen((prevIsOpen) => !prevIsOpen)
-        }}
+        onClick={() => setIsOpen((prevIsOpen) => !prevIsOpen)}
+        primary
+        ref={ref}
       />
       <AnimatePresence>
         {isOpen && (
-          <Circle ref={ref} isOpen={isOpen}>
+          <Circle isOpen={isOpen}>
             {subMenu.map(({ name, link, icon }, index) => (
               <motion.div
                 key={name}
-                initial="hidden"
                 animate="visible"
-                exit="hidden"
-                variants={subMenuCircleAnimation}
                 custom={{ index, count }}
+                exit="hidden"
+                initial="hidden"
+                variants={subMenuCircleAnimation}
               >
                 <SubButton
                   a11yTitle={name}
