@@ -31,7 +31,7 @@ const VerticalText = styled.div`
   writing-mode: vertical-rl;
   text-orientation: mixed;
   float: right;
-  padding-top: ${spacerSm};
+  padding-top: 4px;
 `
 
 const Date = styled(Text)`

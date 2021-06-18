@@ -9,7 +9,7 @@ import { getImageCollage } from "lib/content/image-collage"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
 
-const { spacerSm } = styleSettings
+const { spacerXs, spacerSm } = styleSettings
 
 const variants = {
   out: ({ index }) => ({
@@ -38,7 +38,10 @@ const Casper = ({ imageCollage, isXxsUp }) => {
       pad={{ horizontal: isXxsUp ? "xlarge" : "medium", vertical: "xlarge" }}
     >
       <div ref={gridFef}>
-        <Masonry columnsCount={isBaseUp ? 5 : 3} gutter={spacerSm}>
+        <Masonry
+          columnsCount={isBaseUp ? 5 : 3}
+          gutter={isXxsUp ? spacerSm : spacerXs}
+        >
           {images.map(({ src, width, height }, index) => (
             <motion.div
               key={src}
