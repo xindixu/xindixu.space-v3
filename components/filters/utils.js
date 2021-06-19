@@ -4,6 +4,7 @@ const tagNameById = {
   "at-nokia": "Nokia",
   "at-personal": "Personal",
   "at-ut": "UT - Austin",
+  "at-daikin": "Daikin",
   "type-all": "All",
   "type-development": "Development",
   "type-advertising": "Advertising",
