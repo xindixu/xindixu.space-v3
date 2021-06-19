@@ -1,9 +1,8 @@
 import React, { useState, useRef, useEffect } from "react"
 import PropTypes from "prop-types"
-import Link from "next/link"
 import { useRouter } from "next/router"
 import styled from "styled-components"
-import { Main, Box, Button, Text, Anchor } from "grommet"
+import { Main, Box, Button } from "grommet"
 import { useWindowScroll } from "react-use"
 import { Previous } from "grommet-icons"
 import { getProject, getAllProjectSlugs } from "lib/content/project"
@@ -11,10 +10,9 @@ import Header from "components/header"
 import RichText from "components/rich-text"
 import InfoBox from "components/info-box"
 import TableOfContent from "components/table-of-content"
+import MetaBox from "components/meta-box"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
-import { formatDuration } from "utils/datetime"
-import { getName } from "components/filters/utils"
 
 const { spacerXxl } = styleSettings
 
@@ -31,6 +29,8 @@ const ReadableMain = styled(Main).attrs(({ isXxsUp }) => ({
   },
   margin: { bottom: "xlarge" },
 }))`
+  position: relative;
+
   & > div {
     width: 100%;
     max-width: 920px;
@@ -72,6 +72,7 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
 
   const contentRef = useRef()
   const [showToolbox, setShowToolbox] = useState(false)
+  const [activeHeader, setActiveHeader] = useState()
   const { y } = useWindowScroll()
   const isXlUp = useMedia("xl")
   const router = useRouter()
@@ -85,6 +86,23 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
       }
       if (!showToolbox && top < THRESHOLD) {
         setShowToolbox(true)
+      }
+    }
+  }, [showToolbox, y])
+
+  useEffect(() => {
+    if (contentRef.current) {
+      const headings = contentRef.current.querySelectorAll("h2, h3")
+
+      if (!headings) {
+        return
+      }
+      const displayHeadingIndex = [...headings].findIndex((heading) => {
+        const { top } = heading.getBoundingClientRect()
+        return top > 0
+      })
+      if (displayHeadingIndex - 1 >= 0) {
+        setActiveHeader(headings[displayHeadingIndex - 1].id)
       }
     }
   }, [showToolbox, y])
@@ -114,29 +132,9 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
             align="center"
             justify="between"
           >
-            <Box>
-              <Box direction="row" gap="small">
-                {tags.map((id) => {
-                  const [key, value] = id.split("-")
-                  return (
-                    <Link
-                      key={id}
-                      href={{ pathname: "/projects", query: { [key]: value } }}
-                      passHref
-                    >
-                      <Anchor label={getName(id)} />
-                    </Link>
-                  )
-                })}
-              </Box>
-              <Text size="small" color="dark-2">
-                {formatDuration({ start, end })}
-              </Text>
-            </Box>
-
+            <MetaBox tags={tags} start={start} end={end} />
             <InfoBox demoLink={demoLink} repoLink={repoLink} show horizontal />
           </TopBox>
-
           <div ref={contentRef}>
             <RichText mainContent={description} />
             <Button
@@ -162,7 +160,11 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
               show={showToolbox}
             />
             <Spacer />
-            <TableOfContent mainContent={description} show={showToolbox} />
+            <TableOfContent
+              mainContent={description}
+              show={showToolbox}
+              activeHeader={activeHeader}
+            />
           </FloatingBox>
         )}
       </Wrapper>
@@ -199,6 +201,9 @@ Project.propTypes = {
       width: PropTypes.number.isRequired,
       height: PropTypes.number.isRequired,
     }).isRequired,
+    end: PropTypes.string.isRequired,
+    start: PropTypes.string.isRequired,
+    tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
   }).isRequired,
   setHeaderRef: PropTypes.func.isRequired,
 }

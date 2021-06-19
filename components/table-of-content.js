@@ -6,7 +6,7 @@ import { Card, Anchor } from "grommet"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings"
 
-const { spacerBase } = styleSettings
+const { spacerBase, green, greenDark } = styleSettings
 
 const List = styled.ul`
   list-style: none;
@@ -14,12 +14,16 @@ const List = styled.ul`
 `
 
 const ListItem = styled.li`
-  ${({ level }) =>
-    `
+  ${({ level }) => `
     margin-left: calc(${level - 1} * ${spacerBase});
-    `}
+  `}
 `
 
+const ColorAnchor = styled(Anchor)`
+  ${({ active }) => `
+    color: ${active ? greenDark : green}
+    `}
+`
 const variants = {
   hidden: {
     y: -50,
@@ -35,13 +39,15 @@ const variants = {
 
 const parseContent = (mainContent) =>
   mainContent
-    .filter(({ nodeType }) => nodeType.startsWith("heading"))
+    .filter(
+      ({ nodeType }) => nodeType === "heading-1" || nodeType === "heading-2"
+    )
     .map(({ content, nodeType }) => ({
       title: content[0]?.value,
       level: parseInt(nodeType.split("-")[1] || 0, 10),
     }))
 
-const TableOfContent = ({ mainContent, show }) => {
+const TableOfContent = ({ mainContent, show, activeHeader }) => {
   if (!mainContent) {
     return null
   }
@@ -66,18 +72,22 @@ const TableOfContent = ({ mainContent, show }) => {
             <nav aria-label="Table of contents">
               <List>
                 {headings.map(({ title, level }) => {
-                  const id = `#${kebabCase(title)}`
+                  const id = kebabCase(title)
+                  const href = `#${kebabCase(title)}`
+                  const active = activeHeader === id
+
                   return (
                     <ListItem key={title} level={level}>
-                      <Anchor
+                      <ColorAnchor
+                        active={active}
                         size="small"
-                        href={id}
+                        href={href}
                         label={title}
                         onClick={(e) => {
                           e.preventDefault()
 
                           if (document !== undefined) {
-                            document.querySelector(id).scrollIntoView({
+                            document.querySelector(href).scrollIntoView({
                               behavior: "smooth",
                             })
                           }
@@ -102,7 +112,9 @@ TableOfContent.propTypes = {
         nodeType: PropTypes.string.isRequired,
       }).isRequired
     ).isRequired,
-  }),
+  }).isRequired,
+  activeHeader: PropTypes.string,
+  show: PropTypes.bool.isRequired,
 }
 
 export default TableOfContent
