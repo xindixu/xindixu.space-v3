@@ -23,7 +23,7 @@ const Code = styled.code`
   color: ${focus};
   word-break: break-word;
 `
-const ULList = styled.ul``
+const List = styled.ul``
 const ListItem = styled.li`
   &::marker {
     color: ${pink};
@@ -146,7 +146,7 @@ const options = {
         {children}
       </Heading>
     ),
-    [BLOCKS.UL_LIST]: (_, children) => <ULList>{children}</ULList>,
+    [BLOCKS.UL_LIST]: (_, children) => <List>{children}</List>,
     [BLOCKS.LIST_ITEM]: (_, children) => <ListItem>{children}</ListItem>,
     [BLOCKS.EMBEDDED_ASSET]: (node) => {
       const { title, file, description } = get(node, "data.target.fields")

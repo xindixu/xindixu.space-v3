@@ -12,6 +12,7 @@ import styleSettings from "lib/style-settings"
 const {
   readable,
   pink,
+  spacerBase,
   elevation: { light },
 } = styleSettings
 
@@ -28,6 +29,15 @@ const Wrapper = styled(VerticalTimeline)`
     .vertical-timeline-element-content {
       box-shadow: ${light.medium};
     }
+  }
+`
+
+const List = styled.ul`
+  padding-left: ${spacerBase};
+`
+const ListItem = styled.li`
+  &::marker {
+    color: ${pink};
   }
 `
 
@@ -53,11 +63,11 @@ const Timeline = () => (
         <Heading level="4" className="vertical-timeline-element-subtitle">
           {company}
         </Heading>
-        <ul>
+        <List>
           {list.map((l) => (
-            <li key={l}>{l}</li>
+            <ListItem key={l}>{l}</ListItem>
           ))}
-        </ul>
+        </List>
       </VerticalTimelineElement>
     ))}
   </Wrapper>

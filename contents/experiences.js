@@ -22,8 +22,8 @@ export const experiences = [
     ],
   },
   {
-    company: "the University of Texas at Austin",
-    jobTitle: "BS in Advertising & CS Minor",
+    company: "The University of Texas at Austin",
+    jobTitle: "BS in Advertising & Minor in CS",
     date: "08/2016 – 05/2020",
     icon: <Workshop />,
     list: [
@@ -44,7 +44,7 @@ export const experiences = [
   },
   {
     company: "ProMazo",
-    jobTitle: " Front-end Software Engineer",
+    jobTitle: "Front-end Software Engineer",
     date: "04/2020 – 08/2020",
     icon: <Briefcase />,
     list: [
