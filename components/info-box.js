@@ -8,11 +8,13 @@ import styleSettings from "lib/style-settings/index"
 const {
   elevation: { light },
   borderSize: { xlarge },
+  beige,
 } = styleSettings
 
 const IconButton = styled(Button)`
   border-radius: ${xlarge};
   box-shadow: ${light.medium};
+  background: ${beige};
 `
 
 const mainIconAnimation = {

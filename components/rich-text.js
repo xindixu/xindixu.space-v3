@@ -7,7 +7,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
 import styleSettings from "lib/style-settings"
 
-const { pink, focus } = styleSettings
+const { pink, focus, spacerBase, spacerLg } = styleSettings
 
 const embeddedContentCss = css`
   position: absolute;
@@ -52,8 +52,8 @@ const Embed = styled.embed`
 `
 
 const Heading = styled(BaseHeading)`
-  padding-top: 72px;
-  margin-top: -72px;
+  padding-top: calc(${spacerBase} + ${spacerLg});
+  margin-top: calc(-${spacerBase} - ${spacerLg});
   pointer-events: none;
 `
 

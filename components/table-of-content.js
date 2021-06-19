@@ -6,7 +6,7 @@ import { Card, Anchor } from "grommet"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings"
 
-const { spacerBase, green, greenDark } = styleSettings
+const { spacerBase } = styleSettings
 
 const List = styled.ul`
   list-style: none;
@@ -19,11 +19,6 @@ const ListItem = styled.li`
   `}
 `
 
-const ColorAnchor = styled(Anchor)`
-  ${({ active }) => `
-    color: ${active ? greenDark : green}
-    `}
-`
 const variants = {
   hidden: {
     y: -50,
@@ -78,8 +73,8 @@ const TableOfContent = ({ mainContent, show, activeHeader }) => {
 
                   return (
                     <ListItem key={title} level={level}>
-                      <ColorAnchor
-                        active={active}
+                      <Anchor
+                        color={active ? "pinkDark" : "beigeDark"}
                         size="small"
                         href={href}
                         label={title}
