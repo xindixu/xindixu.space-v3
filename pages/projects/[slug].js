@@ -99,11 +99,12 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
       }
       const displayHeadingIndex = [...headings].findIndex((heading) => {
         const { top } = heading.getBoundingClientRect()
-        return top > 0
+        return top > 72
       })
-      if (displayHeadingIndex - 1 >= 0) {
-        setActiveHeader(headings[displayHeadingIndex - 1].id)
-      }
+      const index =
+        displayHeadingIndex - 1 >= 0 ? displayHeadingIndex : headings.length
+
+      setActiveHeader(headings[index - 1].id)
     }
   }, [showToolbox, y])
 
