@@ -1,7 +1,7 @@
 # [XindiXu.Space](https://xindixu.space)
 
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=xindixu-space-v3&style=for-the-badge)
-
+[![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)
 
 Xindi Xu is a Software Engineer and an incoming MSCS student at Columbia University. Checkout her experiences, past projects, and cute kitty Casper Dr. Meowspy here!
 
