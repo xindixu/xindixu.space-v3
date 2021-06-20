@@ -3,19 +3,24 @@
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=xindixu-space-v3&style=for-the-badge)
 
 
-Xindi Xu is a Software Engineer and an incoming MSCS student at Columbia University. Checkout her experiences, past projects, and kitty Casper Dr. Meowspy here!
+Xindi Xu is a Software Engineer and an incoming MSCS student at Columbia University. Checkout her experiences, past projects, and cute kitty Casper Dr. Meowspy here!
 
 Built with Next.js with content managed by Contentful, this website optimizes loading experiences and eases future updates. It also contains many hand-crafted animations created with Framer Motion to enhance UX.
 
 ## Notable Libraries Used
-- [Next.js](https://nextjs.org): Static site generation & server-side rendering
-- [React.js](https://reactjs.org): Declarative way to build UIs efficiently
-- [Styled components](https://styled-components.com): Better CSS styling for React component systems
-- [Grommet](https://v2.grommet.io): Styled-component-based framework that provides accessibility, modularity, responsiveness, and theming
-- [Contentful](https://www.contentful.com): Modern CMS that provides content infrastructure for modern web apps 
-- [Framer motion](https://www.framer.com/motion/): Production-ready animation and gesture library for React
-- [Emailjs](https://www.emailjs.com): Send email directly from JavaScript without any server code
-- [Vercel](https://vercel.com): Deployment services that combines the best developer experience with an obsessive focus on end-user performance
+
+|   |   |
+|---|---|
+| [Next.js](https://nextjs.org) | Static site generation & server-side rendering |
+| [React.js](https://reactjs.org) | Declarative way to build UIs efficiently |
+| [Styled components](https://styled-components.com) | Better CSS styling for React component systems |
+| [Grommet](https://v2.grommet.io) | Styled-component-based framework that provides accessibility, modularity, responsiveness, and theming |
+| [Framer motion](https://www.framer.com/motion/) | Production-ready animation and gesture library for React |
+| [Octokit](https://github.com/octokit) | Official clients for the GitHub API |
+| [Chart.js](https://github.com/reactchartjs/react-chartjs-2) | React wrapper for [Chart.js](https://www.chartjs.org), a simple yet flexible JavaScript charting library |
+| [Contentful](https://www.contentful.com) | Modern CMS that provides content infrastructure for modern web apps  |
+| [Emailjs](https://www.emailjs.com) | Send email directly from JavaScript without any server code |
+| [Vercel](https://vercel.com) | Deployment services that combines the best developer experience with an obsessive focus on end-user performance |
 
 ## To Set Up
 - Run `yarn install`
@@ -34,6 +39,7 @@ Built with Next.js with content managed by Contentful, this website optimizes lo
 - Add those env variables above in Vercel app settings
 
 ## Sample Build Output
+```
 Page                                                           Size     First Load JS
 ┌ ○ /                                                          168 B           349 kB
 ├   /_app                                                      0 B             349 kB
@@ -70,3 +76,4 @@ Page                                                           Size     First Lo
 ○  (Static)  automatically rendered as static HTML (uses no initial props)
 ●  (SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
    (ISR)     incremental static regeneration (uses revalidate in getStaticProps)
+```
