@@ -1,5 +1,6 @@
 import React, { useState } from "react"
-import { Box, Header, Button, Text } from "grommet"
+import Link from "next/link"
+import { Box, Header, Button, Text, Anchor } from "grommet"
 import { Menu } from "grommet-icons"
 import styled from "styled-components"
 import Sidebar from "./sidebar"
@@ -11,6 +12,11 @@ const FixTop = styled(Box)`
   z-index: 1;
 `
 
+const NoUnderlineLink = styled(Anchor)`
+  &:hover {
+    text-decoration: none;
+  }
+`
 const solidStyleProps = {
   background: "brand",
   elevation: "medium",
@@ -29,7 +35,9 @@ const Navbar = ({ isHeaderInView }) => {
           {...(isHeaderInView ? {} : solidStyleProps)}
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
-          <Text margin="none">XindiXu.Space</Text>
+          <Link href="/" passHref>
+            <NoUnderlineLink color="dark-2">XindiXu.Space</NoUnderlineLink>
+          </Link>
           <Button
             icon={<Menu />}
             onClick={() => setShowSideBar(true)}
