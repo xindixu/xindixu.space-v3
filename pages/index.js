@@ -189,6 +189,10 @@ const Index = ({ setContentRef, isXxsUp }) => {
   )
 }
 
+Index.defaultProps = {
+  setContentRef: () => {},
+}
+
 Index.propTypes = {
   setContentRef: PropTypes.func,
 }

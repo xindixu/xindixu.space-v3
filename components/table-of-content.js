@@ -100,6 +100,10 @@ const TableOfContent = ({ mainContent, show, activeHeader }) => {
   )
 }
 
+TableOfContent.defaultProps = {
+  activeHeader: "",
+}
+
 TableOfContent.propTypes = {
   mainContent: PropTypes.shape({
     content: PropTypes.arrayOf(
