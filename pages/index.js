@@ -175,13 +175,20 @@ const Index = ({ setContentRef, isXxsUp }) => {
           <Link href="/projects" passHref>
             <Button
               as="a"
-              primary
+              secondary
               label="View Selected Projects"
               size="medium"
+              align="center"
             />
           </Link>
           <Link href="/experiences" passHref>
-            <Button as="a" primary label="View My Life Story" size="medium" />
+            <Button
+              as="a"
+              secondary
+              label="View My Life Story"
+              size="medium"
+              align="center"
+            />
           </Link>
         </Box>
       </ReadableRow>
