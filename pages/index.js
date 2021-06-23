@@ -102,18 +102,24 @@ const Index = ({ setContentRef, isXxsUp }) => {
             <Box>
               <Paragraph fill>
                 I enjoy designing and implementing full-stack features with
-                complex functionalities at Pingboard. I&apos;ve helped migrate
-                legacy front-end code to modern technologies. I&apos;m
-                passionate about improving user experience and understand
-                technologies on a deeper level.
+                complex functionalities. I&apos;m passionate about improving
+                user experience and understand technologies on a deeper level.
+                I&apos;m building web apps, using JavaScript, React, and Vue,
+                but also curious on other applications of CS.
               </Paragraph>
               <Paragraph fill>
-                I graduated with an Advertising major and a minor in Computer
-                Science and Business from the University of Texas at Austin. I
-                took 30 hours of Computer Science classes. I mastered software
-                engineering principles via working with peers to design and
-                build full-stack web apps, iOS apps, games, and computer
-                graphics.
+                Recently, I concluded my years of working as a Software Engineer
+                at Pingboard, where I work in teams to build fully fledged
+                features in a timely manner. I&apos;m taking online classes,
+                spending time with my families, and preparing to start my
+                graduate school at Columbia University.
+              </Paragraph>
+              <Paragraph fill>
+                Before that, I was studying Advertising and Computer Science at
+                the University of Texas at Austin. I took 30 credit hours of
+                Computer Science classes and mastered software engineering
+                principles via working with peers to design and build full-stack
+                web apps, iOS apps, games, and computer graphics.
               </Paragraph>
             </Box>
             <Box direction="row" align="center" justify="end" gap="large">
