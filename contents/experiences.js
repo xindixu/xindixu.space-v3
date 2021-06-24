@@ -9,6 +9,16 @@ export const experiences = [
     list: [],
   },
   {
+    company: "BrainHAK",
+    jobTitle: "Lead Software Engineer & Project Manager",
+    date: "06/2021 – Present",
+    icon: <Briefcase />,
+    list: [
+      "Research and decide on tech stacks to use based on product features for a static website and a web app.",
+      "Plan out development cycle and distribute tasks based on engineers' skill sets",
+    ],
+  },
+  {
     company: "Pingboard",
     jobTitle: "Software Engineer",
     date: "06/2020 – 06/2021",
