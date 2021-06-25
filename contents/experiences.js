@@ -37,9 +37,9 @@ export const experiences = [
     date: "08/2016 – 05/2020",
     icon: <Workshop />,
     list: [
-      "Took 30 credit hours of CS classes, built various web apps, mobile apps, and games with industry-standard technologies",
-      "Conducted dozens of advertising projects, graduated from Texas Media & Analytics, the top 1 advertising program in the U.S.",
-      "Completed Business minor, learned Japanese, built Raptors for theater show",
+      "Took 30 credit hours of CS classes and built various web apps, mobile apps, and games with industry-standard technologies",
+      "Conducted dozens of advertising projects and graduated from Texas Media & Analytics, the number 1 advertising program in the U.S.",
+      "Graduated with BS in Advertising with Honor, earned CS certificate, Japanese certificate, Business minor, and history minor",
     ],
   },
   {
