@@ -7,9 +7,9 @@ Xindi Xu is a Software Engineer and an incoming MSCS student at Columbia Univers
 
 Built with Next.js with content managed by Contentful, this website optimizes loading experiences and eases future updates. It also contains many hand-crafted animations created with Framer Motion to enhance UX.
 
-## Notable Libraries Used
+## Notable Tools/Libraries Used
 
-|   |   |
+| Tool/Library | Description |
 |---|---|
 | [Next.js](https://nextjs.org) | Static site generation & server-side rendering |
 | [React.js](https://reactjs.org) | Declarative way to build UIs efficiently |
