@@ -31,6 +31,13 @@ const MainButton = styled(Button)`
   left: 16px;
   border-radius: 50%;
   box-shadow: ${light.medium};
+
+  &&& {
+    &:focus {
+      box-shadow: ${light.medium};
+    }
+  }
+
   z-index: 1;
 `
 
