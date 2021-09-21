@@ -5,7 +5,7 @@ import styleSettings from "lib/style-settings/index"
 
 const {
   fontRoot,
-  pink,
+  brand,
   colors: { "light-1": lightGray },
   borderSize: { small },
 } = styleSettings
@@ -44,7 +44,7 @@ const ContentWrapper = styled.div`
 
 const LoadingIndicator = styled.div`
   border: ${small} solid ${lightGray};
-  border-top: ${small} solid ${pink};
+  border-top: ${small} solid ${brand};
   border-radius: 50%;
 
   animation: ${spin} 2s infinite;

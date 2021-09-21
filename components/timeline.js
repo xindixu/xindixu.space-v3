@@ -11,7 +11,7 @@ import styleSettings from "lib/style-settings"
 
 const {
   readable,
-  pink,
+  brand,
   spacerBase,
   elevation: { light },
 } = styleSettings
@@ -22,7 +22,7 @@ const Wrapper = styled(VerticalTimeline)`
     max-width: ${readable};
 
     &::before {
-      background: ${pink};
+      background: ${brand};
     }
 
     .vertical-timeline-element-icon,
@@ -37,7 +37,7 @@ const List = styled.ul`
 `
 const ListItem = styled.li`
   &::marker {
-    color: ${pink};
+    color: ${brand};
   }
 `
 
@@ -47,10 +47,10 @@ const Timeline = () => (
       <VerticalTimelineElement
         key={date}
         className="vertical-timeline-element--work"
-        contentStyle={{ border: `1px solid ${pink}` }}
-        contentArrowStyle={{ borderRight: `7px solid ${pink}` }}
+        contentStyle={{ border: `1px solid ${brand}` }}
+        contentArrowStyle={{ borderRight: `7px solid ${brand}` }}
         date={date}
-        iconStyle={{ background: pink }}
+        iconStyle={{ background: brand }}
         icon={icon}
       >
         <Heading

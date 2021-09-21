@@ -13,7 +13,14 @@ import { media } from "lib/style-settings/media-query"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
 
-const { readable, beige, spacerXl, spacerLg, spacerBase } = styleSettings
+const {
+  readable,
+  "neutral-4": neutral4,
+  spacerXl,
+  spacerLg,
+  spacerBase,
+} = styleSettings
+
 const Half = styled(Box).attrs({
   margin: { horizontal: "xlarge" },
   pad: { vertical: "large" },
@@ -57,7 +64,7 @@ const Avatar = styled(Image)`
 `
 
 const Quote = styled.div`
-  color: ${beige};
+  color: ${neutral4};
   font-size: ${spacerXl};
 `
 

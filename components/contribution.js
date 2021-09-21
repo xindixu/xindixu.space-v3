@@ -7,7 +7,7 @@ import { getRecentCommits } from "lib/github"
 import styleSettings from "lib/style-settings/index"
 import { MONTH_DAY_FORMAT } from "utils/datetime"
 
-const { pink } = styleSettings
+const { brand } = styleSettings
 
 const getDate = (isoStr) => isoStr.split("T")[0]
 
@@ -31,8 +31,8 @@ const parseData = (commits) => {
         data,
         fill: false,
         stepped: true,
-        borderColor: pink,
-        backgroundColor: `${pink}50`,
+        borderColor: brand,
+        backgroundColor: `${brand}50`,
       },
     ],
   }

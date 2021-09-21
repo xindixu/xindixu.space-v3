@@ -7,7 +7,7 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
 import styleSettings from "lib/style-settings"
 
-const { pink, focus, spacerBase, spacerLg } = styleSettings
+const { brand, "accent-1": accent1, spacerBase, spacerLg } = styleSettings
 
 const embeddedContentCss = css`
   position: absolute;
@@ -20,13 +20,13 @@ const embeddedContentCss = css`
 
 const Code = styled.code`
   font-size: 87.5%;
-  color: ${focus};
+  color: ${accent1};
   word-break: break-word;
 `
 const List = styled.ul``
 const ListItem = styled.li`
   &::marker {
-    color: ${pink};
+    color: ${brand};
   }
 `
 const Video = styled.video`

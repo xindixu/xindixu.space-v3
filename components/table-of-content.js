@@ -62,7 +62,7 @@ const TableOfContent = ({ mainContent, show, activeHeader }) => {
             width="small"
             height="min-content"
             pad={{ horizontal: "small" }}
-            background="white"
+            background="background"
           >
             <nav aria-label="Table of contents">
               <List>
@@ -74,7 +74,7 @@ const TableOfContent = ({ mainContent, show, activeHeader }) => {
                   return (
                     <ListItem key={title} level={level}>
                       <Anchor
-                        color={active ? "pinkDark" : "beigeDark"}
+                        color={active ? "brand" : "accent-4"}
                         size="small"
                         href={href}
                         label={title}

@@ -39,7 +39,6 @@ const ReadableMain = styled(Main).attrs(({ isXxsUp }) => ({
 const Spacer = styled(Box)`
   width: 920px;
   pointer-events: none;
-  // background: beige;
 `
 
 const FloatingBox = styled(Box)`

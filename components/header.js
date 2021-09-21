@@ -7,16 +7,16 @@ import styleSettings from "lib/style-settings"
 import { media } from "lib/style-settings/media-query"
 
 const {
-  pink,
-  "accent-4": beige,
-  white,
+  brand,
+  "neutral-4": neutral4,
+  background,
   spacerXs,
   spacerSm,
   size: { large, medium },
 } = styleSettings
 
 const Gradient = styled(Box)`
-  background: radial-gradient(circle, ${white}00 60%, ${pink}60 100%);
+  background: radial-gradient(circle, ${background}00 60%, ${brand}60 100%);
 `
 const Content = styled(Box)`
   width: ${medium};
@@ -27,11 +27,11 @@ const Content = styled(Box)`
     height: ${large};
   `}
 
-  background: radial-gradient(circle, ${white}55 80%, ${white} 100%);
+  background: radial-gradient(circle, ${background}55 80%, ${background} 100%);
 `
 
 const Label = styled(Box)`
-  background: ${beige};
+  background: ${neutral4};
   margin: ${spacerXs} ${spacerSm};
 `
 
@@ -74,7 +74,7 @@ const Header = React.forwardRef(
         <motion.div style={{ y: titleY, x: 0 }}>
           <Content align="center" justify="center">
             <Heading
-              color="black"
+              color="foreground"
               size={full ? "xlarge" : "medium"}
               textAlign="center"
             >

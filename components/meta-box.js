@@ -16,7 +16,7 @@ const MetaBox = ({ tags, start, end }) => (
             href={{ pathname: "/projects", query: { [key]: value } }}
             passHref
           >
-            <Anchor label={getName(id)} color="beigeDark" />
+            <Anchor label={getName(id)} color="brand" />
           </Link>
         )
       })}
