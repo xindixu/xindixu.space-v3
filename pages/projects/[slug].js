@@ -142,7 +142,7 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
               icon={<Previous size="small" />}
               label="Back"
               onClick={() => router.back()}
-              primary
+              secondary
             />
           </div>
         </ReadableMain>

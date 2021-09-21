@@ -36,7 +36,7 @@ const Navbar = ({ isHeaderInView }) => {
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
           <Link href="/" passHref>
-            <NoUnderlineLink color="dark-2">XindiXu.Space</NoUnderlineLink>
+            <NoUnderlineLink color="dark-3">XindiXu.Space</NoUnderlineLink>
           </Link>
           <Button
             icon={<Menu />}
