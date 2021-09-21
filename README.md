@@ -3,7 +3,7 @@
 ![Vercel](https://therealsujitk-vercel-badge.vercel.app/?app=xindixu-space-v3&style=for-the-badge)
 [![License: GPL v3](https://img.shields.io/badge/License-GPLv3-blue.svg?style=for-the-badge)](https://www.gnu.org/licenses/gpl-3.0)
 
-Xindi Xu is a Software Engineer and an incoming MSCS student at Columbia University. Checkout her experiences, past projects, and cute kitty Casper Dr. Meowspy here!
+Xindi Xu is a Software Engineer and a Master of Science in Computer Science student at Columbia University. Checkout her experiences, past projects, and cute kitty Casper Dr. Meowspy here!
 
 Built with Next.js with content managed by Contentful, this website optimizes loading experiences and eases future updates. It also contains many hand-crafted animations created with Framer Motion to enhance UX.
 
