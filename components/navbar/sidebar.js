@@ -138,7 +138,7 @@ const Sidebar = ({ onClose, show }) => {
             animation="none"
             elevation="medium"
             full="vertical"
-            modal={false}
+            modal
             onClickOutside={onClose}
             onEsc={onClose}
             position="right"
