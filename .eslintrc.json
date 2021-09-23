@@ -3,7 +3,12 @@
   "env": {
     "browser": true
   },
-  "extends": ["airbnb", "prettier", "plugin:import/recommended"],
+  "extends": [
+    "airbnb",
+    "prettier",
+    "plugin:import/recommended",
+    "plugin:@next/next/recommended"
+  ],
   "parser": "babel-eslint",
   "parserOptions": {
     "sourceType": "module",

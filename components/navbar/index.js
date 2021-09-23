@@ -1,6 +1,6 @@
 import React, { useState } from "react"
 import Link from "next/link"
-import { Box, Header, Button, Text, Anchor } from "grommet"
+import { Box, Header, Button, Anchor } from "grommet"
 import { Menu } from "grommet-icons"
 import styled from "styled-components"
 import Sidebar from "./sidebar"
