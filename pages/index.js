@@ -115,18 +115,21 @@ const Index = ({ setContentRef, isXxsUp }) => {
                 but also curious on other applications of CS.
               </Paragraph>
               <Paragraph fill>
-                Recently, I concluded my years of working as a Software Engineer
-                at Pingboard, where I work in teams to build fully fledged
-                features in a timely manner. I&apos;m taking online classes,
-                spending time with my families, and preparing to start my
-                graduate school at Columbia University.
+                I&apos;m currently pursing a Master of Science in Computer
+                Science at Columbia University. This semester, I&apos;m taking
+                classes in AI, Engineering Software-as-a-Service, Programming
+                Languages and Translators, and Analysis of Algorithms. Before
+                coming to Columbia, I was a Software Engineer at Pingboard,
+                where I worked in teams to build fully fledged features in a
+                timely manner.
               </Paragraph>
               <Paragraph fill>
-                Before that, I was studying Advertising and Computer Science at
-                the University of Texas at Austin. I took 30 credit hours of
-                Computer Science classes and mastered software engineering
-                principles via working with peers to design and build full-stack
-                web apps, iOS apps, games, and computer graphics.
+                In 2020, I graduated from the University of Texas at Austin,
+                with a Bachelor of Science in Advertising and Minor in Computer
+                Science. I took 30 credit hours of Computer Science classes and
+                mastered software engineering principles via working with peers
+                to design and build full-stack web apps, iOS apps, games, and
+                computer graphics.
               </Paragraph>
             </Box>
             <Box direction="row" align="center" justify="end" gap="large">
@@ -148,11 +151,11 @@ const Index = ({ setContentRef, isXxsUp }) => {
           <Box direction="column" gap="large" align="center">
             <Map />
             <Paragraph fill>
-              I spent the first 18 years of my life in Fuzhou, China. I missed
-              all my close friends and tasty foodies there. I moved to Austin,
-              TX for my undergrad at University of Texas at Austin. After
-              graduation, I worked at Pingboard as a Software Engineer for a
-              year. Soon, I&apos;ll join Columbia University as a MSCS student.
+              I spent the first 18 years of my life in Fuzhou, China. I miss all
+              my close friends and tasty foodies there. I moved to Austin, TX
+              for my undergrad. This summer, I drove with my kitties from Austin
+              to New York. Bye Texas summer heat and hello New York winter
+              chill~
             </Paragraph>
           </Box>
         </Right>
