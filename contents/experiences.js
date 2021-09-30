@@ -3,7 +3,7 @@ import { Briefcase, Workshop } from "grommet-icons"
 export const experiences = [
   {
     company: "Columbia University",
-    jobTitle: "MS in CS",
+    jobTitle: "MS in CS (Software System)",
     date: "08/2021 – Present",
     icon: <Workshop />,
     list: [],
