@@ -2,11 +2,23 @@ import React from "react"
 import styled, { createGlobalStyle } from "styled-components"
 import { Grommet } from "grommet"
 import { motion } from "framer-motion"
+import { ThemeProvider, useTheme } from "next-themes"
 import CommonLayout from "layout/common"
 import useClick from "hooks/use-click"
 import customTheme from "lib/style-settings/theme"
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    /* Your default theme */
+    --background: white;
+    --foreground: black;
+  }
+  
+  [data-theme='dark'] {
+    --background: black;
+    --foreground: white;
+  }
+
   body {
     margin: 0;
     padding: 0;
@@ -38,9 +50,10 @@ const pageAnimation = {
   }),
 }
 
-const App = ({ Component, pageProps, router }) => {
+const Content = ({ Component, pageProps, router }) => {
   const d = process.browser ? document : null
   const { coordinates } = useClick({ node: d })
+  const { theme, setTheme } = useTheme()
 
   return (
     <NoOverflow theme={customTheme} full>
@@ -67,5 +80,11 @@ const App = ({ Component, pageProps, router }) => {
     </NoOverflow>
   )
 }
+
+const App = ({ Component, pageProps, router }) => (
+  <ThemeProvider>
+    <Content Component={Component} pageProps={pageProps} router={router} />
+  </ThemeProvider>
+)
 
 export default App
