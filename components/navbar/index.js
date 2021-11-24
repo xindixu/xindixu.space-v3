@@ -1,9 +1,11 @@
 import React, { useState } from "react"
 import Link from "next/link"
 import { Box, Header, Button, Anchor } from "grommet"
-import { Menu } from "grommet-icons"
+import { Sun, Moon, Menu } from "grommet-icons"
+import { useTheme } from "next-themes"
 import styled from "styled-components"
 import Sidebar from "./sidebar"
+import { DARK, LIGHT } from "lib/style-settings"
 
 const FixTop = styled(Box)`
   position: fixed;
@@ -28,6 +30,8 @@ const solidStyleProps = {
 
 const Navbar = ({ isHeaderInView }) => {
   const [showSideBar, setShowSideBar] = useState(false)
+  const { theme, setTheme } = useTheme()
+  const newTheme = theme === LIGHT ? DARK : LIGHT
   return (
     <>
       <FixTop fill="horizontal">
@@ -38,11 +42,18 @@ const Navbar = ({ isHeaderInView }) => {
           <Link href="/" passHref>
             <NoUnderlineLink color="dark-3">XindiXu.Space</NoUnderlineLink>
           </Link>
-          <Button
-            icon={<Menu />}
-            onClick={() => setShowSideBar(true)}
-            a11yTitle="open menu"
-          />
+          <Box direction="row">
+            <Button
+              icon={theme === LIGHT ? <Moon /> : <Sun />}
+              onClick={() => setTheme(newTheme)}
+              a11yTitle={`toggle ${newTheme} mode`}
+            />
+            <Button
+              icon={<Menu />}
+              onClick={() => setShowSideBar(true)}
+              a11yTitle="open menu"
+            />
+          </Box>
         </Header>
       </FixTop>
 

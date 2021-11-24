@@ -2,10 +2,11 @@ import React from "react"
 import styled, { createGlobalStyle } from "styled-components"
 import { Grommet } from "grommet"
 import { motion } from "framer-motion"
-import { ThemeProvider, useTheme } from "next-themes"
+import { ThemeProvider } from "next-themes"
 import CommonLayout from "layout/common"
 import useClick from "hooks/use-click"
 import customTheme from "lib/style-settings/theme"
+import { DARK, LIGHT } from "lib/style-settings"
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -14,7 +15,7 @@ const GlobalStyle = createGlobalStyle`
     --foreground: black;
   }
   
-  [data-theme='dark'] {
+  [data-theme='${DARK}'] {
     --background: black;
     --foreground: white;
   }
@@ -50,13 +51,20 @@ const pageAnimation = {
   }),
 }
 
+const isDarkMode = (d) => {
+  if (!d) {
+    return false
+  }
+  const el = d.getElementsByTagName("html")[0]
+  return el?.dataset?.theme === DARK
+}
 const Content = ({ Component, pageProps, router }) => {
   const d = process.browser ? document : null
   const { coordinates } = useClick({ node: d })
-  const { theme, setTheme } = useTheme()
+  const darkMode = isDarkMode(d)
 
   return (
-    <NoOverflow theme={customTheme} full>
+    <NoOverflow theme={customTheme} themeMode={darkMode ? DARK : LIGHT} full>
       <GlobalStyle />
       <CommonLayout>
         {({ setContentRef, setHeaderRef, header, isXxsUp }) => (
