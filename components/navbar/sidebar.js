@@ -10,15 +10,15 @@ import styleSettings from "lib/style-settings"
 import { links } from "contents/routes"
 import useMedia from "hooks/use-media"
 
-const { brand, foreground, background } = styleSettings
+const { pink, foreground, background } = styleSettings
 
 const GradientBackground = styled(GSidebar)`
   ${({ isBaseUp }) => `
     background: linear-gradient(
       0deg,
       ${foreground}BB -10%,
-      ${brand}${isBaseUp ? "88" : "BB"} 90%,
-      ${brand} 100%
+      ${pink}${isBaseUp ? "88" : "BB"} 90%,
+      ${pink} 100%
     );
 `}
 `

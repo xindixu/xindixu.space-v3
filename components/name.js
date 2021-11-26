@@ -8,7 +8,7 @@ import { nameZh } from "assets/svg/name-zh"
 import styleSettings from "lib/style-settings"
 import AnimatedSvg from "components/animated-svg"
 
-const { brand } = styleSettings
+const { pink } = styleSettings
 
 const SvgWrapper = styled(Box)`
   div,
@@ -46,7 +46,7 @@ const Name = () => {
             {(props) => (
               <g
                 transform={`translate(0,${height}) scale(0.1,-0.1)`}
-                fill={brand}
+                fill={pink}
                 stroke="none"
               >
                 {paths.map((d, index) => (
@@ -55,7 +55,7 @@ const Name = () => {
                     key={index}
                     fill="transparent"
                     d={d}
-                    stroke={brand}
+                    stroke={pink}
                     strokeWidth="40"
                     {...props}
                   />

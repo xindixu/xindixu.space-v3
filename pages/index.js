@@ -13,13 +13,7 @@ import { media } from "lib/style-settings/media-query"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
 
-const {
-  readable,
-  "neutral-4": neutral4,
-  spacerXl,
-  spacerLg,
-  spacerBase,
-} = styleSettings
+const { readable, beigeLight, spacerXl, spacerLg, spacerBase } = styleSettings
 
 const Half = styled(Box).attrs({
   margin: { horizontal: "xlarge" },
@@ -64,7 +58,7 @@ const Avatar = styled(Image)`
 `
 
 const Quote = styled.div`
-  color: ${neutral4};
+  color: ${beigeLight};
   font-size: ${spacerXl};
 `
 
@@ -146,7 +140,7 @@ const Index = ({ setContentRef, isXxsUp }) => {
           </Box>
         </Left>
       </ReadableRow>
-      <ReadableRow isXxsUp={isXxsUp} background="bg-paper">
+      <ReadableRow isXxsUp={isXxsUp} background="background-front">
         <Right>
           <Box direction="column" gap="large" align="center">
             <Map />
@@ -172,7 +166,7 @@ const Index = ({ setContentRef, isXxsUp }) => {
           </Box>
         </Left>
       </ReadableRow>
-      <ReadableRow isXxsUp={isXxsUp} background="bg-paper">
+      <ReadableRow isXxsUp={isXxsUp} background="background-front">
         <Right>
           <Box fill="horizontal" direction="column" gap="large">
             <Heading level={2}>Commits on GitHub</Heading>

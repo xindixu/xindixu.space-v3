@@ -7,8 +7,8 @@ import styleSettings from "lib/style-settings"
 import { media } from "lib/style-settings/media-query"
 
 const {
-  brand,
-  "neutral-4": neutral4,
+  pink,
+  beigeLight,
   background,
   spacerXs,
   spacerSm,
@@ -16,7 +16,7 @@ const {
 } = styleSettings
 
 const Gradient = styled(Box)`
-  background: radial-gradient(circle, ${background}00 60%, ${brand}60 100%);
+  background: radial-gradient(circle, ${background}00 60%, ${pink}60 100%);
 `
 const Content = styled(Box)`
   width: ${medium};
@@ -31,7 +31,7 @@ const Content = styled(Box)`
 `
 
 const Label = styled(Box)`
-  background: ${neutral4};
+  background: ${beigeLight};
   margin: ${spacerXs} ${spacerSm};
 `
 

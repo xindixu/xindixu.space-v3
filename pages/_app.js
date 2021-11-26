@@ -7,18 +7,19 @@ import CommonLayout from "layout/common"
 import useClick from "hooks/use-click"
 import customTheme from "lib/style-settings/theme"
 import { DARK, LIGHT } from "lib/style-settings"
+import { isDarkMode } from "lib/style-settings/utils"
 
 const GlobalStyle = createGlobalStyle`
-  :root {
-    /* Your default theme */
-    --background: white;
-    --foreground: black;
-  }
+  // :root {
+  //   /* Your default theme */
+  //   --background: white;
+  //   --foreground: black;
+  // }
   
-  [data-theme='${DARK}'] {
-    --background: black;
-    --foreground: white;
-  }
+  // [data-theme='${DARK}'] {
+  //   --background: black;
+  //   --foreground: white;
+  // }
 
   body {
     margin: 0;
@@ -51,17 +52,10 @@ const pageAnimation = {
   }),
 }
 
-const isDarkMode = (d) => {
-  if (!d) {
-    return false
-  }
-  const el = d.getElementsByTagName("html")[0]
-  return el?.dataset?.theme === DARK
-}
 const Content = ({ Component, pageProps, router }) => {
   const d = process.browser ? document : null
   const { coordinates } = useClick({ node: d })
-  const darkMode = isDarkMode(d)
+  const darkMode = isDarkMode()
 
   return (
     <NoOverflow theme={customTheme} themeMode={darkMode ? DARK : LIGHT} full>

@@ -8,13 +8,13 @@ import styleSettings from "lib/style-settings/index"
 const {
   elevation: { light },
   borderSize: { xlarge },
-  "accent-4": accent4,
+  beigeDark,
 } = styleSettings
 
 const IconButton = styled(Button)`
   border-radius: ${xlarge};
   box-shadow: ${light.medium};
-  background: ${accent4};
+  background: ${beigeDark};
 `
 
 const mainIconAnimation = {
