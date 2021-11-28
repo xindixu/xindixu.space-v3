@@ -1,6 +1,6 @@
 import React from "react"
 import styled, { createGlobalStyle } from "styled-components"
-import { Grommet } from "grommet"
+import { Grommet as BaseGrommet } from "grommet"
 import { motion } from "framer-motion"
 import { ThemeProvider } from "next-themes"
 import CommonLayout from "layout/common"
@@ -10,17 +10,6 @@ import { DARK, LIGHT } from "lib/style-settings"
 import { isDarkMode } from "lib/style-settings/utils"
 
 const GlobalStyle = createGlobalStyle`
-  // :root {
-  //   /* Your default theme */
-  //   --background: white;
-  //   --foreground: black;
-  // }
-  
-  // [data-theme='${DARK}'] {
-  //   --background: black;
-  //   --foreground: white;
-  // }
-
   body {
     margin: 0;
     padding: 0;
@@ -30,7 +19,7 @@ const GlobalStyle = createGlobalStyle`
 `
 
 // This fix the bug where next.js wouldn't scroll back to top when page changes
-const NoOverflow = styled(Grommet)`
+const Grommet = styled(BaseGrommet)`
   overflow: initial;
 `
 
@@ -55,10 +44,10 @@ const pageAnimation = {
 const Content = ({ Component, pageProps, router }) => {
   const d = process.browser ? document : null
   const { coordinates } = useClick({ node: d })
-  const darkMode = isDarkMode()
+  const darkMode = isDarkMode(d)
 
   return (
-    <NoOverflow theme={customTheme} themeMode={darkMode ? DARK : LIGHT} full>
+    <Grommet theme={customTheme} themeMode={darkMode ? DARK : LIGHT} full>
       <GlobalStyle />
       <CommonLayout>
         {({ setContentRef, setHeaderRef, header, isXxsUp }) => (
@@ -79,7 +68,7 @@ const Content = ({ Component, pageProps, router }) => {
           </PageAnimate>
         )}
       </CommonLayout>
-    </NoOverflow>
+    </Grommet>
   )
 }
 
