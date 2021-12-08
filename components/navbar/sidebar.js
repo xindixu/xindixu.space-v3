@@ -9,16 +9,17 @@ import { motion, AnimatePresence } from "framer-motion"
 import styleSettings from "lib/style-settings"
 import { links } from "contents/routes"
 import useMedia from "hooks/use-media"
+import { color } from "lib/style-settings/utils"
 
-const { pink, foreground, background } = styleSettings
+const { PINK, foreground, background } = styleSettings
 
 const GradientBackground = styled(GSidebar)`
   ${({ isBaseUp }) => `
     background: linear-gradient(
       0deg,
       ${foreground}BB -10%,
-      ${pink}${isBaseUp ? "88" : "BB"} 90%,
-      ${pink} 100%
+      ${color(PINK)}${isBaseUp ? "88" : "BB"} 90%,
+      ${color(PINK)} 100%
     );
 `}
 `

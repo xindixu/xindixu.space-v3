@@ -2,13 +2,14 @@ import React from "react"
 import { Box } from "grommet"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import styled from "styled-components"
+import styled, { withTheme } from "styled-components"
 import { nameEn } from "assets/svg/name-en"
 import { nameZh } from "assets/svg/name-zh"
 import styleSettings from "lib/style-settings"
 import AnimatedSvg from "components/animated-svg"
+import { color } from "lib/style-settings/utils"
 
-const { pink } = styleSettings
+const { PINK } = styleSettings
 
 const SvgWrapper = styled(Box)`
   div,
@@ -30,9 +31,9 @@ const names = [
   },
 ]
 
-const Name = () => {
+const Name = ({ theme }) => {
   const [ref, inView] = useInView({ delay: 1000 })
-
+  const pink = color(PINK)({ theme })
   return (
     <SvgWrapper direction="row" width="small">
       <Box ref={ref}>
@@ -69,4 +70,4 @@ const Name = () => {
   )
 }
 
-export default Name
+export default withTheme(Name)

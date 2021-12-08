@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react"
 import { Line } from "react-chartjs-2"
-import styled from "styled-components"
+import styled, { withTheme } from "styled-components"
 import { groupBy } from "lodash"
 import { format } from "date-fns"
 import { getRecentCommits } from "lib/github"
 import styleSettings from "lib/style-settings/index"
 import { MONTH_DAY_FORMAT } from "utils/datetime"
+import { color } from "lib/style-settings/utils"
 
-const { pink } = styleSettings
+const { PINK } = styleSettings
 
 const getDate = (isoStr) => isoStr.split("T")[0]
 
@@ -17,7 +18,7 @@ const FullWidthDiv = styled.div`
   position: relative;
 `
 
-const parseData = (commits) => {
+const parseData = (commits, pink) => {
   const commitsByDate = groupBy(commits, (commit) => getDate(commit))
 
   const keys = Object.keys(commitsByDate)
@@ -50,11 +51,11 @@ const options = {
   },
 }
 
-const Contribution = () => {
+const Contribution = ({ theme }) => {
   const [data, setData] = useState({})
-
+  const pink = color(PINK)({ theme })
   useEffect(() => {
-    getRecentCommits().then((commits) => setData(parseData(commits)))
+    getRecentCommits().then((commits) => setData(parseData(commits, pink)))
   }, [])
 
   return (
@@ -64,4 +65,4 @@ const Contribution = () => {
   )
 }
 
-export default Contribution
+export default withTheme(Contribution)

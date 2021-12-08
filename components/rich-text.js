@@ -6,8 +6,9 @@ import { BLOCKS, MARKS } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
 import styleSettings from "lib/style-settings"
+import { color } from "lib/style-settings/utils"
 
-const { pink, green, spacerBase, spacerLg } = styleSettings
+const { PINK, GREEN, spacerBase, spacerLg } = styleSettings
 
 const embeddedContentCss = css`
   position: absolute;
@@ -20,13 +21,13 @@ const embeddedContentCss = css`
 
 const Code = styled.code`
   font-size: 87.5%;
-  color: ${green};
+  color: ${color(GREEN)};
   word-break: break-word;
 `
 const List = styled.ul``
 const ListItem = styled.li`
   &::marker {
-    color: ${pink};
+    color: ${color(PINK)};
   }
 `
 const Video = styled.video`

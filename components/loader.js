@@ -2,11 +2,11 @@ import React from "react"
 import PropTypes from "prop-types"
 import styled, { keyframes } from "styled-components"
 import styleSettings from "lib/style-settings/index"
+import { color } from "lib/style-settings/utils"
+import { PINK } from "lib/style-settings/color-names"
 
 const {
   fontRoot,
-  pink,
-  colors: { "light-1": lightGray },
   borderSize: { small },
 } = styleSettings
 
@@ -43,8 +43,8 @@ const ContentWrapper = styled.div`
 `
 
 const LoadingIndicator = styled.div`
-  border: ${small} solid ${lightGray};
-  border-top: ${small} solid ${pink};
+  border: ${small} solid ${color("light-1")};
+  border-top: ${small} solid ${color(PINK)};
   border-radius: 50%;
 
   animation: ${spin} 2s infinite;

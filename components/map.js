@@ -8,8 +8,9 @@ import styleSettings from "lib/style-settings"
 import AnimatedSvg from "components/animated-svg"
 import { media } from "lib/style-settings/media-query"
 import useMedia from "hooks/use-media"
+import { color } from "lib/style-settings/utils"
 
-const { spacerSm, spacerBase, pink, fontSizeLg, fontSizeSm, fontSizeBase } =
+const { spacerSm, spacerBase, PINK, fontSizeLg, fontSizeSm, fontSizeBase } =
   styleSettings
 
 const ROUTE_SIZE = 5
@@ -100,14 +101,14 @@ const Map = () => {
             <path
               strokeLinecap="round"
               strokeWidth={PLACE_SIZE}
-              stroke={pink}
+              stroke={color(PINK)}
               d="M360 220 h0"
             />
             {/* Austin */}
             <path
               strokeLinecap="round"
               strokeWidth={PLACE_SIZE}
-              stroke={pink}
+              stroke={color(PINK)}
               d="M740 210 h0"
             />
 
@@ -115,14 +116,14 @@ const Map = () => {
             <path
               strokeLinecap="round"
               strokeWidth={PLACE_SIZE}
-              stroke={pink}
+              stroke={color(PINK)}
               d="M790 170 h0"
             />
 
             <motion.path
               strokeLinecap="round"
               strokeWidth={ROUTE_SIZE}
-              stroke={pink}
+              stroke={color(PINK)}
               fill="none"
               d="M360 220 C500 0 650 100 740 210"
               {...props}
@@ -132,7 +133,7 @@ const Map = () => {
             <motion.path
               strokeLinecap="round"
               strokeWidth={ROUTE_SIZE}
-              stroke={pink}
+              stroke={color(PINK)}
               fill="none"
               d="M740 210 C750 175 780 170 790 170"
               {...props}
