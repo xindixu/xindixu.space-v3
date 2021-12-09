@@ -8,7 +8,7 @@ import BaseImage from "next/image"
 import styleSettings from "lib/style-settings"
 import { color } from "lib/style-settings/utils"
 
-const { PINK, GREEN, spacerBase, spacerLg } = styleSettings
+const { PINK, spacerBase, spacerLg } = styleSettings
 
 const embeddedContentCss = css`
   position: absolute;
@@ -20,8 +20,7 @@ const embeddedContentCss = css`
 `
 
 const Code = styled.code`
-  font-size: 87.5%;
-  color: ${color(GREEN)};
+  color: ${color(PINK)};
   word-break: break-word;
 `
 const List = styled.ul``
