@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Text } from "grommet"
 import { motion } from "framer-motion"
-import styled from "styled-components"
+import styled, { withTheme } from "styled-components"
 import { useInView } from "react-intersection-observer"
 import BaseMap from "assets/svg/map.svg"
 import styleSettings from "lib/style-settings"
@@ -85,12 +85,12 @@ const xSmallScreenPositions = [5, 20, 5]
 const smallScreenPositions = [20, 20, 5]
 const bigScreenPositions = [20, 30, 5]
 
-const Map = () => {
+const Map = ({ theme }) => {
   const [ref, inView] = useInView({ delay: 1000 })
 
   const isXsUp = useMedia("xs")
   const isSmUp = useMedia("sm")
-
+  const pink = color(PINK)({ theme })
   return (
     <Box fill ref={ref} width={{ max: "large" }}>
       <AnimatedSvg viewBox="0 0 940 460" inView={inView} paths={[]}>
@@ -101,14 +101,14 @@ const Map = () => {
             <path
               strokeLinecap="round"
               strokeWidth={PLACE_SIZE}
-              stroke={color(PINK)}
+              stroke={pink}
               d="M360 220 h0"
             />
             {/* Austin */}
             <path
               strokeLinecap="round"
               strokeWidth={PLACE_SIZE}
-              stroke={color(PINK)}
+              stroke={pink}
               d="M740 210 h0"
             />
 
@@ -116,14 +116,14 @@ const Map = () => {
             <path
               strokeLinecap="round"
               strokeWidth={PLACE_SIZE}
-              stroke={color(PINK)}
+              stroke={pink}
               d="M790 170 h0"
             />
 
             <motion.path
               strokeLinecap="round"
               strokeWidth={ROUTE_SIZE}
-              stroke={color(PINK)}
+              stroke={pink}
               fill="none"
               d="M360 220 C500 0 650 100 740 210"
               {...props}
@@ -133,7 +133,7 @@ const Map = () => {
             <motion.path
               strokeLinecap="round"
               strokeWidth={ROUTE_SIZE}
-              stroke={color(PINK)}
+              stroke={pink}
               fill="none"
               d="M740 210 C750 175 780 170 790 170"
               {...props}
@@ -161,4 +161,4 @@ const Map = () => {
   )
 }
 
-export default Map
+export default withTheme(Map)

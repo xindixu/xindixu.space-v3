@@ -10,7 +10,7 @@ import { color } from "lib/style-settings/utils"
 const {
   PINK,
   BEIGE,
-  background,
+  BACKGROUND,
   spacerXs,
   spacerSm,
   size: { large, medium },
@@ -19,7 +19,7 @@ const {
 const Gradient = styled(Box)`
   background: radial-gradient(
     circle,
-    ${background}00 60%,
+    ${color(BACKGROUND)}00 60%,
     ${color(PINK)}60 100%
   );
 `
@@ -32,7 +32,9 @@ const Content = styled(Box)`
     height: ${large};
   `}
 
-  background: radial-gradient(circle, ${background}55 80%, ${background} 100%);
+  background: radial-gradient(circle, ${color(BACKGROUND)}55 80%, ${color(
+    BACKGROUND
+  )} 100%);
 `
 
 const Label = styled(Box)`
@@ -78,11 +80,7 @@ const Header = React.forwardRef(
         <Gradient {...size} />
         <motion.div style={{ y: titleY, x: 0 }}>
           <Content align="center" justify="center">
-            <Heading
-              color="foreground"
-              size={full ? "xlarge" : "medium"}
-              textAlign="center"
-            >
+            <Heading size={full ? "xlarge" : "medium"} textAlign="center">
               {name}
             </Heading>
             <Box direction="row" wrap justify="center">

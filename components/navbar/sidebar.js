@@ -11,15 +11,15 @@ import { links } from "contents/routes"
 import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
 
-const { PINK, foreground, background } = styleSettings
+const { PINK, TEXT, BACKGROUND } = styleSettings
 
 const GradientBackground = styled(GSidebar)`
-  ${({ isBaseUp }) => `
+  ${({ isBaseUp, theme }) => `
     background: linear-gradient(
       0deg,
-      ${foreground}BB -10%,
-      ${color(PINK)}${isBaseUp ? "88" : "BB"} 90%,
-      ${color(PINK)} 100%
+      ${color(TEXT)({ theme })}BB -10%,
+      ${color(PINK)({ theme })}${isBaseUp ? "88" : "BB"} 90%,
+      ${color(PINK)({ theme })} 100%
     );
 `}
 `
@@ -86,15 +86,14 @@ const SidebarButton = ({ icon, label, link, onClick, active }) => (
   <Link href={link} passHref>
     <Button
       as="a"
+      primary
       active={active}
-      color="background"
+      color={BACKGROUND}
       fill="horizontal"
-      hoverIndicator
       icon={icon}
       label={label}
       onClick={onClick}
       size="large"
-      style={{ background }}
     />
   </Link>
 )

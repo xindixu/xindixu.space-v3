@@ -74,7 +74,7 @@ const TableOfContent = ({ mainContent, show, activeHeader }) => {
                   return (
                     <ListItem key={title} level={level}>
                       <Anchor
-                        color={active ? "brand" : "accent-4"}
+                        color={active ? "brand" : "text-weak"}
                         size="small"
                         href={href}
                         label={title}
