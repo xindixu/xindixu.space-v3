@@ -30,8 +30,8 @@ const solidStyleProps = {
 
 const Navbar = ({ isHeaderInView }) => {
   const [showSideBar, setShowSideBar] = useState(false)
-  const { theme, setTheme } = useTheme()
-  const newTheme = theme === LIGHT ? DARK : LIGHT
+  const { resolvedTheme, setTheme } = useTheme()
+  const newTheme = resolvedTheme === LIGHT ? DARK : LIGHT
   return (
     <>
       <FixTop fill="horizontal">
@@ -44,7 +44,7 @@ const Navbar = ({ isHeaderInView }) => {
           </Link>
           <Box direction="row">
             <Button
-              icon={theme === LIGHT ? <Moon /> : <Sun />}
+              icon={resolvedTheme === LIGHT ? <Moon /> : <Sun />}
               onClick={() => setTheme(newTheme)}
               a11yTitle={`toggle ${newTheme} mode`}
             />

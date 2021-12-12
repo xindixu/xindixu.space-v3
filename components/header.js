@@ -3,7 +3,8 @@ import { Box, Heading, Stack } from "grommet"
 import Image from "next/image"
 import { useViewportScroll, motion, useTransform } from "framer-motion"
 import styled, { css } from "styled-components"
-import styleSettings from "lib/style-settings"
+import { useTheme } from "next-themes"
+import styleSettings, { DARK } from "lib/style-settings"
 import { media } from "lib/style-settings/media-query"
 import { color } from "lib/style-settings/utils"
 
@@ -51,7 +52,10 @@ const Wrapper = styled(Stack)`
 `
 
 const Header = React.forwardRef(
-  ({ name, background: { src, alt }, full, labels }, ref) => {
+  (
+    { name, background: { src, lightSrc, darkSrc, alt }, full, labels },
+    ref
+  ) => {
     const size = full
       ? { height: "100vh", width: "100vw" }
       : { height: "50vh", width: "100vw" }
@@ -63,13 +67,13 @@ const Header = React.forwardRef(
       full ? [0, 200] : [0, 100]
     )
     const titleY = useTransform(scrollY, [0, 400], full ? [0, 300] : [0, 150])
-
+    const { resolvedTheme } = useTheme()
     return (
       <Wrapper anchor="center" full={full}>
         <motion.div style={{ y: backgroundY, x: 0 }}>
           <Box {...size} ref={ref}>
             <Image
-              src={src}
+              src={src || (resolvedTheme === DARK ? darkSrc : lightSrc)}
               layout="fill"
               priority
               objectFit="cover"

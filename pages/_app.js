@@ -2,10 +2,14 @@ import React from "react"
 import styled, { createGlobalStyle } from "styled-components"
 import { Grommet as BaseGrommet } from "grommet"
 import { motion } from "framer-motion"
-import { ThemeProvider as NextThemeProvider, useTheme } from "next-themes"
+import {
+  ThemeProvider as NextThemeProvider,
+  useTheme as useNextTheme,
+} from "next-themes"
 import CommonLayout from "layout/common"
 import useClick from "hooks/use-click"
 import customTheme from "lib/style-settings/theme"
+import { themeMode } from "lib/style-settings/utils"
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -42,10 +46,11 @@ const d = process.browser ? document : null
 
 const Content = ({ Component, pageProps, router }) => {
   const { coordinates } = useClick({ node: d })
-  const { resolvedTheme } = useTheme()
+  const { resolvedTheme, theme } = useNextTheme()
 
   return (
     <Grommet theme={customTheme} themeMode={resolvedTheme} full>
+      The current theme is: {resolvedTheme} {theme}
       <GlobalStyle />
       <CommonLayout>
         {({ setContentRef, setHeaderRef, header, isXxsUp }) => (

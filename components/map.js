@@ -87,12 +87,13 @@ const bigScreenPositions = [20, 30, 5]
 
 const Map = ({ theme }) => {
   const [ref, inView] = useInView({ delay: 1000 })
-
+  console.log(theme.dark)
   const isXsUp = useMedia("xs")
   const isSmUp = useMedia("sm")
   const pink = color(PINK)({ theme })
   return (
     <Box fill ref={ref} width={{ max: "large" }}>
+      dark {theme.dark}
       <AnimatedSvg viewBox="0 0 940 460" inView={inView} paths={[]}>
         {(props) => (
           <>

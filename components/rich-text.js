@@ -72,7 +72,7 @@ const Image = ({ file, alt }) => {
   )
 }
 const Description = ({ description }) => (
-  <Text color="dark-2" size="small" margin={{ bottom: "small" }}>
+  <Text color="text-weak" size="small" margin={{ bottom: "small" }}>
     {description}
   </Text>
 )

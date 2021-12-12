@@ -39,35 +39,65 @@ export const linksByPathname = {
     icon: <Home />,
     name: "Home",
     link: "/",
-    background: { src: "/img/bg/bg-light-2.jpg", width: 1440, height: 960 },
+    background: {
+      lightSrc: "/img/bg/bg-light-2.jpg",
+      darkSrc: "/img/bg/bg-dark-2.jpg",
+      width: 1440,
+      height: 960,
+    },
   },
   "/experiences": {
     icon: <Book />,
     name: "Life Story",
     link: "/experiences",
-    background: { src: "/img/bg/bg-light-3.jpg", width: 1440, height: 960 },
+    background: {
+      lightSrc: "/img/bg/bg-light-3.jpg",
+      darkSrc: "/img/bg/bg-dark-3.jpg",
+      width: 1440,
+      height: 960,
+    },
   },
   "/projects": {
     icon: <Briefcase />,
     name: "Projects",
     link: "/projects",
-    background: { src: "/img/bg/bg-light-6.jpg", width: 1440, height: 960 },
+    background: {
+      lightSrc: "/img/bg/bg-light-6.jpg",
+      darkSrc: "/img/bg/bg-dark-1.jpg",
+      width: 1440,
+      height: 960,
+    },
   },
   "/contact": {
     icon: <ContactInfo />,
     name: "Contact",
     link: "/contact",
-    background: { src: "/img/bg/bg-light-1.jpg", width: 1440, height: 960 },
+    background: {
+      lightSrc: "/img/bg/bg-light-1.jpg",
+      darkSrc: "/img/bg/bg-dark-4.jpg",
+      width: 1440,
+      height: 960,
+    },
   },
   "/casper": {
     icon: <CasperIcon />,
     name: "Casper",
     link: "/casper",
-    background: { src: "/img/bg/bg-light-4.jpg", width: 1440, height: 960 },
+    background: {
+      lightSrc: "/img/bg/bg-light-4.jpg",
+      darkSrc: "/img/bg/bg-dark-4.jpg",
+      width: 1440,
+      height: 960,
+    },
   },
 }
 
 export const errorPage = {
   name: "404",
-  background: { src: "/img/bg/bg-light-5.jpg", width: 1440, height: 960 },
+  background: {
+    lightSrc: "/img/bg/bg-light-5.jpg",
+    darkSrc: "/img/bg/bg-light-5.jpg",
+    width: 1440,
+    height: 960,
+  },
 }
