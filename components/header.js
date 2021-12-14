@@ -39,7 +39,8 @@ const Content = styled(Box)`
 `
 
 const Label = styled(Box)`
-  background: ${color(BEIGE)};
+  background: ${color(BACKGROUND_FRONT)};
+  // color: ${color(TEXT)};
   margin: ${spacerXs} ${spacerSm};
 `
 
