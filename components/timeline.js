@@ -13,6 +13,7 @@ import { color } from "lib/style-settings/utils"
 const {
   readable,
   PINK,
+  BACKGROUND,
   spacerBase,
   elevation: { light },
 } = styleSettings
@@ -29,6 +30,7 @@ const Wrapper = styled(VerticalTimeline)`
     .vertical-timeline-element-icon,
     .vertical-timeline-element-content {
       box-shadow: ${light.medium};
+      background: ${color(BACKGROUND)};
     }
   }
 `

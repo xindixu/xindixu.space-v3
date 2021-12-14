@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import styled, { createGlobalStyle } from "styled-components"
 import { Grommet as BaseGrommet } from "grommet"
 import { motion } from "framer-motion"
@@ -9,9 +9,18 @@ import {
 import CommonLayout from "layout/common"
 import useClick from "hooks/use-click"
 import customTheme from "lib/style-settings/theme"
-import { themeMode } from "lib/style-settings/utils"
 
 const GlobalStyle = createGlobalStyle`
+  :root {
+    /* Your default theme */
+    --background: white;
+    --foreground: black;
+  }
+
+  [data-theme='dark'] {
+    --background: black;
+    --foreground: white;
+  }
   body {
     margin: 0;
     padding: 0;
@@ -46,11 +55,16 @@ const d = process.browser ? document : null
 
 const Content = ({ Component, pageProps, router }) => {
   const { coordinates } = useClick({ node: d })
-  const { resolvedTheme, theme } = useNextTheme()
+  const { resolvedTheme } = useNextTheme()
+  // hacky way to handle server client theme mismatch
+  const [isMounted, setIsMounted] = useState(false)
 
-  return (
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
+
+  const body = (
     <Grommet theme={customTheme} themeMode={resolvedTheme} full>
-      The current theme is: {resolvedTheme} {theme}
       <GlobalStyle />
       <CommonLayout>
         {({ setContentRef, setHeaderRef, header, isXxsUp }) => (
@@ -73,6 +87,11 @@ const Content = ({ Component, pageProps, router }) => {
       </CommonLayout>
     </Grommet>
   )
+
+  if (!isMounted) {
+    return <div style={{ visibility: "hidden" }}>{body}</div>
+  }
+  return body
 }
 
 const App = (props) => (
