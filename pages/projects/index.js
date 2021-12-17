@@ -67,6 +67,8 @@ const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
             width={width}
             height={height}
             alt={`devices showing different screenshots of project ${name}`}
+            placeholder="blur"
+            blurDataURL={`/img/project-thumbnails/${slug}.png`}
           />
         </Box>
         <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
