@@ -10,7 +10,7 @@ import { color } from "lib/style-settings/utils"
 
 const {
   PINK,
-  BEIGE,
+  BACKGROUND_FRONT,
   BACKGROUND,
   spacerXs,
   spacerSm,
@@ -24,6 +24,10 @@ const Gradient = styled(Box)`
     ${color(PINK)}60 100%
   );
 `
+
+const Darken = styled(Box)`
+  background: ${color(BACKGROUND)}50;
+`
 const Content = styled(Box)`
   width: ${medium};
   height: ${medium};
@@ -32,15 +36,10 @@ const Content = styled(Box)`
     width: ${large};
     height: ${large};
   `}
-
-  background: radial-gradient(circle, ${color(BACKGROUND)}55 80%, ${color(
-    BACKGROUND
-  )} 100%);
 `
 
 const Label = styled(Box)`
   background: ${color(BACKGROUND_FRONT)};
-  // color: ${color(TEXT)};
   margin: ${spacerXs} ${spacerSm};
 `
 
@@ -49,6 +48,14 @@ const Wrapper = styled(Stack)`
     height: ${full ? "100vh" : "50vh"};
     width: 100vw;
     overflow: hidden;
+
+    ${full
+      ? css`
+          img {
+            filter: blur(2px);
+          }
+        `
+      : ""}
   `}
 `
 
@@ -82,6 +89,7 @@ const Header = React.forwardRef(
             />
           </Box>
         </motion.div>
+        {full || <Darken {...size} />}
         <Gradient {...size} />
         <motion.div style={{ y: titleY, x: 0 }}>
           <Content align="center" justify="center">

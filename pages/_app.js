@@ -13,12 +13,12 @@ import customTheme from "lib/style-settings/theme"
 const GlobalStyle = createGlobalStyle`
   :root {
     /* Your default theme */
-    --background: white;
+    --background: "#FFFFFF";
     --foreground: black;
   }
 
   [data-theme='dark'] {
-    --background: black;
+    --background: "#111111";
     --foreground: white;
   }
   body {

@@ -40,7 +40,7 @@ const Navbar = ({ isHeaderInView }) => {
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
           <Link href="/" passHref>
-            <NoUnderlineLink color="dark-3">XindiXu.Space</NoUnderlineLink>
+            <NoUnderlineLink color="text">XindiXu.Space</NoUnderlineLink>
           </Link>
           <Box direction="row">
             <Button
