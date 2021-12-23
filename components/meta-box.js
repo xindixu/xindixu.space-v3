@@ -21,7 +21,7 @@ const MetaBox = ({ tags, start, end }) => (
         )
       })}
     </Box>
-    <Text size="small" color="dark-2">
+    <Text size="small" color="text-weak">
       {formatDuration({ start, end })}
     </Text>
   </Box>

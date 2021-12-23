@@ -11,13 +11,13 @@ import { links } from "contents/routes"
 import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
 
-const { PINK, TEXT, BACKGROUND } = styleSettings
+const { PINK, BLACK, BACKGROUND } = styleSettings
 
 const GradientBackground = styled(GSidebar)`
   ${({ isBaseUp, theme }) => `
     background: linear-gradient(
       0deg,
-      ${color(TEXT)({ theme })}BB -10%,
+      ${color(BLACK)({ theme })}BB -10%,
       ${color(PINK)({ theme })}${isBaseUp ? "88" : "BB"} 90%,
       ${color(PINK)({ theme })} 100%
     );

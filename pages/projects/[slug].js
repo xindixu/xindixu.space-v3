@@ -103,7 +103,7 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
       const index =
         displayHeadingIndex - 1 >= 0 ? displayHeadingIndex : headings.length
 
-      setActiveHeader(headings[index - 1].id)
+      setActiveHeader(headings[index - 1]?.id)
     }
   }, [showToolbox, y])
 
