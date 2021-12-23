@@ -33,7 +33,7 @@ const parseData = (commits, pink) => {
         fill: false,
         stepped: true,
         borderColor: pink,
-        backgroundColor: `${pink}50`,
+        backgroundColor: `${pink}20`,
       },
     ],
   }
@@ -44,6 +44,9 @@ const options = {
     yAxes: [
       {
         ticks: {
+          color: "#ffffff",
+          backdropColor: "#ffffff",
+          borderColor: "#fff",
           beginAtZero: true,
         },
       },

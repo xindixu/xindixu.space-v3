@@ -1,5 +1,14 @@
 import React, { useState, useCallback, useEffect } from "react"
-import { Box, Card, CardFooter, Grid, Main, Spinner, Text } from "grommet"
+import {
+  Box,
+  Card,
+  CardFooter,
+  Grid,
+  Main,
+  Spinner,
+  Text,
+  Stack,
+} from "grommet"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import Link from "next/link"
@@ -13,17 +22,9 @@ import { getQuery } from "components/filters/utils"
 import { getAllProjects } from "lib/content/project"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
+import { color } from "lib/style-settings/utils"
 
-const {
-  elevation: { light },
-  readable,
-} = styleSettings
-
-const ActiveCard = styled(Card)`
-  :hover {
-    box-shadow: ${light.medium};
-  }
-`
+const { readable, BACKGROUND } = styleSettings
 
 const ReadableContent = styled(Box)`
   width: 100%;
@@ -58,10 +59,9 @@ const cardHoverAnimation = {
 const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
   <motion.div whileHover={cardHoverAnimation}>
     <Link href={`/projects/${slug}`}>
-      <ActiveCard>
-        <Box>
+      <Card>
+        <Box fill>
           <Image
-            // TODO: fallback url
             layout="responsive"
             src={`https:${src}`}
             width={width}
@@ -74,7 +74,7 @@ const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
         <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
           <Text>{name}</Text>
         </CardFooter>
-      </ActiveCard>
+      </Card>
     </Link>
   </motion.div>
 )
@@ -212,9 +212,9 @@ const Projects = ({
             align="center"
             justify="center"
             pad={{ vertical: "large", horizontal: "large" }}
-            background="light-1"
+            background="background-front"
           >
-            <Text color="dark-2">
+            <Text color="text-weak">
               No matching results. How about trying some other filters?
             </Text>
           </Box>

@@ -1,7 +1,6 @@
 import React, { useState } from "react"
 import { Footer as BaseFooter, Box } from "grommet"
 import styled from "styled-components"
-import { links } from "contents/social-media"
 import QuickMenu from "components/quick-menu"
 
 const FixBottom = styled(Box)`
@@ -15,7 +14,7 @@ const Footer = () => {
   return (
     <FixBottom>
       <BaseFooter pad="small">
-        <QuickMenu subMenu={links} isOpen={isOpen} setIsOpen={setIsOpen} />
+        <QuickMenu isOpen={isOpen} setIsOpen={setIsOpen} />
       </BaseFooter>
     </FixBottom>
   )

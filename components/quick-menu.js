@@ -1,11 +1,12 @@
-import React, { useRef } from "react"
+import React, { cloneElement, useRef } from "react"
 import PropTypes from "prop-types"
 import { useClickAway } from "react-use"
 import { Button } from "grommet"
 import { Close, AppsRounded } from "grommet-icons"
-import styled from "styled-components"
+import styled, { withTheme } from "styled-components"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings/index"
+import { links } from "contents/social-media"
 
 const {
   spacerBase,
@@ -85,9 +86,12 @@ const subIconAnimation = {
   visible: { scale: 1, transition: { duration: 0.1 } },
 }
 
-const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
-  const { length: count } = subMenu
+const QuickMenu = ({ isOpen, setIsOpen, theme }) => {
+  const { length: count } = links
   const ref = useRef(null)
+
+  const iconColor = theme.dark ? "dark-2" : "dark-3"
+  const buttonColor = theme.dark ? "text-weak" : "background"
   useClickAway(ref, () => {
     if (isOpen) {
       setIsOpen(false)
@@ -98,16 +102,21 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
     <>
       <MainButton
         a11yTitle={`${isOpen ? "close" : "open"} sub-menu`}
+        active={false}
         icon={
           <motion.div
             initial={isOpen ? "hidden" : false}
             animate={isOpen ? "visible" : "hidden"}
             variants={mainIconAnimation}
           >
-            {isOpen ? <Close /> : <AppsRounded />}
+            {isOpen ? (
+              <Close color={iconColor} />
+            ) : (
+              <AppsRounded color={iconColor} />
+            )}
           </motion.div>
         }
-        hoverIndicator
+        hoverIndicator={buttonColor}
         onClick={() => setIsOpen((prevIsOpen) => !prevIsOpen)}
         primary
         ref={ref}
@@ -115,7 +124,7 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
       <AnimatePresence>
         {isOpen && (
           <Circle isOpen={isOpen}>
-            {subMenu.map(({ name, link, icon }, index) => (
+            {links.map(({ name, link, icon }, index) => (
               <motion.div
                 key={name}
                 animate="visible"
@@ -128,11 +137,13 @@ const QuickMenu = ({ subMenu, isOpen, setIsOpen }) => {
                   a11yTitle={name}
                   count={count}
                   cycle={count}
-                  hoverIndicator
                   href={link}
                   icon={
-                    <motion.div variants={subIconAnimation}>{icon}</motion.div>
+                    <motion.div variants={subIconAnimation}>
+                      {cloneElement(icon, { color: iconColor })}
+                    </motion.div>
                   }
+                  hoverIndicator={buttonColor}
                   index={index}
                   primary
                   tabIndex={isOpen - 1}
@@ -159,4 +170,4 @@ QuickMenu.propTypes = {
   setIsOpen: PropTypes.func.isRequired,
 }
 
-export default QuickMenu
+export default withTheme(QuickMenu)

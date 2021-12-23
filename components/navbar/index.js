@@ -32,6 +32,18 @@ const Navbar = ({ isHeaderInView }) => {
   const [showSideBar, setShowSideBar] = useState(false)
   const { resolvedTheme, setTheme } = useTheme()
   const newTheme = resolvedTheme === LIGHT ? DARK : LIGHT
+  const isDarkTheme = resolvedTheme === DARK
+  // header in view & dark -> dark-2
+  // hearer not in view & dark -> text
+  // header in view & light -> dark-3
+  // header not in view & light -> dark-3
+
+  const iconColor = isDarkTheme
+    ? isHeaderInView
+      ? "text"
+      : "dark-2"
+    : "dark-3"
+
   return (
     <>
       <FixTop fill="horizontal">
@@ -40,16 +52,22 @@ const Navbar = ({ isHeaderInView }) => {
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
           <Link href="/" passHref>
-            <NoUnderlineLink color="text">XindiXu.Space</NoUnderlineLink>
+            <NoUnderlineLink color={iconColor}>XindiXu.Space</NoUnderlineLink>
           </Link>
           <Box direction="row">
             <Button
-              icon={resolvedTheme === LIGHT ? <Moon /> : <Sun />}
+              icon={
+                resolvedTheme === LIGHT ? (
+                  <Moon color={iconColor} />
+                ) : (
+                  <Sun color={iconColor} />
+                )
+              }
               onClick={() => setTheme(newTheme)}
               a11yTitle={`toggle ${newTheme} mode`}
             />
             <Button
-              icon={<Menu />}
+              icon={<Menu color={iconColor} />}
               onClick={() => setShowSideBar(true)}
               a11yTitle="open menu"
             />

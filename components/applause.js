@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react"
-import styled from "styled-components"
+import styled, { withTheme } from "styled-components"
 import { Box, Button, Card, CardBody, CardFooter, Stack, Text } from "grommet"
 import { Previous, Next } from "grommet-icons"
 import { AnimatePresence, motion } from "framer-motion"
@@ -40,67 +40,73 @@ const variants = {
   }),
 }
 
-const Base = ({
-  createdAt,
-  index,
-  length,
-  likes,
-  message,
-  paginate,
-  sender: { name, jobTitle },
-  isXxsUp,
-}) => (
-  <StyledCard
-    height="medium"
-    width="medium"
-    gap="medium"
-    pad="medium"
-    isXxsUp={isXxsUp}
-  >
-    <CardBody>&ldquo;{message}&rdquo;</CardBody>
-    <CardFooter direction="column" align="start">
-      <Box direction="row" justify="start">
-        <Text color="gray">&mdash;</Text>
-        <Text color="gray" margin={{ horizontal: "xsmall" }} size="small">
-          {name}, {jobTitle} <br />
-          {format(new Date(createdAt), MONTH_DAY_YEAR_FORMAT)}
-        </Text>
-      </Box>
-      <Box direction="row" align="center" justify="between" fill="horizontal">
-        <Box
-          border="all"
-          round="large"
-          pad={{ vertical: "xxsmall", horizontal: "small" }}
-        >
-          <Text size="small">
-            <span role="img" aria-label="Clapping hand">
-              👏
-            </span>{" "}
-            {likes}
+const Base = withTheme(
+  ({
+    createdAt,
+    index,
+    length,
+    likes,
+    message,
+    paginate,
+    sender: { name, jobTitle },
+    isXxsUp,
+    theme,
+  }) => (
+    <StyledCard
+      height="medium"
+      width="medium"
+      gap="medium"
+      pad="medium"
+      isXxsUp={isXxsUp}
+      background={theme.dark ? "background-front" : "background"}
+    >
+      <CardBody>&ldquo;{message}&rdquo;</CardBody>
+      <CardFooter direction="column" align="start">
+        <Box direction="row" justify="start">
+          <Text color="gray">&mdash;</Text>
+          <Text color="gray" margin={{ horizontal: "xsmall" }} size="small">
+            {name}, {jobTitle} <br />
+            {format(new Date(createdAt), MONTH_DAY_YEAR_FORMAT)}
           </Text>
         </Box>
-        <Box direction="row" align="center">
-          <IconButton
-            icon={<Previous size="small" />}
-            a11yTitle="previous"
-            round="full"
-            size="small"
-            onClick={() => paginate(-1)}
-          />
-          <Text margin={{ horizontal: "small" }} size="small">
-            {index + 1} of {length}
-          </Text>
-          <IconButton
-            icon={<Next size="small" />}
-            a11yTitle="next"
-            round="full"
-            size="small"
-            onClick={() => paginate(1)}
-          />
+        <Box direction="row" align="center" justify="between" fill="horizontal">
+          <Box
+            border="all"
+            round="large"
+            pad={{ vertical: "xxsmall", horizontal: "small" }}
+          >
+            <Box direction="row">
+              <Text size="small" margin={{ right: "xsmall" }}>
+                <span role="img" aria-label="Clapping hand">
+                  👏
+                </span>
+              </Text>
+              <Text size="small">{likes}</Text>
+            </Box>
+          </Box>
+          <Box direction="row" align="center">
+            <IconButton
+              icon={<Previous size="small" />}
+              a11yTitle="previous"
+              round="full"
+              size="small"
+              onClick={() => paginate(-1)}
+            />
+            <Text margin={{ horizontal: "small" }} size="small">
+              {index + 1} of {length}
+            </Text>
+            <IconButton
+              icon={<Next size="small" />}
+              a11yTitle="next"
+              round="full"
+              size="small"
+              onClick={() => paginate(1)}
+            />
+          </Box>
         </Box>
-      </Box>
-    </CardFooter>
-  </StyledCard>
+      </CardFooter>
+    </StyledCard>
+  )
 )
 
 const Appause = () => {
