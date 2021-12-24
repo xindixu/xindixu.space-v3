@@ -159,13 +159,6 @@ const QuickMenu = ({ isOpen, setIsOpen, theme }) => {
 }
 
 QuickMenu.propTypes = {
-  subMenu: PropTypes.arrayOf(
-    PropTypes.shape({
-      link: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      icon: PropTypes.element.isRequired,
-    }).isRequired
-  ).isRequired,
   isOpen: PropTypes.bool.isRequired,
   setIsOpen: PropTypes.func.isRequired,
 }

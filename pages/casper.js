@@ -30,7 +30,8 @@ const variants = {
 }
 const Casper = ({ imageCollage, isXxsUp }) => {
   const { images } = imageCollage
-  const isBaseUp = useMedia("base")
+  const isMdUp = useMedia("md")
+  const isSmUp = useMedia("sm")
   const [gridFef, gridInView] = useInView({ delay: 1000 })
 
   return (
@@ -39,7 +40,7 @@ const Casper = ({ imageCollage, isXxsUp }) => {
     >
       <div ref={gridFef}>
         <Masonry
-          columnsCount={isBaseUp ? 5 : 3}
+          columnsCount={isMdUp ? 5 : isSmUp ? 3 : 2}
           gutter={isXxsUp ? spacerSm : spacerXs}
         >
           {images.map(({ src, width, height }, index) => (

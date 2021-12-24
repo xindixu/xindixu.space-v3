@@ -1,4 +1,14 @@
 import React, { useState, useEffect } from "react"
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js"
 import { Line } from "react-chartjs-2"
 import styled, { withTheme } from "styled-components"
 import { groupBy } from "lodash"
@@ -18,12 +28,31 @@ const FullWidthDiv = styled.div`
   position: relative;
 `
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+)
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+  },
+}
+
 const parseData = (commits, pink) => {
   const commitsByDate = groupBy(commits, (commit) => getDate(commit))
-
   const keys = Object.keys(commitsByDate)
   const data = keys.map((date) => commitsByDate[date].length)
   const labels = keys.map((key) => format(new Date(key), MONTH_DAY_FORMAT))
+
   return {
     labels,
     datasets: [
@@ -39,31 +68,16 @@ const parseData = (commits, pink) => {
   }
 }
 
-const options = {
-  scales: {
-    yAxes: [
-      {
-        ticks: {
-          color: "#ffffff",
-          backdropColor: "#ffffff",
-          borderColor: "#fff",
-          beginAtZero: true,
-        },
-      },
-    ],
-  },
-}
-
 const Contribution = ({ theme }) => {
   const [data, setData] = useState({})
   const pink = color(PINK)({ theme })
   useEffect(() => {
-    getRecentCommits().then((commits) => setData(parseData(commits, pink)))
+    getRecentCommits().then(setData)
   }, [])
 
   return (
     <FullWidthDiv>
-      <Line data={data} options={options} />
+      <Line data={parseData(data, pink)} options={options} />
     </FullWidthDiv>
   )
 }
