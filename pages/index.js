@@ -105,26 +105,24 @@ const Index = ({ setContentRef, isXxsUp }) => {
               <Paragraph fill>
                 I enjoy designing and implementing full-stack features with
                 complex functionalities. I&apos;m passionate about improving
-                user experience and understand technologies on a deeper level.
-                I&apos;m building web apps, using JavaScript, React, and Vue,
-                but also curious on other applications of CS.
+                user experience and understanding technologies on a deeper
+                level. I&apos;m building web apps with JavaScript, React,
+                Python, and AWS.
               </Paragraph>
               <Paragraph fill>
-                I&apos;m currently pursing a Master of Science in Computer
-                Science at Columbia University. This semester, I&apos;m taking
-                classes in AI, Engineering Software-as-a-Service, Programming
-                Languages and Translators, and Analysis of Algorithms. Before
-                coming to Columbia, I was a Software Engineer at Pingboard,
-                where I worked in teams to build fully fledged features in a
-                timely manner.
+                I&apos;m an MS in CS student at Columbia University and
+                currently taking classes in Operating Systems, Distributed
+                Systems, Cloud Computing, and Intro to Databases. Before coming
+                to Columbia, I was a Software Engineer at Pingboard, where I
+                worked in teams to build fully-fledged features promptly.
               </Paragraph>
               <Paragraph fill>
-                In 2020, I graduated from the University of Texas at Austin,
-                with a Bachelor of Science in Advertising and Minor in Computer
-                Science. I took 30 credit hours of Computer Science classes and
-                mastered software engineering principles via working with peers
-                to design and build full-stack web apps, iOS apps, games, and
-                computer graphics.
+                In 2020, I graduated from University of Texas at Austin, with a
+                BS in Advertising and a Minor in Computer Science. I took 30
+                credit hours of Computer Science classes and mastered software
+                engineering principles via working with peers to design and
+                build full-stack web apps, iOS apps, games, and computer
+                graphics.
               </Paragraph>
             </Box>
             <Box direction="row" align="center" justify="end" gap="large">
