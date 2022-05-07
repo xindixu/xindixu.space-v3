@@ -8,6 +8,7 @@ import Link from "next/link"
 import Applause from "components/applause"
 import Name from "components/name"
 import Map from "components/map"
+import TechCloud from "components/tech-cloud"
 import Contribution from "components/contribution"
 import { media } from "lib/style-settings/media-query"
 import styleSettings from "lib/style-settings"
@@ -106,23 +107,24 @@ const Index = ({ setContentRef, isXxsUp }) => {
                 I enjoy designing and implementing full-stack features with
                 complex functionalities. I&apos;m passionate about improving
                 user experience and understanding technologies on a deeper
-                level. I&apos;m building web apps with JavaScript, React,
-                Python, and AWS.
+                level. I&apos;m an{" "}
+                <strong>MS in CS student at Columbia University</strong> and
+                currently taking classes in <strong>Operating Systems</strong>,{" "}
+                <strong>Distributed Systems</strong>,{" "}
+                <strong>Cloud Computing</strong>, and{" "}
+                <strong>Intro to Databases</strong>. This summer, I'll be
+                working at{" "}
+                <strong>Instabase as a Software Engineer Intern</strong>.
               </Paragraph>
               <Paragraph fill>
-                I&apos;m an MS in CS student at Columbia University and
-                currently taking classes in Operating Systems, Distributed
-                Systems, Cloud Computing, and Intro to Databases. Before coming
-                to Columbia, I was a Software Engineer at Pingboard, where I
-                worked in teams to build fully-fledged features promptly.
-              </Paragraph>
-              <Paragraph fill>
-                In 2020, I graduated from University of Texas at Austin, with a
-                BS in Advertising and a Minor in Computer Science. I took 30
-                credit hours of Computer Science classes and mastered software
-                engineering principles via working with peers to design and
-                build full-stack web apps, iOS apps, games, and computer
-                graphics.
+                Before coming to Columbia, I was a Software Engineer at
+                Pingboard, where I worked in teams to build fully-fledged
+                features promptly. In 2020, I graduated from University of Texas
+                at Austin, with a BS in Advertising and a Minor in Computer
+                Science. I took 30 credit hours of Computer Science classes and
+                mastered software engineering principles via working with peers
+                to design and build full-stack web apps, iOS apps, games, and
+                computer graphics.
               </Paragraph>
             </Box>
             <Box direction="row" align="center" justify="end" gap="large">
@@ -135,6 +137,21 @@ const Index = ({ setContentRef, isXxsUp }) => {
                   height={942}
                 />
               </Box>
+            </Box>
+          </Box>
+        </Left>
+      </ReadableRow>
+      <ReadableRow isXxsUp={isXxsUp} background="background-front">
+        <Left>
+          <Box direction="column" gap="large" align="center">
+            <Paragraph fill>
+              I&apos;m proficient in JavaScript and Python. I&apos;ve been
+              coding in C/C++, TypeScript, and Go recently. Some frameworks and
+              stacks I use to build web apps are React/Redux, Next.js, AWS, Ruby
+              on Rails, and Python Flask.
+            </Paragraph>
+            <Box>
+              <TechCloud />
             </Box>
           </Box>
         </Left>
