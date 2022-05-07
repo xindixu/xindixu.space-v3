@@ -1,55 +1,87 @@
 import React from "react"
 import { TagCloud } from "react-tagcloud"
+import { motion } from "framer-motion"
+import styled from "styled-components"
+import { useInView } from "react-intersection-observer"
+import useMedia from "hooks/use-media"
 
-const words = [
-  { count: 15, value: "C" },
-  { count: 16, value: "SQL" },
-  { count: 17, value: "Java" },
-  { count: 18, value: "PostgreSQL" },
-  { count: 19, value: "MongoDB" },
-  { count: 21, value: "Express.js" },
-  { count: 22, value: "Flask" },
-  { count: 24, value: "TypeScript" },
-  { count: 25, value: "Go" },
-  { count: 26, value: "Vue.js" },
-  { count: 27, value: "AWS" },
-  { count: 27, value: "Node.js" },
-  { count: 29, value: "React" },
-  { count: 30, value: "JavaScript" },
-  { count: 30, value: "Python3" },
-]
+import TECH_WORDS from "lib/content/tech"
 
-const customRenderer = (tag, size, color) => {
-  return (
-    <span
-      key={tag.value}
-      style={{
-        color,
-        fontSize: size,
-        display: "inline-block",
-        margin: "3px 5px",
-      }}
-    >
-      {tag.value}
-    </span>
-  )
-}
-
-const options = {
+const COLOR_OPTIONS = {
   luminosity: "light",
   hue: "purple",
 }
 
+const StyledTagCloud = styled(TagCloud)`
+  width: 100%;
+  max-width: 700px;
+  text-align: center;
+`
+
+const Tag = styled(motion.span)`
+  ${({ color, size, isBaseUp }) => `
+    color: ${color};
+    font-size: ${size}px;
+    margin: ${isBaseUp ? "10px" : "5px"};
+  `}
+  display: inline-block;
+`
+
+const DURATION = 2
+const POSITION = 30
+const BASE_UP_SIZE = {
+  minSize: 20,
+  maxSize: 35,
+}
+const BASE_DOWN_SIZE = {
+  minSize: 15,
+  maxSize: 30,
+}
+const svgAnimation = {
+  in: () => ({
+    opacity: 1,
+    x: 0,
+    y: 0,
+    transition: {
+      delay: DURATION * Math.random(),
+      duration: DURATION,
+      ease: "easeOut",
+    },
+  }),
+  out: () => ({
+    opacity: 0,
+    x: POSITION * Math.random() - POSITION,
+    y: POSITION * Math.random() - POSITION,
+    transition: { duration: 0.1 },
+  }),
+}
+
+const customRenderer = (tag, size, color, inView, isBaseUp) => (
+  <Tag
+    key={tag.value}
+    color={color}
+    size={size}
+    isBaseUp={isBaseUp}
+    initial="out"
+    animate={inView ? "in" : "out"}
+    variants={svgAnimation}
+  >
+    {tag.value}
+  </Tag>
+)
+
 const TechCloud = () => {
+  const [ref, inView] = useInView({ delay: 1000 })
+  const isBaseUp = useMedia("base")
   return (
-    <TagCloud
-      style={{ height: 300, width: 600 }}
-      minSize={20}
-      maxSize={45}
-      tags={words}
-      colorOptions={options}
-      renderer={customRenderer}
-    />
+    <div ref={ref}>
+      <StyledTagCloud
+        {...(isBaseUp ? BASE_UP_SIZE : BASE_DOWN_SIZE)}
+        tags={TECH_WORDS}
+        colorOptions={COLOR_OPTIONS}
+        renderer={(...props) => customRenderer(...props, inView, isBaseUp)}
+      />
+    </div>
   )
 }
 
