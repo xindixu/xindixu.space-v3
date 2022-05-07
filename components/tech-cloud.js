@@ -37,7 +37,8 @@ const BASE_DOWN_SIZE = {
   minSize: 15,
   maxSize: 30,
 }
-const svgAnimation = {
+
+const animation = {
   in: () => ({
     opacity: 1,
     x: 0,
@@ -50,8 +51,8 @@ const svgAnimation = {
   }),
   out: () => ({
     opacity: 0,
-    x: POSITION * Math.random() - POSITION,
-    y: POSITION * Math.random() - POSITION,
+    x: POSITION * (Math.random() - 0.5),
+    y: POSITION * (Math.random() - 0.5),
     transition: { duration: 0.1 },
   }),
 }
@@ -61,10 +62,9 @@ const customRenderer = (tag, size, color, inView, isBaseUp) => (
     key={tag.value}
     color={color}
     size={size}
-    isBaseUp={isBaseUp}
     initial="out"
     animate={inView ? "in" : "out"}
-    variants={svgAnimation}
+    variants={animation}
   >
     {tag.value}
   </Tag>

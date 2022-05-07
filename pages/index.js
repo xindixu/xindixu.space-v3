@@ -14,6 +14,7 @@ import { media } from "lib/style-settings/media-query"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
+import ImageStack from "components/image-stack"
 
 const { readable, BEIGE, spacerXl, spacerLg, spacerBase } = styleSettings
 
@@ -116,16 +117,6 @@ const Index = ({ setContentRef, isXxsUp }) => {
                 working at{" "}
                 <strong>Instabase as a Software Engineer Intern</strong>.
               </Paragraph>
-              <Paragraph fill>
-                Before coming to Columbia, I was a Software Engineer at
-                Pingboard, where I worked in teams to build fully-fledged
-                features promptly. In 2020, I graduated from University of Texas
-                at Austin, with a BS in Advertising and a Minor in Computer
-                Science. I took 30 credit hours of Computer Science classes and
-                mastered software engineering principles via working with peers
-                to design and build full-stack web apps, iOS apps, games, and
-                computer graphics.
-              </Paragraph>
             </Box>
             <Box direction="row" align="center" justify="end" gap="large">
               <Name />
@@ -142,6 +133,26 @@ const Index = ({ setContentRef, isXxsUp }) => {
         </Left>
       </ReadableRow>
       <ReadableRow isXxsUp={isXxsUp} background="background-front">
+        <Right>
+          <Box direction="column" gap="large" align="center">
+            <Paragraph fill>
+              Before coming to Columbia, I was a Software Engineer at Pingboard,
+              where I worked in teams to build fully-fledged features promptly.
+              In 2020, I graduated from{" "}
+              <strong>University of Texas at Austin</strong>, with a{" "}
+              <strong>BS in Advertising and a Minor in Computer Science</strong>
+              . I took 30 credit hours of Computer Science classes and mastered
+              software engineering principles via working with peers to design
+              and build full-stack web apps, iOS apps, games, and computer
+              graphics.
+            </Paragraph>
+            <Box>
+              <ImageStack />
+            </Box>
+          </Box>
+        </Right>
+      </ReadableRow>
+      <ReadableRow isXxsUp={isXxsUp}>
         <Left>
           <Box direction="column" gap="large" align="center">
             <Paragraph fill>

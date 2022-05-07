@@ -121,8 +121,9 @@ const Appause = () => {
   const isXxsUp = useMedia("xxs")
 
   const paginate = useCallback(
-    (newDirection) => setPage([page + newDirection, newDirection]),
-    [page]
+    (newDirection) =>
+      setPage(([prevPage]) => [prevPage + newDirection, newDirection]),
+    []
   )
 
   useEffect(() => {
