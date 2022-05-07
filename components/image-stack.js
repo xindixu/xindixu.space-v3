@@ -62,6 +62,7 @@ const ImageStack = () => {
           >
             <Box elevation="medium">
               <Image
+                priority
                 src={`/img/locations/${IMAGES[index]}.jpg`}
                 width={500}
                 height={300}
