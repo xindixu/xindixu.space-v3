@@ -12,6 +12,7 @@ const POSITION = 300
 
 const StyledCard = styled(motion.div)`
   width: 500px;
+  max-width: 100%;
   height: 300px;
 `
 
@@ -60,12 +61,12 @@ const ImageStack = () => {
             variants={animation}
             custom={{ x: Math.random() - 0.5, y: Math.random() - 0.5 }}
           >
-            <Box elevation="medium">
+            <Box elevation="medium" width={500} height={300}>
               <Image
                 priority
                 src={`/img/locations/${IMAGES[index]}.jpg`}
-                width={500}
-                height={300}
+                layout="fill"
+                objectFit="cover"
               />
             </Box>
           </StyledCard>
