@@ -61,7 +61,7 @@ const ImageStack = () => {
             variants={animation}
             custom={{ x: Math.random() - 0.5, y: Math.random() - 0.5 }}
           >
-            <Box elevation="medium" width={500} height={300}>
+            <Box elevation="medium">
               <Image
                 priority
                 src={`/img/locations/${IMAGES[index]}.jpg`}
