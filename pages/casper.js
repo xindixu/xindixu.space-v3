@@ -67,6 +67,10 @@ const Casper = ({ imageCollage, isXxsUp }) => {
   )
 }
 
+Casper.defaultProps = {
+  imageCollage: { images: [] },
+}
+
 Casper.propTypes = {
   imageCollage: PropTypes.shape({
     images: PropTypes.arrayOf(
@@ -76,7 +80,7 @@ Casper.propTypes = {
         height: PropTypes.number.isRequired,
       }).isRequired
     ).isRequired,
-  }).isRequired,
+  }),
 }
 
 export async function getStaticProps() {

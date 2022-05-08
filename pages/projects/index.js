@@ -245,12 +245,14 @@ export async function getServerSideProps(context) {
 
 Projects.defaultProps = {
   initialProjects: [],
+  initialTotalPages: 0,
+  initialTags: {},
 }
 
 Projects.propTypes = {
   initialProjects: PropTypes.arrayOf(PropTypes.object.isRequired),
-  initialTotalPages: PropTypes.number.isRequired,
-  initialTags: PropTypes.object.isRequired,
+  initialTotalPages: PropTypes.number,
+  initialTags: PropTypes.object,
 }
 
 export default Projects
