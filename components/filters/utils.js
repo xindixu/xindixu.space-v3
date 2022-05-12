@@ -1,4 +1,5 @@
 const tagNameById = {
+  "at-columbia": "Columbia",
   "at-all": "All",
   "at-pingboard": "Pingboard",
   "at-nokia": "Nokia",
@@ -6,7 +7,7 @@ const tagNameById = {
   "at-ut": "UT - Austin",
   "at-daikin": "Daikin",
   "type-all": "All",
-  "type-development": "Development",
+  "type-development": "Software",
   "type-advertising": "Advertising",
   "type-crafts": "Crafts",
 }
