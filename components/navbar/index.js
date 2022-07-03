@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Link from "next/link"
 import { Box, Header, Button, Anchor } from "grommet"
 import { Sun, Moon, Menu } from "grommet-icons"
@@ -6,6 +6,7 @@ import { useTheme } from "next-themes"
 import styled from "styled-components"
 import Sidebar from "./sidebar"
 import { DARK, LIGHT } from "lib/style-settings"
+import { useWindowSize } from "react-use"
 
 const FixTop = styled(Box)`
   position: fixed;
@@ -30,6 +31,7 @@ const solidStyleProps = {
 
 const Navbar = ({ isHeaderInView }) => {
   const [showSideBar, setShowSideBar] = useState(false)
+  const { width } = useWindowSize()
   const { resolvedTheme, setTheme } = useTheme()
   const newTheme = resolvedTheme === LIGHT ? DARK : LIGHT
   const isDarkTheme = resolvedTheme === DARK
@@ -37,6 +39,10 @@ const Navbar = ({ isHeaderInView }) => {
   // hearer not in view & dark -> text
   // header in view & light -> dark-3
   // header not in view & light -> dark-3
+
+  useEffect(() => {
+    setShowSideBar(false)
+  }, [width])
 
   const iconColor = isDarkTheme
     ? isHeaderInView

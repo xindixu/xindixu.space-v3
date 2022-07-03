@@ -10,6 +10,7 @@ import styleSettings from "lib/style-settings"
 import { links } from "contents/routes"
 import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
+import { useWindowSize } from "react-use"
 
 const { PINK, BLACK, BACKGROUND } = styleSettings
 
@@ -80,7 +81,18 @@ const linkAnimation = {
   }),
 }
 
-const SidebarFooter = () => <Text color="light-5">Built with Next.js</Text>
+const SidebarFooter = () => (
+  <Box color="light-5" pad="xsmall">
+    <Text>
+      Built with{" "}
+      <span role="img" aria-label="Heart">
+        ❤️
+      </span>{" "}
+      using{" "}
+    </Text>
+    <Text>Next.js, Contentful, Framer Motion</Text>
+  </Box>
+)
 
 const SidebarButton = ({ icon, label, link, onClick, active }) => (
   <Link href={link} passHref>
