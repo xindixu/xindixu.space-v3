@@ -109,13 +109,15 @@ const Index = ({ setContentRef, isXxsUp }) => {
                 complex functionalities. I&apos;m passionate about improving
                 user experience and understanding technologies on a deeper
                 level. I&apos;m an{" "}
-                <strong>MS in CS student at Columbia University</strong> and
-                currently taking classes in <strong>Operating Systems</strong>,{" "}
-                <strong>Distributed Systems</strong>,{" "}
-                <strong>Cloud Computing</strong>, and{" "}
-                <strong>Intro to Databases</strong>. This summer, I'll be
-                working at{" "}
-                <strong>Instabase as a Software Engineer Intern</strong>.
+                <strong>
+                  Master student in Computer Science at Columbia University
+                </strong>
+                . My favorite classes I took there are{" "}
+                <strong>Operating Systems</strong>,{" "}
+                <strong>Distributed Systems</strong>, and{" "}
+                <strong>Cloud Computing</strong>. This summer, I&apos;m
+                interning at <strong>Instabase</strong> as a Software Engineer
+                on the <strong>Core Services</strong> team.
               </Paragraph>
             </Box>
             <Box direction="row" align="center" justify="end" gap="large">

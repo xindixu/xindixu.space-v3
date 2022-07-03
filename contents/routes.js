@@ -10,7 +10,7 @@ export const links = [
   { icon: <Home />, name: "Home", link: "/", component: <Index /> },
   {
     icon: <Book />,
-    name: "Life Story",
+    name: "Experiences",
     link: "/experiences",
     component: <Experiences />,
   },
@@ -48,7 +48,7 @@ export const linksByPathname = {
   },
   "/experiences": {
     icon: <Book />,
-    name: "Life Story",
+    name: "Experiences",
     link: "/experiences",
     background: {
       lightSrc: "/img/bg/bg-light-3.jpg",
