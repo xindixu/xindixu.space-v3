@@ -224,7 +224,7 @@ const Index = ({ setContentRef, isXxsUp }) => {
             <Button
               as="a"
               secondary
-              label="View My Life Story"
+              label="View My Experiences"
               size="medium"
               align="center"
             />
