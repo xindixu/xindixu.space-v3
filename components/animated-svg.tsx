@@ -1,5 +1,4 @@
-import React from "react"
-import PropTypes from "prop-types"
+import React, { FC } from "react"
 
 const DURATION = 2
 const svgAnimation = {
@@ -10,7 +9,13 @@ const svgAnimation = {
   out: { pathLength: 0, transition: { duration: 0.1 } },
 }
 
-const AnimatedSvg = ({ inView, viewBox, children }) => (
+type TProps = {
+  children: (props: Object) => JSX.Element
+  inView: boolean
+  viewBox: string
+}
+
+const AnimatedSvg: FC<TProps> = ({ children, inView, viewBox }) => (
   <svg
     preserveAspectRatio="xMinYMin meet"
     xmlns="http://www.w3.org/2000/svg"
@@ -24,11 +29,5 @@ const AnimatedSvg = ({ inView, viewBox, children }) => (
     })}
   </svg>
 )
-
-AnimatedSvg.propTypes = {
-  inView: PropTypes.bool.isRequired,
-  viewBox: PropTypes.string.isRequired,
-  children: PropTypes.func.isRequired,
-}
 
 export default AnimatedSvg

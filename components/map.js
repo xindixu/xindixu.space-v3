@@ -93,7 +93,7 @@ const Map = ({ theme }) => {
   const pink = color(PINK)({ theme })
   return (
     <Box fill ref={ref} width={{ max: "large" }}>
-      <AnimatedSvg viewBox="0 0 940 460" inView={inView} paths={[]}>
+      <AnimatedSvg inView={inView} viewBox="0 0 940 460">
         {(props) => (
           <>
             <BaseMap />
