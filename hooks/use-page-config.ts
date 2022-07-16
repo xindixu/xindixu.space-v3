@@ -3,7 +3,7 @@ import { linksByPathname, errorPage } from "contents/routes"
 
 const usePageConfig = () => {
   const { pathname } = useRouter()
-  const paths = pathname.match(/\/(\w+)?/g)
+  const paths = pathname.match(/\/(\w+)?/g) || []
 
   return {
     isTopLevel: paths.length === 1,

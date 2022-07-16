@@ -1,29 +1,37 @@
 import { useEffect, useState } from "react"
 
-const useClick = ({ node }) => {
+const MOUSEDOWN = "mousedown"
+const TOUCHSTART = "touchstart"
+
+const useClick = ({ node }: { node: HTMLElement }) => {
   const [coordinates, setCoordinates] = useState({ x: 0, y: 0 })
 
   useEffect(() => {
-    const getCoordinates = (e) => {
-      if (e.type === "mousedown") {
-        return setCoordinates({ x: e.clientX, y: e.clientY })
-      }
-
-      return setCoordinates({
-        x: e.touches[0].clientX,
-        y: e.touches[0].clientY,
-      })
+    const getCoordinates = (e: MouseEvent) => {
+      setCoordinates({ x: e.clientX, y: e.clientY })
     }
-
     if (node) {
-      node.addEventListener("mousedown", getCoordinates)
-      node.addEventListener("touchstart", getCoordinates)
+      node.addEventListener(MOUSEDOWN, getCoordinates)
     }
 
     return () => {
       if (node) {
-        node.removeEventListener("mousedown", getCoordinates)
-        node.removeEventListener("touchstart", getCoordinates)
+        node.removeEventListener(MOUSEDOWN, getCoordinates)
+      }
+    }
+  }, [node])
+
+  useEffect(() => {
+    const getCoordinates = (e: TouchEvent) => {
+      setCoordinates({ x: e.touches[0].clientX, y: e.touches[0].clientY })
+    }
+    if (node) {
+      node.addEventListener(TOUCHSTART, getCoordinates)
+    }
+
+    return () => {
+      if (node) {
+        node.removeEventListener(TOUCHSTART, getCoordinates)
       }
     }
   }, [node])
