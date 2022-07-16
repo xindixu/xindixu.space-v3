@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
 import useMedia from "hooks/use-media"
 
-import TECH_WORDS from "lib/content/tech"
+import TECH_WORDS from "contents/tech"
 
 const COLOR_OPTIONS = {
   luminosity: "light",
