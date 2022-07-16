@@ -12,6 +12,6 @@ const TAGS = [
   "type-crafts",
 ]
 
-const groupTags = (tags) => groupBy(tags, (tag) => tag.split("-")[0])
+const groupTags = (tags = TAGS) => groupBy(tags, (tag) => tag.split("-")[0])
 
 export const getAllTags = () => groupTags(TAGS)
