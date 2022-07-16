@@ -5,7 +5,8 @@
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "tslint": "./node_modules/.bin/tsc -p ./tsconfig.json"
+    "tslint": "./node_modules/.bin/tsc -p ./tsconfig.json",
+    "ts-migrate": "npx ts-migrate-full . --sources=\"*.d.ts\" \"**/*.ts\" \"**/*.tsx\" \"node_modules/**/*.d.ts\""
   },
   "dependencies": {
     "@contentful/rich-text-react-renderer": "^15.12.1",
