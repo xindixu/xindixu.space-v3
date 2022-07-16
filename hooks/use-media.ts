@@ -1,9 +1,9 @@
 import { useContext } from "react"
 import { ResponsiveContext } from "grommet"
 import { isScreenUp } from "lib/style-settings/utils"
-import { TBreakpoints } from "lib/style-settings/media-query"
+import { TBreakpointsKeys } from "lib/style-settings/media-query"
 
-const useMedia = (base: TBreakpoints) => {
+const useMedia = (base: TBreakpointsKeys) => {
   const current = useContext(ResponsiveContext)
   return isScreenUp({ base, current })
 }
