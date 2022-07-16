@@ -1,5 +1,6 @@
 import { get } from "lodash"
 import { client } from "./index"
+import { THtml } from "./types"
 
 const parseImageCollage = ({ fields }) => ({
   images: fields.images.map((image) => ({
@@ -14,7 +15,7 @@ const parseImageCollage = ({ fields }) => ({
 const parseImageCollages = (entries) => entries?.items?.map(parseImageCollage)
 
 export async function getImageCollage({ title }) {
-  const entries = await client.getEntries({
+  const entries = await client.getEntries<THtml>({
     content_type: "html",
     limit: 1,
     "fields.title[in]": title,

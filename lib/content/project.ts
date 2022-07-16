@@ -1,5 +1,6 @@
 import { get } from "lodash"
 import { client } from "./index"
+import { TProject } from "./types"
 
 const PAGE_SIZE = 10
 
@@ -42,7 +43,7 @@ export async function getAllProjects({ page: queryPage, tags = [] } = {}) {
     params["metadata.tags.sys.id[all]"] = tags.join(",")
   }
 
-  const entries = await client.getEntries(params)
+  const entries = await client.getEntries<TProject>(params)
 
   return {
     entries: parseProjectEntries(entries),
@@ -52,7 +53,7 @@ export async function getAllProjects({ page: queryPage, tags = [] } = {}) {
 }
 
 export async function getProject({ slug }) {
-  const entries = await client.getEntries({
+  const entries = await client.getEntries<TProject>({
     content_type: "work",
     limit: 1,
     "fields.slug[in]": slug,
@@ -62,9 +63,10 @@ export async function getProject({ slug }) {
 }
 
 export async function getAllProjectSlugs() {
-  const entries = await client.getEntries({
+  const entries = await client.getEntries<TProject>({
     content_type: "work",
     select: "fields.slug",
   })
+
   return entries.items.map(({ fields: { slug } }) => slug)
 }
