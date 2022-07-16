@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Text } from "grommet"
 import { motion } from "framer-motion"
-import styled, { withTheme } from "styled-components"
+import styled, { useTheme } from "styled-components"
 import { useInView } from "react-intersection-observer"
 import BaseMap from "assets/svg/map.svg"
 import styleSettings from "lib/style-settings"
@@ -85,7 +85,8 @@ const xSmallScreenPositions = [5, 20, 5]
 const smallScreenPositions = [20, 20, 5]
 const bigScreenPositions = [20, 30, 5]
 
-const Map = ({ theme }) => {
+const Map = () => {
+  const theme = useTheme()
   const [ref, inView] = useInView({ delay: 1000 })
 
   const isXsUp = useMedia("xs")
@@ -161,4 +162,4 @@ const Map = ({ theme }) => {
   )
 }
 
-export default withTheme(Map)
+export default Map

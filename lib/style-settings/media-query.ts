@@ -13,8 +13,11 @@ export const breakpoints = {
   xxl: 1680,
 }
 
-export type TBreakpoints = keyof typeof breakpoints
-export type TMediaKeys = `${TBreakpoints}Up`
+export type TBreakpointsKeys = keyof typeof breakpoints
+export type TBreakpoints = {
+  [key in TBreakpointsKeys]: number
+}
+export type TMediaKeys = `${TBreakpointsKeys}Up`
 export type TMedia = {
   [key in TMediaKeys]: (
     first: TemplateStringsArray | CSSObject,
@@ -34,20 +37,17 @@ export const mediaQuery = {
 }
 
 // iterate through the breakpoints and create a media template
-const breakpointKeys = Object.keys(breakpoints) as TBreakpoints[]
+export const media: TMedia = (
+  Object.keys(breakpoints) as TBreakpointsKeys[]
+).reduce((memo: TMedia, label: TBreakpointsKeys) => {
+  // use em in breakpoints to work properly cross-browser and support users
+  // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
+  const emSizeUp = (breakpoints[label] + 1) / fontRoot
 
-export const media: TMedia = breakpointKeys.reduce(
-  (memo: TMedia, label: TBreakpoints) => {
-    // use em in breakpoints to work properly cross-browser and support users
-    // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
-    const emSizeUp = (breakpoints[label] + 1) / fontRoot
-    const key = `${label}Up` as TMediaKeys
-    memo[key] = (first, ...args) => css`
-      @media screen and (min-width: ${emSizeUp}em) {
-        ${css(first, ...args)};
-      }
-    `
-    return memo
-  },
-  {} as TMedia
-)
+  memo[`${label}Up` as TMediaKeys] = (first, ...args) => css`
+    @media screen and (min-width: ${emSizeUp}em) {
+      ${css(first, ...args)};
+    }
+  `
+  return memo
+}, {} as TMedia)

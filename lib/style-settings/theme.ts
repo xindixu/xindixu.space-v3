@@ -1,7 +1,18 @@
 import { fontRoot } from "./constants"
-import { breakpoints } from "./media-query"
+import { breakpoints, TBreakpointsKeys } from "./media-query"
 
 import colors from "./colors"
+
+type TBreakpoints = {
+  [key in TBreakpointsKeys]: { value: number }
+}
+const parsedBreakpoints = Object.entries(breakpoints).reduce(
+  (memo, [key, value]) => {
+    memo[key as TBreakpointsKeys] = { value }
+    return memo
+  },
+  {} as TBreakpoints
+)
 
 const customTheme = {
   heading: {
@@ -20,10 +31,7 @@ const customTheme = {
       size: `${fontRoot}px`,
       family: "'Lato', sans-serif",
     },
-    breakpoints: Object.entries(breakpoints).reduce((memo, [key, value]) => {
-      memo[key] = { value }
-      return memo
-    }, {}),
+    breakpoints: parsedBreakpoints,
   },
 }
 

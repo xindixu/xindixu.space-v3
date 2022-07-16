@@ -1,12 +1,15 @@
-import { breakpoints } from "./media-query"
+import { DefaultTheme } from "styled-components"
 import { DARK, LIGHT } from "lib/style-settings"
+import { breakpoints, TBreakpoints } from "./media-query"
+import { TColorNames } from "./color-names"
 
-export const getSize = (size) => {
-  const [number] = size.match(/\d+/g)
-  return parseInt(number, 10)
-}
-
-export const isScreenUp = ({ base, current } = {}) => {
+export const isScreenUp = ({
+  base,
+  current,
+}: {
+  base: TBreakpoints
+  current: string
+}) => {
   const allBreakPoints = {
     small: 768,
     medium: 1536,
@@ -24,9 +27,11 @@ export const isScreenUp = ({ base, current } = {}) => {
 }
 
 export const color =
-  (colorName) =>
-  ({ theme }) => {
+  (colorName: TColorNames) =>
+  ({ theme }: { theme: DefaultTheme }) => {
+    // @ts-expect-error
     const mode = theme.dark ? DARK : LIGHT
+    // @ts-expect-error
     const { colors } = theme.global
     const selectedColor = colors?.[colorName]
     if (selectedColor && typeof selectedColor === "object") {

@@ -7,6 +7,7 @@ const usePageConfig = () => {
 
   return {
     isTopLevel: paths.length === 1,
+    // @ts-expect-error
     config: linksByPathname[paths[0]] || errorPage,
   }
 }
