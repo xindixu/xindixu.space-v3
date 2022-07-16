@@ -34,18 +34,20 @@ export const mediaQuery = {
 }
 
 // iterate through the breakpoints and create a media template
-export const media: TMedia = Object.keys(breakpoints).reduce(
+const breakpointKeys = Object.keys(breakpoints) as TBreakpoints[]
+
+export const media: TMedia = breakpointKeys.reduce(
   (memo: TMedia, label: TBreakpoints) => {
     // use em in breakpoints to work properly cross-browser and support users
     // changing their browsers font-size: https://zellwk.com/blog/media-query-units/
     const emSizeUp = (breakpoints[label] + 1) / fontRoot
-
-    memo[`${label}Up` as TMediaKeys] = (first, ...args) => css`
+    const key = `${label}Up` as TMediaKeys
+    memo[key] = (first, ...args) => css`
       @media screen and (min-width: ${emSizeUp}em) {
         ${css(first, ...args)};
       }
     `
     return memo
   },
-  {}
+  {} as TMedia
 )
