@@ -32,6 +32,7 @@ const GlobalStyle = createGlobalStyle`
 // This fix the bug where next.js wouldn't scroll back to top when page changes
 const Grommet = styled(BaseGrommet)`
   overflow: initial;
+  height: 100%;
 `
 
 const PageAnimate = styled(motion.div)`
