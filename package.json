@@ -47,6 +47,7 @@
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.7.1",
+    "ts-migrate": "^0.1.30",
     "typescript": "^4.7.4"
   },
   "license": "GPL-3.0-or-later"
