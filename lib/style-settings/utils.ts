@@ -1,13 +1,13 @@
 import { DefaultTheme } from "styled-components"
 import { DARK, LIGHT } from "lib/style-settings"
-import { breakpoints, TBreakpoints } from "./media-query"
+import { breakpoints, TBreakpointsKeys } from "./media-query"
 import { TColorNames } from "./color-names"
 
 export const isScreenUp = ({
   base,
   current,
 }: {
-  base: TBreakpoints
+  base: TBreakpointsKeys
   current: string
 }) => {
   const allBreakPoints = {
