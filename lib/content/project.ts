@@ -1,10 +1,17 @@
 import { get } from "lodash"
 import { client } from "./index"
-import { TProject } from "./types"
+import { IProjectFields } from "./types"
+import {
+  EntryCollectionWithLinkResolutionAndWithUnresolvableLinks,
+  EntryWithLinkResolutionAndWithUnresolvableLinks,
+} from "contentful"
 
 const PAGE_SIZE = 10
 
-const parseProjectEntry = ({ fields, metadata }) => ({
+const parseProjectEntry = ({
+  fields,
+  metadata,
+}: EntryWithLinkResolutionAndWithUnresolvableLinks<IProjectFields>) => ({
   created: fields.created,
   description: fields.description || {},
   demoLink: fields.demoLink,
@@ -27,10 +34,18 @@ const parseProjectEntry = ({ fields, metadata }) => ({
   tags: metadata.tags.map(({ sys }) => sys.id),
 })
 
-const parseProjectEntries = (entries) => entries?.items?.map(parseProjectEntry)
+const parseProjectEntries = (
+  entries: EntryCollectionWithLinkResolutionAndWithUnresolvableLinks<IProjectFields>
+) => entries?.items?.map(parseProjectEntry)
 
-export async function getAllProjects({ page: queryPage, tags = [] } = {}) {
-  const page = queryPage ? parseInt(queryPage, 10) : 1
+export async function getAllProjects({
+  page: queryPage = "1",
+  tags = [],
+}: {
+  page?: string
+  tags?: string[]
+}) {
+  const page = parseInt(queryPage, 10)
 
   const params = {
     content_type: "work",
@@ -40,10 +55,11 @@ export async function getAllProjects({ page: queryPage, tags = [] } = {}) {
   }
 
   if (tags.length > 0) {
+    // @ts-expect-error
     params["metadata.tags.sys.id[all]"] = tags.join(",")
   }
 
-  const entries = await client.getEntries<TProject>(params)
+  const entries = await client.getEntries<IProjectFields>(params)
 
   return {
     entries: parseProjectEntries(entries),
@@ -52,8 +68,8 @@ export async function getAllProjects({ page: queryPage, tags = [] } = {}) {
   }
 }
 
-export async function getProject({ slug }) {
-  const entries = await client.getEntries<TProject>({
+export async function getProject({ slug }: { slug: string }) {
+  const entries = await client.getEntries<IProjectFields>({
     content_type: "work",
     limit: 1,
     "fields.slug[in]": slug,
@@ -63,8 +79,9 @@ export async function getProject({ slug }) {
 }
 
 export async function getAllProjectSlugs() {
-  const entries = await client.getEntries<TProject>({
+  const entries = await client.getEntries<IProjectFields>({
     content_type: "work",
+    // @ts-expect-error
     select: "fields.slug",
   })
 

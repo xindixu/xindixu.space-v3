@@ -1,8 +1,8 @@
 import { get } from "lodash"
 import { client } from "./index"
-import { THtml } from "./types"
+import { IHtmlFields } from "./types"
 
-const parseImageCollage = ({ fields }) => ({
+const parseImageCollage = ({ fields }: { fields: IHtmlFields }) => ({
   images: fields.images.map((image) => ({
     src: get(image, "fields.file.url") || "",
     width: get(image, "fields.file.details.image.width") || 0,
@@ -12,14 +12,13 @@ const parseImageCollage = ({ fields }) => ({
   columns: fields.columns,
 })
 
-const parseImageCollages = (entries) => entries?.items?.map(parseImageCollage)
-
-export async function getImageCollage({ title }) {
-  const entries = await client.getEntries<THtml>({
+export async function getImageCollage({ title }: { title: string }) {
+  const entries = await client.getEntries<IHtmlFields>({
     content_type: "html",
     limit: 1,
     "fields.title[in]": title,
   })
 
-  return parseImageCollages(entries)[0]
+  // @ts-expect-error
+  return parseImageCollage(entries?.items[0])
 }
