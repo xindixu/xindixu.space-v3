@@ -77,3 +77,8 @@ Page                                                           Size     First Lo
 ●  (SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
    (ISR)     incremental static regeneration (uses revalidate in getStaticProps)
 ```
+
+## TypeScript Migration
+1. Install `typescript` globally and `tsc --init`
+2. Follow the [guide](https://nextjs.org/docs/basic-features/typescript#existing-projects) from Next.js to turn TypeScript support for Next.js
+3. Update `baseUrl` in `tsconfig.json`
