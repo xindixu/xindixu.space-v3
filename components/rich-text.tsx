@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto"
 import React, { ReactNode } from "react"
 import styled, { css } from "styled-components"
 import { kebabCase, get } from "lodash"
@@ -13,7 +14,6 @@ import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
 import styleSettings from "lib/style-settings"
 import { color } from "lib/style-settings/utils"
-import { randomUUID } from "crypto"
 
 const { PINK, spacerBase, spacerLg } = styleSettings
 
@@ -119,6 +119,7 @@ const EmbeddedImage = ({
 
 const EmbeddedVideo = ({
   description,
+  title,
   url,
 }: {
   description: string
@@ -127,15 +128,21 @@ const EmbeddedVideo = ({
 }) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
-    <Video controls src={`https:${url}`} />
+    <Video title={title} controls src={`https:${url}`} />
   </Box>
 )
 
-const EmbeddedEmbed = ({ description, height, url, width }: TEmbedded) => (
+const EmbeddedEmbed = ({
+  description,
+  height,
+  title,
+  url,
+  width,
+}: TEmbedded) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
     <EmbedWrapper ratio={Math.round((height / width) * 100)}>
-      <Embed type="application/pdf" src={url} />
+      <Embed title={title} type="application/pdf" src={url} />
     </EmbedWrapper>
   </Box>
 )

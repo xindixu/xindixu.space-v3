@@ -4,7 +4,7 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component"
 import "react-vertical-timeline-component/style.min.css"
-import styled, { useTheme, withTheme } from "styled-components"
+import styled, { useTheme } from "styled-components"
 import { Heading } from "grommet"
 import { experiences } from "contents/experiences"
 import styleSettings from "lib/style-settings"

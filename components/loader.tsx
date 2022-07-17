@@ -1,5 +1,4 @@
 import React, { ReactNode } from "react"
-import PropTypes from "prop-types"
 import styled, { keyframes } from "styled-components"
 import styleSettings from "lib/style-settings/index"
 import { color } from "lib/style-settings/utils"

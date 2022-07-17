@@ -1,14 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react"
-import {
-  Box,
-  Card,
-  CardFooter,
-  Grid,
-  Main,
-  Spinner,
-  Text,
-  Stack,
-} from "grommet"
+import { Box, Card, CardFooter, Grid, Main, Spinner, Text } from "grommet"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import Link from "next/link"

@@ -37,6 +37,7 @@
     "no-prototype-builtins": 0,
     "no-underscore-dangle": 0,
     "no-unused-expressions": 0,
+    "no-unused-vars": ["warn"],
     "prefer-promise-reject-errors": 0,
     "prettier/prettier": ["error"],
     "react-hooks/exhaustive-deps": "warn",
@@ -49,9 +50,9 @@
     "react/no-multi-comp": [1, { "ignoreStateless": true }],
     "react/prop-types": 0,
     "react/react-in-jsx-scope": 0,
+    "react/require-default-props": 0,
     "react/sort-comp": 0,
     "semi": ["error", "never"],
-    "no-unused-vars": ["warn"],
     "unused-imports/no-unused-imports": "error",
     "unused-imports/no-unused-vars": [
       "warn",

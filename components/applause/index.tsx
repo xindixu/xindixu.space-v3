@@ -2,9 +2,9 @@ import React, { useCallback, useEffect, useState } from "react"
 import { Box, Stack } from "grommet"
 import { AnimatePresence, motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
+import Card from "./card"
 import useMedia from "hooks/use-media"
 
-import Card from "./card"
 import { applauses } from "contents/applauses"
 
 const READING_TIME = 10000 // 10 secs

@@ -6,10 +6,10 @@ import {
   ThemeProvider as NextThemeProvider,
   useTheme as useNextTheme,
 } from "next-themes"
+import { NextRouter } from "next/router"
 import CommonLayout from "layout/common"
 import useClick from "hooks/use-click"
 import customTheme from "lib/style-settings/theme"
-import { NextRouter } from "next/router"
 import { TPageProps } from "types/types"
 
 const GlobalStyle = createGlobalStyle`
@@ -58,7 +58,7 @@ const d = typeof window !== "undefined" ? document : null
 
 type TProps = {
   Component: React.ComponentType<TPageProps>
-  pageProps: {}
+  pageProps: any
   router: NextRouter
 }
 

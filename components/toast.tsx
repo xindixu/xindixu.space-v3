@@ -49,7 +49,7 @@ type TProps = {
 }
 const Toast = ({
   closeAfter = 3000,
-  content,
+  content = "",
   isOpen,
   mode = "ok",
   onClose,

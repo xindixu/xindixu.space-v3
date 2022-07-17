@@ -59,14 +59,15 @@ const Wrapper = styled(Stack)<{ full: boolean }>`
   `}
 `
 
+type TSrc = { src: string }
+type TThemedSrc = { lightSrc: string; darkSrc: string }
+type TSrcs = TSrc | TThemedSrc
+
 type TProps = {
   name: string
   background: {
-    src?: string
-    lightSrc?: string
-    darkSrc?: string
     alt?: string
-  }
+  } & TSrcs
   full: boolean
   labels?: string[]
   setHeaderRef: (node?: Element | null | undefined) => void
@@ -74,7 +75,7 @@ type TProps = {
 
 const Header = ({
   name,
-  background: { src, lightSrc, darkSrc, alt },
+  background: { alt, ...srcs },
   full,
   labels,
   setHeaderRef,
@@ -91,17 +92,18 @@ const Header = ({
   )
   const titleY = useTransform(scrollY, [0, 400], full ? [0, 300] : [0, 150])
   const { resolvedTheme } = useTheme()
+
+  const src = srcs.hasOwnProperty("src")
+    ? (srcs as TSrc).src
+    : resolvedTheme === DARK
+    ? (srcs as TThemedSrc).darkSrc
+    : (srcs as TThemedSrc).lightSrc
+
   return (
     <Wrapper anchor="center" full={full}>
       <motion.div style={{ y: backgroundY, x: 0 }}>
         <Box {...size} ref={setHeaderRef}>
-          <Image
-            src={src || (resolvedTheme === DARK ? darkSrc : lightSrc)!}
-            layout="fill"
-            priority
-            objectFit="cover"
-            alt={alt}
-          />
+          <Image src={src} layout="fill" priority objectFit="cover" alt={alt} />
         </Box>
       </motion.div>
       {full || <Darken {...size} />}

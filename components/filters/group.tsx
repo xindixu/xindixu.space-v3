@@ -2,11 +2,11 @@ import React from "react"
 import { Box, Text } from "grommet"
 import { capitalize } from "lodash"
 import styled from "styled-components"
+import ButtonFilter from "./button-filter"
+import SelectFilter from "./select-filter"
 import useMedia from "hooks/use-media"
 import { getAllId } from "lib/content/tag"
 import styleSettings from "lib/style-settings"
-import ButtonFilter from "./button-filter"
-import SelectFilter from "./select-filter"
 
 const { spacerLg } = styleSettings
 
