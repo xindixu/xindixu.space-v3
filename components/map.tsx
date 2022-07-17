@@ -16,7 +16,7 @@ const { spacerSm, spacerBase, PINK, fontSizeLg, fontSizeSm, fontSizeBase } =
 const ROUTE_SIZE = 5
 const PLACE_SIZE = 10
 
-const Location = styled.div`
+const Location = styled.div<{ position: string }>`
   ${({ position }) => `
       margin-left: ${position};
   `}
@@ -48,7 +48,14 @@ const Date = styled(Text)`
   `}
 `
 
-const Label = ({ place, country, monthDay, year, position }) => (
+type TProps = {
+  country: string
+  monthDay: string
+  place: string
+  position: string
+  year: string
+}
+const Label = ({ country, monthDay, place, position, year }: TProps) => (
   <Location position={position}>
     <HorizontalText>{place}</HorizontalText>
     <VerticalText>{country}</VerticalText>
