@@ -1,10 +1,10 @@
 import React from "react"
 import styled from "styled-components"
 import { kebabCase } from "lodash"
+import { Block, Document, Text } from "@contentful/rich-text-types"
 import { Card, Anchor } from "grommet"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings"
-import { Block, Inline } from "@contentful/rich-text-types"
 
 const { spacerBase } = styleSettings
 
@@ -32,22 +32,19 @@ const variants = {
   },
 }
 
-type TContent = Block | Inline
 type TProps = {
   activeHeader: string
-  mainContent: {
-    content: TContent[]
-  }
+  mainContent: Document
   show: boolean
 }
 
-const parseContent = (content: TContent[]) =>
-  content
+const parseContent = (contents: Block[]) =>
+  contents
     .filter(
       ({ nodeType }) => nodeType === "heading-1" || nodeType === "heading-2"
     )
     .map(({ content, nodeType }) => ({
-      title: content[0]?.value,
+      title: (content as Text[])[0]?.value,
       level: parseInt(nodeType.split("-")[1] || "0", 10),
     }))
 

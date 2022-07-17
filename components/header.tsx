@@ -103,6 +103,7 @@ const Header = ({
   return (
     <Wrapper anchor="center" full={full}>
       <motion.div style={{ y: backgroundY, x: 0 }}>
+        {/* @ts-expect-error legacy ref */}
         <Box {...size} ref={setHeaderRef}>
           <Image src={src} layout="fill" priority objectFit="cover" alt={alt} />
         </Box>

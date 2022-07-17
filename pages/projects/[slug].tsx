@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from "react"
-import PropTypes from "prop-types"
 import { useRouter } from "next/router"
 import styled from "styled-components"
 import { Main, Box, Button } from "grommet"
@@ -215,22 +214,6 @@ export const getStaticPaths: GetStaticPaths = async () => {
     paths: paths.map((slug) => `/projects/${slug}`),
     fallback: false,
   }
-}
-
-Project.propTypes = {
-  project: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    slug: PropTypes.string.isRequired,
-    devices: PropTypes.shape({
-      src: PropTypes.string.isRequired,
-      width: PropTypes.number.isRequired,
-      height: PropTypes.number.isRequired,
-    }).isRequired,
-    end: PropTypes.string.isRequired,
-    start: PropTypes.string.isRequired,
-    tags: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-  }).isRequired,
-  setHeaderRef: PropTypes.func.isRequired,
 }
 
 export default Project

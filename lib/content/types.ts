@@ -21,7 +21,7 @@ export type TPdf = Contentful.Entry<IPdfFields>
 export interface IProjectFields {
   created: Contentful.EntryFields.Date
   demoLink?: Contentful.EntryFields.Symbol
-  description: CFRichTextTypes.Block | CFRichTextTypes.Inline
+  description: CFRichTextTypes.Document
   devices: Contentful.Asset
   end: Contentful.EntryFields.Date
   labels: Contentful.EntryFields.Symbol[]

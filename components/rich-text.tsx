@@ -5,9 +5,9 @@ import { Grid, Box, Text, Paragraph, Heading as BaseHeading } from "grommet"
 import {
   Block,
   BLOCKS,
+  Document,
   Inline,
   MARKS,
-  Document,
 } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
@@ -285,7 +285,8 @@ type TProps = {
   mainContent: Document
 }
 
-const RichText = ({ mainContent }: TProps) =>
-  documentToReactComponents(mainContent, options)
+const RichText = ({ mainContent }: TProps) => (
+  <>{documentToReactComponents(mainContent, options)}</>
+)
 
 export default RichText
