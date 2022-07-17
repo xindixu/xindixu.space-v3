@@ -34,6 +34,7 @@ const customTheme: DefaultTheme = {
     },
     breakpoints: parsedBreakpoints,
   },
+  dark: true,
 }
 
 export default customTheme
