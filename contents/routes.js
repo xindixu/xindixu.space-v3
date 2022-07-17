@@ -93,7 +93,9 @@ export const linksByPathname = {
 }
 
 export const errorPage = {
+  icon: null,
   name: "404",
+  link: "/error",
   background: {
     lightSrc: "/img/bg/bg-light-5.jpg",
     darkSrc: "/img/bg/bg-light-5.jpg",

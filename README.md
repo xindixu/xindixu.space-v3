@@ -77,3 +77,15 @@ Page                                                           Size     First Lo
 ●  (SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
    (ISR)     incremental static regeneration (uses revalidate in getStaticProps)
 ```
+
+## TypeScript Migration
+### Guides
+- TS-migrate
+- Next.js: [Guide](https://nextjs.org/docs/basic-features/typescript#existing-projects) 
+- Contentful: [Guide](https://www.contentful.com/developers/docs/javascript/tutorials/typescript-in-javascript-client-library), [TS type generation app](https://github.com/marcolink/cf-content-types-generator-app)
+
+1. Install `typescript` globally and `tsc --init`
+3. Update `baseUrl` in `tsconfig.json`
+4. Install `@type/..` for 3rd party libraries
+5. Update npm packages for TypeScript support
+6. Use `ts-migrate` to migrate incrementally

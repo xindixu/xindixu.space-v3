@@ -1,14 +1,5 @@
 import React, { useState, useCallback, useEffect } from "react"
-import {
-  Box,
-  Card,
-  CardFooter,
-  Grid,
-  Main,
-  Spinner,
-  Text,
-  Stack,
-} from "grommet"
+import { Box, Card, CardFooter, Grid, Main, Spinner, Text } from "grommet"
 import Image from "next/image"
 import { useRouter } from "next/router"
 import Link from "next/link"
@@ -18,13 +9,12 @@ import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
 import { uniqBy } from "lodash"
 import Filters from "components/filters"
-import { getQuery } from "components/filters/utils"
+import { getQuery } from "lib/content/tag"
 import { getAllProjects } from "lib/content/project"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
-import { color } from "lib/style-settings/utils"
 
-const { readable, BACKGROUND } = styleSettings
+const { readable } = styleSettings
 
 const ReadableContent = styled(Box)`
   width: 100%;

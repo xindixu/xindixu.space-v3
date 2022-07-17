@@ -110,16 +110,16 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
   return (
     <>
       <Header
-        full={false}
-        ref={setHeaderRef}
-        name={name}
-        labels={labels}
         background={{
           src: `https:${src}`,
           width,
           height,
           alt: `devices showing different screenshots of project ${name}`,
         }}
+        full={false}
+        labels={labels}
+        name={name}
+        setHeaderRef={setHeaderRef}
       />
 
       <Wrapper>
