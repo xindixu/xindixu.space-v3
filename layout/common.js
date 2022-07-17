@@ -9,7 +9,7 @@ import Footer from "components/footer"
 import useMedia from "hooks/use-media"
 
 const Common = ({ children }) => {
-  const [headerRef, isHeaderInView] = useInView({ threshold: 0.05 })
+  const [setHeaderRef, isHeaderInView] = useInView({ threshold: 0.05 })
   const isXxsUp = useMedia("xxs")
 
   const contentRef = useRef(null)
@@ -27,14 +27,14 @@ const Common = ({ children }) => {
         setContentRef: (node) => {
           contentRef.current = node
         },
-        setHeaderRef: headerRef,
+        setHeaderRef,
         header: isTopLevel && (
           <Header
-            ref={headerRef}
-            name={name}
+            alt="floral background image to decorate the header"
             background={background}
             full={isTopLevel}
-            alt="floral background image to decorate the header"
+            name={name}
+            setHeaderRef={setHeaderRef}
           />
         ),
         isXxsUp,

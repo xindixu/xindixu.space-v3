@@ -50,8 +50,6 @@ const Navbar = ({ isHeaderInView }: TProps) => {
     <>
       <FixTop fill="horizontal">
         <Header
-          background={isHeaderInView ? undefined : "brand"}
-          elevation={isHeaderInView ? undefined : "medium"}
           animation={
             isHeaderInView
               ? undefined
@@ -60,6 +58,8 @@ const Navbar = ({ isHeaderInView }: TProps) => {
                   duration: 500,
                 }
           }
+          background={isHeaderInView ? undefined : "brand"}
+          elevation={isHeaderInView ? undefined : "medium"}
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
           <Link href="/" passHref>

@@ -40,7 +40,7 @@ const Base = ({
   sender: { name, jobTitle },
 }: TProps) => {
   const theme = useTheme()
-  console.log(theme.dark)
+
   return (
     <StyledCard
       height="medium"

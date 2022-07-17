@@ -1,7 +1,5 @@
-import { DefaultTheme } from "styled-components"
 import { fontRoot } from "./constants"
 import { breakpoints, TBreakpointsKeys } from "./media-query"
-
 import colors from "./colors"
 
 type TBreakpoints = {
@@ -15,7 +13,7 @@ const parsedBreakpoints = Object.entries(breakpoints).reduce(
   {} as TBreakpoints
 )
 
-const customTheme: DefaultTheme = {
+const customTheme = {
   heading: {
     font: {
       family: "'Sansita Swashed', cursive",
@@ -34,7 +32,6 @@ const customTheme: DefaultTheme = {
     },
     breakpoints: parsedBreakpoints,
   },
-  dark: true,
 }
 
 export default customTheme
