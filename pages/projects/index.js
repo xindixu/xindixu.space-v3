@@ -18,13 +18,12 @@ import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
 import { uniqBy } from "lodash"
 import Filters from "components/filters"
-import { getQuery } from "components/filters/utils"
+import { getQuery } from "lib/content/tag"
 import { getAllProjects } from "lib/content/project"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
-import { color } from "lib/style-settings/utils"
 
-const { readable, BACKGROUND } = styleSettings
+const { readable } = styleSettings
 
 const ReadableContent = styled(Box)`
   width: 100%;

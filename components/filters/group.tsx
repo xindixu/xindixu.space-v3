@@ -3,8 +3,8 @@ import PropTypes from "prop-types"
 import { Box, Button, Text, Select } from "grommet"
 import { capitalize } from "lodash"
 import styled from "styled-components"
-import { getAllId, getName } from "./utils"
 import useMedia from "hooks/use-media"
+import { getAllId, getName } from "lib/content/tag"
 import styleSettings from "lib/style-settings"
 
 const { spacerLg } = styleSettings

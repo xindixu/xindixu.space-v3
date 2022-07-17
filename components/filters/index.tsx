@@ -3,8 +3,8 @@ import PropTypes from "prop-types"
 import styled from "styled-components"
 import { identity, pickBy } from "lodash"
 import Group from "./group"
-import { getAllId } from "./utils"
-import { getAllTags } from "lib/content/tag"
+
+import { getAllTags, getAllId } from "lib/content/tag"
 import styleSettings from "lib/style-settings"
 
 const { spacerSm } = styleSettings
