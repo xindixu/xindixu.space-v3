@@ -9,6 +9,8 @@ import {
 import CommonLayout from "layout/common"
 import useClick from "hooks/use-click"
 import customTheme from "lib/style-settings/theme"
+import { NextRouter } from "next/router"
+import { TPageProps } from "types/types"
 
 const GlobalStyle = createGlobalStyle`
   :root {
@@ -42,19 +44,25 @@ const PageAnimate = styled(motion.div)`
 `
 
 const pageAnimation = {
-  pageInitial: ({ x, y }) => ({
+  pageInitial: ({ x, y }: { x: number; y: number }) => ({
     clipPath: `circle(0% at ${x}px ${y}px)`,
   }),
-  pageAnimate: ({ x, y }) => ({
+  pageAnimate: ({ x, y }: { x: number; y: number }) => ({
     clipPath: `circle(150% at ${x}px ${y}px)`,
     transition: {
       duration: 1,
     },
   }),
 }
-const d = process.browser ? document : null
+const d = typeof window !== "undefined" ? document : null
 
-const Content = ({ Component, pageProps, router }) => {
+type TProps = {
+  Component: React.ComponentType<TPageProps>
+  pageProps: {}
+  router: NextRouter
+}
+
+const Content = ({ Component, pageProps, router }: TProps) => {
   const { coordinates } = useClick({ node: d })
   const { resolvedTheme } = useNextTheme()
   // hacky way to handle server client theme mismatch
@@ -65,7 +73,8 @@ const Content = ({ Component, pageProps, router }) => {
   }, [])
 
   const body = (
-    <Grommet theme={customTheme} themeMode={resolvedTheme} full>
+    // @ts-expect-error grommet theme
+    <Grommet theme={customTheme} themeMode={resolvedTheme}>
       <GlobalStyle />
       <CommonLayout>
         {({ setContentRef, setHeaderRef, header, isXxsUp }) => (
@@ -79,9 +88,9 @@ const Content = ({ Component, pageProps, router }) => {
             {header}
             <Component
               {...pageProps}
-              setHeaderRef={setHeaderRef}
-              setContentRef={setContentRef}
               isXxsUp={isXxsUp}
+              setContentRef={setContentRef}
+              setHeaderRef={setHeaderRef}
             />
           </PageAnimate>
         )}
@@ -95,7 +104,7 @@ const Content = ({ Component, pageProps, router }) => {
   return body
 }
 
-const App = (props) => (
+const App = (props: any) => (
   <NextThemeProvider>
     <Content {...props} />
   </NextThemeProvider>

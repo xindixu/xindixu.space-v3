@@ -62,13 +62,13 @@ const Wrapper = styled(Stack)<{ full: boolean }>`
 type TProps = {
   name: string
   background: {
-    src: string
-    lightSrc: string
-    darkSrc: string
-    alt: string
+    src?: string
+    lightSrc?: string
+    darkSrc?: string
+    alt?: string
   }
   full: boolean
-  labels: string[]
+  labels?: string[]
   setHeaderRef: (node?: Element | null | undefined) => void
 }
 
@@ -94,10 +94,9 @@ const Header = ({
   return (
     <Wrapper anchor="center" full={full}>
       <motion.div style={{ y: backgroundY, x: 0 }}>
-        {/* ts-expect-error */}
         <Box {...size} ref={setHeaderRef}>
           <Image
-            src={src || (resolvedTheme === DARK ? darkSrc : lightSrc)}
+            src={src || (resolvedTheme === DARK ? darkSrc : lightSrc)!}
             layout="fill"
             priority
             objectFit="cover"

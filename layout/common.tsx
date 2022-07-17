@@ -1,4 +1,4 @@
-import React, { useRef } from "react"
+import React, { ReactNode, useRef } from "react"
 import { useInView } from "react-intersection-observer"
 import PropTypes from "prop-types"
 import usePageConfig from "hooks/use-page-config"
@@ -7,12 +7,16 @@ import Navbar from "components/navbar"
 import Header from "components/header"
 import Footer from "components/footer"
 import useMedia from "hooks/use-media"
+import { TPageProps } from "types/types"
 
-const Common = ({ children }) => {
+type TProps = {
+  children: (props: TPageProps) => ReactNode
+}
+const Common = ({ children }: TProps) => {
   const [setHeaderRef, isHeaderInView] = useInView({ threshold: 0.05 })
   const isXxsUp = useMedia("xxs")
 
-  const contentRef = useRef(null)
+  const contentRef = useRef<HTMLElement>()
   const {
     config: { name, background },
     isTopLevel,
@@ -28,15 +32,17 @@ const Common = ({ children }) => {
           contentRef.current = node
         },
         setHeaderRef,
-        header: isTopLevel && (
+        header: isTopLevel ? (
           <Header
-            alt="floral background image to decorate the header"
-            background={background}
+            background={{
+              alt: "floral background image to decorate the header",
+              ...background,
+            }}
             full={isTopLevel}
             name={name}
             setHeaderRef={setHeaderRef}
           />
-        ),
+        ) : null,
         isXxsUp,
       })}
       <Footer />

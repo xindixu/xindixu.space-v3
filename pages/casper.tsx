@@ -1,5 +1,4 @@
 import React from "react"
-import PropTypes from "prop-types"
 import { motion } from "framer-motion"
 import Masonry from "react-responsive-masonry"
 import Image from "next/image"
@@ -12,14 +11,14 @@ import useMedia from "hooks/use-media"
 const { spacerXs, spacerSm } = styleSettings
 
 const variants = {
-  out: ({ index }) => ({
+  out: ({ index }: { index: number }) => ({
     translateY: -16,
     opacity: 0,
     transition: {
       delay: 0.1 * index,
     },
   }),
-  in: ({ index }) => ({
+  in: ({ index }: { index: number }) => ({
     translateY: 0,
     opacity: 1,
     transition: {
@@ -28,17 +27,33 @@ const variants = {
     },
   }),
 }
-const Casper = ({ imageCollage, isXxsUp }) => {
-  const { images } = imageCollage
+
+type TProps = {
+  imageCollage: {
+    images: {
+      src: string
+      width: number
+      height: number
+    }[]
+  }
+  isXxsUp: boolean
+}
+
+const Casper = ({ imageCollage = { images: [] }, isXxsUp }: TProps) => {
   const isMdUp = useMedia("md")
   const isSmUp = useMedia("sm")
-  const [gridFef, gridInView] = useInView({ delay: 1000 })
+  const [gridRef, gridInView] = useInView({ delay: 1000 })
 
+  const { images } = imageCollage
+
+  if (images.length === 0) {
+    return null
+  }
   return (
     <Main
       pad={{ horizontal: isXxsUp ? "xlarge" : "medium", vertical: "xlarge" }}
     >
-      <div ref={gridFef}>
+      <div ref={gridRef}>
         <Masonry
           columnsCount={isMdUp ? 5 : isSmUp ? 3 : 2}
           gutter={isXxsUp ? spacerSm : spacerXs}
@@ -65,22 +80,6 @@ const Casper = ({ imageCollage, isXxsUp }) => {
       </div>
     </Main>
   )
-}
-
-Casper.defaultProps = {
-  imageCollage: { images: [] },
-}
-
-Casper.propTypes = {
-  imageCollage: PropTypes.shape({
-    images: PropTypes.arrayOf(
-      PropTypes.shape({
-        src: PropTypes.string.isRequired,
-        width: PropTypes.number.isRequired,
-        height: PropTypes.number.isRequired,
-      }).isRequired
-    ).isRequired,
-  }),
 }
 
 export async function getStaticProps() {

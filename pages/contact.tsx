@@ -2,8 +2,9 @@ import React, { useContext } from "react"
 import { Main, Box, ResponsiveContext } from "grommet"
 import { links } from "contents/social-media"
 import ContactForm from "components/contact"
+import { TPageProps } from "types/types"
 
-const Contact = ({ isXxsUp }) => {
+const Contact = ({ isXxsUp }: TPageProps) => {
   const size = useContext(ResponsiveContext)
 
   return (

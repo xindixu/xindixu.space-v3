@@ -1,6 +1,12 @@
-import React from "react"
-import PropTypes from "prop-types"
-import { Main, Box, Paragraph, Button, Heading } from "grommet"
+import React, { ReactNode } from "react"
+import {
+  Main,
+  Box,
+  Paragraph,
+  Button,
+  Heading,
+  BoxExtendedProps,
+} from "grommet"
 import { motion } from "framer-motion"
 import styled from "styled-components"
 import Image from "next/image"
@@ -15,6 +21,7 @@ import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
 import ImageStack from "components/image-stack"
+import { TPageProps } from "types/types"
 
 const { readable, BEIGE, spacerXl, spacerLg, spacerBase } = styleSettings
 
@@ -42,10 +49,7 @@ const Right = styled(Half).attrs({
   margin: "none",
 })``
 
-const BaseReadableRow = styled(Box).attrs(({ isXxsUp }) => ({
-  alignContent: "center",
-  pad: { horizontal: isXxsUp ? "xlarge" : "medium" },
-}))`
+const BaseReadableRow = styled(Box)`
   & > div {
     align-self: center;
     max-width: ${readable};
@@ -76,16 +80,28 @@ const RightQuote = styled(Quote)`
   margin-right: -${spacerBase};
 `
 
-const ReadableRow = ({ children, ...props }) => (
-  <BaseReadableRow {...props}>
+const ReadableRow = ({
+  children,
+  isXxsUp,
+  ...props
+}: {
+  children: ReactNode
+  isXxsUp: boolean
+} & BoxExtendedProps) => (
+  <BaseReadableRow
+    alignContent="center"
+    pad={{ horizontal: isXxsUp ? "xlarge" : "medium" }}
+    {...props}
+  >
     <div>{children}</div>
   </BaseReadableRow>
 )
 
-const Index = ({ setContentRef, isXxsUp }) => {
+const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
   const isBaseUp = useMedia("base")
 
   return (
+    // @ts-expect-error legacy ref
     <Main ref={setContentRef} fill={false} gap="large">
       <ReadableRow isXxsUp={isXxsUp}>
         <Left>
@@ -217,7 +233,6 @@ const Index = ({ setContentRef, isXxsUp }) => {
               secondary
               label="View Selected Projects"
               size="medium"
-              align="center"
             />
           </Link>
           <Link href="/experiences" passHref>
@@ -226,7 +241,6 @@ const Index = ({ setContentRef, isXxsUp }) => {
               secondary
               label="View My Experiences"
               size="medium"
-              align="center"
             />
           </Link>
         </Box>
@@ -234,13 +248,4 @@ const Index = ({ setContentRef, isXxsUp }) => {
     </Main>
   )
 }
-
-Index.defaultProps = {
-  setContentRef: () => {},
-}
-
-Index.propTypes = {
-  setContentRef: PropTypes.func,
-}
-
 export default Index
