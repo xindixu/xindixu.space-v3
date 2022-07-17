@@ -3,7 +3,7 @@ import PropTypes from "prop-types"
 import Link from "next/link"
 import { Box, Text, Anchor } from "grommet"
 import { formatDuration } from "utils/datetime"
-import { getName } from "components/filters/utils"
+import { getName } from "lib/content/tag"
 
 const MetaBox = ({ tags, start, end }) => (
   <Box>

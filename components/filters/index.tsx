@@ -1,24 +1,30 @@
+// @ts-nocheck FIXME
 import React from "react"
-import PropTypes from "prop-types"
 import styled from "styled-components"
 import { identity, pickBy } from "lodash"
 import Group from "./group"
 
-import { getAllTags, getAllId } from "lib/content/tag"
+import { getAllTags, getAllId, TTagQuery } from "lib/content/tag"
 import styleSettings from "lib/style-settings"
 
 const { spacerSm } = styleSettings
 const Wrapper = styled.div`
   margin-bottom: -${spacerSm};
 `
-const Filters = ({ tags, setTags }) => {
-  const tagGroups = getAllTags()
 
-  const initialSelectedTags = Object.keys(tagGroups).reduce((memo, key) => {
-    memo[key] = getAllId(key)
-    return memo
-  }, {})
+type TProps = {
+  tags: TTagQuery
+  setTags: React.Dispatch<React.SetStateAction<TTagQuery>>
+}
 
+const tagGroups = getAllTags()
+
+const initialSelectedTags = Object.keys(tagGroups).reduce((memo, key) => {
+  memo[key] = getAllId(key)
+  return memo
+}, {})
+
+const Filters = ({ tags, setTags }: TProps) => {
   const selectedTags = Object.entries(tags).reduce((memo, [key, value]) => {
     memo[key] = value
     return memo
@@ -62,11 +68,6 @@ const Filters = ({ tags, setTags }) => {
       })}
     </Wrapper>
   )
-}
-
-Filters.propTypes = {
-  tags: PropTypes.object.isRequired,
-  setTags: PropTypes.func.isRequired,
 }
 
 export default Filters

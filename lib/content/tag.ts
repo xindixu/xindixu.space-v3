@@ -26,27 +26,28 @@ const TAG_NAMES = {
   "type-crafts": "Crafts",
 }
 
-const AT = "at"
-const TYPE = "type"
+type TTag = keyof typeof TAG_NAMES
 
-type TTagNames = keyof typeof TAG_NAMES
-type TCategory = typeof AT | typeof TYPE
-type TQueryParams = { [key in TCategory]: TTagNames }
-type TQuery = { [key in TCategory]: string }
+export type TTagQuery = { [key: string]: string }
+type TGroup = { [key: string]: string[] }
 
-const groupTags = (tags = TAGS) => groupBy(tags, (tag) => tag.split("-")[0])
-
+const groupTags = (tags = TAGS): TGroup =>
+  groupBy(tags, (tag) => tag.split("-")[0])
 export const getAllTags = () => groupTags(TAGS)
 
 export const getAllId = (key: string) => `${key}-all`
-export const getName = (id: TTagNames) => TAG_NAMES[id]
+export const getName = (id: string) => {
+  if (TAG_NAMES.hasOwnProperty(id)) {
+    return TAG_NAMES[id as TTag]
+  }
+  return ""
+}
 
-export const getKey = (id: TTagNames): TCategory =>
-  id.split("-")[0] as TCategory
-export const getValue = (id: TTagNames) => id.split("-")[1]
+export const getKey = (id: string) => id.split("-")[0]
+export const getValue = (id: string) => id.split("-")[1]
 
-export const getQuery = (object: TQueryParams) =>
+export const getQuery = (object: TTagQuery) =>
   Object.entries(object).reduce((memo, [key, value]) => {
-    memo[key as TCategory] = getValue(value)
+    memo[key] = getValue(value)
     return memo
-  }, {} as TQuery)
+  }, {} as TTagQuery)
