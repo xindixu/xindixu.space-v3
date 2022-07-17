@@ -1,14 +1,13 @@
-import { randomUUID } from "crypto"
 import React, { ReactNode } from "react"
 import styled, { css } from "styled-components"
-import { kebabCase, get } from "lodash"
+import { kebabCase, get, random } from "lodash"
 import { Grid, Box, Text, Paragraph, Heading as BaseHeading } from "grommet"
 import {
   Block,
   BLOCKS,
-  Document,
   Inline,
   MARKS,
+  Document,
 } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
@@ -192,7 +191,7 @@ const EmbeddedImages = ({
 )
 
 const getId = (node: ReactNode) =>
-  typeof node === "string" ? kebabCase(node) : randomUUID()
+  typeof node === "string" ? kebabCase(node) : `text-id-${random(false)}`
 
 const options = {
   renderMark: {

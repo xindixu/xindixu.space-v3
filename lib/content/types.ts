@@ -19,20 +19,34 @@ export interface IPdfFields {
 export type TPdf = Contentful.Entry<IPdfFields>
 
 export interface IProjectFields {
-  name: Contentful.EntryFields.Symbol
-  slug: Contentful.EntryFields.Symbol
-  description: CFRichTextTypes.Block | CFRichTextTypes.Inline
-  start: Contentful.EntryFields.Date
-  end: Contentful.EntryFields.Date
-  demoLink?: Contentful.EntryFields.Symbol
-  repoLink?: Contentful.EntryFields.Symbol
-  labels: Contentful.EntryFields.Symbol[]
-  devices: Contentful.Asset
-  thumbnail?: Contentful.Asset
   created: Contentful.EntryFields.Date
+  demoLink?: Contentful.EntryFields.Symbol
+  description: CFRichTextTypes.Block | CFRichTextTypes.Inline
+  devices: Contentful.Asset
+  end: Contentful.EntryFields.Date
+  labels: Contentful.EntryFields.Symbol[]
+  name: Contentful.EntryFields.Symbol
+  repoLink?: Contentful.EntryFields.Symbol
+  slug: Contentful.EntryFields.Symbol
+  start: Contentful.EntryFields.Date
+  thumbnail?: Contentful.Asset
 }
 
 export type TProject = Contentful.Entry<IProjectFields>
+
+export type TParsedProject = Omit<IProjectFields, "devices" | "thumbnail"> & {
+  devices: {
+    src: string
+    width: number
+    height: number
+  }
+  thumbnail: {
+    src: string
+    width: number
+    height: number
+  }
+  tags: string[]
+}
 
 export interface IYoutubeFields {
   title: Contentful.EntryFields.Symbol

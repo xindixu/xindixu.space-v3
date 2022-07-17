@@ -4,6 +4,7 @@ import { kebabCase } from "lodash"
 import { Card, Anchor } from "grommet"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings"
+import { Block, Inline } from "@contentful/rich-text-types"
 
 const { spacerBase } = styleSettings
 
@@ -31,7 +32,7 @@ const variants = {
   },
 }
 
-type TContent = { nodeType: string; content: [{ value: string }] }
+type TContent = Block | Inline
 type TProps = {
   activeHeader: string
   mainContent: {
@@ -40,8 +41,8 @@ type TProps = {
   show: boolean
 }
 
-const parseContent = (mainContent: TContent[]) =>
-  mainContent
+const parseContent = (content: TContent[]) =>
+  content
     .filter(
       ({ nodeType }) => nodeType === "heading-1" || nodeType === "heading-2"
     )

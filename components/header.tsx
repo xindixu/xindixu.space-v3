@@ -4,9 +4,11 @@ import Image from "next/image"
 import { useScroll, motion, useTransform } from "framer-motion"
 import styled, { css } from "styled-components"
 import { useTheme } from "next-themes"
+
 import styleSettings, { DARK } from "lib/style-settings"
 import { media } from "lib/style-settings/media-query"
 import { color } from "lib/style-settings/utils"
+import { TPageProps } from "types/types"
 
 const {
   PINK,
@@ -59,7 +61,7 @@ const Wrapper = styled(Stack)<{ full: boolean }>`
   `}
 `
 
-type TSrc = { src: string }
+type TSrc = { src: string; height?: number; width?: number }
 type TThemedSrc = { lightSrc: string; darkSrc: string }
 type TSrcs = TSrc | TThemedSrc
 
@@ -70,8 +72,7 @@ type TProps = {
   } & TSrcs
   full: boolean
   labels?: string[]
-  setHeaderRef: (node?: Element | null | undefined) => void
-}
+} & Pick<TPageProps, "setHeaderRef">
 
 const Header = ({
   name,

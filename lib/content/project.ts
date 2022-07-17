@@ -3,7 +3,8 @@ import {
   EntryCollectionWithLinkResolutionAndWithUnresolvableLinks,
   EntryWithLinkResolutionAndWithUnresolvableLinks,
 } from "contentful"
-import { IProjectFields } from "./types"
+
+import { IProjectFields, TParsedProject } from "./types"
 import { client } from "./index"
 
 const PAGE_SIZE = 10
@@ -11,27 +12,27 @@ const PAGE_SIZE = 10
 const parseProjectEntry = ({
   fields,
   metadata,
-}: EntryWithLinkResolutionAndWithUnresolvableLinks<IProjectFields>) => ({
+}: EntryWithLinkResolutionAndWithUnresolvableLinks<IProjectFields>): TParsedProject => ({
   created: fields.created,
-  description: fields.description || {},
   demoLink: fields.demoLink,
-  repoLink: fields.repoLink,
-  thumbnail: {
-    src: get(fields.thumbnail, "fields.file.url") || "",
-    width: get(fields.thumbnail, "fields.file.details.image.width") || 0,
-    height: get(fields.thumbnail, "fields.file.details.image.height") || 0,
-  },
+  description: fields.description || {},
   devices: {
-    src: get(fields.devices, "fields.file.url") || "",
-    width: get(fields.devices, "fields.file.details.image.width") || 0,
-    height: get(fields.devices, "fields.file.details.image.height") || 0,
+    src: get(fields.devices, "fields.file.url", ""),
+    width: get(fields.devices, "fields.file.details.image.width", 0),
+    height: get(fields.devices, "fields.file.details.image.height", 0),
   },
-  name: fields.name,
-  slug: fields.slug,
-  start: fields.start,
   end: fields.end,
   labels: fields.labels || [],
+  name: fields.name,
+  repoLink: fields.repoLink,
+  slug: fields.slug,
+  start: fields.start,
   tags: metadata.tags.map(({ sys }) => sys.id),
+  thumbnail: {
+    src: get(fields.devices, "fields.file.url", ""),
+    width: get(fields.devices, "fields.file.details.image.width", 0),
+    height: get(fields.devices, "fields.file.details.image.height", 0),
+  },
 })
 
 const parseProjectEntries = (

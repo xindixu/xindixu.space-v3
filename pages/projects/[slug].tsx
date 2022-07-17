@@ -3,8 +3,10 @@ import PropTypes from "prop-types"
 import { useRouter } from "next/router"
 import styled from "styled-components"
 import { Main, Box, Button } from "grommet"
+import { GetStaticPaths, GetStaticProps } from "next"
 import { useWindowScroll } from "react-use"
 import { Previous } from "grommet-icons"
+
 import { getProject, getAllProjectSlugs } from "lib/content/project"
 import Header from "components/header"
 import RichText from "components/rich-text"
@@ -13,6 +15,8 @@ import TableOfContent from "components/table-of-content"
 import MetaBox from "components/meta-box"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
+import { TPageProps } from "types/types"
+import { TParsedProject } from "lib/content/types"
 
 const { spacerXxl } = styleSettings
 
@@ -21,14 +25,7 @@ const Wrapper = styled.div`
   position: relative;
 `
 
-const ReadableMain = styled(Main).attrs(({ isXxsUp }) => ({
-  align: "center",
-  pad: {
-    horizontal: isXxsUp ? "xlarge" : "medium",
-    vertical: "xlarge",
-  },
-  margin: { bottom: "xlarge" },
-}))`
+const ReadableMain = styled(Main)`
   position: relative;
 
   & > div {
@@ -50,13 +47,17 @@ const FloatingBox = styled(Box)`
   align-items: top;
 `
 
-const TopBox = styled(Box)`
+const TopBox = styled(Box)<{ hide: boolean }>`
   ${({ hide }) => `
     opacity: ${hide ? 0 : 1};
   `}
 `
 
-const Project = ({ setHeaderRef, project, isXxsUp }) => {
+type TProps = {
+  project: TParsedProject
+} & TPageProps
+
+const Project = ({ isXxsUp, project, setHeaderRef }: TProps) => {
   const {
     name,
     start,
@@ -69,9 +70,9 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
     tags,
   } = project
 
-  const contentRef = useRef()
+  const contentRef = useRef<HTMLElement>()
   const [showToolbox, setShowToolbox] = useState(false)
-  const [activeHeader, setActiveHeader] = useState()
+  const [activeHeader, setActiveHeader] = useState("")
   const { y } = useWindowScroll()
   const isXlUp = useMedia("xl")
   const router = useRouter()
@@ -123,7 +124,14 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
       />
 
       <Wrapper>
-        <ReadableMain isXxsUp={isXxsUp}>
+        <ReadableMain
+          align="center"
+          pad={{
+            horizontal: isXxsUp ? "xlarge" : "medium",
+            vertical: "xlarge",
+          }}
+          margin={{ bottom: "xlarge" }}
+        >
           <TopBox
             fill
             hide={isXlUp && showToolbox}
@@ -135,6 +143,7 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
             <MetaBox tags={tags} start={start} end={end} />
             <InfoBox demoLink={demoLink} repoLink={repoLink} show horizontal />
           </TopBox>
+          {/* @ts-expect-error legacy ref */}
           <div ref={contentRef}>
             <RichText mainContent={description} />
             <Button
@@ -172,7 +181,23 @@ const Project = ({ setHeaderRef, project, isXxsUp }) => {
   )
 }
 
-export async function getStaticProps({ params: { slug } }) {
+type TStaticProps = {
+  slug: string
+}
+
+export const getStaticProps: GetStaticProps<TStaticProps> = async ({
+  params: { slug } = {},
+}) => {
+  if (!slug || Array.isArray(slug)) {
+    return {
+      props: JSON.parse(
+        JSON.stringify({
+          project: {},
+        })
+      ),
+    }
+  }
+
   const project = await getProject({ slug })
   return {
     props: JSON.parse(
@@ -183,7 +208,7 @@ export async function getStaticProps({ params: { slug } }) {
   }
 }
 
-export async function getStaticPaths() {
+export const getStaticPaths: GetStaticPaths = async () => {
   const paths = await getAllProjectSlugs()
 
   return {
