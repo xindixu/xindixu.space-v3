@@ -1,7 +1,10 @@
 import React from "react"
 import Head from "next/head"
 
-const Title = ({ name }) => (
+type TProps = {
+  name: string
+}
+const Title = ({ name }: TProps) => (
   <Head>
     <link
       rel="apple-touch-icon"

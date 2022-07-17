@@ -4,7 +4,7 @@ import {
   VerticalTimelineElement,
 } from "react-vertical-timeline-component"
 import "react-vertical-timeline-component/style.min.css"
-import styled, { withTheme } from "styled-components"
+import styled, { useTheme, withTheme } from "styled-components"
 import { Heading } from "grommet"
 import { experiences } from "contents/experiences"
 import styleSettings from "lib/style-settings"
@@ -15,7 +15,7 @@ const {
   PINK,
   BACKGROUND,
   spacerBase,
-  elevation: { light },
+  elevation: { light } = {},
 } = styleSettings
 
 const Wrapper = styled(VerticalTimeline)`
@@ -29,7 +29,7 @@ const Wrapper = styled(VerticalTimeline)`
 
     .vertical-timeline-element-icon,
     .vertical-timeline-element-content {
-      box-shadow: ${light.medium};
+      box-shadow: ${light?.medium};
       background: ${color(BACKGROUND)};
     }
   }
@@ -44,7 +44,8 @@ const ListItem = styled.li`
   }
 `
 
-const Timeline = ({ theme }) => {
+const Timeline = () => {
+  const theme = useTheme()
   const pink = color(PINK)({ theme })
 
   return (
@@ -80,4 +81,4 @@ const Timeline = ({ theme }) => {
   )
 }
 
-export default withTheme(Timeline)
+export default Timeline

@@ -5,7 +5,7 @@ import styled from "styled-components"
 import { useInView } from "react-intersection-observer"
 import useMedia from "hooks/use-media"
 
-import TECH_WORDS from "contents/tech"
+import TECH_WORDS, { TTag } from "contents/tech"
 
 const COLOR_OPTIONS = {
   luminosity: "light",
@@ -18,7 +18,11 @@ const StyledTagCloud = styled(TagCloud)`
   text-align: center;
 `
 
-const Tag = styled(motion.span)`
+const Tag = styled(motion.span)<{
+  color: string
+  size: number
+  isBaseUp: boolean
+}>`
   ${({ color, size, isBaseUp }) => `
     color: ${color};
     font-size: ${size}px;
@@ -57,13 +61,26 @@ const animation = {
   }),
 }
 
-const customRenderer = (tag, size, color, inView, isBaseUp) => (
+const renderTag = ({
+  color,
+  inView,
+  isBaseUp,
+  size,
+  tag,
+}: {
+  color: string
+  inView: boolean
+  isBaseUp: boolean
+  size: number
+  tag: TTag
+}) => (
   <Tag
     key={tag.value}
-    color={color}
-    size={size}
-    initial="out"
     animate={inView ? "in" : "out"}
+    color={color}
+    initial="out"
+    isBaseUp={isBaseUp}
+    size={size}
     variants={animation}
   >
     {tag.value}
@@ -79,7 +96,9 @@ const TechCloud = () => {
         {...(isBaseUp ? BASE_UP_SIZE : BASE_DOWN_SIZE)}
         tags={TECH_WORDS}
         colorOptions={COLOR_OPTIONS}
-        renderer={(...props) => customRenderer(...props, inView, isBaseUp)}
+        renderer={(tag: TTag, size: number, color: string) =>
+          renderTag({ color, inView, isBaseUp, size, tag })
+        }
       />
     </div>
   )

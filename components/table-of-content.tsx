@@ -1,6 +1,5 @@
 import React from "react"
 import styled from "styled-components"
-import PropTypes from "prop-types"
 import { kebabCase } from "lodash"
 import { Card, Anchor } from "grommet"
 import { AnimatePresence, motion } from "framer-motion"
@@ -13,7 +12,7 @@ const List = styled.ul`
   padding: 0;
 `
 
-const ListItem = styled.li`
+const ListItem = styled.li<{ level: number }>`
   ${({ level }) => `
     margin-left: calc(${level - 1} * ${spacerBase});
   `}
@@ -32,17 +31,26 @@ const variants = {
   },
 }
 
-const parseContent = (mainContent) =>
+type TContent = { nodeType: string; content: [{ value: string }] }
+type TProps = {
+  activeHeader: string
+  mainContent: {
+    content: TContent[]
+  }
+  show: boolean
+}
+
+const parseContent = (mainContent: TContent[]) =>
   mainContent
     .filter(
       ({ nodeType }) => nodeType === "heading-1" || nodeType === "heading-2"
     )
     .map(({ content, nodeType }) => ({
       title: content[0]?.value,
-      level: parseInt(nodeType.split("-")[1] || 0, 10),
+      level: parseInt(nodeType.split("-")[1] || "0", 10),
     }))
 
-const TableOfContent = ({ mainContent, show, activeHeader }) => {
+const TableOfContent = ({ activeHeader, mainContent, show }: TProps) => {
   if (!mainContent) {
     return null
   }
@@ -82,7 +90,7 @@ const TableOfContent = ({ mainContent, show, activeHeader }) => {
                           e.preventDefault()
 
                           if (document !== undefined) {
-                            document.querySelector(href).scrollIntoView({
+                            document.querySelector(href)?.scrollIntoView({
                               behavior: "smooth",
                             })
                           }
@@ -98,22 +106,6 @@ const TableOfContent = ({ mainContent, show, activeHeader }) => {
       )}
     </AnimatePresence>
   )
-}
-
-TableOfContent.defaultProps = {
-  activeHeader: "",
-}
-
-TableOfContent.propTypes = {
-  mainContent: PropTypes.shape({
-    content: PropTypes.arrayOf(
-      PropTypes.shape({
-        nodeType: PropTypes.string.isRequired,
-      }).isRequired
-    ).isRequired,
-  }).isRequired,
-  activeHeader: PropTypes.string,
-  show: PropTypes.bool.isRequired,
 }
 
 export default TableOfContent

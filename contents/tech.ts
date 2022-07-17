@@ -28,4 +28,8 @@ const TECH_WORDS = [
   { count: 30, value: "Python3" },
 ]
 
+export type TTag = {
+  count: number
+  value: string
+}
 export default TECH_WORDS
