@@ -1,8 +1,7 @@
 import React, { useState } from "react"
-import { isEmpty } from "lodash"
 import { Box, Form, TextArea, TextInput, FormField, Button } from "grommet"
 import styled from "styled-components"
-import Toast from "components/toast"
+import Toast, { TMode } from "components/toast"
 import Loader from "components/loader"
 import { send } from "lib/email"
 import styleSettings from "lib/style-settings"
@@ -14,8 +13,6 @@ const Wrapper = styled.div`
   width: 100%;
   max-width: ${readable};
 `
-
-type TMode = "ok" | "warning" | "error"
 
 type TToast = {
   mode: TMode
@@ -86,14 +83,13 @@ const Contact = () => {
           </Box>
         </Form>
       </Wrapper>
-      {toast ? (
-        <Toast
-          isOpen={!isEmpty(toast)}
-          mode={toast.mode}
-          content={toast.content}
-          onClose={() => setToast(null)}
-        />
-      ) : null}
+
+      <Toast
+        isOpen={!toast}
+        mode={toast?.mode}
+        content={toast?.content}
+        onClose={() => setToast(null)}
+      />
     </>
   )
 }

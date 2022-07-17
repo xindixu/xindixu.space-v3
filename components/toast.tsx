@@ -1,14 +1,13 @@
 import React, { useEffect } from "react"
-import PropTypes from "prop-types"
+
 import {
   FormClose,
   StatusGood,
   CircleAlert,
   StatusWarning,
 } from "grommet-icons"
-import { motion, AnimatePresence } from "framer-motion"
-
 import { Box, Layer, Button, Text } from "grommet"
+import { motion, AnimatePresence } from "framer-motion"
 
 const modes = {
   ok: {
@@ -40,9 +39,23 @@ const slideMenuAnimation = {
   },
 }
 
-const Toast = ({ isOpen, onClose, content, mode, closeAfter }) => {
+export type TMode = "ok" | "warning" | "error"
+type TProps = {
+  closeAfter?: number
+  content?: string
+  isOpen: boolean
+  mode?: TMode
+  onClose: () => void
+}
+const Toast = ({
+  closeAfter = 3000,
+  content,
+  isOpen,
+  mode = "ok",
+  onClose,
+}: TProps) => {
   useEffect(() => {
-    let timer
+    let timer: NodeJS.Timer
     if (isOpen) {
       timer = setTimeout(onClose, closeAfter)
     }
@@ -91,19 +104,6 @@ const Toast = ({ isOpen, onClose, content, mode, closeAfter }) => {
       ) : null}
     </AnimatePresence>
   )
-}
-
-Toast.defaultProps = {
-  closeAfter: 3000,
-  mode: "ok",
-}
-
-Toast.propTypes = {
-  closeAfter: PropTypes.number,
-  content: PropTypes.string.isRequired,
-  isOpen: PropTypes.bool.isRequired,
-  mode: PropTypes.oneOf(["ok", "warning", "error"]),
-  onClose: PropTypes.func.isRequired,
 }
 
 export default Toast
