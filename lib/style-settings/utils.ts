@@ -30,6 +30,7 @@ export const color =
   (colorName: TColorNames | string) =>
   ({ theme }: { theme: DefaultTheme }) => {
     const mode = theme.dark ? DARK : LIGHT
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { colors } = theme.global!
     const selectedColor = colors?.[colorName]
     if (selectedColor && typeof selectedColor === "object") {

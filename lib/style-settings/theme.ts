@@ -5,6 +5,7 @@ import colors from "./colors"
 type TBreakpoints = {
   [key in TBreakpointsKeys]: { value: number }
 }
+
 const parsedBreakpoints = Object.entries(breakpoints).reduce(
   (memo, [key, value]) => {
     memo[key as TBreakpointsKeys] = { value }

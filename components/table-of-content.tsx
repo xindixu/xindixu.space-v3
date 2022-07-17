@@ -1,6 +1,7 @@
 import React from "react"
 import styled from "styled-components"
 import { kebabCase } from "lodash"
+import { Block, Document, Text } from "@contentful/rich-text-types"
 import { Card, Anchor } from "grommet"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings"
@@ -31,22 +32,19 @@ const variants = {
   },
 }
 
-type TContent = { nodeType: string; content: [{ value: string }] }
 type TProps = {
   activeHeader: string
-  mainContent: {
-    content: TContent[]
-  }
+  mainContent: Document
   show: boolean
 }
 
-const parseContent = (mainContent: TContent[]) =>
-  mainContent
+const parseContent = (contents: Block[]) =>
+  contents
     .filter(
       ({ nodeType }) => nodeType === "heading-1" || nodeType === "heading-2"
     )
     .map(({ content, nodeType }) => ({
-      title: content[0]?.value,
+      title: (content as Text[])[0]?.value,
       level: parseInt(nodeType.split("-")[1] || "0", 10),
     }))
 

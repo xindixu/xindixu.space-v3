@@ -1,7 +1,7 @@
 import React from "react"
 import { Blank } from "grommet-icons"
 
-const Icon = (props: any) => (
+const Icon = (props: { [key: string]: unknown }) => (
   <Blank {...props}>
     <svg
       xmlns="http://www.w3.org/2000/svg"

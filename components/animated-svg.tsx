@@ -10,7 +10,19 @@ const svgAnimation = {
 }
 
 type TProps = {
-  children: (props: Object) => JSX.Element
+  children: ({
+    initial,
+    animate,
+    variants,
+  }: {
+    initial: string
+    animate: string
+    variants: {
+      [key: string]:
+        | Record<string, unknown>
+        | (({ index }: { index?: number }) => Record<string, unknown>)
+    }
+  }) => JSX.Element
   inView: boolean
   viewBox: string
 }

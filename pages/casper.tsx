@@ -82,7 +82,7 @@ const Casper = ({ imageCollage = { images: [] }, isXxsUp }: TProps) => {
   )
 }
 
-export async function getStaticProps() {
+export const getStaticProps = async () => {
   const imageCollage = await getImageCollage({ title: "Casper" })
   return {
     props: JSON.parse(

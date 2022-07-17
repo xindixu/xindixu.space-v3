@@ -1,8 +1,11 @@
 import { get } from "lodash"
-import { IHtmlFields } from "./types"
+import { EntryWithLinkResolutionAndWithUnresolvableLinks } from "contentful"
+import { IHtmlFields, TParsedHtml } from "./types"
 import { client } from "./index"
 
-const parseImageCollage = ({ fields }: { fields: IHtmlFields }) => ({
+const parseImageCollage = ({
+  fields,
+}: EntryWithLinkResolutionAndWithUnresolvableLinks<IHtmlFields>): TParsedHtml => ({
   images: fields.images.map((image) => ({
     src: get(image, "fields.file.url") || "",
     width: get(image, "fields.file.details.image.width") || 0,
@@ -19,6 +22,5 @@ export async function getImageCollage({ title }: { title: string }) {
     "fields.title[in]": title,
   })
 
-  // @ts-expect-error contentful
   return parseImageCollage(entries?.items[0])
 }

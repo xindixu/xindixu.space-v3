@@ -36,9 +36,9 @@ const mainIconAnimation = {
 }
 
 type TProps = {
-  demoLink: string
+  demoLink?: string | undefined
   horizontal: boolean
-  repoLink: string
+  repoLink?: string | undefined
   show: boolean
 }
 

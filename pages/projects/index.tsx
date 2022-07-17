@@ -1,18 +1,24 @@
 import React, { useState, useCallback, useEffect } from "react"
-import { Box, Card, CardFooter, Grid, Main, Spinner, Text } from "grommet"
-import Image from "next/image"
+import { Box, Main, Spinner, Text } from "grommet"
 import { useRouter } from "next/router"
-import Link from "next/link"
+import { GetServerSideProps } from "next"
+
 import PropTypes from "prop-types"
-import { motion } from "framer-motion"
 import styled from "styled-components"
-import { useInView } from "react-intersection-observer"
-import { uniqBy } from "lodash"
+import { isEmpty, uniqBy } from "lodash"
+import {
+  getTagParams,
+  getQuery,
+  getTags,
+  TTagQueries,
+  TTags,
+} from "lib/content/tag"
+import { TParsedProject } from "lib/content/types"
 import Filters from "components/filters"
-import { getQuery } from "lib/content/tag"
 import { getAllProjects } from "lib/content/project"
 import styleSettings from "lib/style-settings"
-import useMedia from "hooks/use-media"
+import { TPageProps } from "types/types"
+import ProjectGrid from "components/project-grid"
 
 const { readable } = styleSettings
 
@@ -21,78 +27,23 @@ const ReadableContent = styled(Box)`
   max-width ${readable};  
 `
 
-const cardAnimation = {
-  out: ({ index }) => ({
-    translateY: -16,
-    opacity: 0,
-    transition: {
-      delay: 0.1 * index,
-    },
-  }),
-  in: ({ index }) => ({
-    translateY: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.5,
-      delay: 0.1 * index,
-    },
-  }),
-}
-
-const cardHoverAnimation = {
-  translateY: -16,
-  transition: {
-    duration: 0.2,
-  },
-}
-
-const Project = ({ name, slug, thumbnail: { src, width, height } }) => (
-  <motion.div whileHover={cardHoverAnimation}>
-    <Link href={`/projects/${slug}`}>
-      <Card>
-        <Box fill>
-          <Image
-            layout="responsive"
-            src={`https:${src}`}
-            width={width}
-            height={height}
-            alt={`devices showing different screenshots of project ${name}`}
-            placeholder="blur"
-            blurDataURL={`/img/project-thumbnails/${slug}.png`}
-          />
-        </Box>
-        <CardFooter pad={{ horizontal: "medium", vertical: "small" }}>
-          <Text>{name}</Text>
-        </CardFooter>
-      </Card>
-    </Link>
-  </motion.div>
-)
-
-const getParam = (tags) =>
-  Object.values(tags).filter((tag) => !tag.endsWith("all"))
-
-const getTagsFromQuery = (query) =>
-  Object.entries(query).reduce((memo, [key, value]) => {
-    memo[key] = `${key}-${value}`
-    return memo
-  }, {})
+type TProps = {
+  initialProjects: TParsedProject[]
+  initialTags: TTags
+  initialTotalPages: number
+} & TPageProps
 
 const Projects = ({
   initialProjects = [],
-  initialTotalPages,
-  initialTags,
+  initialTags = {},
+  initialTotalPages = 0,
   isXxsUp,
-}) => {
+}: TProps) => {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [page, setPage] = useState(1)
   const [totalPages, setTotalPages] = useState(initialTotalPages)
   const [tags, setTags] = useState(initialTags)
-
-  const isMdUp = useMedia("md")
-  const [gridFef, gridInView] = useInView({ delay: 1000 })
-  const [loadMoreRef, loadMoreInView] = useInView()
 
   const [projects, setProjects] = useState(initialProjects)
 
@@ -114,8 +65,8 @@ const Projects = ({
       setIsLoading(true)
       setProjects([])
       const response = await getAllProjects({
-        tags: getParam(tags),
-        page: 1,
+        tags: getTagParams(tags),
+        page: "1",
       })
       setIsLoading(false)
       setProjects(response?.entries)
@@ -128,8 +79,8 @@ const Projects = ({
     const request = async () => {
       setIsLoading(true)
       const { entries } = await getAllProjects({
-        tags: getParam(tags),
-        page,
+        tags: getTagParams(tags),
+        page: `${page}`,
       })
 
       setIsLoading(false)
@@ -139,13 +90,6 @@ const Projects = ({
     }
     request()
   }, [page, tags])
-
-  useEffect(() => {
-    if (loadMoreInView) {
-      setPage((prevPage) => prevPage + 1)
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [loadMoreInView])
 
   useEffect(() => {
     filterProjects()
@@ -169,28 +113,11 @@ const Projects = ({
       <ReadableContent gap="large">
         <Filters tags={tags} setTags={setTags} />
         {projects.length > 0 && (
-          <Grid
-            gap="medium"
-            columns={{
-              count: "fill",
-              size: isMdUp ? "medium" : "100%",
-            }}
-            ref={gridFef}
-          >
-            {projects.map(({ name, slug, devices }, index) => (
-              <div key={slug}>
-                <motion.div
-                  initial={gridInView ? "out" : false}
-                  animate={gridInView ? "in" : "out"}
-                  variants={cardAnimation}
-                  custom={{ index }}
-                >
-                  <Project name={name} slug={slug} thumbnail={devices} />
-                </motion.div>
-              </div>
-            ))}
-            {page < totalPages && !isLoading && <div ref={loadMoreRef} />}
-          </Grid>
+          <ProjectGrid
+            loadMore={() => setPage((prevPage) => prevPage + 1)}
+            projects={projects}
+            showLoadMore={page < totalPages && !isLoading}
+          />
         )}
         {isLoading && (
           <Box align="center" fill="horizontal">
@@ -214,12 +141,29 @@ const Projects = ({
   )
 }
 
-export async function getServerSideProps(context) {
-  const { query } = context
+const fallbackProps = {
+  initialProjects: [],
+  initialTotalPages: 0,
+  initialTags: {},
+}
 
-  const tags = getTagsFromQuery(query)
+export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+  if (
+    !query ||
+    typeof query !== "object" ||
+    isEmpty(query) ||
+    Object.values(query).some((value) => !value || Array.isArray(value))
+  ) {
+    return {
+      props: fallbackProps,
+    }
+  }
 
-  const { entries, totalPages } = await getAllProjects({ tags: getParam(tags) })
+  const tags = getTags(query as TTagQueries)
+
+  const { entries, totalPages } = await getAllProjects({
+    tags: getTagParams(tags),
+  })
   // Next.js expects the props to be json stringify-able
   // https://dev.to/ryyppy/reason-records-nextjs-undefined-and-getstaticprops-5d46
   return {

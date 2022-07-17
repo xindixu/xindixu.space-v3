@@ -1,7 +1,6 @@
-import { randomUUID } from "crypto"
 import React, { ReactNode } from "react"
 import styled, { css } from "styled-components"
-import { kebabCase, get } from "lodash"
+import { kebabCase, get, random } from "lodash"
 import { Grid, Box, Text, Paragraph, Heading as BaseHeading } from "grommet"
 import {
   Block,
@@ -12,6 +11,7 @@ import {
 } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
+import { IHtmlFields, IPdfFields, IYoutubeFields } from "../lib/content/types"
 import styleSettings from "lib/style-settings"
 import { color } from "lib/style-settings/utils"
 
@@ -64,23 +64,26 @@ const Heading = styled(BaseHeading)`
   pointer-events: none;
 `
 
+type TExtra = {
+  description: string
+  title: string
+}
+
 type TImageFile = {
   url: string
   details: {
-    image: {
-      width: number
-      height: number
+    image?: {
+      width?: number
+      height?: number
     }
   }
 }
 
 type TEmbedded = {
-  description: string
   height: number
-  title: string
   url: string
   width: number
-}
+} & TExtra
 
 const Image = ({ alt, file }: { alt: string; file: TImageFile }) => {
   const { url, details } = file
@@ -107,10 +110,8 @@ const EmbeddedImage = ({
   title,
   file,
 }: {
-  description: string
-  title: string
   file: TImageFile
-}) => (
+} & TExtra) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
     <Image file={file} alt={title} />
@@ -122,10 +123,8 @@ const EmbeddedVideo = ({
   title,
   url,
 }: {
-  description: string
-  title: string
   url: string
-}) => (
+} & TExtra) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
     <Video title={title} controls src={`https:${url}`} />
@@ -170,8 +169,8 @@ const EmbeddedImages = ({
   columns: number
   images: {
     fields: {
-      title: string
-      file: TImageFile
+      title?: string
+      file?: TImageFile
     }
   }[]
   title: string
@@ -184,41 +183,48 @@ const EmbeddedImages = ({
         size: "auto",
       }}
     >
-      {images.map(({ fields }) => (
-        <Image key={fields.title} file={fields.file} alt={title} />
-      ))}
+      {images
+        .filter(
+          ({ fields: { title: fieldTitle, file } }) => !!fieldTitle && !!file
+        )
+        .map(({ fields: { title: fieldTitle, file } }) => (
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          <Image key={fieldTitle!} file={file!} alt={title} />
+        ))}
     </Grid>
   </Box>
 )
 
 const getId = (node: ReactNode) =>
-  typeof node === "string" ? kebabCase(node) : randomUUID()
+  typeof node === "string" ? kebabCase(node) : `text-id-${random(false)}`
 
 const options = {
   renderMark: {
     [MARKS.CODE]: (text: ReactNode) => <Code>{text}</Code>,
   },
   renderNode: {
-    [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => (
+    [BLOCKS.PARAGRAPH]: (_: unknown, children: ReactNode) => (
       <Paragraph fill>{children}</Paragraph>
     ),
-    [BLOCKS.HEADING_1]: (_: any, children: ReactNode) => (
+    [BLOCKS.HEADING_1]: (_: unknown, children: ReactNode) => (
       <Heading level={2} id={getId(children)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.HEADING_2]: (_: any, children: ReactNode) => (
+    [BLOCKS.HEADING_2]: (_: unknown, children: ReactNode) => (
       <Heading level={3} id={getId(children)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.HEADING_3]: (_: any, children: ReactNode) => (
+    [BLOCKS.HEADING_3]: (_: unknown, children: ReactNode) => (
       <Heading level={4} id={getId(children)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.UL_LIST]: (_: any, children: ReactNode) => <List>{children}</List>,
-    [BLOCKS.LIST_ITEM]: (_: any, children: ReactNode) => (
+    [BLOCKS.UL_LIST]: (_: unknown, children: ReactNode) => (
+      <List>{children}</List>
+    ),
+    [BLOCKS.LIST_ITEM]: (_: unknown, children: ReactNode) => (
       <ListItem>{children}</ListItem>
     ),
     [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
@@ -243,14 +249,14 @@ const options = {
       const type = get(sys, "contentType.sys.id")
 
       if (type === "pdf") {
-        const { media, height, width, title } = fields
+        const { media, height, width, title } = fields as IPdfFields
         const { file, description } = media.fields
-        const { url } = file
+        const { url } = file || {}
         return (
           <EmbeddedEmbed
-            url={`https:${url}`}
+            url={url ? `https:${url}` : ""}
             title={title}
-            description={description}
+            description={description || ""}
             height={height}
             width={width}
           />
@@ -258,7 +264,7 @@ const options = {
       }
 
       if (type === "youtube") {
-        const { title, url, description } = fields
+        const { title, url, description } = fields as IYoutubeFields
         return (
           <EmbeddedIFrame
             title={title}
@@ -271,7 +277,7 @@ const options = {
       }
 
       if (type === "html") {
-        const { title, images, columns } = fields
+        const { title, images, columns } = fields as IHtmlFields
         return (
           <EmbeddedImages title={title} images={images} columns={columns} />
         )
@@ -286,7 +292,8 @@ type TProps = {
   mainContent: Document
 }
 
-const RichText = ({ mainContent }: TProps) =>
-  documentToReactComponents(mainContent, options)
+const RichText = ({ mainContent }: TProps) => (
+  <>{documentToReactComponents(mainContent, options)}</>
+)
 
 export default RichText
