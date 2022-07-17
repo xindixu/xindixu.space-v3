@@ -25,11 +25,11 @@ Built with Next.js with content managed by Contentful, this website optimizes lo
 ## To Set Up
 - Run `yarn install`
 - Create a .env.local file and add these variables:
-  - NEXT_PUBLIC_CONTENTFUL_SPACE_ID
-  - NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN
-  - NEXT_PUBLIC_EMAIL_USER_ID
-  - NEXT_PUBLIC_EMAIL_SERVICE_ID
-  - NEXT_PUBLIC_GITHUB_ACCESS_TOKEN
+  - `NEXT_PUBLIC_CONTENTFUL_SPACE_ID`
+  - `NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN`
+  - `NEXT_PUBLIC_EMAIL_USER_ID`
+  - `NEXT_PUBLIC_EMAIL_SERVICE_ID`
+  - `NEXT_PUBLIC_GITHUB_ACCESS_TOKEN`
 
 ## To Run 
 - Run `yarn dev` and web app should be available at http://localhost:3000
@@ -95,3 +95,5 @@ Page                                          Size     First Load JS
 4. Install `@type/..` for 3rd party libraries
 5. Update npm packages for TypeScript support
 6. Use `ts-migrate` to migrate incrementally
+7. Declare global type interfaces `**.d.ts`
+8. Update `eslint` settings

@@ -80,15 +80,15 @@ const linkAnimation = {
 }
 
 const SidebarFooter = () => (
-  <Box color="light-5" pad="xsmall">
-    <Text>
+  <Box pad="xsmall">
+    <Text color="white">
       Built with{" "}
       <span role="img" aria-label="Heart">
         ❤️
       </span>{" "}
       using{" "}
     </Text>
-    <Text>Next.js, Contentful, Framer Motion</Text>
+    <Text color="white">Next.js, Contentful, Framer Motion</Text>
   </Box>
 )
 
@@ -108,9 +108,8 @@ const SidebarButton = ({
   <Link href={link} passHref>
     <Button
       as="a"
-      primary
-      active={active}
-      color={BACKGROUND}
+      primary={!active}
+      color={active ? PINK : BACKGROUND}
       fill="horizontal"
       icon={icon}
       label={label}
