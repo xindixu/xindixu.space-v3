@@ -93,6 +93,6 @@
     "skipLibCheck": true /* Skip type checking all .d.ts files. */,
     "lib": ["dom", "dom.iterable", "esnext"]
   },
-  "include": ["next-env.d.ts", "environment.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["**.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
 }

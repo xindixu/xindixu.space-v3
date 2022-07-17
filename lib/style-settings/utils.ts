@@ -29,10 +29,8 @@ export const isScreenUp = ({
 export const color =
   (colorName: TColorNames) =>
   ({ theme }: { theme: DefaultTheme }) => {
-    // @ts-expect-error
     const mode = theme.dark ? DARK : LIGHT
-    // @ts-expect-error
-    const { colors } = theme.global
+    const { colors } = theme.global!
     const selectedColor = colors?.[colorName]
     if (selectedColor && typeof selectedColor === "object") {
       return selectedColor?.[mode]
