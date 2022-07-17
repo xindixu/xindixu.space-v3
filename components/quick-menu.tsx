@@ -1,17 +1,13 @@
 import React, { cloneElement, useRef } from "react"
-import PropTypes from "prop-types"
 import { useClickAway } from "react-use"
 import { Button } from "grommet"
 import { Close, AppsRounded } from "grommet-icons"
-import styled, { withTheme } from "styled-components"
+import styled, { useTheme } from "styled-components"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings/index"
 import { links } from "contents/social-media"
 
-const {
-  spacerBase,
-  elevation: { light },
-} = styleSettings
+const { spacerBase, elevation: { light } = {} } = styleSettings
 
 const diameter = "288px"
 const radius = "144px"
@@ -31,24 +27,28 @@ const MainButton = styled(Button)`
   bottom: 16px;
   left: 16px;
   border-radius: 50%;
-  box-shadow: ${light.medium};
+  box-shadow: ${light?.medium};
 
   &&& {
     &:focus {
-      box-shadow: ${light.medium};
+      box-shadow: ${light?.medium};
     }
   }
 
   z-index: 1;
 `
 
-const SubButton = styled(Button)`
+const SubButton = styled(Button)<{
+  count: number
+  cycle: number
+  index: number
+}>`
   position: absolute;
   top: 50%;
   left: 50%;
   margin: -${spacerBase};
   border-radius: 50%;
-  box-shadow: ${light.medium};
+  box-shadow: ${light?.medium};
   ${({ count, index, cycle }) => {
     const angle = 90 / count
     const rotation = angle * (index + count * (cycle - 1) + 0.5)
@@ -64,14 +64,14 @@ const mainIconAnimation = {
 }
 
 const subMenuCircleAnimation = {
-  hidden: ({ index, count }) => ({
+  hidden: ({ index, count }: { count: number; index: number }) => ({
     translateY: radius,
     rotate: -100,
     transition: {
       delay: 0.1 * (count - index),
     },
   }),
-  visible: ({ index }) => ({
+  visible: ({ index }: { index: number }) => ({
     translateY: radius,
     rotate: 0,
     transition: {
@@ -86,7 +86,12 @@ const subIconAnimation = {
   visible: { scale: 1, transition: { duration: 0.1 } },
 }
 
-const QuickMenu = ({ isOpen, setIsOpen, theme }) => {
+type TProps = {
+  isOpen: boolean
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+const QuickMenu = ({ isOpen, setIsOpen }: TProps) => {
+  const theme = useTheme()
   const { length: count } = links
   const ref = useRef(null)
 
@@ -123,7 +128,7 @@ const QuickMenu = ({ isOpen, setIsOpen, theme }) => {
       />
       <AnimatePresence>
         {isOpen && (
-          <Circle isOpen={isOpen}>
+          <Circle>
             {links.map(({ name, link, icon }, index) => (
               <motion.div
                 key={name}
@@ -146,7 +151,7 @@ const QuickMenu = ({ isOpen, setIsOpen, theme }) => {
                   hoverIndicator={buttonColor}
                   index={index}
                   primary
-                  tabIndex={isOpen - 1}
+                  tabIndex={isOpen ? 0 : -1}
                   target="_blank"
                 />
               </motion.div>
@@ -158,9 +163,4 @@ const QuickMenu = ({ isOpen, setIsOpen, theme }) => {
   )
 }
 
-QuickMenu.propTypes = {
-  isOpen: PropTypes.bool.isRequired,
-  setIsOpen: PropTypes.func.isRequired,
-}
-
-export default withTheme(QuickMenu)
+export default QuickMenu

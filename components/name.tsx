@@ -2,7 +2,7 @@ import React from "react"
 import { Box } from "grommet"
 import { motion } from "framer-motion"
 import { useInView } from "react-intersection-observer"
-import styled, { withTheme } from "styled-components"
+import styled, { useTheme } from "styled-components"
 import { nameEn } from "assets/svg/name-en"
 import { nameZh } from "assets/svg/name-zh"
 import styleSettings from "lib/style-settings"
@@ -31,7 +31,8 @@ const names = [
   },
 ]
 
-const Name = ({ theme }) => {
+const Name = () => {
+  const theme = useTheme()
   const [ref, inView] = useInView({ delay: 1000 })
   const pink = color(PINK)({ theme })
   return (
@@ -70,4 +71,4 @@ const Name = ({ theme }) => {
   )
 }
 
-export default withTheme(Name)
+export default Name

@@ -1,12 +1,19 @@
-import React from "react"
+import React, { ReactNode } from "react"
 import styled, { css } from "styled-components"
 import { kebabCase, get } from "lodash"
 import { Grid, Box, Text, Paragraph, Heading as BaseHeading } from "grommet"
-import { BLOCKS, MARKS } from "@contentful/rich-text-types"
+import {
+  Block,
+  BLOCKS,
+  Document,
+  Inline,
+  MARKS,
+} from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
 import styleSettings from "lib/style-settings"
 import { color } from "lib/style-settings/utils"
+import { randomUUID } from "crypto"
 
 const { PINK, spacerBase, spacerLg } = styleSettings
 
@@ -36,7 +43,7 @@ const Video = styled.video`
   height: auto;
 `
 
-const EmbedWrapper = styled(Box)`
+const EmbedWrapper = styled(Box)<{ ratio: number }>`
   ${({ ratio }) => `
     padding-bottom: ${ratio}%;
   `}
@@ -57,7 +64,25 @@ const Heading = styled(BaseHeading)`
   pointer-events: none;
 `
 
-const Image = ({ file, alt }) => {
+type TImageFile = {
+  url: string
+  details: {
+    image: {
+      width: number
+      height: number
+    }
+  }
+}
+
+type TEmbedded = {
+  description: string
+  height: number
+  title: string
+  url: string
+  width: number
+}
+
+const Image = ({ alt, file }: { alt: string; file: TImageFile }) => {
   const { url, details } = file
   const { width, height } = details?.image || {}
 
@@ -71,45 +96,79 @@ const Image = ({ file, alt }) => {
     />
   )
 }
-const Description = ({ description }) => (
+const Description = ({ description }: { description: string }) => (
   <Text color="text-weak" size="small" margin={{ bottom: "small" }}>
     {description}
   </Text>
 )
 
-const EmbeddedImage = ({ description, title, file }) => (
+const EmbeddedImage = ({
+  description,
+  title,
+  file,
+}: {
+  description: string
+  title: string
+  file: TImageFile
+}) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
     <Image file={file} alt={title} />
   </Box>
 )
 
-const EmbeddedVideo = ({ url, title, description }) => (
+const EmbeddedVideo = ({
+  description,
+  url,
+}: {
+  description: string
+  title: string
+  url: string
+}) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
-    <Video controls name={title} playsinline src={`https:${url}`} />
+    <Video controls src={`https:${url}`} />
   </Box>
 )
 
-const EmbeddedEmbed = ({ description, title, url, width, height }) => (
+const EmbeddedEmbed = ({ description, height, url, width }: TEmbedded) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
     <EmbedWrapper ratio={Math.round((height / width) * 100)}>
-      <Embed name={title} type="application/pdf" src={url} />
+      <Embed type="application/pdf" src={url} />
     </EmbedWrapper>
   </Box>
 )
 
-const EmbeddedIFrame = ({ description, title, url, width, height }) => (
+const EmbeddedIFrame = ({
+  description,
+  height,
+  title,
+  url,
+  width,
+}: TEmbedded) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
     <EmbedWrapper ratio={Math.round((height / width) * 100)}>
-      <IFrame name={title} type="application/pdf" src={url} />
+      <IFrame name={title} src={url} />
     </EmbedWrapper>
   </Box>
 )
 
-const EmbeddedImages = ({ title, columns, images }) => (
+const EmbeddedImages = ({
+  columns,
+  images,
+  title,
+}: {
+  columns: number
+  images: {
+    fields: {
+      title: string
+      file: TImageFile
+    }
+  }[]
+  title: string
+}) => (
   <Box margin={{ bottom: "medium" }}>
     <Grid
       gap="small"
@@ -125,30 +184,37 @@ const EmbeddedImages = ({ title, columns, images }) => (
   </Box>
 )
 
+const getId = (node: ReactNode) =>
+  typeof node === "string" ? kebabCase(node) : randomUUID()
+
 const options = {
   renderMark: {
-    [MARKS.CODE]: (text) => <Code>{text}</Code>,
+    [MARKS.CODE]: (text: ReactNode) => <Code>{text}</Code>,
   },
   renderNode: {
-    [BLOCKS.PARAGRAPH]: (_, children) => <Paragraph fill>{children}</Paragraph>,
-    [BLOCKS.HEADING_1]: (_, children) => (
-      <Heading level={2} id={kebabCase(children)}>
+    [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => (
+      <Paragraph fill>{children}</Paragraph>
+    ),
+    [BLOCKS.HEADING_1]: (_: any, children: ReactNode) => (
+      <Heading level={2} id={getId(children)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.HEADING_2]: (_, children) => (
-      <Heading level={3} id={kebabCase(children)}>
+    [BLOCKS.HEADING_2]: (_: any, children: ReactNode) => (
+      <Heading level={3} id={getId(children)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.HEADING_3]: (_, children) => (
-      <Heading level={4} id={kebabCase(children)}>
+    [BLOCKS.HEADING_3]: (_: any, children: ReactNode) => (
+      <Heading level={4} id={getId(children)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.UL_LIST]: (_, children) => <List>{children}</List>,
-    [BLOCKS.LIST_ITEM]: (_, children) => <ListItem>{children}</ListItem>,
-    [BLOCKS.EMBEDDED_ASSET]: (node) => {
+    [BLOCKS.UL_LIST]: (_: any, children: ReactNode) => <List>{children}</List>,
+    [BLOCKS.LIST_ITEM]: (_: any, children: ReactNode) => (
+      <ListItem>{children}</ListItem>
+    ),
+    [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
       const { title, file, description } = get(node, "data.target.fields")
       const { url, contentType } = file
       if (contentType.startsWith("image")) {
@@ -165,7 +231,7 @@ const options = {
 
       return null
     },
-    [BLOCKS.EMBEDDED_ENTRY]: (node) => {
+    [BLOCKS.EMBEDDED_ENTRY]: (node: Block | Inline) => {
       const { fields, sys } = get(node, "data.target")
       const type = get(sys, "contentType.sys.id")
 
@@ -209,7 +275,11 @@ const options = {
   },
 }
 
-const RichText = ({ mainContent }) =>
+type TProps = {
+  mainContent: Document
+}
+
+const RichText = ({ mainContent }: TProps) =>
   documentToReactComponents(mainContent, options)
 
 export default RichText
