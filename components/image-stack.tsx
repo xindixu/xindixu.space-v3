@@ -25,7 +25,7 @@ const animation = {
       ease: "easeOut",
     },
   }),
-  out: ({ x, y }) => ({
+  out: ({ x, y }: { x: number; y: number }) => ({
     opacity: 0,
     x: POSITION * x,
     y: POSITION * y,
@@ -38,7 +38,7 @@ const ImageStack = () => {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    let timer
+    let timer: NodeJS.Timer
     if (inView) {
       timer = setInterval(() => {
         setIndex((prevIndex) => (prevIndex + 1) % IMAGES.length)

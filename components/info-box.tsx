@@ -4,17 +4,18 @@ import styled from "styled-components"
 import { Github, Monitor } from "grommet-icons"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings/index"
+import { color } from "lib/style-settings/utils"
 
 const {
-  elevation: { light },
-  borderSize: { xlarge },
-  beigeDark,
+  BEIGE,
+  borderSize: { xlarge } = {},
+  elevation: { light } = {},
 } = styleSettings
 
 const IconButton = styled(Button)`
   border-radius: ${xlarge};
-  box-shadow: ${light.medium};
-  background: ${beigeDark};
+  box-shadow: ${light?.medium};
+  background: ${color(BEIGE)};
 `
 
 const mainIconAnimation = {
@@ -25,7 +26,7 @@ const mainIconAnimation = {
       duration: 0.1,
     },
   },
-  visible: (index) => ({
+  visible: (index: number) => ({
     scale: 1,
     opacity: 1,
     transition: {
@@ -34,7 +35,14 @@ const mainIconAnimation = {
   }),
 }
 
-const InfoBox = ({ demoLink, repoLink, show, horizontal }) => {
+type TProps = {
+  demoLink: string
+  horizontal: boolean
+  repoLink: string
+  show: boolean
+}
+
+const InfoBox = ({ demoLink, horizontal, repoLink, show }: TProps) => {
   const links = [
     {
       name: "Demo",
