@@ -1,10 +1,10 @@
 import { get } from "lodash"
-import { client } from "./index"
-import { IProjectFields } from "./types"
 import {
   EntryCollectionWithLinkResolutionAndWithUnresolvableLinks,
   EntryWithLinkResolutionAndWithUnresolvableLinks,
 } from "contentful"
+import { IProjectFields } from "./types"
+import { client } from "./index"
 
 const PAGE_SIZE = 10
 
@@ -55,7 +55,7 @@ export async function getAllProjects({
   }
 
   if (tags.length > 0) {
-    // @ts-expect-error
+    // @ts-expect-error contentful
     params["metadata.tags.sys.id[all]"] = tags.join(",")
   }
 
@@ -81,7 +81,7 @@ export async function getProject({ slug }: { slug: string }) {
 export async function getAllProjectSlugs() {
   const entries = await client.getEntries<IProjectFields>({
     content_type: "work",
-    // @ts-expect-error
+    // @ts-expect-error contentful
     select: "fields.slug",
   })
 

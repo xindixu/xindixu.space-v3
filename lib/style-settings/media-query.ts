@@ -1,4 +1,9 @@
-import { css, SimpleInterpolation, CSSObject } from "styled-components"
+import {
+  css,
+  SimpleInterpolation,
+  CSSObject,
+  FlattenSimpleInterpolation,
+} from "styled-components"
 
 import { fontRoot } from "./constants"
 
@@ -22,7 +27,7 @@ export type TMedia = {
   [key in TMediaKeys]: (
     first: TemplateStringsArray | CSSObject,
     ...interpolations: SimpleInterpolation[]
-  ) => any
+  ) => FlattenSimpleInterpolation
 }
 
 export const mediaQuery = {

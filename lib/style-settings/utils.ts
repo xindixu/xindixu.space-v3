@@ -1,7 +1,7 @@
 import { DefaultTheme } from "styled-components"
-import { DARK, LIGHT } from "lib/style-settings"
 import { breakpoints, TBreakpointsKeys } from "./media-query"
 import { TColorNames } from "./color-names"
+import { DARK, LIGHT } from "lib/style-settings"
 
 export const isScreenUp = ({
   base,

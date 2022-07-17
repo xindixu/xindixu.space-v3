@@ -1,6 +1,6 @@
 import { get } from "lodash"
-import { client } from "./index"
 import { IHtmlFields } from "./types"
+import { client } from "./index"
 
 const parseImageCollage = ({ fields }: { fields: IHtmlFields }) => ({
   images: fields.images.map((image) => ({
@@ -19,6 +19,6 @@ export async function getImageCollage({ title }: { title: string }) {
     "fields.title[in]": title,
   })
 
-  // @ts-expect-error
+  // @ts-expect-error contentful
   return parseImageCollage(entries?.items[0])
 }
