@@ -20,16 +20,12 @@ const NoUnderlineLink = styled(Anchor)`
     text-decoration: none;
   }
 `
-const solidStyleProps = {
-  background: "brand",
-  elevation: "medium",
-  animation: {
-    type: "fadeIn",
-    duration: 500,
-  },
+
+type TProps = {
+  isHeaderInView: boolean
 }
 
-const Navbar = ({ isHeaderInView }) => {
+const Navbar = ({ isHeaderInView }: TProps) => {
   const [showSideBar, setShowSideBar] = useState(false)
   const { width } = useWindowSize()
   const { resolvedTheme, setTheme } = useTheme()
@@ -54,7 +50,16 @@ const Navbar = ({ isHeaderInView }) => {
     <>
       <FixTop fill="horizontal">
         <Header
-          {...(isHeaderInView ? {} : solidStyleProps)}
+          background={isHeaderInView ? undefined : "brand"}
+          elevation={isHeaderInView ? undefined : "medium"}
+          animation={
+            isHeaderInView
+              ? undefined
+              : {
+                  type: "fadeIn",
+                  duration: 500,
+                }
+          }
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
           <Link href="/" passHref>

@@ -10,11 +10,10 @@ import styleSettings from "lib/style-settings"
 import { links } from "contents/routes"
 import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
-import { useWindowSize } from "react-use"
 
 const { PINK, BLACK, BACKGROUND } = styleSettings
 
-const GradientBackground = styled(GSidebar)`
+const GradientBackground = styled(GSidebar)<{ isBaseUp: boolean }>`
   ${({ isBaseUp, theme }) => `
     background: linear-gradient(
       0deg,
@@ -94,7 +93,19 @@ const SidebarFooter = () => (
   </Box>
 )
 
-const SidebarButton = ({ icon, label, link, onClick, active }) => (
+const SidebarButton = ({
+  active,
+  icon,
+  label,
+  link,
+  onClick,
+}: {
+  active: boolean
+  icon: JSX.Element
+  label: string
+  link: string
+  onClick: () => void
+}) => (
   <Link href={link} passHref>
     <Button
       as="a"
@@ -110,10 +121,20 @@ const SidebarButton = ({ icon, label, link, onClick, active }) => (
   </Link>
 )
 
-const MainNavigation = ({ isBaseUp, onClose, show }) => (
+const MainNavigation = ({
+  isBaseUp,
+  onClose,
+  pathname,
+  show,
+}: {
+  isBaseUp: boolean
+  onClose: () => void
+  pathname: string
+  show: boolean
+}) => (
   <Nav
     gap={isBaseUp ? "medium" : "large"}
-    full="horizontal"
+    fill="horizontal"
     alignSelf="stretch"
     pad={{ horizontal: "large" }}
   >
@@ -127,19 +148,24 @@ const MainNavigation = ({ isBaseUp, onClose, show }) => (
         custom={{ index, count: links.length }}
       >
         <SidebarButton
-          key={name}
+          active={pathname === link}
           icon={icon}
+          key={name}
           label={name}
           link={link}
           onClick={onClose}
-          show={show}
         />
       </motion.div>
     ))}
   </Nav>
 )
 
-const Sidebar = ({ onClose, show }) => {
+type TProps = {
+  onClose: () => void
+  show: boolean
+}
+
+const Sidebar = ({ onClose, show }: TProps) => {
   const isBaseUp = useMedia("base")
   const { pathname } = useRouter()
   return (
@@ -148,7 +174,6 @@ const Sidebar = ({ onClose, show }) => {
         {show && (
           <Layer
             animation="none"
-            elevation="medium"
             full="vertical"
             modal
             onClickOutside={onClose}
@@ -175,7 +200,7 @@ const Sidebar = ({ onClose, show }) => {
                 }
                 align="center"
                 footer={<SidebarFooter />}
-                full="vertical"
+                fill="vertical"
               >
                 <MainNavigation
                   isBaseUp={isBaseUp}
@@ -190,11 +215,6 @@ const Sidebar = ({ onClose, show }) => {
       </AnimatePresence>
     </Box>
   )
-}
-
-Sidebar.propTypes = {
-  onClose: PropTypes.func.isRequired,
-  show: PropTypes.bool.isRequired,
 }
 
 export default Sidebar
