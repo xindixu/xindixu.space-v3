@@ -84,12 +84,14 @@ const Contact = () => {
         </Form>
       </Wrapper>
 
-      <Toast
-        isOpen={!toast}
-        mode={toast?.mode}
-        content={toast?.content}
-        onClose={() => setToast(null)}
-      />
+      {toast && (
+        <Toast
+          isOpen
+          mode={toast?.mode}
+          content={toast?.content}
+          onClose={() => setToast(null)}
+        />
+      )}
     </>
   )
 }

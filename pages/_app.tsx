@@ -58,7 +58,7 @@ const d = typeof window !== "undefined" ? document : null
 
 type TProps = {
   Component: React.ComponentType<TPageProps>
-  pageProps: any
+  pageProps: unknown
   router: NextRouter
 }
 
@@ -104,7 +104,7 @@ const Content = ({ Component, pageProps, router }: TProps) => {
   return body
 }
 
-const App = (props: any) => (
+const App = (props: unknown) => (
   <NextThemeProvider>
     <Content {...props} />
   </NextThemeProvider>

@@ -198,26 +198,28 @@ const options = {
     [MARKS.CODE]: (text: ReactNode) => <Code>{text}</Code>,
   },
   renderNode: {
-    [BLOCKS.PARAGRAPH]: (_: any, children: ReactNode) => (
+    [BLOCKS.PARAGRAPH]: (_: unknown, children: ReactNode) => (
       <Paragraph fill>{children}</Paragraph>
     ),
-    [BLOCKS.HEADING_1]: (_: any, children: ReactNode) => (
+    [BLOCKS.HEADING_1]: (_: unknown, children: ReactNode) => (
       <Heading level={2} id={getId(children)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.HEADING_2]: (_: any, children: ReactNode) => (
+    [BLOCKS.HEADING_2]: (_: unknown, children: ReactNode) => (
       <Heading level={3} id={getId(children)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.HEADING_3]: (_: any, children: ReactNode) => (
+    [BLOCKS.HEADING_3]: (_: unknown, children: ReactNode) => (
       <Heading level={4} id={getId(children)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.UL_LIST]: (_: any, children: ReactNode) => <List>{children}</List>,
-    [BLOCKS.LIST_ITEM]: (_: any, children: ReactNode) => (
+    [BLOCKS.UL_LIST]: (_: unknown, children: ReactNode) => (
+      <List>{children}</List>
+    ),
+    [BLOCKS.LIST_ITEM]: (_: unknown, children: ReactNode) => (
       <ListItem>{children}</ListItem>
     ),
     [BLOCKS.EMBEDDED_ASSET]: (node: Block | Inline) => {
