@@ -1,14 +1,11 @@
-import React from "react"
+import React, { ReactNode } from "react"
 import PropTypes from "prop-types"
 import styled, { keyframes } from "styled-components"
 import styleSettings from "lib/style-settings/index"
 import { color } from "lib/style-settings/utils"
 import { PINK } from "lib/style-settings/color-names"
 
-const {
-  fontRoot,
-  borderSize: { small },
-} = styleSettings
+const { fontRoot, borderSize: { small } = {} } = styleSettings
 
 const spin = keyframes`
   0% {
@@ -35,14 +32,14 @@ const LoadingWrapper = styled.div`
   margin: 0;
 `
 
-const ContentWrapper = styled.div`
+const ContentWrapper = styled.div<{ loading: boolean }>`
   ${({ loading }) => `
     opacity: ${loading ? 0 : 1};
     transition: opacity 0.3s ease-in;
   `}
 `
 
-const LoadingIndicator = styled.div`
+const LoadingIndicator = styled.div<{ loading: boolean }>`
   border: ${small} solid ${color("light-1")};
   border-top: ${small} solid ${color(PINK)};
   border-radius: 50%;
@@ -57,7 +54,12 @@ const LoadingIndicator = styled.div`
   `}
 `
 
-const Loader = ({ loading, children }) => (
+type TProps = {
+  loading: boolean
+  children: ReactNode
+}
+
+const Loader = ({ loading, children }: TProps) => (
   <Wrapper>
     <ContentWrapper loading={loading}>{children}</ContentWrapper>
     <LoadingWrapper>
@@ -65,10 +67,5 @@ const Loader = ({ loading, children }) => (
     </LoadingWrapper>
   </Wrapper>
 )
-
-Loader.propTypes = {
-  loading: PropTypes.bool.isRequired,
-  children: PropTypes.node.isRequired,
-}
 
 export default Loader

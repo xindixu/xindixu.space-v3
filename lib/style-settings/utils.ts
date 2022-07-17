@@ -27,7 +27,7 @@ export const isScreenUp = ({
 }
 
 export const color =
-  (colorName: TColorNames) =>
+  (colorName: TColorNames | string) =>
   ({ theme }: { theme: DefaultTheme }) => {
     const mode = theme.dark ? DARK : LIGHT
     const { colors } = theme.global!
