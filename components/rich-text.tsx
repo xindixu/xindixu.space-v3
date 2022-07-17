@@ -11,6 +11,7 @@ import {
 } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
+import { IHtmlFields, IPdfFields, IYoutubeFields } from "../lib/content/types"
 import styleSettings from "lib/style-settings"
 import { color } from "lib/style-settings/utils"
 
@@ -63,23 +64,26 @@ const Heading = styled(BaseHeading)`
   pointer-events: none;
 `
 
+type TExtra = {
+  description: string
+  title: string
+}
+
 type TImageFile = {
   url: string
   details: {
-    image: {
-      width: number
-      height: number
+    image?: {
+      width?: number
+      height?: number
     }
   }
 }
 
 type TEmbedded = {
-  description: string
   height: number
-  title: string
   url: string
   width: number
-}
+} & TExtra
 
 const Image = ({ alt, file }: { alt: string; file: TImageFile }) => {
   const { url, details } = file
@@ -106,10 +110,8 @@ const EmbeddedImage = ({
   title,
   file,
 }: {
-  description: string
-  title: string
   file: TImageFile
-}) => (
+} & TExtra) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
     <Image file={file} alt={title} />
@@ -121,10 +123,8 @@ const EmbeddedVideo = ({
   title,
   url,
 }: {
-  description: string
-  title: string
   url: string
-}) => (
+} & TExtra) => (
   <Box margin={{ bottom: "medium" }}>
     <Description description={description} />
     <Video title={title} controls src={`https:${url}`} />
@@ -169,8 +169,8 @@ const EmbeddedImages = ({
   columns: number
   images: {
     fields: {
-      title: string
-      file: TImageFile
+      title?: string
+      file?: TImageFile
     }
   }[]
   title: string
@@ -183,9 +183,14 @@ const EmbeddedImages = ({
         size: "auto",
       }}
     >
-      {images.map(({ fields }) => (
-        <Image key={fields.title} file={fields.file} alt={title} />
-      ))}
+      {images
+        .filter(
+          ({ fields: { title: fieldTitle, file } }) => !!fieldTitle && !!file
+        )
+        .map(({ fields: { title: fieldTitle, file } }) => (
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          <Image key={fieldTitle!} file={file!} alt={title} />
+        ))}
     </Grid>
   </Box>
 )
@@ -244,14 +249,14 @@ const options = {
       const type = get(sys, "contentType.sys.id")
 
       if (type === "pdf") {
-        const { media, height, width, title } = fields
+        const { media, height, width, title } = fields as IPdfFields
         const { file, description } = media.fields
-        const { url } = file
+        const { url } = file || {}
         return (
           <EmbeddedEmbed
-            url={`https:${url}`}
+            url={url ? `https:${url}` : ""}
             title={title}
-            description={description}
+            description={description || ""}
             height={height}
             width={width}
           />
@@ -259,7 +264,7 @@ const options = {
       }
 
       if (type === "youtube") {
-        const { title, url, description } = fields
+        const { title, url, description } = fields as IYoutubeFields
         return (
           <EmbeddedIFrame
             title={title}
@@ -272,7 +277,7 @@ const options = {
       }
 
       if (type === "html") {
-        const { title, images, columns } = fields
+        const { title, images, columns } = fields as IHtmlFields
         return (
           <EmbeddedImages title={title} images={images} columns={columns} />
         )

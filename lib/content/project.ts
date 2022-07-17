@@ -1,4 +1,4 @@
-import { get } from "lodash"
+import { get, set } from "lodash"
 import {
   EntryCollectionWithLinkResolutionAndWithUnresolvableLinks,
   EntryWithLinkResolutionAndWithUnresolvableLinks,
@@ -56,8 +56,7 @@ export async function getAllProjects({
   }
 
   if (tags.length > 0) {
-    // @ts-expect-error contentful
-    params["metadata.tags.sys.id[all]"] = tags.join(",")
+    set(params, "metadata.tags.sys.id[all]", tags.join(","))
   }
 
   const entries = await client.getEntries<IProjectFields>(params)
@@ -82,8 +81,8 @@ export async function getProject({ slug }: { slug: string }) {
 export async function getAllProjectSlugs() {
   const entries = await client.getEntries<IProjectFields>({
     content_type: "work",
-    // @ts-expect-error contentful
-    select: "fields.slug",
+    // @ts-expect-error contentful template literal type
+    select: `fields.slug`,
   })
 
   return entries.items.map(({ fields: { slug } }) => slug)

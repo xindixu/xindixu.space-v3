@@ -2,18 +2,26 @@ import * as CFRichTextTypes from "@contentful/rich-text-types"
 import * as Contentful from "contentful"
 
 export interface IHtmlFields {
-  title: Contentful.EntryFields.Symbol
-  images: Contentful.Asset[]
   columns: Contentful.EntryFields.Integer
+  images: Contentful.Asset[]
+  title: Contentful.EntryFields.Symbol
 }
 
 export type THtml = Contentful.Entry<IHtmlFields>
 
+export type TParsedHtml = Omit<IHtmlFields, "images"> & {
+  images: {
+    src: string
+    width: number
+    height: number
+  }[]
+}
+
 export interface IPdfFields {
-  title: Contentful.EntryFields.Symbol
-  media: Contentful.Asset
-  width: Contentful.EntryFields.Number
   height: Contentful.EntryFields.Number
+  media: Contentful.Asset
+  title: Contentful.EntryFields.Symbol
+  width: Contentful.EntryFields.Number
 }
 
 export type TPdf = Contentful.Entry<IPdfFields>
