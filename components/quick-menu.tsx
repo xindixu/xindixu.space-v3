@@ -9,14 +9,15 @@ import { links } from "contents/social-media"
 
 const { spacerBase, elevation: { light } = {} } = styleSettings
 
-const diameter = "288px"
-const radius = "144px"
+const DIAMETER = "288px"
+const RADIUS = "144px"
+
 const Circle = styled.div`
   position: relative;
-  width: ${diameter};
-  height: ${diameter};
-  margin-left: -${radius};
-  margin-bottom: -${radius};
+  width: ${DIAMETER};
+  height: ${DIAMETER};
+  margin-left: -${RADIUS};
+  margin-bottom: -${RADIUS};
   padding: 0;
   border-radius: 50%;
   z-index: 0;
@@ -53,7 +54,7 @@ const SubButton = styled(Button)<{
     const angle = 90 / count
     const rotation = angle * (index + count * (cycle - 1) + 0.5)
     return `
-      transform: rotate(${rotation}deg) translate(${radius}) rotate(-${rotation}deg);
+      transform: rotate(${rotation}deg) translate(${RADIUS}) rotate(-${rotation}deg);
     `
   }}
 `
@@ -65,14 +66,14 @@ const mainIconAnimation = {
 
 const subMenuCircleAnimation = {
   hidden: ({ index, count }: { count: number; index: number }) => ({
-    translateY: radius,
+    translateY: RADIUS,
     rotate: -100,
     transition: {
       delay: 0.1 * (count - index),
     },
   }),
   visible: ({ index }: { index: number }) => ({
-    translateY: radius,
+    translateY: RADIUS,
     rotate: 0,
     transition: {
       when: "beforeChildren",
