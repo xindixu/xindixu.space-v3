@@ -48,6 +48,7 @@ const Base = ({
       gap="medium"
       pad="medium"
       isXxsUp={isXxsUp}
+      // @ts-expect-error
       background={theme.dark ? "background-front" : "background"}
     >
       <CardBody>&ldquo;{message}&rdquo;</CardBody>

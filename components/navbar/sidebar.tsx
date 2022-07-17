@@ -1,6 +1,5 @@
 import React from "react"
 import Link from "next/link"
-import PropTypes from "prop-types"
 import { useRouter } from "next/router"
 import styled from "styled-components"
 import { Box, Button, Layer, Nav, Sidebar as GSidebar, Text } from "grommet"
@@ -64,14 +63,14 @@ const slideMenuAnimation = {
 }
 
 const linkAnimation = {
-  visible: ({ index }) => ({
+  visible: ({ index }: { index: number }) => ({
     opacity: 1,
     y: 0,
     transition: {
       delay: 0.2 + 0.1 * index,
     },
   }),
-  hidden: ({ index, count }) => ({
+  hidden: ({ index, count }: { index: number; count: number }) => ({
     opacity: 0,
     y: -10,
     transition: {
@@ -201,6 +200,7 @@ const Sidebar = ({ onClose, show }: TProps) => {
                 align="center"
                 footer={<SidebarFooter />}
                 fill="vertical"
+                isBaseUp={isBaseUp}
               >
                 <MainNavigation
                   isBaseUp={isBaseUp}

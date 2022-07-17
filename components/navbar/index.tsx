@@ -4,9 +4,9 @@ import { Box, Header, Button, Anchor } from "grommet"
 import { Sun, Moon, Menu } from "grommet-icons"
 import { useTheme } from "next-themes"
 import styled from "styled-components"
+import { useWindowSize } from "react-use"
 import Sidebar from "./sidebar"
 import { DARK, LIGHT } from "lib/style-settings"
-import { useWindowSize } from "react-use"
 
 const FixTop = styled(Box)`
   position: fixed;
