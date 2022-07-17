@@ -1,7 +1,7 @@
 import React from "react"
 import { Box, Heading, Stack } from "grommet"
 import Image from "next/image"
-import { useViewportScroll, motion, useTransform } from "framer-motion"
+import { useScroll, motion, useTransform } from "framer-motion"
 import styled, { css } from "styled-components"
 import { useTheme } from "next-themes"
 import styleSettings, { DARK } from "lib/style-settings"
@@ -84,7 +84,7 @@ const Header = ({
     ? { height: "100vh", width: "100vw" }
     : { height: "50vh", width: "100vw" }
 
-  const { scrollY } = useViewportScroll()
+  const { scrollY } = useScroll()
   const backgroundY = useTransform(
     scrollY,
     [0, 400],
