@@ -10,7 +10,7 @@ import {
   Legend,
 } from "chart.js"
 import { Line } from "react-chartjs-2"
-import styled, { withTheme } from "styled-components"
+import styled, { useTheme } from "styled-components"
 import { groupBy } from "lodash"
 import { format } from "date-fns"
 import { getRecentCommits } from "lib/github"
@@ -19,8 +19,6 @@ import { MONTH_DAY_FORMAT } from "utils/datetime"
 import { color } from "lib/style-settings/utils"
 
 const { PINK } = styleSettings
-
-const getDate = (isoStr) => isoStr.split("T")[0]
 
 const FullWidthDiv = styled.div`
   width: 100%;
@@ -38,16 +36,9 @@ ChartJS.register(
   Legend
 )
 
-export const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: "top",
-    },
-  },
-}
+const getDate = (isoStr: string) => isoStr.split("T")[0]
 
-const parseData = (commits, pink) => {
+const parseData = (commits: string[], pink: string) => {
   const commitsByDate = groupBy(commits, (commit) => getDate(commit))
   const keys = Object.keys(commitsByDate)
   const data = keys.map((date) => commitsByDate[date].length)
@@ -68,18 +59,31 @@ const parseData = (commits, pink) => {
   }
 }
 
-const Contribution = ({ theme }) => {
-  const [data, setData] = useState({})
+const Contribution = () => {
+  const theme = useTheme()
   const pink = color(PINK)({ theme })
+
+  const [data, setData] = useState<string[]>([])
+
   useEffect(() => {
     getRecentCommits().then(setData)
   }, [])
 
   return (
     <FullWidthDiv>
-      <Line data={parseData(data, pink)} options={options} />
+      <Line
+        data={parseData(data, pink)}
+        options={{
+          responsive: true,
+          plugins: {
+            legend: {
+              position: "top",
+            },
+          },
+        }}
+      />
     </FullWidthDiv>
   )
 }
 
-export default withTheme(Contribution)
+export default Contribution

@@ -9,20 +9,31 @@ import styleSettings from "lib/style-settings"
 
 const { readable } = styleSettings
 
-const ReadableForm = styled(Form)`
-  &&& {
-    align-self: center;
-    width: 100%;
-    max-width: ${readable};
-  }
+const Wrapper = styled.div`
+  align-self: center;
+  width: 100%;
+  max-width: ${readable};
 `
+
+type TMode = "ok" | "warning" | "error"
+
+type TToast = {
+  mode: TMode
+  content: string
+}
+
+type TForm = {
+  name: string
+  email: string
+  message: string
+}
 
 const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
 const Contact = () => {
   const [isSubmitting, setIsSubmitting] = useState(false)
-  const [toast, setToast] = useState({})
+  const [toast, setToast] = useState<TToast | null>(null)
 
-  const onSubmit = (value) => {
+  const onSubmit = (value: TForm) => {
     setIsSubmitting(true)
     send(value)
       .then(() =>
@@ -38,52 +49,51 @@ const Contact = () => {
   }
   return (
     <>
-      <ReadableForm
-        onSubmit={({ value }) => onSubmit(value)}
-        validate="blur"
-        disabled={isSubmitting}
-      >
-        <Box gap="medium">
-          <Box direction="row" gap="medium" fill>
-            <FormField name="name" label="Name" fill required>
-              <TextInput name="name" />
+      <Wrapper>
+        <Form<TForm> onSubmit={({ value }) => onSubmit(value)} validate="blur">
+          <Box gap="medium">
+            <Box direction="row" gap="medium" fill>
+              <FormField name="name" label="Name" fill required>
+                <TextInput name="name" />
+              </FormField>
+              <FormField
+                name="email"
+                label="Email"
+                fill
+                required
+                validate={{
+                  regexp: emailRegex,
+                  message: "not a validate email address",
+                  status: "error",
+                }}
+              >
+                <TextInput name="email" />
+              </FormField>
+            </Box>
+            <FormField name="message" label="Message" fill required>
+              <TextArea name="message" size="medium" />
             </FormField>
-            <FormField
-              name="email"
-              label="Email"
-              fill
-              required
-              validate={{
-                regexp: emailRegex,
-                message: "not a validate email address",
-                status: "error",
-              }}
-            >
-              <TextInput name="email" />
-            </FormField>
-          </Box>
-          <FormField name="message" label="Message" fill required>
-            <TextArea name="message" size="medium" />
-          </FormField>
-          <Box direction="row" gap="medium">
-            <Button
-              type="submit"
-              disabled={isSubmitting}
-              primary
-              label={<Loader loading={isSubmitting}>Send Email</Loader>}
-            />
+            <Box direction="row" gap="medium">
+              <Button
+                type="submit"
+                disabled={isSubmitting}
+                primary
+                label={<Loader loading={isSubmitting}>Send Email</Loader>}
+              />
 
-            <Button type="reset" label="Reset" />
+              <Button type="reset" label="Reset" />
+            </Box>
           </Box>
-        </Box>
-      </ReadableForm>
-
-      <Toast
-        isOpen={!isEmpty(toast)}
-        mode={toast.mode}
-        content={toast.content}
-        onClose={() => setToast({})}
-      />
+        </Form>
+      </Wrapper>
+      {toast ? (
+        <Toast
+          isOpen={!isEmpty(toast)}
+          mode={toast.mode}
+          content={toast.content}
+          onClose={() => setToast(null)}
+        />
+      ) : null}
     </>
   )
 }

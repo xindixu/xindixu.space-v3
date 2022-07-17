@@ -33,7 +33,7 @@ export const color =
     const { colors } = theme.global!
     const selectedColor = colors?.[colorName]
     if (selectedColor && typeof selectedColor === "object") {
-      return selectedColor?.[mode]
+      return selectedColor?.[mode] || ""
     }
-    return selectedColor
+    return selectedColor || ""
   }
