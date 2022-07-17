@@ -40,49 +40,55 @@ Built with Next.js with content managed by Contentful, this website optimizes lo
 
 ## Sample Build Output
 ```
-Page                                                           Size     First Load JS
-┌ ○ /                                                          168 B           349 kB
-├   /_app                                                      0 B             349 kB
-├ ○ /404                                                       186 B           349 kB
-├ ● /casper                                                    4.54 kB         354 kB
-├ ○ /contact                                                   1.98 kB         351 kB
-├ ○ /experiences                                               1.69 kB         351 kB
-├ λ /projects                                                  3.03 kB         352 kB
-└ ● /projects/[slug]                                           15.3 kB         364 kB
-    ├ /projects/our-next-branch
-    ├ /projects/texas-state-capitol
-    ├ /projects/enron-raptors
-    └ [+22 more paths]
-+ First Load JS shared by all                                  349 kB
-  ├ chunks/0ae45f2eda23ec83b61be77b5a93af9f72dd9e2c.d1f444.js  9.09 kB
-  ├ chunks/197f7f4aa9a9b203f2f35cecae15a0a52d538a29.84e48c.js  29.7 kB
-  ├ chunks/29107295.72d742.js                                  24.6 kB
-  ├ chunks/36bcf0ca.0a0147.js                                  50.3 kB
-  ├ chunks/3a598c4ef1965d7fc4611cc5f799c66a1cf81aeb.e96a69.js  13.6 kB
-  ├ chunks/490dbc0323d11165697adf947884d32e6742a8f3.8ed55d.js  4.53 kB
-  ├ chunks/6f99514df46bcd158b2e57e54c4c8d54a41bf662.05ccfe.js  5.61 kB
-  ├ chunks/71247caf95475e3ea7f9a0f8a30beb258b23d005.b8b048.js  52.7 kB
-  ├ chunks/7d0196f7742c61621b1d1ab3ab6f91f4944b2d2c.0fe841.js  30.9 kB
-  ├ chunks/a03329c20db0a323d2926cf53db50ea2e1ed12c0.4e749a.js  15.7 kB
-  ├ chunks/b8cd623695ec97ec665a179189d5bbe179d34bad.53b08a.js  33.7 kB
-  ├ chunks/c1101280e8f72a9b3bd20dea9c845d134fab6612.0a8846.js  9.7 kB
-  ├ chunks/c7e9828f2fd7411ee6d66a95bb5f5b18b3719cba.bd4443.js  5.06 kB
-  ├ chunks/framework.f8bd46.js                                 42.1 kB
-  ├ chunks/main.b11e64.js                                      7.14 kB
-  ├ chunks/pages/_app.dd7561.js                                13.9 kB
-  ├ chunks/webpack.50bee0.js                                   751 B
-  └ css/f7b8e90763bdbc2dc8bd.css                               1.31 kB
+yarn run v1.22.18
+$ next build
+info  - Loaded env from .env.local
+info  - Linting and checking validity of types
+info  - Disabled SWC as replacement for Babel because of custom Babel configuration ".babelrc" https://nextjs.org/docs/messages/swc-disabled
+info  - Using external babel configuration from .babelrc
+info  - Creating an optimized production build
+info  - Compiled successfully
+info  - Collecting page data
+info  - Generating static pages (34/34)
+info  - Finalizing page optimization
+
+Page                                          Size     First Load JS
+┌ ○ / (1904 ms)                               191 B           392 kB
+├   /_app                                     0 B             392 kB
+├ ○ /404                                      227 B           392 kB
+├ ● /casper (606 ms)                          194 B           392 kB
+├ ○ /contact                                  195 B           392 kB
+├ ○ /experiences (1909 ms)                    197 B           392 kB
+├ λ /projects                                 197 B           392 kB
+└ ● /projects/[slug] (11330 ms)               7.22 kB         399 kB
+    ├ /projects/tesla-motors (881 ms)
+    ├ /projects/complaza (792 ms)
+    ├ /projects/reservation-system (777 ms)
+    ├ /projects/our-next-branch (694 ms)
+    ├ /projects/calendar (685 ms)
+    ├ /projects/texas-state-capitol (681 ms)
+    ├ /projects/lammes-candies (664 ms)
+    └ [+21 more paths]
++ First Load JS shared by all                 392 kB
+  ├ chunks/framework-4556c45dd113b893.js      45.2 kB
+  ├ chunks/main-daa4f2056e4719ac.js           29.1 kB
+  ├ chunks/pages/_app-09810d977a6628e9.js     316 kB
+  ├ chunks/webpack-ca9696987e6daf54.js        1.69 kB
+  └ css/38b362ae65d5686f.css                  1.29 kB
+
 λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)  automatically rendered as static HTML (uses no initial props)
 ●  (SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
-   (ISR)     incremental static regeneration (uses revalidate in getStaticProps)
+
+✨  Done in 59.43s.
 ```
 
 ## TypeScript Migration
 ### Guides
-- TS-migrate
-- Next.js: [Guide](https://nextjs.org/docs/basic-features/typescript#existing-projects) 
 - Contentful: [Guide](https://www.contentful.com/developers/docs/javascript/tutorials/typescript-in-javascript-client-library), [TS type generation app](https://github.com/marcolink/cf-content-types-generator-app)
+- Next.js: [Guide](https://nextjs.org/docs/basic-features/typescript#existing-projects) 
+- Styled-Components: [Guide](https://styled-components.com/docs/api#typescript)
+- TS-migrate: [GitHub](https://github.com/airbnb/ts-migrate)
 
 1. Install `typescript` globally and `tsc --init`
 3. Update `baseUrl` in `tsconfig.json`
