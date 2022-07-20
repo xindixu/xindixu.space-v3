@@ -1,8 +1,13 @@
-import React, { useContext } from "react"
+import React, { useContext, Suspense } from "react"
+import dynamic from "next/dynamic"
 import { Main, Box, ResponsiveContext } from "grommet"
 import { links } from "contents/social-media"
-import ContactForm from "components/contact"
+
 import { TPageProps } from "types/types"
+
+const ContactForm = dynamic(() => import("components/contact"), {
+  suspense: true,
+})
 
 const Contact = ({ isXxsUp }: TPageProps) => {
   const size = useContext(ResponsiveContext)
@@ -34,7 +39,9 @@ const Contact = ({ isXxsUp }: TPageProps) => {
       </Box>
 
       <Box pad={{ horizontal: size === "large" ? "xlarge" : "none" }}>
-        <ContactForm />
+        <Suspense fallback={null}>
+          <ContactForm />
+        </Suspense>
       </Box>
     </Main>
   )

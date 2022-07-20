@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react"
+import React, { ReactNode, Suspense } from "react"
 import {
   Main,
   Box,
@@ -11,17 +11,31 @@ import { motion } from "framer-motion"
 import styled from "styled-components"
 import Image from "next/image"
 import Link from "next/link"
-import Applause from "components/applause"
+import dynamic from "next/dynamic"
+
 import Name from "components/name"
-import Map from "components/map"
-import TechCloud from "components/tech-cloud"
-import Contribution from "components/contribution"
+
 import { media } from "lib/style-settings/media-query"
 import styleSettings from "lib/style-settings"
 import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
-import ImageStack from "components/image-stack"
 import { TPageProps } from "types/types"
+
+const Applause = dynamic(() => import("components/applause"), {
+  suspense: true,
+})
+const Contribution = dynamic(() => import("components/contribution"), {
+  suspense: true,
+})
+const ImageStack = dynamic(() => import("components/image-stack"), {
+  suspense: true,
+})
+const Map = dynamic(() => import("components/map"), {
+  suspense: true,
+})
+const TechCloud = dynamic(() => import("components/tech-cloud"), {
+  suspense: true,
+})
 
 const { readable, BEIGE, spacerXl, spacerLg, spacerBase } = styleSettings
 
@@ -165,7 +179,9 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
               graphics.
             </Paragraph>
             <Box>
-              <ImageStack />
+              <Suspense fallback={null}>
+                <ImageStack />
+              </Suspense>
             </Box>
           </Box>
         </Right>
@@ -180,7 +196,9 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
               on Rails, and Python Flask.
             </Paragraph>
             <Box>
-              <TechCloud />
+              <Suspense fallback={null}>
+                <TechCloud />
+              </Suspense>
             </Box>
           </Box>
         </Left>
@@ -188,7 +206,9 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
       <ReadableRow isXxsUp={isXxsUp} background="background-front">
         <Right>
           <Box direction="column" gap="large" align="center">
-            <Map />
+            <Suspense fallback={null}>
+              <Map />
+            </Suspense>
             <Paragraph fill>
               I spent the first 18 years of my life in Fuzhou, China. I miss all
               my close friends and tasty foodies there. I moved to Austin, TX
@@ -205,7 +225,9 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
             <Heading level={2}>Applauses from coworkers</Heading>
             <LeftQuote>&ldquo;</LeftQuote>
             <Box justify="center">
-              <Applause />
+              <Suspense fallback={null}>
+                <Applause />
+              </Suspense>
             </Box>
             <RightQuote>&rdquo;</RightQuote>
           </Box>
@@ -215,7 +237,9 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
         <Right>
           <Box fill="horizontal" direction="column" gap="large">
             <Heading level={2}>Commits on GitHub</Heading>
-            <Contribution />
+            <Suspense fallback={null}>
+              <Contribution />
+            </Suspense>
           </Box>
         </Right>
       </ReadableRow>

@@ -1,13 +1,22 @@
-import React, { ReactNode, useRef } from "react"
+import React, { ReactNode, useRef, Suspense } from "react"
 import { useInView } from "react-intersection-observer"
 import PropTypes from "prop-types"
+import dynamic from "next/dynamic"
+
 import usePageConfig from "hooks/use-page-config"
 import Title from "components/title"
-import Navbar from "components/navbar"
 import Header from "components/header"
-import Footer from "components/footer"
+
 import useMedia from "hooks/use-media"
 import { TPageProps } from "types/types"
+
+const Navbar = dynamic(() => import("components/navbar"), {
+  suspense: true,
+})
+
+const Footer = dynamic(() => import("components/footer"), {
+  suspense: true,
+})
 
 type TProps = {
   children: (props: TPageProps) => ReactNode
@@ -25,8 +34,9 @@ const Common = ({ children }: TProps) => {
   return (
     <>
       <Title name={name} />
-      <Navbar isHeaderInView={isHeaderInView} />
-
+      <Suspense fallback={null}>
+        <Navbar isHeaderInView={isHeaderInView} />
+      </Suspense>
       {children({
         setContentRef: (node) => {
           contentRef.current = node
@@ -45,7 +55,10 @@ const Common = ({ children }: TProps) => {
         ) : null,
         isXxsUp,
       })}
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
+      )
     </>
   )
 }
