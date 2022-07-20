@@ -52,35 +52,35 @@ info  - Collecting page data
 info  - Generating static pages (34/34)
 info  - Finalizing page optimization
 
-Page                                          Size     First Load JS
-┌ ○ / (1904 ms)                               191 B           392 kB
-├   /_app                                     0 B             392 kB
-├ ○ /404                                      227 B           392 kB
-├ ● /casper (606 ms)                          194 B           392 kB
-├ ○ /contact                                  195 B           392 kB
-├ ○ /experiences (1909 ms)                    197 B           392 kB
-├ λ /projects                                 197 B           392 kB
-└ ● /projects/[slug] (11330 ms)               7.22 kB         399 kB
-    ├ /projects/tesla-motors (881 ms)
-    ├ /projects/complaza (792 ms)
-    ├ /projects/reservation-system (777 ms)
-    ├ /projects/our-next-branch (694 ms)
-    ├ /projects/calendar (685 ms)
-    ├ /projects/texas-state-capitol (681 ms)
-    ├ /projects/lammes-candies (664 ms)
+Page                                                                Size     First Load JS
+┌ ○ / (1354 ms)                                                     10 kB           186 kB
+├   /_app                                                           0 B             166 kB
+├ ○ /404 (2441 ms)                                                  227 B           167 kB
+├ ● /casper (1222 ms)                                               1.73 kB         168 kB
+├ ○ /contact (2282 ms)                                              2.08 kB         168 kB
+├ ○ /experiences (846 ms)                                           5.97 kB         172 kB
+├   └ css/38b362ae65d5686f.css                                      1.29 kB
+├ λ /projects                                                       65.4 kB         269 kB
+└ ● /projects/[slug] (16855 ms)                                     17 kB           221 kB
+    ├ /projects/user-experience-accessibility-animations (2221 ms)
+    ├ /projects/complaza (2034 ms)
+    ├ /projects/mailit (2025 ms)
+    ├ /projects/texas-state-capitol (1784 ms)
+    ├ /projects/reservation-system (1767 ms)
+    ├ /projects/calendar (970 ms)
+    ├ /projects/texas-central-star (779 ms)
     └ [+21 more paths]
-+ First Load JS shared by all                 392 kB
-  ├ chunks/framework-4556c45dd113b893.js      45.2 kB
-  ├ chunks/main-daa4f2056e4719ac.js           29.1 kB
-  ├ chunks/pages/_app-09810d977a6628e9.js     316 kB
-  ├ chunks/webpack-ca9696987e6daf54.js        1.69 kB
-  └ css/38b362ae65d5686f.css                  1.29 kB
++ First Load JS shared by all                                       166 kB
+  ├ chunks/framework-4556c45dd113b893.js                            45.2 kB
+  ├ chunks/main-daa4f2056e4719ac.js                                 29.1 kB
+  ├ chunks/pages/_app-483bfe0e380ac51d.js                           89.9 kB
+  └ chunks/webpack-13cedcbda4ff7a6c.js                              2.05 kB
 
 λ  (Server)  server-side renders at runtime (uses getInitialProps or getServerSideProps)
 ○  (Static)  automatically rendered as static HTML (uses no initial props)
 ●  (SSG)     automatically generated as static HTML + JSON (uses getStaticProps)
 
-✨  Done in 59.43s.
+✨  Done in 29.96s.
 ```
 
 ## TypeScript Migration

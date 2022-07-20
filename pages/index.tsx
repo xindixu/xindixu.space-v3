@@ -7,7 +7,6 @@ import {
   Heading,
   BoxExtendedProps,
 } from "grommet"
-import { motion } from "framer-motion"
 import styled from "styled-components"
 import Image from "next/image"
 import Link from "next/link"
@@ -34,6 +33,9 @@ const Map = dynamic(() => import("components/map"), {
   suspense: true,
 })
 const TechCloud = dynamic(() => import("components/tech-cloud"), {
+  suspense: true,
+})
+const WavingHand = dynamic(() => import("components/waving-hand"), {
   suspense: true,
 })
 
@@ -71,9 +73,6 @@ const BaseReadableRow = styled(Box)`
   }
 `
 
-const Hand = styled(motion.div)`
-  width: min-content;
-`
 const Avatar = styled(Image)`
   border-radius: 100%;
 `
@@ -121,16 +120,9 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
         <Left>
           <Box>
             <Box direction="row" gap="small">
-              <Hand
-                animate={{ rotate: [0, 30, -10] }}
-                transition={{ repeat: Infinity, repeatDelay: 0.5 }}
-              >
-                <Heading level={2}>
-                  <span role="img" aria-label="Waving Hand">
-                    👋
-                  </span>
-                </Heading>
-              </Hand>
+              <Suspense fallback={null}>
+                <WavingHand />
+              </Suspense>
               <Heading level={2}> Hi there,</Heading>
             </Box>
             <Box>
