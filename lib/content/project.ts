@@ -82,7 +82,7 @@ export async function getAllProjectSlugs() {
   const entries = await client.getEntries<IProjectFields>({
     content_type: "work",
     // @ts-expect-error contentful template literal type
-    select: `fields.slug`,
+    select: "fields.slug",
   })
 
   return entries.items.map(({ fields: { slug } }) => slug)

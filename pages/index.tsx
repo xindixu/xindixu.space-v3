@@ -109,7 +109,7 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
             <Box direction="row" gap="small">
               <Hand
                 animate={{ rotate: [0, 30, -10] }}
-                transition={{ loop: Infinity, repeatDelay: 0.5 }}
+                transition={{ repeat: Infinity, repeatDelay: 0.5 }}
               >
                 <Heading level={2}>
                   <span role="img" aria-label="Waving Hand">
