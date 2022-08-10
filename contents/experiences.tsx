@@ -4,9 +4,15 @@ export const experiences = [
   {
     company: "Intabase",
     jobTitle: "Software Engineer Intern",
-    date: "05/2022 – Present",
+    date: "05/2022 – 08/2022",
     icon: <Briefcase />,
-    list: ["Core Services Team"],
+    list: [
+      "Planned, scoped, and designed an Admin Diagnostics App to help site admins troubleshoot their Instabase deployment",
+      "Built the entire Admin Diagnostics App from scratch and shipped the beta version in 10 weeks with React, Python Flask, and Go",
+      "Collaborated with the designers and engineers to design and build generic components for the company’s design system Pollen",
+      "Researched and gradually migrated ESlint and TSlint config to improve the developer experience and code quality",
+      "Won 1st place out of 40 teams in the company's hackathon by adding real-time collaboration to enable 100 users to annotate the same document",
+    ],
   },
   {
     company: "Columbia University",
@@ -24,7 +30,7 @@ export const experiences = [
     icon: <Briefcase />,
     list: [
       "Research and decide on tech stacks to use based on product features for a static website and a web app",
-      "Plan out development cycle and distribute tasks based on engineers' skill sets",
+      "Plan out development cycle and distribute tasks based on engineers' skills and interests",
     ],
   },
   {
