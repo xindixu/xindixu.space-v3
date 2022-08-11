@@ -1,6 +1,7 @@
 import { groupBy } from "lodash"
 
 const TAGS = [
+  "at-instabase",
   "at-columbia",
   "at-pingboard",
   "at-personal",
@@ -13,8 +14,9 @@ const TAGS = [
 ]
 
 const TAG_NAMES = {
-  "at-columbia": "Columbia",
   "at-all": "All",
+  "at-instabase": "Instabase",
+  "at-columbia": "Columbia",
   "at-pingboard": "Pingboard",
   "at-nokia": "Nokia",
   "at-personal": "Personal",

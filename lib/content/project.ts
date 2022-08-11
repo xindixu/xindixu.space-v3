@@ -1,4 +1,4 @@
-import { get, set } from "lodash"
+import { get } from "lodash"
 import {
   EntryCollectionWithLinkResolutionAndWithUnresolvableLinks,
   EntryWithLinkResolutionAndWithUnresolvableLinks,
@@ -53,10 +53,10 @@ export async function getAllProjects({
     limit: PAGE_SIZE,
     order: "-fields.created",
     skip: PAGE_SIZE * (page - 1),
-  }
+  } as Record<string, string | number>
 
   if (tags.length > 0) {
-    set(params, "metadata.tags.sys.id[all]", tags.join(","))
+    params["metadata.tags.sys.id[all]"] = tags.join(",")
   }
 
   const entries = await client.getEntries<IProjectFields>(params)
