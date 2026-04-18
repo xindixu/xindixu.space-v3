@@ -150,7 +150,7 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
               depth. I started at the{" "}
               <strong>University of Texas at Austin</strong> with a degree in{" "}
               <strong>Advertising</strong> and a minor in <strong>CS</strong>,
-              which led to my first engineering role at Pingboard. To understand
+              which led to my first engineering role at Nokia. To understand
               systems at a deeper level, I later earned my{" "}
               <strong>Master&apos;s in Computer Science</strong> from{" "}
               <strong>Columbia University</strong>, where I focused on{" "}
