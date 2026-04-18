@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react"
 import styled, { css } from "styled-components"
-import { kebabCase, get, random } from "lodash"
+import { get } from "lodash"
 import { Grid, Box, Text, Paragraph, Heading as BaseHeading } from "grommet"
 import {
   Block,
@@ -15,6 +15,7 @@ import type { Asset } from "contentful"
 import { IHtmlFields, IPdfFields, IYoutubeFields } from "../lib/content/types"
 import styleSettings from "lib/style-settings"
 import { color } from "lib/style-settings/utils"
+import { headingIdFromBlock } from "lib/content/heading-id"
 
 const { PINK, spacerBase, spacerLg } = styleSettings
 
@@ -193,9 +194,6 @@ const EmbeddedImages = ({
   </Box>
 )
 
-const getId = (node: ReactNode) =>
-  typeof node === "string" ? kebabCase(node) : `text-id-${random(false)}`
-
 const options = {
   renderMark: {
     [MARKS.CODE]: (text: ReactNode) => <Code>{text}</Code>,
@@ -204,18 +202,18 @@ const options = {
     [BLOCKS.PARAGRAPH]: (_: unknown, children: ReactNode) => (
       <Paragraph fill>{children}</Paragraph>
     ),
-    [BLOCKS.HEADING_1]: (_: unknown, children: ReactNode) => (
-      <Heading level={2} id={getId(children)}>
+    [BLOCKS.HEADING_1]: (node: Block | Inline, children: ReactNode) => (
+      <Heading level={2} id={headingIdFromBlock(node as Block)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.HEADING_2]: (_: unknown, children: ReactNode) => (
-      <Heading level={3} id={getId(children)}>
+    [BLOCKS.HEADING_2]: (node: Block | Inline, children: ReactNode) => (
+      <Heading level={3} id={headingIdFromBlock(node as Block)}>
         {children}
       </Heading>
     ),
-    [BLOCKS.HEADING_3]: (_: unknown, children: ReactNode) => (
-      <Heading level={4} id={getId(children)}>
+    [BLOCKS.HEADING_3]: (node: Block | Inline, children: ReactNode) => (
+      <Heading level={4} id={headingIdFromBlock(node as Block)}>
         {children}
       </Heading>
     ),

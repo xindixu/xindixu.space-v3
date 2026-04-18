@@ -1,7 +1,10 @@
 import React from "react"
 import styled from "styled-components"
-import { kebabCase } from "lodash"
-import { Block, Document, Text } from "@contentful/rich-text-types"
+import { Block, Document } from "@contentful/rich-text-types"
+import {
+  headingIdFromBlock,
+  headingPlainTextFromBlock,
+} from "lib/content/heading-id"
 import { Card, Anchor } from "grommet"
 import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings"
@@ -43,9 +46,10 @@ const parseContent = (contents: Block[]) =>
     .filter(
       ({ nodeType }) => nodeType === "heading-1" || nodeType === "heading-2"
     )
-    .map(({ content, nodeType }) => ({
-      title: (content as Text[])[0]?.value,
-      level: parseInt(nodeType.split("-")[1] || "0", 10),
+    .map((block) => ({
+      title: headingPlainTextFromBlock(block),
+      id: headingIdFromBlock(block),
+      level: parseInt(block.nodeType.split("-")[1] || "0", 10),
     }))
 
 const TableOfContent = ({ activeHeader, mainContent, show }: TProps) => {
@@ -72,9 +76,8 @@ const TableOfContent = ({ activeHeader, mainContent, show }: TProps) => {
           >
             <nav aria-label="Table of contents">
               <List>
-                {headings.map(({ title, level }) => {
-                  const id = kebabCase(title)
-                  const href = `#${kebabCase(title)}`
+                {headings.map(({ title, level, id }) => {
+                  const href = `#${id}`
                   const active = activeHeader === id
 
                   return (
