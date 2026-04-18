@@ -127,19 +127,17 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
             </Box>
             <Box>
               <Paragraph fill>
-                I enjoy designing and implementing full-stack features with
-                complex functionalities. I&apos;m passionate about improving
-                user experience and understanding technologies on a deeper
-                level. I&apos;m an{" "}
-                <strong>
-                  Master student in Computer Science at Columbia University
-                </strong>
-                . My favorite classes I took there are{" "}
-                <strong>Operating Systems</strong>,{" "}
-                <strong>Distributed Systems</strong>, and{" "}
-                <strong>Cloud Computing</strong>. This summer, I&apos;m
-                interning at <strong>Instabase</strong> as a Software Engineer
-                on the <strong>Core Services</strong> team.
+                I&apos;m currently a{" "}
+                <strong>Technical Lead and Software Engineer</strong> at{" "}
+                <strong>Instabase</strong>, where I lead the design and
+                execution of complex, full-stack initiatives. Most recently, I
+                architected the frontend for our <strong>SuperApp</strong>,
+                enabling a unified experience across mobile and desktop from the
+                ground up. I love diving deep into technical challenges—like
+                building robust <strong>permission systems</strong>,{" "}
+                <strong>real-time collaboration apps</strong>, or optimizing{" "}
+                <strong>developer workflows</strong>—to create high-impact
+                products that are as reliable as they are user-friendly.
               </Paragraph>
             </Box>
             <Box direction="row" align="center" justify="end" gap="large">
@@ -160,15 +158,19 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
         <Right>
           <Box direction="column" gap="large" align="center">
             <Paragraph fill>
-              Before coming to Columbia, I was a Software Engineer at Pingboard,
-              where I worked in teams to build fully-fledged features promptly.
-              In 2020, I graduated from{" "}
-              <strong>University of Texas at Austin</strong>, with a{" "}
-              <strong>BS in Advertising and a Minor in Computer Science</strong>
-              . I took 30 credit hours of Computer Science classes and mastered
-              software engineering principles via working with peers to design
-              and build full-stack web apps, iOS apps, games, and computer
-              graphics.
+              My journey in tech is a blend of creative strategy and technical
+              depth. I started at the{" "}
+              <strong>University of Texas at Austin</strong> with a degree in{" "}
+              <strong>Advertising</strong> and a minor in <strong>CS</strong>,
+              which led to my first engineering role at Pingboard. To understand
+              systems at a deeper level, I later earned my{" "}
+              <strong>Master&apos;s in Computer Science</strong> from{" "}
+              <strong>Columbia University</strong>, where I focused on{" "}
+              <strong>
+                Operating Systems, Distributed Systems, and Cloud Computing
+              </strong>
+              . I really enjoy bridging the gap between low-level system design
+              and high-level product experience.
             </Paragraph>
             <Box>
               <Suspense fallback={null}>
@@ -182,10 +184,10 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
         <Left>
           <Box direction="column" gap="large" align="center">
             <Paragraph fill>
-              I&apos;m proficient in JavaScript and Python. I&apos;ve been
-              coding in C/C++, TypeScript, and Go recently. Some frameworks and
-              stacks I use to build web apps are React/Redux, Next.js, AWS, Ruby
-              on Rails, and Python Flask.
+              I&apos;m proficient in TypeScript, Python, and Go. I&apos;ve been
+              coding in React Native recently. Some frameworks and stacks I use
+              to build cross-platform apps are <strong>React Native</strong>,{" "}
+              <strong>Next.js</strong>, and <strong>Go</strong>.
             </Paragraph>
             <Box>
               <Suspense fallback={null}>
@@ -202,11 +204,15 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
               <Map />
             </Suspense>
             <Paragraph fill>
-              I spent the first 18 years of my life in Fuzhou, China. I miss all
-              my close friends and tasty foodies there. I moved to Austin, TX
-              for my undergrad. This summer, I drove with my kitties from Austin
-              to New York. Bye Texas summer heat and hello New York winter
-              chill~
+              I grew up in <strong>Fuzhou, China</strong>, and spent several
+              years in <strong>Austin</strong> and <strong>New York</strong>{" "}
+              before recently settling in <strong>Santa Clara</strong>. I made
+              the move to California with my two cats, trading the New York
+              bustle for the heart of Silicon Valley. Outside of work, I&apos;m
+              a big fan of detective stories—both reading and watching them—and
+              I spend my free time on coding side projects, gaming, or hitting
+              the gym. I&apos;m also constantly on the hunt for the pho in the
+              area!
             </Paragraph>
           </Box>
         </Right>

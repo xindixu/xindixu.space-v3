@@ -10,8 +10,7 @@ import { media } from "lib/style-settings/media-query"
 import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
 
-const { spacerSm, spacerBase, PINK, fontSizeLg, fontSizeSm, fontSizeBase } =
-  styleSettings
+const { spacerBase, PINK, fontSizeLg, fontSizeSm, fontSizeBase } = styleSettings
 
 const ROUTE_SIZE = 5
 const PLACE_SIZE = 10
@@ -22,22 +21,27 @@ const Location = styled.div<{ position: string }>`
   `}
   margin-top: -${spacerBase};
   display: block;
+  position: relative;
+  padding-right: ${spacerBase};
 `
 
 const HorizontalText = styled.div`
-  padding-bottom: ${spacerSm};
+  text-wrap: nowrap;
 `
 
 const VerticalText = styled.div`
   writing-mode: vertical-rl;
   text-orientation: mixed;
-  float: right;
-  padding-top: 4px;
+  position: absolute;
+  right: 0;
+  top: ${spacerBase};
+  text-wrap: nowrap;
 `
 
 const Date = styled(Text)`
   margin: 0;
   display: block;
+  text-align: right;
 
   font-size: ${fontSizeSm};
   ${media.smUp`
@@ -48,49 +52,60 @@ const Date = styled(Text)`
   `}
 `
 
-type TProps = {
-  country: string
+type TLabel = {
   monthDay: string
-  place: string
-  position: string
+  city: string
+  state: string
   year: string
 }
-const Label = ({ country, monthDay, place, position, year }: TProps) => (
+const Label = ({
+  monthDay,
+  city,
+  state,
+  position,
+  year,
+}: TLabel & { position: string }) => (
   <Location position={position}>
-    <HorizontalText>{place}</HorizontalText>
-    <VerticalText>{country}</VerticalText>
+    <HorizontalText>{city}</HorizontalText>
     <Date>
       {monthDay}
       <br />
       {year}
     </Date>
+    <VerticalText>{state}</VerticalText>
   </Location>
 )
 
-const labels = [
+const labels: TLabel[] = [
   {
-    place: "Fuzhou, Fujian",
-    country: "China",
+    city: "Fuzhou",
+    state: "Fujian",
     monthDay: "0324",
     year: "1998",
   },
   {
-    place: "Austin, Texas",
-    country: "U.S.A",
+    city: "Bay Area",
+    state: "California",
+    monthDay: "0524",
+    year: "2023",
+  },
+  {
+    city: "Austin",
+    state: "Texas",
     monthDay: "0809",
     year: "2016",
   },
   {
-    place: "NYC, New York",
-    country: "U.S.A",
+    city: "New York",
+    state: "New York",
     monthDay: "0801",
     year: "2021",
   },
 ]
 
-const xSmallScreenPositions = [5, 20, 5]
-const smallScreenPositions = [20, 20, 5]
-const bigScreenPositions = [20, 30, 5]
+const xSmallScreenPositions = [5, 20, 5, 5]
+const smallScreenPositions = [20, 20, 5, 5]
+const bigScreenPositions = [20, 30, 5, 5]
 
 const Map = () => {
   const theme = useTheme()
@@ -128,6 +143,14 @@ const Map = () => {
               d="M790 170 h0"
             />
 
+            {/* Bay Area */}
+            <path
+              strokeLinecap="round"
+              strokeWidth={PLACE_SIZE}
+              stroke={pink}
+              d="M660 190 h0"
+            />
+
             <motion.path
               strokeLinecap="round"
               strokeWidth={ROUTE_SIZE}
@@ -147,6 +170,16 @@ const Map = () => {
               {...props}
               custom={{ index: 1 }}
             />
+
+            <motion.path
+              strokeLinecap="round"
+              strokeWidth={ROUTE_SIZE}
+              stroke={pink}
+              fill="none"
+              d="M790 170 C750 145 700 150 660 190"
+              {...props}
+              custom={{ index: 2 }}
+            />
           </>
         )}
       </AnimatedSvg>
@@ -154,7 +187,7 @@ const Map = () => {
         {labels.map((props, i) => (
           <Label
             {...props}
-            key={props.year}
+            key={props.city}
             position={`${
               isXsUp
                 ? isSmUp

@@ -7,6 +7,7 @@ const TECH_WORDS = [
   { count: 18, value: "Java" },
   { count: 18, value: "PostgreSQL" },
   { count: 19, value: "MongoDB" },
+  { count: 19, value: "React Query" },
   { count: 19, value: "Styled-Component" },
   { count: 20, value: "a11y" },
   { count: 20, value: "Redux" },
@@ -25,7 +26,9 @@ const TECH_WORDS = [
   { count: 28, value: "Next.js" },
   { count: 29, value: "React" },
   { count: 30, value: "JavaScript" },
-  { count: 30, value: "Python3" },
+  { count: 30, value: "Python" },
+  { count: 30, value: "React Native" },
+  { count: 30, value: "Spanner" },
 ]
 
 export type TTag = {
