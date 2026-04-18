@@ -10,7 +10,8 @@ import { media } from "lib/style-settings/media-query"
 import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
 
-const { spacerBase, PINK, fontSizeLg, fontSizeSm, fontSizeBase } = styleSettings
+const { spacerBase, spacerXs, PINK, fontSizeLg, fontSizeSm, fontSizeBase } =
+  styleSettings
 
 const ROUTE_SIZE = 5
 const PLACE_SIZE = 10
@@ -19,7 +20,6 @@ const Location = styled.div<{ position: string }>`
   ${({ position }) => `
       margin-left: ${position};
   `}
-  margin-top: -${spacerBase};
   display: block;
   position: relative;
   padding-right: ${spacerBase};
@@ -34,7 +34,7 @@ const VerticalText = styled.div`
   text-orientation: mixed;
   position: absolute;
   right: 0;
-  top: ${spacerBase};
+  top: ${spacerXs};
   text-wrap: nowrap;
 `
 
@@ -66,13 +66,13 @@ const Label = ({
   year,
 }: TLabel & { position: string }) => (
   <Location position={position}>
-    <HorizontalText>{city}</HorizontalText>
+    <HorizontalText>{state}</HorizontalText>
     <Date>
       {monthDay}
       <br />
       {year}
     </Date>
-    <VerticalText>{state}</VerticalText>
+    <VerticalText>{city}</VerticalText>
   </Location>
 )
 
@@ -85,27 +85,27 @@ const labels: TLabel[] = [
   },
   {
     city: "Bay Area",
-    state: "California",
+    state: "CA",
     monthDay: "0524",
     year: "2023",
   },
   {
     city: "Austin",
-    state: "Texas",
+    state: "TX",
     monthDay: "0809",
     year: "2016",
   },
   {
     city: "New York",
-    state: "New York",
+    state: "NY",
     monthDay: "0801",
     year: "2021",
   },
 ]
 
-const xSmallScreenPositions = [5, 20, 5, 5]
+const xSmallScreenPositions = [10, 10, 5, 5]
 const smallScreenPositions = [20, 20, 5, 5]
-const bigScreenPositions = [20, 30, 5, 5]
+const bigScreenPositions = [20, 25, 5, 5]
 
 const Map = () => {
   const theme = useTheme()
@@ -113,6 +113,7 @@ const Map = () => {
 
   const isXsUp = useMedia("xs")
   const isSmUp = useMedia("sm")
+
   const pink = color(PINK)({ theme })
   return (
     <Box fill ref={ref} width={{ max: "large" }}>
