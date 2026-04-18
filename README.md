@@ -9,20 +9,21 @@ Built with Next.js with content managed by Contentful, this website optimizes lo
 
 ## Notable Tools/Libraries Used
 
-| Tool/Library | Description |
-|---|---|
-| [Next.js](https://nextjs.org) | Static site generation & server-side rendering |
-| [React.js](https://reactjs.org) | Declarative way to build UIs efficiently |
-| [Styled components](https://styled-components.com) | Better CSS styling for React component systems |
-| [Grommet](https://v2.grommet.io) | Styled-component-based framework that provides accessibility, modularity, responsiveness, and theming |
-| [Framer motion](https://www.framer.com/motion/) | Production-ready animation and gesture library for React |
-| [Octokit](https://github.com/octokit) | Official clients for the GitHub API |
-| [Chart.js](https://github.com/reactchartjs/react-chartjs-2) | React wrapper for [Chart.js](https://www.chartjs.org), a simple yet flexible JavaScript charting library |
-| [Contentful](https://www.contentful.com) | Modern CMS that provides content infrastructure for modern web apps  |
-| [Emailjs](https://www.emailjs.com) | Send email directly from JavaScript without any server code |
-| [Vercel](https://vercel.com) | Deployment services that combines the best developer experience with an obsessive focus on end-user performance |
+| Tool/Library                                                | Description                                                                                                     |
+| ----------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| [Next.js](https://nextjs.org)                               | Static site generation & server-side rendering                                                                  |
+| [React.js](https://reactjs.org)                             | Declarative way to build UIs efficiently                                                                        |
+| [Styled components](https://styled-components.com)          | Better CSS styling for React component systems                                                                  |
+| [Grommet](https://v2.grommet.io)                            | Styled-component-based framework that provides accessibility, modularity, responsiveness, and theming           |
+| [Framer motion](https://www.framer.com/motion/)             | Production-ready animation and gesture library for React                                                        |
+| [Octokit](https://github.com/octokit)                       | Official clients for the GitHub API                                                                             |
+| [Chart.js](https://github.com/reactchartjs/react-chartjs-2) | React wrapper for [Chart.js](https://www.chartjs.org), a simple yet flexible JavaScript charting library        |
+| [Contentful](https://www.contentful.com)                    | Modern CMS that provides content infrastructure for modern web apps                                             |
+| [Emailjs](https://www.emailjs.com)                          | Send email directly from JavaScript without any server code                                                     |
+| [Vercel](https://vercel.com)                                | Deployment services that combines the best developer experience with an obsessive focus on end-user performance |
 
 ## To Set Up
+
 - Run `yarn install`
 - Create a .env.local file and add these variables:
   - `NEXT_PUBLIC_CONTENTFUL_SPACE_ID`
@@ -31,14 +32,17 @@ Built with Next.js with content managed by Contentful, this website optimizes lo
   - `NEXT_PUBLIC_EMAIL_SERVICE_ID`
   - `NEXT_PUBLIC_GITHUB_ACCESS_TOKEN`
 
-## To Run 
+## To Run
+
 - Run `yarn dev` and web app should be available at http://localhost:3000
 
 ## To Deploy
+
 - Push to the `main` branch should trigger an automatic rebuild in Vercel
 - Add those env variables above in Vercel app settings
 
 ## Sample Build Output
+
 ```
 yarn run v1.22.18
 $ next build
@@ -84,16 +88,18 @@ Page                                                                Size     Fir
 ```
 
 ## TypeScript Migration
+
 ### Guides
+
 - Contentful: [Guide](https://www.contentful.com/developers/docs/javascript/tutorials/typescript-in-javascript-client-library), [TS type generation app](https://github.com/marcolink/cf-content-types-generator-app)
-- Next.js: [Guide](https://nextjs.org/docs/basic-features/typescript#existing-projects) 
+- Next.js: [Guide](https://nextjs.org/docs/basic-features/typescript#existing-projects)
 - Styled-Components: [Guide](https://styled-components.com/docs/api#typescript)
 - TS-migrate: [GitHub](https://github.com/airbnb/ts-migrate)
 
 1. Install `typescript` globally and `tsc --init`
-3. Update `baseUrl` in `tsconfig.json`
-4. Install `@type/..` for 3rd party libraries
-5. Update npm packages for TypeScript support
-6. Use `ts-migrate` to migrate incrementally
-7. Declare global type interfaces `**.d.ts`
-8. Update `eslint` settings
+2. Update `baseUrl` in `tsconfig.json`
+3. Install `@type/..` for 3rd party libraries
+4. Update npm packages for TypeScript support
+5. Use `ts-migrate` to migrate incrementally
+6. Declare global type interfaces `**.d.ts`
+7. Update `eslint` settings
