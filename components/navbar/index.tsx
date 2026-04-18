@@ -6,7 +6,7 @@ import { useTheme } from "next-themes"
 import styled from "styled-components"
 import { useWindowSize } from "react-use"
 import Sidebar from "./sidebar"
-import { DARK, LIGHT } from "lib/style-settings"
+import { spacerXs, DARK, LIGHT } from "lib/style-settings"
 
 const FixTop = styled(Box)`
   position: fixed;
@@ -62,11 +62,13 @@ const Navbar = ({ isHeaderInView }: TProps) => {
           elevation={isHeaderInView ? undefined : "medium"}
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
-          <Link href="/">
-            <NoUnderlineLink as="span" color={iconColor}>
-              XindiXu.Space
-            </NoUnderlineLink>
-          </Link>
+          <Box margin={{ left: "small" }}>
+            <Link href="/">
+              <NoUnderlineLink as="span" color={iconColor}>
+                XindiXu.Space
+              </NoUnderlineLink>
+            </Link>
+          </Box>
           <Box direction="row">
             <Button
               icon={
