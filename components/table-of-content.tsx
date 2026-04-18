@@ -1,12 +1,12 @@
 import React from "react"
 import styled from "styled-components"
 import { Block, Document } from "@contentful/rich-text-types"
+import { Card, Anchor } from "grommet"
+import { AnimatePresence, motion } from "framer-motion"
 import {
   headingIdFromBlock,
   headingPlainTextFromBlock,
 } from "lib/content/heading-id"
-import { Card, Anchor } from "grommet"
-import { AnimatePresence, motion } from "framer-motion"
 import styleSettings from "lib/style-settings"
 
 const { spacerBase } = styleSettings

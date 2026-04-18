@@ -6,7 +6,7 @@ import { useTheme } from "next-themes"
 import styled from "styled-components"
 import { useWindowSize } from "react-use"
 import Sidebar from "./sidebar"
-import { spacerXs, DARK, LIGHT } from "lib/style-settings"
+import { DARK, LIGHT } from "lib/style-settings"
 
 const FixTop = styled(Box)`
   position: fixed;
