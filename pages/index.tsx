@@ -20,24 +20,12 @@ import useMedia from "hooks/use-media"
 import { color } from "lib/style-settings/utils"
 import { TPageProps } from "types/types"
 
-const Applause = dynamic(() => import("components/applause"), {
-  suspense: true,
-})
-const Contribution = dynamic(() => import("components/contribution"), {
-  suspense: true,
-})
-const ImageStack = dynamic(() => import("components/image-stack"), {
-  suspense: true,
-})
-const Map = dynamic(() => import("components/map"), {
-  suspense: true,
-})
-const TechCloud = dynamic(() => import("components/tech-cloud"), {
-  suspense: true,
-})
-const WavingHand = dynamic(() => import("components/waving-hand"), {
-  suspense: true,
-})
+const Applause = dynamic(() => import("components/applause"))
+const Contribution = dynamic(() => import("components/contribution"))
+const ImageStack = dynamic(() => import("components/image-stack"))
+const Map = dynamic(() => import("components/map"))
+const TechCloud = dynamic(() => import("components/tech-cloud"))
+const WavingHand = dynamic(() => import("components/waving-hand"))
 
 const { readable, BEIGE, spacerXl, spacerLg, spacerBase } = styleSettings
 
@@ -100,7 +88,7 @@ const ReadableRow = ({
 }: {
   children: ReactNode
   isXxsUp: boolean
-} & BoxExtendedProps) => (
+} & Omit<BoxExtendedProps, "as" | "forwardedAs">) => (
   <BaseReadableRow
     alignContent="center"
     pad={{ horizontal: isXxsUp ? "xlarge" : "medium" }}
@@ -249,17 +237,17 @@ const Index = ({ setContentRef, isXxsUp }: TPageProps) => {
           pad={{ vertical: "large" }}
           justify="center"
         >
-          <Link href="/projects" passHref>
+          <Link href="/projects">
             <Button
-              as="a"
+              as="span"
               secondary
               label="View Selected Projects"
               size="medium"
             />
           </Link>
-          <Link href="/experiences" passHref>
+          <Link href="/experiences">
             <Button
-              as="a"
+              as="span"
               secondary
               label="View My Experiences"
               size="medium"

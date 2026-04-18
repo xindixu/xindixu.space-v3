@@ -1,7 +1,13 @@
 import React from "react"
+import dynamic from "next/dynamic"
 import { motion } from "framer-motion"
-import Masonry from "react-responsive-masonry"
 import Image from "next/image"
+import type MasonryDefault from "react-responsive-masonry"
+
+const Masonry = dynamic(() => import("react-responsive-masonry"), {
+  ssr: false,
+}) as typeof MasonryDefault
+
 import { Main } from "grommet"
 import { useInView } from "react-intersection-observer"
 import { getImageCollage } from "lib/content/image-collage"
@@ -67,12 +73,12 @@ const Casper = ({ imageCollage = { images: [] }, isXxsUp }: TProps) => {
               variants={variants}
             >
               <Image
-                layout="responsive"
                 src={`https:${src}`}
                 width={width}
                 height={height}
                 alt="Casper"
-                style={{ width: "100%", display: "block" }}
+                sizes="(max-width: 768px) 50vw, 20vw"
+                style={{ width: "100%", height: "auto", display: "block" }}
               />
             </motion.div>
           ))}

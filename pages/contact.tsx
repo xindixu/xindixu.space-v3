@@ -5,9 +5,7 @@ import { links } from "contents/social-media"
 
 import { TPageProps } from "types/types"
 
-const ContactForm = dynamic(() => import("components/contact"), {
-  suspense: true,
-})
+const ContactForm = dynamic(() => import("components/contact"))
 
 const Contact = ({ isXxsUp }: TPageProps) => {
   const size = useContext(ResponsiveContext)

@@ -38,14 +38,14 @@ const ImageStack = () => {
   const [index, setIndex] = useState(0)
 
   useEffect(() => {
-    let timer: NodeJS.Timer
+    let timer: ReturnType<typeof setInterval> | undefined
     if (inView) {
       timer = setInterval(() => {
         setIndex((prevIndex) => (prevIndex + 1) % IMAGES.length)
       }, AUTOPLAY_TIME * 1000)
     }
     return () => {
-      clearTimeout(timer)
+      if (timer !== undefined) clearInterval(timer)
     }
   }, [inView])
 
@@ -61,12 +61,16 @@ const ImageStack = () => {
             variants={animation}
             custom={{ x: Math.random() - 0.5, y: Math.random() - 0.5 }}
           >
-            <Box elevation="medium">
+            <Box
+              elevation="medium"
+              style={{ position: "relative", width: "100%", height: "100%" }}
+            >
               <Image
+                fill
                 priority
                 src={`/img/locations/${IMAGES[index]}.jpg`}
-                layout="fill"
-                objectFit="cover"
+                style={{ objectFit: "cover" }}
+                alt={`Campus location: ${IMAGES[index]}`}
               />
             </Box>
           </StyledCard>

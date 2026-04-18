@@ -41,7 +41,7 @@ export default class MyDocument extends Document {
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
-            crossOrigin="true"
+            crossOrigin="anonymous"
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Lato&family=Sansita+Swashed:wght@300&display=swap"

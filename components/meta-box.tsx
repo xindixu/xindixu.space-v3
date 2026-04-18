@@ -19,9 +19,8 @@ const MetaBox = ({ tags, start, end }: TProps) => (
           <Link
             key={id}
             href={{ pathname: "/projects", query: { [key]: value } }}
-            passHref
           >
-            <Anchor label={getName(id)} color="brand" />
+            <Anchor as="span" label={getName(id)} color="brand" />
           </Link>
         )
       })}

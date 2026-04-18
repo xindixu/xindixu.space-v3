@@ -29,6 +29,20 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     overflow: initial;
   }
+
+  /* next/image renders a plain <img> with intrinsic width/height; without this,
+     flex/grid parents cannot shrink images below intrinsic size (min-width: auto).
+     Matches typical pre–Next-13 Image wrapper behavior. */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* next/link renders a native <a>; without this, UA link/visited colors override layout text. */
+  a:any-link {
+    color: inherit;
+    text-decoration: none;
+  }
 `
 
 // This fix the bug where next.js wouldn't scroll back to top when page changes

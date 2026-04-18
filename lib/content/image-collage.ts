@@ -1,26 +1,31 @@
 import { get } from "lodash"
-import { EntryWithLinkResolutionAndWithUnresolvableLinks } from "contentful"
 import { IHtmlFields, TParsedHtml } from "./types"
 import { client } from "./index"
 
-const parseImageCollage = ({
-  fields,
-}: EntryWithLinkResolutionAndWithUnresolvableLinks<IHtmlFields>): TParsedHtml => ({
+type HtmlEntry = {
+  fields: IHtmlFields
+}
+
+const parseImageCollage = ({ fields }: HtmlEntry): TParsedHtml => ({
   images: fields.images.map((image) => ({
-    src: get(image, "fields.file.url") || "",
-    width: get(image, "fields.file.details.image.width") || 0,
-    height: get(image, "fields.file.details.image.height") || 0,
+    src: String(get(image, "fields.file.url") ?? ""),
+    width: Number(get(image, "fields.file.details.image.width")) || 0,
+    height: Number(get(image, "fields.file.details.image.height")) || 0,
   })),
   title: fields.title,
   columns: fields.columns,
 })
 
 export async function getImageCollage({ title }: { title: string }) {
-  const entries = await client.getEntries<IHtmlFields>({
+  const entries = (await client.getEntries({
     content_type: "html",
     limit: 1,
     "fields.title[in]": title,
-  })
+  })) as unknown as { items: HtmlEntry[] }
 
-  return parseImageCollage(entries?.items[0])
+  const first = entries?.items?.[0]
+  if (!first) {
+    throw new Error(`No image collage found for title: ${title}`)
+  }
+  return parseImageCollage(first)
 }

@@ -1,7 +1,8 @@
 import React, { FC } from "react"
+import type { Variants } from "framer-motion"
 
 const DURATION = 2
-const svgAnimation = {
+const svgAnimation: Variants = {
   in: ({ index = 0 } = {}) => ({
     pathLength: 1,
     transition: { delay: DURATION * index, duration: DURATION },
@@ -17,12 +18,8 @@ type TProps = {
   }: {
     initial: string
     animate: string
-    variants: {
-      [key: string]:
-        | Record<string, unknown>
-        | (({ index }: { index?: number }) => Record<string, unknown>)
-    }
-  }) => JSX.Element
+    variants: Variants
+  }) => React.ReactElement
   inView: boolean
   viewBox: string
 }

@@ -10,9 +10,10 @@ const usePageConfig = () => {
 
   return {
     isTopLevel: paths.length === 1,
-    config: linksByPathname.hasOwnProperty(path)
-      ? linksByPathname[path as TPath]
-      : errorPage,
+    config:
+      path !== undefined && Object.hasOwn(linksByPathname, path)
+        ? linksByPathname[path as TPath]
+        : errorPage,
   }
 }
 

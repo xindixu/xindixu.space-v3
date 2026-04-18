@@ -55,12 +55,12 @@ const Toast = ({
   onClose,
 }: TProps) => {
   useEffect(() => {
-    let timer: NodeJS.Timer
+    let timer: ReturnType<typeof setTimeout> | undefined
     if (isOpen) {
       timer = setTimeout(onClose, closeAfter)
     }
     return () => {
-      clearTimeout(timer)
+      if (timer !== undefined) clearTimeout(timer)
     }
   }, [isOpen, closeAfter, onClose])
 

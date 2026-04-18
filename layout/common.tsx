@@ -10,13 +10,9 @@ import Header from "components/header"
 import useMedia from "hooks/use-media"
 import { TPageProps } from "types/types"
 
-const Navbar = dynamic(() => import("components/navbar"), {
-  suspense: true,
-})
+const Navbar = dynamic(() => import("components/navbar"))
 
-const Footer = dynamic(() => import("components/footer"), {
-  suspense: true,
-})
+const Footer = dynamic(() => import("components/footer"))
 
 type TProps = {
   children: (props: TPageProps) => ReactNode
@@ -25,7 +21,7 @@ const Common = ({ children }: TProps) => {
   const [setHeaderRef, isHeaderInView] = useInView({ threshold: 0.05 })
   const isXxsUp = useMedia("xxs")
 
-  const contentRef = useRef<HTMLElement>()
+  const contentRef = useRef<HTMLElement | null>(null)
   const {
     config: { name, background },
     isTopLevel,
@@ -58,7 +54,6 @@ const Common = ({ children }: TProps) => {
       <Suspense fallback={null}>
         <Footer />
       </Suspense>
-      )
     </>
   )
 }

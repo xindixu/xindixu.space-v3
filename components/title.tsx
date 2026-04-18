@@ -31,7 +31,7 @@ const Title = ({ name }: TProps) => (
     />
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#e2b4bd" />
-    <title>{name} | XindiXu.space</title>
+    <title>{`${name} | XindiXu.space`}</title>
   </Head>
 )
 

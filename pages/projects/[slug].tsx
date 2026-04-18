@@ -69,7 +69,7 @@ const Project = ({ isXxsUp, project, setHeaderRef }: TProps) => {
     tags,
   } = project
 
-  const contentRef = useRef<HTMLElement>()
+  const contentRef = useRef<HTMLElement | null>(null)
   const [showToolbox, setShowToolbox] = useState(false)
   const [activeHeader, setActiveHeader] = useState("")
   const { y } = useWindowScroll()

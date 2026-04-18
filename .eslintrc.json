@@ -66,10 +66,21 @@
   },
   "settings": {
     "import/resolver": {
+      "typescript": {
+        "project": "./tsconfig.json"
+      },
       "node": {
-        "extensions": [".js", ".jsx"],
-        "moduleDirectory": [".", "node_modules"]
+        "extensions": [".js", ".jsx", ".ts", ".tsx"],
+        "moduleDirectory": ["node_modules", "."]
       }
     }
-  }
+  },
+  "overrides": [
+    {
+      "files": ["next-env.d.ts"],
+      "rules": {
+        "@typescript-eslint/triple-slash-reference": "off"
+      }
+    }
+  ]
 }

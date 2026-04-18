@@ -97,15 +97,21 @@ const Header = ({
   const src = srcs.hasOwnProperty("src")
     ? (srcs as TSrc).src
     : resolvedTheme === DARK
-    ? (srcs as TThemedSrc).darkSrc
-    : (srcs as TThemedSrc).lightSrc
+      ? (srcs as TThemedSrc).darkSrc
+      : (srcs as TThemedSrc).lightSrc
 
   return (
     <Wrapper anchor="center" full={full}>
       <motion.div style={{ y: backgroundY, x: 0 }}>
         {/* @ts-expect-error legacy ref */}
-        <Box {...size} ref={setHeaderRef}>
-          <Image src={src} layout="fill" priority objectFit="cover" alt={alt} />
+        <Box {...size} ref={setHeaderRef} style={{ position: "relative" }}>
+          <Image
+            src={src}
+            fill
+            priority
+            style={{ objectFit: "cover" }}
+            alt={alt ?? ""}
+          />
         </Box>
       </motion.div>
       {full || <Darken {...size} />}

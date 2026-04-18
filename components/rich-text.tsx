@@ -11,6 +11,7 @@ import {
 } from "@contentful/rich-text-types"
 import { documentToReactComponents } from "@contentful/rich-text-react-renderer"
 import BaseImage from "next/image"
+import type { Asset } from "contentful"
 import { IHtmlFields, IPdfFields, IYoutubeFields } from "../lib/content/types"
 import styleSettings from "lib/style-settings"
 import { color } from "lib/style-settings/utils"
@@ -92,9 +93,9 @@ const Image = ({ alt, file }: { alt: string; file: TImageFile }) => {
   return (
     <BaseImage
       src={`https:${url}`}
-      layout="responsive"
-      width={width}
-      height={height}
+      width={width ?? 800}
+      height={height ?? 600}
+      style={{ width: "100%", height: "auto" }}
       alt={alt}
     />
   )
@@ -167,12 +168,7 @@ const EmbeddedImages = ({
   title,
 }: {
   columns: number
-  images: {
-    fields: {
-      title?: string
-      file?: TImageFile
-    }
-  }[]
+  images: Asset[]
   title: string
 }) => (
   <Box margin={{ bottom: "medium" }}>
@@ -184,13 +180,15 @@ const EmbeddedImages = ({
       }}
     >
       {images
-        .filter(
-          ({ fields: { title: fieldTitle, file } }) => !!fieldTitle && !!file
-        )
-        .map(({ fields: { title: fieldTitle, file } }) => (
-          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-          <Image key={fieldTitle!} file={file!} alt={title} />
-        ))}
+        .filter(({ fields }) => {
+          const fieldTitle = fields.title
+          return typeof fieldTitle === "string" && !!fields.file
+        })
+        .map(({ fields }) => {
+          const fieldTitle = fields.title as string
+          const file = fields.file as unknown as TImageFile
+          return <Image key={fieldTitle} file={file} alt={title} />
+        })}
     </Grid>
   </Box>
 )
@@ -256,7 +254,7 @@ const options = {
           <EmbeddedEmbed
             url={url ? `https:${url}` : ""}
             title={title}
-            description={description || ""}
+            description={typeof description === "string" ? description : ""}
             height={height}
             width={width}
           />

@@ -62,8 +62,10 @@ const Navbar = ({ isHeaderInView }: TProps) => {
           elevation={isHeaderInView ? undefined : "medium"}
           pad={{ horizontal: "small", vertical: "xsmall" }}
         >
-          <Link href="/" passHref>
-            <NoUnderlineLink color={iconColor}>XindiXu.Space</NoUnderlineLink>
+          <Link href="/">
+            <NoUnderlineLink as="span" color={iconColor}>
+              XindiXu.Space
+            </NoUnderlineLink>
           </Link>
           <Box direction="row">
             <Button

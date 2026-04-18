@@ -53,14 +53,14 @@ const Applause = () => {
   }, [paused])
 
   useEffect(() => {
-    let timer: NodeJS.Timer
+    let timer: ReturnType<typeof setInterval> | undefined
     if (inView && !paused) {
       timer = setInterval(() => {
         paginate(1)
       }, AUTOPLAY_TIME)
     }
     return () => {
-      clearTimeout(timer)
+      if (timer !== undefined) clearInterval(timer)
     }
   }, [inView, paginate, paused])
 

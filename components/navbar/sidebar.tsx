@@ -100,14 +100,14 @@ const SidebarButton = ({
   onClick,
 }: {
   active: boolean
-  icon: JSX.Element
+  icon: React.ReactElement
   label: string
   link: string
   onClick: () => void
 }) => (
-  <Link href={link} passHref>
+  <Link href={link}>
     <Button
-      as="a"
+      as="span"
       primary={!active}
       color={active ? PINK : BACKGROUND}
       fill="horizontal"

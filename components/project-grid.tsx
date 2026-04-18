@@ -75,10 +75,10 @@ const ProjectGrid = ({ projects, loadMore, showLoadMore }: TProps) => {
                   <Card>
                     <Box fill>
                       <Image
-                        layout="responsive"
                         src={`https:${src}`}
                         width={width}
                         height={height}
+                        sizes="(max-width: 960px) 100vw, 40vw"
                         alt={`devices showing different screenshots of project ${name}`}
                         placeholder="blur"
                         blurDataURL={`/img/project-thumbnails/${slug}.png`}
