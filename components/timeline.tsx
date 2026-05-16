@@ -79,7 +79,11 @@ const Timeline = () => {
           >
             {jobTitle}
           </Heading>
-          <Heading level="4" className="vertical-timeline-element-subtitle">
+          <Heading
+            level="4"
+            className="vertical-timeline-element-subtitle"
+            margin={sections ? { bottom: "medium" } : undefined}
+          >
             {company}
           </Heading>
           {sections ? (
