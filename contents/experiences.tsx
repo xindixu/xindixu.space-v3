@@ -1,8 +1,66 @@
+import React from "react"
 import { Briefcase, Workshop } from "grommet-icons"
 
-export const experiences = [
+export type ExperienceSection = {
+  title: string
+  items: string[]
+}
+
+export type Experience = {
+  company: string
+  jobTitle: string
+  date: string
+  icon: React.ReactElement
+  list?: string[]
+  sections?: ExperienceSection[]
+}
+
+export const experiences: Experience[] = [
   {
-    company: "Intabase",
+    company: "Instabase",
+    jobTitle: "Technical Lead and Software Engineer",
+    date: "02/2023 – Present",
+    icon: <Briefcase />,
+    sections: [
+      {
+        title: "Full Stack Feature Development",
+        items: [
+          "Enterprise Communication Suite: Built out core SuperApp messaging features, including a real-time chat engine with hierarchical reply threads, a custom Markdown rendering engine, and a multi-platform push notification service.",
+          "Security & Mobile Resilience: Delivered mission-critical security infrastructure (OAuth2, RBAC, and SAML group sync) while engineering offline-first mobile capabilities to ensure a seamless user experience regardless of connectivity.",
+        ],
+      },
+      {
+        title: "Frontend Infrastructure",
+        items: [
+          "Multi-Platform Unified Architecture: Architected the SuperApp unified codebase to support five platforms (Web, iOS, Android, macOS, and Windows) from a single source. Introduced a type-safe feature management system using Protobuf to provide granular, cross-stack control over feature releases.",
+          "CI/CD & Developer Experience: Modernized the development lifecycle by migrating to GitHub Actions and containerizing E2E test pipelines, which reduced weekly CI failure rates from 95% to under 2%. Improved long-term maintainability by liquidating 42,000+ lines of deprecated legacy code.",
+        ],
+      },
+      {
+        title: "Performance Improvements",
+        items: [
+          "Advanced Caching & Data Optimization: Engineered application-level caching strategies that reduced redundant network overhead by 50x and optimized batch permission endpoints to achieve a 50% reduction in execution time for large-scale updates.",
+          "High-Performance UI & Connectivity: Refactored core UI components using virtualized rendering to handle large datasets and built a robust WebSocket-based messaging engine with custom heartbeat logic to ensure real-time reliability on unstable networks.",
+        ],
+      },
+      {
+        title: "Growth & Innovation",
+        items: [
+          "AI Product Engineering: Architected the Huddle AI agent, implementing complex logic for real-time voice processing and automated meeting summaries.",
+          "High-Velocity Delivery: Focused on rapid innovation and customer success by delivering the AIHub App Store and critical data management flows under extreme deadlines (ranging from 24-hour turnarounds to two-week sprints).",
+        ],
+      },
+      {
+        title: "Leadership",
+        items: [
+          "Technical Leadership & Mentorship: Acted as Tech Lead for platform-wide migrations, managing a team of four engineers to implement complex, multi-step state management patterns using modern action-reducer architectures.",
+          "Operational Excellence: Scaled the engineering organization by authoring comprehensive technical documentation and onboarding guides, while maintaining a sub-1-hour resolution time for critical production incidents.",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Instabase",
     jobTitle: "Software Engineer Intern",
     date: "05/2022 – 08/2022",
     icon: <Briefcase />,

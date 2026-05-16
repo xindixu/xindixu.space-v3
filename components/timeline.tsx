@@ -44,15 +44,27 @@ const ListItem = styled.li`
   }
 `
 
+const SectionHeading = styled(Heading)`
+  &&& {
+    font-size: 0.95rem;
+    margin-top: 1rem;
+    margin-bottom: 0.35rem;
+
+    &:first-of-type {
+      margin-top: 0;
+    }
+  }
+`
+
 const Timeline = () => {
   const theme = useTheme()
   const pink = color(PINK)({ theme })
 
   return (
     <Wrapper>
-      {experiences.map(({ company, jobTitle, list, date, icon }) => (
+      {experiences.map(({ company, jobTitle, list, sections, date, icon }) => (
         <VerticalTimelineElement
-          key={date}
+          key={`${company}-${date}`}
           className="vertical-timeline-element--work"
           contentStyle={{ border: `1px solid ${pink}` }}
           contentArrowStyle={{ borderRight: `7px solid ${pink}` }}
@@ -67,14 +79,31 @@ const Timeline = () => {
           >
             {jobTitle}
           </Heading>
-          <Heading level="4" className="vertical-timeline-element-subtitle">
+          <Heading
+            level="4"
+            className="vertical-timeline-element-subtitle"
+            margin={sections ? { bottom: "medium" } : undefined}
+          >
             {company}
           </Heading>
-          <List>
-            {list.map((l) => (
-              <ListItem key={l}>{l}</ListItem>
-            ))}
-          </List>
+          {sections ? (
+            sections.map(({ title, items }) => (
+              <div key={title}>
+                <SectionHeading level="5">{title}</SectionHeading>
+                <List>
+                  {items.map((item) => (
+                    <ListItem key={item}>{item}</ListItem>
+                  ))}
+                </List>
+              </div>
+            ))
+          ) : (
+            <List>
+              {list?.map((l) => (
+                <ListItem key={l}>{l}</ListItem>
+              ))}
+            </List>
+          )}
         </VerticalTimelineElement>
       ))}
     </Wrapper>
